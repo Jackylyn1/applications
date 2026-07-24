@@ -1,0 +1,108 @@
+{
+  "name": "Jacqueline Urban",
+  "contact": [
+    "Gelsenkirchen, Deutschland",
+    "info@perfectseowebsite.de",
+    "+49 152 13839296",
+    "in/jacqueline-u-92753821b  |  github.com/Jackylyn1"
+  ],
+  "sections": [
+    {
+      "heading": "PROFIL",
+      "type": "summary",
+      "text": "Softwareentwicklerin mit Schwerpunkt Softwarearchitektur und angewandter KI. Seit 2019 entwickle und pflege ich Web-Anwendungen mit PHP/Laravel und TypeScript, von der Greenfield-Architektur über CI/CD bis zur Testautomatisierung. In den letzten zwei Jahren habe ich LLMs in reale Entwicklungs-Workflows integriert: KI-Agenten entworfen, Prompts optimiert sowie Token-Verbrauch und Kosten reduziert, unter anderem mit der OpenAI- und Anthropic-API und MCP. Ich verstehe Systeme gern von Anfang bis Ende, messe Ergebnisse und verbessere sie iterativ. Aktuell vertiefe ich Python für KI-Arbeit und arbeite mich in RAG und Vektordatenbanken ein."
+    },
+    {
+      "heading": "BERUFSERFAHRUNG",
+      "type": "experience",
+      "items": [
+        {
+          "title": "Webentwicklerin - KI-gestützte Entwicklung",
+          "company": "Gastro IT GmbH",
+          "right": "März 2025 - heute  |  Wuppertal (Remote)",
+          "bullets": [
+            "Konzeption und Umsetzung der Softwarearchitektur für ein Kassensystem (POS) für die Gastronomie als Greenfield-Projekt: Backend mit Laravel und PostgreSQL, Frontend mit Alpine.js und TypeScript.",
+            "Integration von KI-Tools in den täglichen Entwicklungs-Workflow für Code-Analyse, Architekturentwurf, Code-Generierung und Automatisierung.",
+            "Aufbau und Pflege der CI/CD-Pipelines in GitLab sowie Containerisierung der Anwendung mit Docker.",
+            "Testautomatisierung mit Codeception und PHPUnit nach dem BDD-Ansatz.",
+            "Feature-Konzeption mit Gherkin in Zusammenarbeit mit der Geschäftsführung und dem Product Owner."
+          ]
+        },
+        {
+          "title": "Webentwicklerin - KI-gestützte Entwicklung",
+          "company": "wpt-online Domainmarketing UG",
+          "right": "Juni 2021 - Sep. 2024  |  Gelsenkirchen",
+          "bullets": [
+            "Eigenständige Planung, Umsetzung und Wartung von Web-Anwendungen, darunter Ticketsysteme, Websites und Marketing-Tools.",
+            "Produktiver Einsatz von KI-Tools für Code-Analyse, Architekturentwurf, Code-Generierung und Automatisierung.",
+            "Konzeption anforderungsgerechter Individualsoftware und Entwurf der zugrunde liegenden Datenbanksysteme.",
+            "Testautomatisierung mit PHPUnit und Dokumentation mit PHPDoc; Projektkoordination und direkte Kundenkommunikation."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "PROJEKTE",
+      "type": "experience",
+      "items": [
+        {
+          "title": "AI Engineering Experiments",
+          "company": "Eigenprojekt",
+          "right": "",
+          "bullets": [
+            "Aufbau und Bewertung von KI-Workflows, Agenten und Integrationen, um von reinen Prompt-Experimenten hin zum praxisnahen, produktionsorientierten Einsatz von LLMs zu kommen.",
+            "Entwurf von Agenten-Workflows und Orchestrierung mehrstufiger Aufgaben mit der OpenAI- und Anthropic-API und MCP.",
+            "Optimierung von Prompts und Token-Verbrauch mit Abwägung von Kosten und Ergebnisqualität.",
+            "Vergleich von Stärken und Schwächen verschiedener Modelle, um pro Aufgabe das passende Modell zu wählen."
+          ]
+        },
+        {
+          "title": "Trading Research & Backtesting Platform",
+          "company": "Eigenprojekt",
+          "right": "",
+          "bullets": [
+            "Entwurf einer Python-Forschungsumgebung, um große Parameterräume von Trading-Strategien schnell genug für zügige Iteration auszuwerten.",
+            "Verarbeitung von zehn- bis hunderten Millionen Parameterkombinationen durch Ersetzen von Brute-Force-Schleifen mit Vektorisierung und JIT-Kompilierung (NumPy, Numba).",
+            "Aufbau reproduzierbarer Backtesting-Workflows und modularer Scoring-Konzepte, um Strategien statistisch statt intuitiv zu vergleichen."
+          ]
+        },
+        {
+          "title": "Laravel Pivot Events (Open Source)",
+          "company": "github.com/Jackylyn1",
+          "right": "",
+          "bullets": [
+            "Veröffentlichung eines Laravel-Pakets, das Pivot-Events (Many-to-Many) mit eigenen IDs ermöglicht."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "AUSBILDUNG",
+      "type": "education",
+      "items": [
+        {
+          "degree": "Fachinformatikerin für Anwendungsentwicklung",
+          "detail": "wpt-online Domainmarketing UG, Gelsenkirchen  |  2019 - 2021"
+        },
+        {
+          "degree": "Studium IT-Sicherheit (nicht abgeschlossen)",
+          "detail": "Ruhr-Universität Bochum  |  2013 - 2017"
+        }
+      ]
+    },
+    {
+      "heading": "KENNTNISSE",
+      "type": "skills",
+      "lines": [
+        "KI & LLM-Engineering: Agentic AI, AI Agents, LLM-Integration, Prompt Engineering, MCP, OpenAI API, Anthropic API, KI-Workflow-Design, Token- & Kostenoptimierung, KI-gestützte Entwicklung (Claude Code)",
+        "Backend: PHP (OOP), Laravel, Symfony, REST APIs, OpenAPI, OAuth, PostgreSQL, MySQL",
+        "Frontend: TypeScript, JavaScript, Vue.js, Alpine.js, Tailwind CSS, HTML5, CSS3/SCSS",
+        "Python & Data: Python, NumPy, Numba (JIT), Backtesting, Data-Pipelines, Algorithmusoptimierung",
+        "Architektur & Qualität: Softwarearchitektur, System Design, DDD, Event-Driven Architecture, SOLID, Design Patterns, Clean Code, Requirements Engineering, PHPUnit, Codeception, BDD (Gherkin), statische Analyse, Performance-Optimierung, Security",
+        "DevOps: Docker, GitLab CI/CD, Git, Linux, Apache, Composer, npm",
+        "In Einarbeitung: RAG, Vektordatenbanken, Embeddings, FastAPI",
+        "Sprachen: Deutsch (Muttersprache), Englisch (fließend)"
+      ]
+    }
+  ]
+}

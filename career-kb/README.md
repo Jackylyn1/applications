@@ -7,18 +7,35 @@ job offer.
 ## Files
 | File | Purpose |
 |------|---------|
-| `profile.json` | **Source of truth.** Structured facts: personal data, skills, experience, projects, goals, role/skill map, professional profile & differentiators. Query this first. |
-| `knowledge-base.md` | Same facts, human-readable. |
+| `profile.json` | **Source of truth — all facts/data.** Personal data, skills, experience, projects, goals, role/skill map, professional profile & differentiators, engineering philosophy. Query this first. |
 | `cv-standards.md` | Hard rules for CVs (ATS, content, email swap, PDF). |
 | `cover-letter-standards.md` | Hard rules for cover letters (structure, tone). |
 | `general-standards.md` | Project-description standard, writing principles, language matching, career positioning. |
 | `communication-rules.md` | Voice/tone rules for authentic applications + cover-letter structure + the four questions every application answers. |
-| `templates/CV_Template_Rezi_Dec2025.docx` | **Canonical CV layout template**, stored verbatim (byte-identical, unmodified). Use this as the visual/structural template for generated CVs. |
+| `templates/CV_Template_Rezi_Dec2025.docx` | **Canonical CV layout template**, stored verbatim (byte-identical, unmodified). The ONLY layout — never design a new one. |
+| `tools/build_cv.py` | Fills the template from a content JSON, preserving all styling. Its docstring is the content JSON schema. |
+| `.venv/` | Python venv with `python-docx` (used by build_cv.py). Run as `./.venv/bin/python tools/build_cv.py ...`. |
+| `content/` | Role/offer CV content as JSON (input to build_cv.py). |
 | `README.md` | This file. |
-| `output/` | Generated applications land here. |
+| `output/base-cvs/` | The 5 target-role base CVs (EN + DE), DOCX + PDF. Starting point for offer-specific CVs. |
+| `output/` | Job-offer applications land here. |
+
+## Building a CV (tooling)
+Layout is fixed to the template; only content changes. Workflow:
+1. Write a content JSON (schema = docstring of `tools/build_cv.py`).
+2. `./.venv/bin/python tools/build_cv.py --content content/<x>.json --out output/<X>.docx`
+3. `soffice --headless --convert-to pdf --outdir <dir> <X>.docx` (run PDF conversions **sequentially** — LibreOffice locks its user profile under concurrency).
+
+The generator clones the template's real paragraphs as prototypes, so fonts, colors, the right-aligned date tab, bullet list and section rules are preserved exactly. (One fix applied in code: the template's date tab stop was off-page at 20000 twips; build_cv.py re-anchors it to the right margin.)
+
+## Base CV templates (built 2026-07-24)
+Five target roles × EN/DE = 10 CVs in `output/base-cvs/`, each role-optimized with no job offer, ~2 pages:
+`PHP-Developer`, `AI-Software-Developer`, `Solution-Architect`, `Software-Architect`, `IT-Consultant`.
+When a real job offer arrives: start from the closest base CV's content JSON in `content/`, tailor it to the posting's keywords, rebuild.
 
 ## How to generate an application (next step)
 1. Give me a job offer — paste the text, a URL, or a PDF.
+   Structure: `profile.json` = all facts/data · the `*.md` files = rules only.
 2. I load `profile.json` + all `*-standards.md` + `communication-rules.md`, then:
    parse the posting → match keywords against real skills → flag honest gaps →
    tailor CV + cover letter (matching the offer's language and du/Sie register) →

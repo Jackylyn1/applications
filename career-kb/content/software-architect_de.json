@@ -1,0 +1,109 @@
+{
+  "name": "Jacqueline Urban",
+  "contact": [
+    "Gelsenkirchen, Deutschland",
+    "info@perfectseowebsite.de",
+    "+49 152 13839296",
+    "in/jacqueline-u-92753821b  |  github.com/Jackylyn1"
+  ],
+  "sections": [
+    {
+      "heading": "PROFIL",
+      "type": "summary",
+      "text": "Softwareentwicklerin mit Architektur-Fokus - ich entwerfe Systeme, statt nur Features umzusetzen. Aktuell verantworte ich die Softwarearchitektur eines Restaurant-Kassensystems (POS) auf der grünen Wiese (Laravel, PostgreSQL, TypeScript/Alpine.js) und setze dabei Schichtenarchitektur, Domain-Driven Design und ereignisgesteuertes Denken ein - im Gleichgewicht zwischen Wartbarkeit, Performance und Sicherheit. Zusätzlich pflege ich eine historisch gewachsene Legacy-Codebasis und analysiere undokumentierte Abhängigkeiten, bevor ich Änderungen vornehme. Ich arbeite prinzipienorientiert - Clean Code, SOLID, Entwurfsmuster - und untermauere Entscheidungen mit Tests (Codeception, PHPUnit) und statischer Analyse. Derzeit vertiefe ich Cloud-Architektur, Kubernetes und verteilte Systeme (Kafka)."
+    },
+    {
+      "heading": "BERUFSERFAHRUNG",
+      "type": "experience",
+      "items": [
+        {
+          "title": "KI-gestützte Webentwicklung",
+          "company": "Gastro IT GmbH",
+          "right": "Mär 2025 - Heute  |  Wuppertal (Remote)",
+          "bullets": [
+            "Verantworte die Softwarearchitektur eines Restaurant-Kassensystems (POS) auf der grünen Wiese: ein schichtorientiertes Laravel/PostgreSQL-Backend und ein TypeScript/Alpine.js-Frontend, ausgelegt auf klare Trennung der Zuständigkeiten und langfristige Wartbarkeit.",
+            "Setze Domain-Driven Design und ereignisgesteuertes Denken zur Domänenmodellierung ein und übersetze fachliche Anforderungen von Geschäftsführung und Product Owner in ein wartbares Design.",
+            "Definiere Qualitätsstandards: Testautomatisierung mit Codeception und PHPUnit (BDD, Gherkin) sowie statische Analyse, damit die Codebasis mit dem Wachstum überprüfbar bleibt.",
+            "Pflege der CI/CD-Pipelines in GitLab und der Container-Umgebung mit Docker.",
+            "Einsatz von KI-Werkzeugen für Codeanalyse, architektonische Exploration und Codegenerierung im täglichen Entwicklungsablauf."
+          ]
+        },
+        {
+          "title": "Softwareentwicklung (KI-gestützt)",
+          "company": "wpt-online Domainmarketing UG",
+          "right": "Jun 2021 - Sep 2024  |  Gelsenkirchen",
+          "bullets": [
+            "Konzeption anforderungsgerechter Softwarelösungen und Entwicklung individueller Anwendungen (Ticketsysteme, Webanwendungen) durchgängig - vom Requirements Engineering bis zu Umsetzung und Wartung.",
+            "Entwurf, Planung und Optimierung von Datenbanksystemen, einschließlich Schemadesign und Performance.",
+            "Prüfung und Freigabe von Programmierarbeiten, Formulierung von Aufgaben für das Team und Erstellung von User Stories mit Kunden - frühe Verantwortung für technische Führung und Design.",
+            "Testautomatisierung mit PHPUnit und Dokumentation mit PHPDoc.",
+            "Im Arbeitszeugnis mit \"sehr gut\" bewertet; als \"unverzichtbare Mitarbeiterin\" mit analytischem, lösungsorientiertem Denken beschrieben."
+          ]
+        },
+        {
+          "title": "Entwicklung / Koordination",
+          "company": "Narutorpg.de - Open-Source-Community-Projekt",
+          "right": "Mai 2009 - Heute  |  Bottrop",
+          "bullets": [
+            "Übernahme einer historisch gewachsenen, nicht standardkonformen Legacy-Codebasis innerhalb eines proprietären Frameworks und deren fortlaufende Weiterentwicklung.",
+            "Analyse komplexer Legacy-Abhängigkeiten und Identifikation technischer Kopplungen ohne vorhandene Dokumentation, bevor Änderungen vorgenommen werden.",
+            "Debugging und Weiterentwicklung des Systems unter Beibehaltung der bestehenden Architektur.",
+            "Koordination eines zehnköpfigen Teams, Abstimmung technischer und organisatorischer Aufgaben sowie Dokumentation von Prozessen und Spielregeln in MediaWiki."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "PROJEKTE",
+      "type": "experience",
+      "items": [
+        {
+          "title": "Laravel Pivot Events (Open Source)",
+          "company": "PHP · Laravel · Composer",
+          "right": "github.com/Jackylyn1",
+          "bullets": [
+            "Entwurf und Veröffentlichung eines Open-Source-Laravel-Pakets, das Pivot-Events (n:m) mit benutzerdefinierten IDs ermöglicht und mit den Interna von Laravel arbeitet.",
+            "Fokus auf eine klare, vorhersehbare API - eine kleine Übung im Design aus Sicht der Nutzenden."
+          ]
+        },
+        {
+          "title": "Trading-Research- & Backtesting-Plattform",
+          "company": "Python · NumPy · Numba",
+          "right": "Persönliches Projekt",
+          "bullets": [
+            "Aufbau einer quantitativen Backtesting-Umgebung zur Auswertung sehr großer Parameterräume (zig bis hunderte Millionen Kombinationen), schnell genug, um Strategien zu iterieren.",
+            "Laufzeitoptimierung durch JIT-Kompilierung, Vektorisierung und algorithmische Verbesserungen statt naiver Brute-Force sowie Entwurf reproduzierbarer, modularer Scoring-Abläufe."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "AUSBILDUNG",
+      "type": "education",
+      "items": [
+        {
+          "degree": "Fachinformatikerin für Anwendungsentwicklung",
+          "detail": "Wpt-online Domainmarketing UG, Gelsenkirchen  |  Aug 2019 - Jun 2021"
+        },
+        {
+          "degree": "Studium IT-Sicherheit (nicht abgeschlossen)",
+          "detail": "Ruhr-Universität Bochum  |  Sep 2013 - Feb 2017"
+        }
+      ]
+    },
+    {
+      "heading": "KENNTNISSE",
+      "type": "skills",
+      "lines": [
+        "Architektur & Design: Softwarearchitektur, Clean Code, SOLID, Entwurfsmuster, Schichtenarchitektur, Domain-Driven Design, ereignisgesteuerte Architektur, System Design, Requirements Engineering",
+        "Backend: PHP (OOP), Laravel, Symfony, REST APIs, OpenAPI, OAuth, PostgreSQL, MySQL",
+        "Frontend: TypeScript, JavaScript, Vue.js, Alpine.js, Tailwind CSS, HTML5, CSS3/SCSS",
+        "Qualität & Testing: PHPUnit, Codeception, BDD (Gherkin), statische Analyse, Performance-Optimierung, Sicherheit",
+        "DevOps & Tools: Docker, GitLab CI/CD, Git, Linux, Apache, Composer, npm",
+        "KI-gestützte Entwicklung: Claude Code, Prompt Engineering, LLMs, OpenAI- & Anthropic-APIs, MCP, KI-Agenten",
+        "Aktuell im Aufbau: Cloud-Architektur, Kubernetes, verteilte Systeme, Kafka",
+        "Sprachen: Deutsch (Muttersprache), Englisch (fließend)"
+      ]
+    }
+  ]
+}
