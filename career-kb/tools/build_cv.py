@@ -100,19 +100,55 @@ def fill_contact(proto, items):
     return p
 
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument('--content', required=True)
-    ap.add_argument('--out', required=True)
-    ap.add_argument('--template', default=None)
-    args = ap.parse_args()
+def _scale_spacing(p, scale):
+    """Multiply a paragraph's before/after spacing (and line spacing, floored at
+    single) by `scale`. Used to tighten the layout so a CV with a nearly-empty
+    second page collapses onto one page without touching content or font size."""
+    if scale == 1.0:
+        return
+    ppr = p.find(qn('w:pPr'))
+    if ppr is None:
+        return
+    sp = ppr.find(qn('w:spacing'))
+    if sp is None:
+        return
+    for attr in ('w:before', 'w:after'):
+        v = sp.get(qn(attr))
+        if v is not None:
+            sp.set(qn(attr), str(int(int(v) * scale)))
+    ln = sp.get(qn('w:line'))
+    if ln is not None:
+        sp.set(qn('w:line'), str(max(240, int(int(ln) * scale))))
 
-    import os
-    here = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    template = args.template or os.path.join(here, 'templates', 'CV_Template_Rezi_Dec2025.docx')
 
-    with open(args.content, encoding='utf-8') as f:
-        c = json.load(f)
+def _drop_bullets(sections, n):
+    """Remove the `n` least-important bullets and return (sections, dropped_list).
+    'Least important' = trailing bullets of the later (lower-listed, i.e. older)
+    experience/project entries first; never leaves an entry with zero bullets."""
+    if n <= 0:
+        return sections, []
+    items = []
+    for sec in sections:
+        if sec.get('type') == 'experience':
+            for it in sec['items']:
+                items.append(it)
+    dropped, remaining = [], n
+    for it in reversed(items):
+        b = it.get('bullets', [])
+        while remaining > 0 and len(b) > 1:
+            dropped.append((it.get('title', '?'), b.pop()))
+            remaining -= 1
+        if remaining <= 0:
+            break
+    return sections, dropped
+
+
+def build(c, template, spacing_scale=1.0, drop_bullets=0):
+    """Build the CV Document from content dict `c` using `template`.
+    Returns (doc, dropped_bullets)."""
+    import copy as _copy
+    c = _copy.deepcopy(c)
+    _, dropped = _drop_bullets(c['sections'], drop_bullets)
 
     doc = Document(template)
     p = doc.paragraphs
@@ -140,6 +176,10 @@ def main():
         for tab in ppr.iter(qn('w:tab')):
             tab.set(qn('w:val'), 'right')
             tab.set(qn('w:pos'), str(usable_twips))
+
+    if spacing_scale != 1.0:
+        for pr in proto.values():
+            _scale_spacing(pr, spacing_scale)
 
     body = doc.element.body
     sectPr = body.find(W_SECTPR)
@@ -188,8 +228,32 @@ def main():
     for para in out:
         body.insert(list(body).index(sectPr), para)
 
+    return doc, dropped
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument('--content', required=True)
+    ap.add_argument('--out', required=True)
+    ap.add_argument('--template', default=None)
+    ap.add_argument('--spacing-scale', type=float, default=1.0,
+                    help='Scale paragraph spacing (<1.0 tightens the layout).')
+    ap.add_argument('--drop-bullets', type=int, default=0,
+                    help='Drop N least-important bullets (older entries first).')
+    args = ap.parse_args()
+
+    import os
+    here = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    template = args.template or os.path.join(here, 'templates', 'CV_Template_Rezi_Dec2025.docx')
+
+    with open(args.content, encoding='utf-8') as f:
+        c = json.load(f)
+
+    doc, dropped = build(c, template, args.spacing_scale, args.drop_bullets)
     doc.save(args.out)
     print(f"wrote {args.out}")
+    for title, b in dropped:
+        print(f"  dropped bullet [{title}]: {b[:70]}")
 
 
 if __name__ == '__main__':

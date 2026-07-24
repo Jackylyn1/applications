@@ -1,5 +1,8 @@
 ## CV Standards
-- **LAYOUT RULE (hard): Always use the stored template `templates/CV_Template_Rezi_Dec2025.docx` as the CV layout. NEVER generate or design an own/custom layout.** Fill the template with role-optimized content; keep its structure, fonts and styling. Every generated CV — base templates and job-offer CVs — must be built from this template.
+- **LAYOUT RULE (hard): Always use the stored template as the CV layout. NEVER generate or design an own/custom layout.** Fill the template with role-optimized content; keep its structure, fonts and styling. Every generated CV — base templates and job-offer CVs — must be built from a stored template.
+  - **English CVs → `templates/CV_Template_Rezi_Dec2025.docx`.**
+  - **German CVs → `templates/CV_Template_Rezi_DE_Dec2025.docx`** (structurally identical; German section headings, German placeholder text, `MM.YYYY` dates). Regenerate it from the English template with `tools/make_de_template.py` if the English one changes.
+  - Both templates are ATS-hardened: name + contact left-aligned (name = first extracted line), no em/en dashes.
 - Professional, modern, authentic and ATS-friendly.
 - Optimize **content**, not layout. The layout is fixed to the stored template (see rule above).
 - Use the existing CV as the master document.
@@ -9,4 +12,6 @@
 - Focus on measurable impact instead of task lists.
 - Highlight AI and Requirements Engineering where relevant.
 - Replace email with **info@perfectseowebsite.de** when generating application documents.
+- **Dates (hard): German CVs use numeric `MM.YYYY` (e.g. `03.2025 - heute`, `08.2019 - 06.2021`); ongoing = `heute`.** English CVs use `Mon YYYY` (e.g. `Mar 2025 - Present`). Year-only ranges (`2013 - 2017`) are fine where no month applies. Separator is a plain hyphen ` - ` (never `—`/`–`).
+- **Page-length rule (hard): a second page is only allowed if it carries at least 10 lines of text.** If page 2 has fewer than 10 lines, compact onto ONE page — least-destructive first: (1) tighten paragraph spacing (no content lost, font size unchanged); (2) only if still not enough, drop the least-important bullets (trailing bullets of the older/lower-listed roles first; every role keeps ≥1 bullet, and log what was dropped). If one page is unreachable without gutting the CV, keep the intact original. This is automated by `tools/build_fit.py` (renders, checks page 2, escalates).
 - Generate the final CV as **PDF**.
