@@ -1,9 +1,11 @@
 ## CV Standards
+- **LAYOUT RULE (hard): Always use the stored template `templates/CV_Template_Rezi_Dec2025.docx` as the CV layout. NEVER generate or design an own/custom layout.** Fill the template with role-optimized content; keep its structure, fonts and styling. Every generated CV — base templates and job-offer CVs — must be built from this template.
 - Professional, modern, authentic and ATS-friendly.
-- Optimize **content**, not layout, unless a redesign is explicitly requested (Jacqueline has allowed layout changes if they are more recruiter/HR-friendly).
+- Optimize **content**, not layout. The layout is fixed to the stored template (see rule above).
 - Use the existing CV as the master document.
 - Customize summary, skills, projects and keywords for **every** application.
-- **Never invent skills or experience.** ("I never lie.")
+- **Rewrite/reframe the experience bullet points per role when it helps.** The standard CV bullets are a default, not fixed text. When a job offer emphasizes something different from the standard CV (e.g. requirements engineering, database design, project leadership, or the online-marketing/SEO side), rephrase, reorder, drop, or surface bullets — including drawing on documented duties in `profile.json` → `references` (the wpt-online Arbeitszeugnis) — so the most relevant experience leads. Not required every time; leave bullets as-is when the defaults already fit the role.
+- **Never invent skills or experience.** ("I never lie.") Only reframe what is genuinely evidenced in `profile.json`.
 - Focus on measurable impact instead of task lists.
 - Highlight AI and Requirements Engineering where relevant.
 - Replace email with **info@perfectseowebsite.de** when generating application documents.

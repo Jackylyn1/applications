@@ -1,0 +1,99 @@
+{
+  "name": "Jacqueline Urban",
+  "contact": [
+    "Gelsenkirchen, Deutschland",
+    "info@perfectseowebsite.de",
+    "+49 152 13839296",
+    "in/jacqueline-u-92753821b  |  github.com/Jackylyn1"
+  ],
+  "sections": [
+    {
+      "heading": "PROFIL",
+      "type": "summary",
+      "text": "PHP-Entwicklerin mit rund fünf Jahren Erfahrung im Bau und in der Wartung produktiver Webanwendungen, überwiegend mit Laravel. Mein Schwerpunkt liegt im Backend: Domänenmodellierung mit OOP, Clean Code, SOLID und DDD, Entwurf von REST-APIs sowie Arbeit mit MySQL und PostgreSQL. Ich teste mit PHPUnit und Codeception (BDD / Gherkin), liefere über Docker und GitLab CI/CD aus und achte auf Performance und Sicherheit. Ich verstehe Systeme gern von Anfang bis Ende und verbessere sie weiter, statt bei der ersten lauffähigen Version stehen zu bleiben."
+    },
+    {
+      "heading": "BERUFSERFAHRUNG",
+      "type": "experience",
+      "items": [
+        {
+          "title": "PHP-/Laravel-Entwicklerin",
+          "company": "Gastro IT GmbH",
+          "right": "Mär. 2025 - heute  |  Wuppertal (Remote)",
+          "bullets": [
+            "Entwurf und Umsetzung des Backends eines Kassensystems (POS) für die Gastronomie als Greenfield-Projekt in PHP mit Laravel und PostgreSQL; Strukturierung der Domäne mit Schichtenarchitektur und DDD-Konzepten.",
+            "Entwurf und Anbindung von REST-APIs; Frontend in TypeScript und Alpine.js auf Basis des Laravel-Backends.",
+            "Automatisierte Tests mit Codeception und PHPUnit nach BDD-Ansatz; Feature-Konzeption mit Gherkin gemeinsam mit Geschäftsführung und Product Owner.",
+            "Pflege der GitLab-CI/CD-Pipelines und Docker-basierter Entwicklungs- und Deployment-Umgebungen.",
+            "Anwendung von Clean Code, SOLID und Design Patterns; Einsatz von KI-Werkzeugen für Codeanalyse, -generierung und Refactoring im Arbeitsalltag."
+          ]
+        },
+        {
+          "title": "PHP-Entwicklerin (Anwendungsentwicklung)",
+          "company": "wpt-online Domainmarketing UG",
+          "right": "Juni 2021 - Sep. 2024  |  Gelsenkirchen",
+          "bullets": [
+            "Eigenständige Planung, Umsetzung und Wartung individueller PHP-Webanwendungen (Ticketsysteme, Websites, Marketing-Tools) für kleine und mittlere Unternehmen.",
+            "Übersetzung von Kundenanforderungen in Software: Erstellung von User Stories mit Team und Kunden, Konzeption anforderungsgerechter Lösungen sowie Prüfung und Freigabe von Programmierarbeiten.",
+            "Entwurf, Aufbau und Optimierung der zugrunde liegenden Datenbanksysteme.",
+            "Automatisierte Tests mit PHPUnit und Dokumentation mit PHPDoc.",
+            "Projektkoordination und Übergabe von Programmieraufgaben an das Team; Einsatz von KI-Werkzeugen zur Unterstützung von Analyse, Entwurf und Codegenerierung."
+          ]
+        },
+        {
+          "title": "PHP-Entwicklerin / Projektkoordination",
+          "company": "Narutorpg.de - Open-Source-Community-Projekt",
+          "right": "Mai 2009 - heute  |  Bottrop",
+          "bullets": [
+            "Übernahme einer historisch gewachsenen, umfangreichen PHP-Codebasis in einem proprietären Framework und deren Weiterentwicklung unter Erhalt der bestehenden Architektur.",
+            "Analyse komplexer Legacy-Abhängigkeiten ohne vorhandene Dokumentation; sicheres Debugging und Erweiterung des Systems.",
+            "Dokumentation technischer Abläufe und Koordination eines zehnköpfigen Teams."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "PROJEKTE",
+      "type": "experience",
+      "items": [
+        {
+          "title": "Laravel Pivot Events (Open Source)",
+          "company": "github.com/Jackylyn1",
+          "right": "PHP  |  Laravel  |  Composer",
+          "bullets": [
+            "Open-Source-Laravel-Paket, das Events für Änderungen an Pivot-Tabellen (n:m) mit eigenen IDs auslöst und eine Lücke im Standardverhalten von Eloquent schließt.",
+            "Erforderte Arbeit mit den Interna von Laravels Eloquent und dem Event-System; Verteilung über Composer."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "AUSBILDUNG",
+      "type": "education",
+      "items": [
+        {
+          "degree": "Fachinformatikerin für Anwendungsentwicklung",
+          "detail": "wpt-online Domainmarketing UG, Gelsenkirchen  ·  Aug. 2019 - Juni 2021. Ausbildung abgeschlossen; Arbeitszeugnis mit Note \"sehr gut\"."
+        },
+        {
+          "degree": "Studium IT-Sicherheit (ohne Abschluss)",
+          "detail": "Ruhr-Universität Bochum  ·  Sep. 2013 - Feb. 2017."
+        }
+      ]
+    },
+    {
+      "heading": "KENNTNISSE",
+      "type": "skills",
+      "lines": [
+        "Sprachen: PHP (OOP), TypeScript, JavaScript, SQL, HTML5, CSS3/SCSS",
+        "Frameworks: Laravel, Symfony, Vue.js, Alpine.js, Tailwind CSS",
+        "Backend & APIs: REST-APIs, OpenAPI, OAuth, JSON, XML, AJAX, MySQL, PostgreSQL",
+        "Testing & Qualität: PHPUnit, Codeception, BDD (Gherkin), statische Analyse, Clean Code, SOLID, Design Patterns",
+        "Architektur: Domain-Driven Design, Event-Driven Architecture, Requirements Engineering, System Design, Performance-Optimierung, Sicherheit",
+        "DevOps & Tools: Docker, GitLab CI/CD, Git, Composer, npm, Linux, Apache",
+        "KI-gestützte Entwicklung: Claude Code, Prompt Engineering, LLM / OpenAI- & Anthropic-APIs, MCP",
+        "Zertifikate & Sprachen: LinkedIn Skill Assessment - PHP; Deutsch (Muttersprache), Englisch (fließend)"
+      ]
+    }
+  ]
+}

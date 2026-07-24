@@ -1,0 +1,11 @@
+# Python virtualenv (regenerable, platform-specific — not data)
+career-kb/.venv/
+.venv/
+**/__pycache__/
+*.pyc
+
+# LibreOffice lock files
+.~lock.*#
+
+# OS cruft
+.DS_Store

@@ -1,0 +1,105 @@
+{
+  "name": "Jacqueline Urban",
+  "contact": ["Gelsenkirchen, Deutschland", "info@perfectseowebsite.de", "+49 152 13839296", "in/jacqueline-u-92753821b  |  github.com/Jackylyn1"],
+  "sections": [
+    {
+      "heading": "PROFIL",
+      "type": "summary",
+      "text": "Lösungsarchitektin und Softwareentwicklerin, die Systeme entwirft statt nur Features umzusetzen. Stark darin, fachliche Anforderungen in wartbare Software zu übersetzen: Requirements Engineering, Domain-Driven Design, ereignisgesteuerte Architektur, API- und Integrationsdesign sowie die Abwägung von Wartbarkeit, Performance und Sicherheit. Hat die Greenfield-Architektur eines Kassensystems (POS) für die Gastronomie durchgängig entworfen (Backend mit Laravel/PostgreSQL, Frontend mit TypeScript, REST-APIs). Sicher an der Schnittstelle zwischen Fachbereich und Technik, in der Abstimmung mit Stakeholdern und im Abwägen von Architekturentscheidungen. Baut derzeit Praxis in Cloud und Infrastruktur aus (AWS, Kubernetes, Terraform)."
+    },
+    {
+      "heading": "BERUFSERFAHRUNG",
+      "type": "experience",
+      "items": [
+        {
+          "title": "KI-gestützte Webentwicklung / Softwarearchitektur",
+          "company": "Gastro IT GmbH",
+          "right": "März 2025 - heute  |  Wuppertal (Remote)",
+          "bullets": [
+            "Durchgängiger Entwurf der Softwarearchitektur für ein Kassensystem (POS) für die Gastronomie (Greenfield): geschichtetes Backend mit Laravel/PostgreSQL, Frontend mit TypeScript und Alpine.js sowie REST-APIs zur Integration",
+            "Einsatz von Domain-Driven Design und ereignisgesteuerten Mustern, um das Domänenmodell bei sich ändernden Anforderungen wartbar zu halten",
+            "Übersetzung fachlicher Anforderungen von Geschäftsführung und Product Owner in technische Entwürfe; Abstimmung des erwarteten Verhaltens per Gherkin vor der Umsetzung",
+            "Treffen und Dokumentieren von Architekturentscheidungen mit Abwägung von Wartbarkeit, Performance und Sicherheit",
+            "Aufbau und Pflege von GitLab-CI/CD-Pipelines und Docker-Containerisierung; Etablierung von Testautomatisierung mit Codeception und PHPUnit (BDD)",
+            "Gezielter Einsatz von KI-Werkzeugen für Architekturexploration, Codeanalyse und Automatisierung - unter Beibehaltung der ingenieurmäßigen Beurteilung"
+          ]
+        },
+        {
+          "title": "Softwareentwicklung & Projektleitung",
+          "company": "wpt-online Domainmarketing UG",
+          "right": "Juni 2021 - Sep. 2024  |  Gelsenkirchen",
+          "bullets": [
+            "Konzeption anforderungsgerechter Softwarelösungen: Ermittlung des Kundenbedarfs, Ableitung der Anforderungen sowie Erstellung von User Storys gemeinsam mit Entwicklungsteam und Kunden",
+            "Entwurf und Optimierung von Datenbanksystemen (Einrichtung, Planung und Struktur) für individuelle Webanwendungen",
+            "Leitung und Koordination von Softwareprojekten in Webentwicklung und Programmierung; Prüfung und Abnahme von Umsetzungen sowie Übergabe spezifizierter Aufgaben an das Team",
+            "Entwicklung individueller Softwarelösungen - Neuentwicklungen sowie Anpassung und Erweiterung bestehender Systeme - mit Qualitätssicherung und Analyse der Geschäftsprozesse der Kunden",
+            "Direkte Kommunikation mit Kunden zur Abstimmung technischer Lösungen mit den Geschäftszielen; das Arbeitszeugnis bewertet analytisches und lösungsorientiertes Denken 'auf höchstem Niveau' (Gesamtnote: sehr gut)"
+          ]
+        },
+        {
+          "title": "Entwicklung & Koordination (Open-Source-Community-Projekt)",
+          "company": "Narutorpg.de",
+          "right": "Mai 2009 - heute  |  Bottrop",
+          "bullets": [
+            "Analyse und Kartierung einer historisch gewachsenen Legacy-Codebasis mit komplexen, undokumentierten Abhängigkeiten innerhalb eines proprietären Frameworks",
+            "Erweiterung und Debugging des Systems unter Wahrung der bestehenden Architektur",
+            "Dokumentation technischer Abläufe sowie der Domäne (Regeln, Spielwelt) in MediaWiki",
+            "Koordination eines zehnköpfigen Teams und Abstimmung technischer und organisatorischer Aufgaben"
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "PROJEKTE",
+      "type": "experience",
+      "items": [
+        {
+          "title": "Execution-Research- & Backtesting-Plattform",
+          "company": "Eigenprojekt",
+          "right": "Python, NumPy, Numba",
+          "bullets": [
+            "Entwurf einer quantitativen Research-Umgebung zur effizienten Auswertung sehr großer Parameterräume (zig- bis hunderte Millionen Kombinationen) statt naiver Brute-Force-Schleifen",
+            "Laufzeitoptimierung durch JIT-Kompilierung (Numba), Vektorisierung und algorithmische Verbesserungen; reproduzierbare, modulare Backtesting- und Scoring-Workflows",
+            "Zeigt Performance-Engineering und den Entwurf von Systemen, die auch bei großem Umfang nutzbar bleiben"
+          ]
+        },
+        {
+          "title": "Laravel Pivot Events (Open Source)",
+          "company": "github.com/Jackylyn1",
+          "right": "PHP, Laravel, Composer",
+          "bullets": [
+            "Veröffentlichung eines Open-Source-Laravel-Pakets, das Pivot-Events (n:m) mit eigenen IDs ermöglicht",
+            "Erforderte Verständnis der Framework-Interna und den Entwurf einer sauberen, wiederverwendbaren API für andere Entwickler"
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "AUSBILDUNG",
+      "type": "education",
+      "items": [
+        {
+          "degree": "Fachinformatikerin für Anwendungsentwicklung",
+          "detail": "wpt-online Domainmarketing UG, Gelsenkirchen | Aug. 2019 - Juni 2021. Ausbildung mit Bestnote abgeschlossen; anschließend Festanstellung."
+        },
+        {
+          "degree": "Studium IT-Sicherheit (nicht abgeschlossen)",
+          "detail": "Ruhr-Universität Bochum, Bochum | Sep. 2013 - Feb. 2017. Grundlage für sicherheitsorientiertes Denken."
+        }
+      ]
+    },
+    {
+      "heading": "KENNTNISSE",
+      "type": "skills",
+      "lines": [
+        "Architektur & Design: Softwarearchitektur, System Design, Domain-Driven Design, ereignisgesteuerte Architektur, Requirements Engineering, API- & Integrationsdesign, Clean Code, SOLID, Design Patterns",
+        "Backend: PHP (OOP), Laravel, Symfony, REST-APIs, OpenAPI, OAuth, PostgreSQL, MySQL, JSON, XML",
+        "Frontend: TypeScript, JavaScript, Vue.js, Alpine.js, Tailwind CSS, HTML5, CSS3/SCSS",
+        "Qualität & Delivery: Docker, GitLab CI/CD, Git, Codeception, PHPUnit, BDD (Gherkin), statische Analyse, Performance-Optimierung, Sicherheit",
+        "KI-Engineering: LLM-Integration, OpenAI- & Anthropic-APIs, MCP, KI-Agenten, Prompt Engineering",
+        "Im Ausbau: AWS, Kubernetes, Terraform (in Arbeit)",
+        "Sprachen: Deutsch (Muttersprache), Englisch (fließend)"
+      ]
+    }
+  ]
+}

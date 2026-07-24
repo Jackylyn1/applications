@@ -1,0 +1,99 @@
+{
+  "name": "Jacqueline Urban",
+  "contact": [
+    "Gelsenkirchen, Germany",
+    "info@perfectseowebsite.de",
+    "+49 152 13839296",
+    "in/jacqueline-u-92753821b  |  github.com/Jackylyn1"
+  ],
+  "sections": [
+    {
+      "heading": "PROFESSIONAL SUMMARY",
+      "type": "summary",
+      "text": "PHP developer with around five years of experience building and maintaining production web applications, most of it in Laravel. My focus is the backend: modelling the domain with OOP, Clean Code, SOLID and DDD, designing REST APIs, and working with MySQL and PostgreSQL. I test with PHPUnit and Codeception (BDD / Gherkin), ship through Docker and GitLab CI/CD, and keep an eye on performance and security. I like understanding a system end to end and continuing to improve it once it works, rather than stopping at the first version that runs."
+    },
+    {
+      "heading": "EXPERIENCE",
+      "type": "experience",
+      "items": [
+        {
+          "title": "PHP / Laravel Developer",
+          "company": "Gastro IT GmbH",
+          "right": "Mar 2025 - Present  |  Wuppertal (Remote)",
+          "bullets": [
+            "Designed and built the backend of a greenfield restaurant point-of-sale (POS) system in PHP with Laravel and PostgreSQL, structuring the domain with a layered architecture and DDD concepts.",
+            "Designed and consumed REST APIs; frontend in TypeScript and Alpine.js on top of the Laravel backend.",
+            "Wrote automated tests with Codeception and PHPUnit following a BDD approach; specified features with Gherkin together with management and the Product Owner.",
+            "Maintained GitLab CI/CD pipelines and Docker-based development and deployment environments.",
+            "Applied Clean Code, SOLID and design patterns; used AI tools for code analysis, generation and refactoring in daily work."
+          ]
+        },
+        {
+          "title": "PHP Developer (Application Development)",
+          "company": "wpt-online Domainmarketing UG",
+          "right": "Jun 2021 - Sep 2024  |  Gelsenkirchen",
+          "bullets": [
+            "Independently planned, implemented and maintained custom PHP web applications (ticketing systems, websites, marketing tools) for small and mid-sized clients.",
+            "Translated client requirements into software: wrote user stories with the team and clients, conceived requirements-appropriate solutions, and reviewed and approved programming work.",
+            "Designed, set up and optimized the underlying database systems.",
+            "Wrote automated tests with PHPUnit and documented code with PHPDoc.",
+            "Coordinated projects and handed programming tasks to the team; used AI tools to support analysis, design and code generation."
+          ]
+        },
+        {
+          "title": "PHP Developer / Project Coordination",
+          "company": "Narutorpg.de - Open Source Community Project",
+          "right": "May 2009 - Present  |  Bottrop",
+          "bullets": [
+            "Took over a large, historically grown PHP codebase in a proprietary framework and continued developing it while preserving the existing architecture.",
+            "Analyzed complex legacy dependencies without existing documentation; debugged and extended the system safely.",
+            "Documented technical processes and coordinated a ten-person team."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "PROJECTS",
+      "type": "experience",
+      "items": [
+        {
+          "title": "Laravel Pivot Events (Open Source)",
+          "company": "github.com/Jackylyn1",
+          "right": "PHP  |  Laravel  |  Composer",
+          "bullets": [
+            "Open-source Laravel package that fires events for pivot (many-to-many) table changes with custom IDs, filling a gap in Laravel's default Eloquent behavior.",
+            "Required working with Laravel's Eloquent internals and event system; distributed via Composer."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "EDUCATION",
+      "type": "education",
+      "items": [
+        {
+          "degree": "IT Specialist for Application Development (Fachinformatikerin fur Anwendungsentwicklung)",
+          "detail": "wpt-online Domainmarketing UG, Gelsenkirchen  ·  Aug 2019 - Jun 2021. Apprenticeship completed; top-grade employment reference."
+        },
+        {
+          "degree": "IT Security Studies (not completed)",
+          "detail": "Ruhr University Bochum  ·  Sep 2013 - Feb 2017."
+        }
+      ]
+    },
+    {
+      "heading": "SKILLS",
+      "type": "skills",
+      "lines": [
+        "Languages: PHP (OOP), TypeScript, JavaScript, SQL, HTML5, CSS3/SCSS",
+        "Frameworks: Laravel, Symfony, Vue.js, Alpine.js, Tailwind CSS",
+        "Backend & APIs: REST APIs, OpenAPI, OAuth, JSON, XML, AJAX, MySQL, PostgreSQL",
+        "Testing & Quality: PHPUnit, Codeception, BDD (Gherkin), Static Analysis, Clean Code, SOLID, Design Patterns",
+        "Architecture: Domain-Driven Design, Event-Driven Architecture, Requirements Engineering, System Design, Performance Optimization, Security",
+        "DevOps & Tools: Docker, GitLab CI/CD, Git, Composer, npm, Linux, Apache",
+        "AI-Assisted Development: Claude Code, Prompt Engineering, LLM / OpenAI & Anthropic APIs, MCP",
+        "Certifications & Languages: LinkedIn Skill Assessment - PHP; German (native), English (fluent)"
+      ]
+    }
+  ]
+}

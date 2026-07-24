@@ -1,14 +1,16 @@
 {
   "meta": {
     "owner": "Jacqueline Urban",
-    "version": 1,
+    "version": 3,
     "last_updated": "2026-07-24",
     "source_documents": [
       "CVEnglish2026.pdf",
       "Application_Standards_and_Career_Guidelines.pdf",
       "Impact_Portfolio_Detailed.pdf",
       "Project_Learnings_Portfolio.pdf",
-      "Job_Skills_By_Role.pdf"
+      "Job_Skills_By_Role.pdf",
+      "LinkedIn profile screencast (li.webm, extracted 2026-07-24)",
+      "Arbeitszeugnis_JU.pdf (wpt-online employment reference, stored at documents/Arbeitszeugnis_wpt-online_2024.pdf)"
     ],
     "notes": "Single source of truth for CV and cover-letter generation. Never invent facts not present here. The user's principle: 'I never lie.'"
   },
@@ -17,6 +19,7 @@
     "full_name": "Jacqueline Urban",
     "headline": "Full-Stack Developer | AI-Assisted Software Development",
     "positioning_statement": "Software Engineer with Architecture and AI Focus",
+    "linkedin_headline_current": "Agentic Coding & LLM-Integration | Softwarearchitektur | Laravel- & TypeScript-Developerin - AI Engineering | Mentorin für Frauen in Tech",
     "location": "Gelsenkirchen, 45879, Germany",
     "phone": "+49 152 13839296",
     "email_personal": "diejacky@gmx.net",
@@ -34,15 +37,30 @@
     "hobbies_interests": ["Tech meetups", "Mentoring women in tech", "Travel", "Sports", "Nature"]
   },
 
+  "open_to_work": {
+    "source": "LinkedIn 'Offen für Jobangebote' settings",
+    "target_job_titles": ["PHP-Entwickler / PHP Developer", "AI Software Developer", "Lösungsarchitekt / Solution Architect", "Software-Architekt / Software Architect", "IT-Berater / IT Consultant"],
+    "location_type": "Remote",
+    "location": "Gelsenkirchen",
+    "availability": "Immediately; actively applying (Sofort; ich bewerbe mich aktiv)",
+    "employment_type": "Full-time (Vollzeit)"
+  },
+
   "skills": {
-    "backend": ["PHP (OOP)", "Laravel", "REST APIs", "PostgreSQL", "MySQL"],
+    "backend": ["PHP (OOP)", "Laravel", "Symfony", "REST APIs", "OpenAPI", "OAuth", "JSON", "XML", "AJAX", "PostgreSQL", "MySQL"],
     "frontend": ["TypeScript", "JavaScript", "Vue.js", "Alpine.js", "Tailwind CSS", "HTML5", "CSS3/SCSS"],
-    "ai_assisted_development": ["Claude Code", "Prompt Engineering", "Agentic AI", "OpenAI API", "Anthropic API", "MCP", "AI Agents", "AI Workflow Design"],
-    "devops_tools": ["Docker", "GitLab CI/CD", "Git", "Linux", "Apache", "Composer", "npm"],
-    "quality_methodologies": ["Codeception", "PHPUnit", "Behavior-Driven Development (Gherkin)", "Domain-Driven Design", "Software Architecture", "Agile Methodologies", "SOLID", "Design Patterns", "Clean Code", "Static Analysis", "Event-Driven Architecture", "System Design", "Requirements Engineering", "Performance Optimization", "Security"],
-    "marketing": ["SEO", "SEM"],
+    "ai_assisted_development": ["Claude Code", "Prompt Engineering", "Agentic AI", "Large Language Models (LLM)", "OpenAI API", "Anthropic API", "MCP", "AI Agents", "AI Workflow Design"],
+    "devops_tools": ["Docker", "GitLab CI/CD", "Git", "SVN / TortoiseSVN", "Linux", "Apache", "Composer", "npm"],
+    "quality_methodologies": ["Codeception", "PHPUnit", "Behavior-Driven Development (Gherkin)", "Domain-Driven Design", "Software Architecture", "Agile Methodologies", "SOLID", "Design Patterns", "Clean Code", "Static Analysis", "Event-Driven Architecture", "Event-Driven Programming", "System Design", "Requirements Engineering", "Performance Optimization", "Security"],
+    "cms_wiki": ["MediaWiki"],
+    "marketing": ["SEO", "Off-Page SEO", "SEM", "Google Ads", "Facebook / Social Media Marketing", "Web content writing"],
     "data_python": ["Python", "NumPy", "JIT compilation (Numba)", "Backtesting", "Data pipelines", "Algorithm optimization"]
   },
+
+  "certifications": [
+    { "name": "LinkedIn Skill Assessment passed — PHP", "issuer": "LinkedIn", "source": "LinkedIn profile" },
+    { "name": "LinkedIn Skill Assessment passed — Google Ads", "issuer": "LinkedIn", "source": "LinkedIn profile" }
+  ],
 
   "technical_strengths_to_emphasize": [
     "Software Architecture", "Requirements Engineering", "Greenfield Development",
@@ -92,8 +110,11 @@
   "work_experience": [
     {
       "title": "AI-Assisted Web Development",
+      "linkedin_title_de": "Webdeveloperin - KI-gestützte Entwicklung",
       "company": "Gastro IT GmbH",
       "location": "Wuppertal",
+      "work_mode": "Remote",
+      "employment_type": "Full-time",
       "start": "2025-03",
       "end": "present",
       "bullets": [
@@ -116,6 +137,18 @@
         "Test automation with PHPUnit and documentation using PHPDoc",
         "Client communication and coordination"
       ]
+    },
+    {
+      "title": "Marketing Communications Specialist",
+      "linkedin_title_de": "Kauffrau für Marketingkommunikation",
+      "company": "wpt-online Domainmarketing UG",
+      "location": "Gelsenkirchen",
+      "work_mode": "On-site",
+      "employment_type": "Full-time",
+      "start": "2021-07",
+      "end": "2024-09",
+      "note": "Held concurrently with the AI-Assisted Web Development / PHP developer role at the same company. Skills and areas of work are covered under the developer position. Include on CV only when a role calls for marketing/communications background.",
+      "bullets": []
     },
     {
       "title": "Development / Coordination",
@@ -146,6 +179,26 @@
     }
   ],
 
+  "volunteering": [
+    {
+      "role": "IT Mentor",
+      "linkedin_role_de": "IT Mentorin",
+      "organization": "CoffeeCodeBreak",
+      "field": "Education",
+      "start": "2025-01",
+      "end": "present",
+      "description": "Mentors women pursuing an entry or re-entry into IT, sharing software development experience and guiding them on starting their careers. Directly supports the 'Mentor for Women in Tech' positioning in her headline."
+    },
+    {
+      "role": "Management (Leitung)",
+      "organization": "Private Animal Shelter Happyquieker",
+      "field": "Animal welfare",
+      "start": "2005-05",
+      "end": "2010-06",
+      "description": "Primarily responsible for management and placement; co-responsible for finances. Same organization as the freelance Management + Web Development + SEO role in work_experience."
+    }
+  ],
+
   "education": [
     {
       "title": "IT Specialist for Application Development",
@@ -164,7 +217,60 @@
     }
   ],
 
+  "references": [
+    {
+      "document_type": "Arbeitszeugnis (German employment reference letter)",
+      "file": "documents/Arbeitszeugnis_wpt-online_2024.pdf",
+      "employer": "wpt-online Domainmarketing UG (haftungsbeschränkt) & Co. KG",
+      "employer_location": "Gelsenkirchen",
+      "employer_profile": "Agency active since 1998 in online marketing, web design and programming, serving primarily small and mid-sized companies.",
+      "issued_by": "Atilla S. Öner (Geschäftsführer / Managing Director)",
+      "issued_date": "2024-09-30",
+      "employment_period": "2019-08-01 to 2024-09-30",
+      "role_progression": "Began with an apprenticeship as Fachinformatikerin für Anwendungsentwicklung (IT Specialist for Application Development), completed 2021-06-23, then continued in permanent employment (Festanstellung).",
+      "termination": "Ended 2024-09-30 by mutual agreement (in gegenseitigem Einvernehmen).",
+      "covers": ["work_experience: wpt-online (2021-06 to 2024-09)", "education: IT Specialist for Application Development (2019-08 to 2021-06)"],
+      "overall_rating": "Top grade (equivalent to 'sehr gut' / very good). Wording: tasks always performed 'mit großem Engagement und Erfolg'; 'unverzichtbare Mitarbeiterin' (indispensable employee).",
+      "documented_responsibilities": [
+        "Project management, including coordination and leadership of projects in online marketing, web design and programming",
+        "Conception of requirements-appropriate software solutions",
+        "Development of individual software solutions, including adapting, extending and implementing existing software",
+        "Review and approval of programming projects and active participation in their implementation",
+        "Formulating programming tasks and handing them over to the team",
+        "Writing user stories in collaboration with the development team and clients",
+        "Determining customer needs and deriving the necessary measures",
+        "Setup, optimization, planning and creation of database systems",
+        "Quality assurance and analysis of business processes and conditions at the customer / in the respective application department",
+        "Developing product ideas based on researched market gaps and turning them into market-ready prototypes in collaboration with production",
+        "Developing marketing strategies and responsibility for product positioning",
+        "Conception, presentation, setup and management of social media and Google Ads campaigns (incl. copywriting, image research, target-group identification, keyword research, client coordination)",
+        "Copywriting for social media channels (especially Facebook)",
+        "On-page and off-page SEO measures, including maintenance of Google My Business entries",
+        "Recruiting and selection of employees",
+        "Creating and checking invoices and monitoring payments"
+      ],
+      "documented_qualities": [
+        "Exceptionally high commitment (außerordentlich hohe Einsatzbereitschaft)",
+        "Outstanding initiative (herausragende Eigeninitiative)",
+        "Exceptional flexibility; onboarded into new areas in shortest time with highest autonomy and great success",
+        "Analytical skills and solution-oriented thinking at the highest level",
+        "Comprehensive, in-depth knowledge in application development",
+        "Excellent project-management skills and campaign management",
+        "Strong communication skills and exemplary team orientation",
+        "Works with utmost precision and efficiency, never losing sight of company goals"
+      ],
+      "usage_note": "This is verified third-party evidence — safe to cite for the wpt-online period. It broadens that role beyond 'AI-assisted web development' to include requirements engineering, database design, project leadership, custom software, and online-marketing/SEO. Use relevant parts when tailoring; German quotes are available verbatim in the stored PDF for German applications."
+    }
+  ],
+
   "projects": [
+    {
+      "name": "Laravel Pivot Events (Open Source)",
+      "goal": "Open-source Laravel package enabling pivot (many-to-many) events with custom IDs.",
+      "url": "https://github.com/Jackylyn1/laravel-pivot-events-with-custom-id",
+      "technologies": ["PHP", "Laravel", "Composer"],
+      "transferable_skills": ["Open-source contribution", "Package design", "Laravel internals"]
+    },
     {
       "name": "Execution Research & Backtesting Platform",
       "goal": "Design a quantitative execution research environment capable of evaluating enormous parameter spaces quickly enough to iterate on strategies.",

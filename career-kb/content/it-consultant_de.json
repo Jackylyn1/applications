@@ -1,0 +1,97 @@
+{
+  "name": "Jacqueline Urban",
+  "contact": [
+    "Gelsenkirchen, Deutschland",
+    "info@perfectseowebsite.de",
+    "+49 152 13839296",
+    "in/jacqueline-u-92753821b  |  github.com/Jackylyn1"
+  ],
+  "sections": [
+    {
+      "heading": "PROFIL",
+      "type": "summary",
+      "text": "Als IT-Beraterin arbeite ich an der Schnittstelle zwischen Fachbereich und Technik. Seit 2019 analysiere ich Geschäftsprozesse, ermittle den tatsächlichen Kundenbedarf und übersetze Anforderungen in funktionierende Software - von User Storys mit Kunden bis zum Entwurf und Aufbau der zugehörigen Architektur. In einer Online-Marketing-Agentur habe ich Web- und Programmierprojekte geleitet und koordiniert und strukturierte Aufgabenpakete an das Entwicklungsteam übergeben; in einem langjährigen Open-Source-Projekt koordiniere ich ein zehnköpfiges Team. Aktuell integriere ich LLMs und KI-Agenten in reale Entwicklungsabläufe - eine praktische Grundlage, um zu beraten, wo KI einem Geschäftsprozess messbaren Nutzen bringt und wo nicht. Ich möchte Systeme end-to-end verstehen, Ergebnisse messen und kontinuierlich verbessern. Die strategische Beratungsseite baue ich gezielt aus: KI-Governance, EU AI Act, Change-Management und Workshop-Moderation."
+    },
+    {
+      "heading": "BERUFSERFAHRUNG",
+      "type": "experience",
+      "items": [
+        {
+          "title": "Softwareentwicklung (KI-gestützt)",
+          "company": "Gastro IT GmbH",
+          "right": "März 2025 - heute  |  Wuppertal (Remote)",
+          "bullets": [
+            "Übersetzung der Anforderungen von Geschäftsführung und Product Owner in Features, spezifiziert als Gherkin-/BDD-Szenarien, für ein Greenfield-Kassensystem (POS) für die Gastronomie",
+            "Entwurf der Softwarearchitektur (Backend mit Laravel/PostgreSQL, Frontend mit TypeScript und Alpine.js) mit Blick auf Wartbarkeit, Performance und Security",
+            "Integration von KI-Werkzeugen - LLMs und Agenten - in die tägliche Entwicklung für Codeanalyse, Architekturentwurf, Codegenerierung und Automatisierung; praktische Grundlage für die Beratung zur KI-Einführung",
+            "Pflege der CI/CD-Pipelines in GitLab und Containerisierung mit Docker; Testautomatisierung mit Codeception und PHPUnit"
+          ]
+        },
+        {
+          "title": "Anwendungsentwicklung & Projektkoordination",
+          "company": "wpt-online Domainmarketing UG",
+          "right": "Juni 2021 - Sep. 2024  |  Gelsenkirchen",
+          "bullets": [
+            "Ermittlung des Kundenbedarfs und Ableitung der erforderlichen Maßnahmen; Analyse von Geschäftsprozessen und Gegebenheiten im jeweiligen Anwendungsbereich (Geschäftsprozessanalyse)",
+            "Leitung und Koordination von Web-, Programmier- und Online-Marketing-Projekten; Formulierung von Programmieraufgaben, Übergabe an das Team sowie Prüfung und Abnahme der Ergebnisse",
+            "Konzeption anforderungsgerechter Softwarelösungen und Entwicklung individueller Anwendungen (Ticketsysteme, Webanwendungen, Marketing-Tools) inkl. Anpassung und Erweiterung bestehender Software",
+            "Erstellung von User Storys gemeinsam mit Entwicklungsteam und Kunden; Verantwortung für Kundenkommunikation und -koordination",
+            "Planung und Optimierung von Datenbanksystemen; Testautomatisierung mit PHPUnit"
+          ]
+        },
+        {
+          "title": "Entwicklung & Teamkoordination",
+          "company": "Narutorpg.de (Open-Source-Community-Projekt)",
+          "right": "seit Mai 2009  |  Bottrop",
+          "bullets": [
+            "Koordination eines zehnköpfigen Teams und Abstimmung technischer mit organisatorischen Aufgaben",
+            "Analyse komplexer Legacy-Abhängigkeiten und Identifikation technischer Abhängigkeiten ohne vorhandene Dokumentation",
+            "Dokumentation technischer Prozesse und Pflege einer Wissensbasis sowie eines Regelwerks in MediaWiki"
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "PROJEKTE",
+      "type": "experience",
+      "items": [
+        {
+          "title": "AI Engineering Experiments",
+          "company": "Eigenständiges Projekt",
+          "right": "2024 - heute",
+          "bullets": [
+            "Aufbau und Bewertung von KI-Workflows, Agenten und Integrationen, um den produktiven Einsatz von LLMs zu verstehen - nicht nur das Prompting",
+            "Entwurf von Agenten-Workflows, Optimierung von Prompts und Token-Verbrauch sowie Vergleich der Modellstärken gegen Kosten-/Qualitäts-Abwägungen",
+            "Grundlage für ehrliche Beratung zur KI-Einführung: wo KI einem Geschäftsprozess messbaren Nutzen bringt und wo nicht"
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "AUSBILDUNG",
+      "type": "education",
+      "items": [
+        {
+          "degree": "Fachinformatikerin für Anwendungsentwicklung",
+          "detail": "Ausbildung, wpt-online Domainmarketing UG, Gelsenkirchen  |  Aug. 2019 - Juni 2021"
+        },
+        {
+          "degree": "Studium IT-Sicherheit (ohne Abschluss)",
+          "detail": "Ruhr-Universität Bochum, Bochum  |  Sep. 2013 - Feb. 2017"
+        }
+      ]
+    },
+    {
+      "heading": "KENNTNISSE",
+      "type": "skills",
+      "lines": [
+        "Beratung & Anforderungen: Requirements Engineering, Geschäftsprozessanalyse, User Storys (Gherkin/BDD), Stakeholder- & Kundenkommunikation, Projektleitung & -koordination, individuelle Softwarelösungen",
+        "KI-Einführung: LLM-Integration (OpenAI- & Anthropic-APIs), KI-Agenten, MCP, Prompt Engineering, KI-Workflow-Design",
+        "Architektur & Engineering: Softwarearchitektur, System Design, DDD, ereignisgesteuerte Architektur, REST/OpenAPI, PHP/Laravel, TypeScript/Vue/Alpine.js, PostgreSQL/MySQL",
+        "Umsetzung & Qualität: Docker, GitLab CI/CD, Git, Codeception/PHPUnit, Clean Code, SOLID, Performance-Optimierung, Security",
+        "Aktuell im Aufbau: KI-Strategie & -Governance, EU AI Act, Change-Management, Workshop-Moderation",
+        "Sprachen: Deutsch (Muttersprache), Englisch (fließend)"
+      ]
+    }
+  ]
+}

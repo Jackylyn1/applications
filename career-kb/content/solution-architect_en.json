@@ -1,0 +1,105 @@
+{
+  "name": "Jacqueline Urban",
+  "contact": ["Gelsenkirchen, Germany", "info@perfectseowebsite.de", "+49 152 13839296", "in/jacqueline-u-92753821b  |  github.com/Jackylyn1"],
+  "sections": [
+    {
+      "heading": "PROFILE",
+      "type": "summary",
+      "text": "Solution Architect and software engineer who designs systems rather than only implementing features. Strongest in translating business requirements into maintainable software: requirements engineering, Domain-Driven Design, event-driven architecture, API and integration design, and balancing maintainability, performance and security. Designed the greenfield architecture for a restaurant point-of-sale system end-to-end (Laravel/PostgreSQL backend, TypeScript frontend, REST APIs). Comfortable bridging business and technology, aligning stakeholders, and reasoning through architecture trade-offs. Currently deepening cloud and infrastructure practice (AWS, Kubernetes, Terraform)."
+    },
+    {
+      "heading": "EXPERIENCE",
+      "type": "experience",
+      "items": [
+        {
+          "title": "AI-Assisted Web Development / Software Architecture",
+          "company": "Gastro IT GmbH",
+          "right": "Mar 2025 - Present  |  Wuppertal (Remote)",
+          "bullets": [
+            "Designed the end-to-end software architecture for a greenfield restaurant point-of-sale (POS) system: layered Laravel/PostgreSQL backend, TypeScript and Alpine.js frontend, and REST APIs for integration",
+            "Applied Domain-Driven Design and event-driven patterns to keep the domain model maintainable as requirements evolved",
+            "Translated business requirements from executive management and the Product Owner into technical designs, using Gherkin to align on expected behavior before implementation",
+            "Made and documented architecture decisions that balance maintainability, performance and security",
+            "Set up and maintained GitLab CI/CD pipelines and Docker containerization; established test automation with Codeception and PHPUnit (BDD)",
+            "Used AI tools deliberately for architecture exploration, code analysis and automation, keeping engineering judgment in the loop"
+          ]
+        },
+        {
+          "title": "Software Development & Project Lead",
+          "company": "wpt-online Domainmarketing UG",
+          "right": "Jun 2021 - Sep 2024  |  Gelsenkirchen",
+          "bullets": [
+            "Conceived requirements-appropriate software solutions: determined customer needs, derived requirements, and wrote user stories together with the development team and clients",
+            "Designed and optimized database systems (setup, planning and structure) for custom web applications",
+            "Led and coordinated software projects across web development and programming; reviewed and approved implementations and handed specified tasks to the team",
+            "Delivered individual software solutions - new builds as well as adapting and extending existing systems - with quality assurance and analysis of customer business processes",
+            "Communicated directly with clients to align technical solutions with business goals; employment reference rates analytical and solution-oriented thinking 'at the highest level' (overall assessment: very good)"
+          ]
+        },
+        {
+          "title": "Development & Coordination (Open Source Community Project)",
+          "company": "Narutorpg.de",
+          "right": "May 2009 - Present  |  Bottrop",
+          "bullets": [
+            "Analyzed and mapped a historically grown legacy codebase with complex, undocumented dependencies inside a proprietary framework",
+            "Extended and debugged the system while preserving its existing architecture",
+            "Documented technical processes and the domain (rules, game world) in MediaWiki",
+            "Coordinated a ten-person team, aligning technical and organizational work"
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "PROJECTS",
+      "type": "experience",
+      "items": [
+        {
+          "title": "Execution Research & Backtesting Platform",
+          "company": "Personal project",
+          "right": "Python, NumPy, Numba",
+          "bullets": [
+            "Designed a quantitative research environment to evaluate very large parameter spaces (tens to hundreds of millions of combinations) efficiently instead of naive brute-force loops",
+            "Optimized runtime through JIT compilation (Numba), vectorization and algorithmic improvements; built reproducible, modular backtesting and scoring workflows",
+            "Demonstrates performance engineering and designing systems that stay usable at scale"
+          ]
+        },
+        {
+          "title": "Laravel Pivot Events (Open Source)",
+          "company": "github.com/Jackylyn1",
+          "right": "PHP, Laravel, Composer",
+          "bullets": [
+            "Published an open-source Laravel package that adds pivot (many-to-many) events with custom IDs",
+            "Required understanding framework internals and designing a clean, reusable API for other developers"
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "EDUCATION",
+      "type": "education",
+      "items": [
+        {
+          "degree": "IT Specialist for Application Development (Fachinformatikerin)",
+          "detail": "wpt-online Domainmarketing UG, Gelsenkirchen | Aug 2019 - Jun 2021. Apprenticeship completed with top grade; continued in permanent employment."
+        },
+        {
+          "degree": "IT Security Studies (not completed)",
+          "detail": "Ruhr University Bochum, Bochum | Sep 2013 - Feb 2017. Foundation in security-oriented thinking."
+        }
+      ]
+    },
+    {
+      "heading": "SKILLS",
+      "type": "skills",
+      "lines": [
+        "Architecture & Design: Software Architecture, System Design, Domain-Driven Design, Event-Driven Architecture, Requirements Engineering, API & Integration Design, Clean Code, SOLID, Design Patterns",
+        "Backend: PHP (OOP), Laravel, Symfony, REST APIs, OpenAPI, OAuth, PostgreSQL, MySQL, JSON, XML",
+        "Frontend: TypeScript, JavaScript, Vue.js, Alpine.js, Tailwind CSS, HTML5, CSS3/SCSS",
+        "Quality & Delivery: Docker, GitLab CI/CD, Git, Codeception, PHPUnit, BDD (Gherkin), Static Analysis, Performance Optimization, Security",
+        "AI Engineering: LLM integration, OpenAI & Anthropic APIs, MCP, AI Agents, Prompt Engineering",
+        "Currently expanding: AWS, Kubernetes, Terraform (in progress)",
+        "Languages: German (native), English (fluent)"
+      ]
+    }
+  ]
+}
