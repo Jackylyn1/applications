@@ -14,7 +14,7 @@
         {
           "title": "KI-gestützte Webentwicklung / Softwarearchitektur",
           "company": "Gastro IT GmbH",
-          "right": "März 2025 - heute  |  Wuppertal (Remote)",
+          "right": "03.2025 - heute  |  Wuppertal (Remote)",
           "bullets": [
             "Durchgängiger Entwurf der Softwarearchitektur für ein Kassensystem (POS) für die Gastronomie (Greenfield): geschichtetes Backend mit Laravel/PostgreSQL, Frontend mit TypeScript und Alpine.js sowie REST-APIs zur Integration",
             "Einsatz von Domain-Driven Design und ereignisgesteuerten Mustern, um das Domänenmodell bei sich ändernden Anforderungen wartbar zu halten",
@@ -27,7 +27,7 @@
         {
           "title": "Softwareentwicklung & Projektleitung",
           "company": "wpt-online Domainmarketing UG",
-          "right": "Juni 2021 - Sep. 2024  |  Gelsenkirchen",
+          "right": "06.2021 - 09.2024  |  Gelsenkirchen",
           "bullets": [
             "Konzeption anforderungsgerechter Softwarelösungen: Ermittlung des Kundenbedarfs, Ableitung der Anforderungen sowie Erstellung von User Storys gemeinsam mit Entwicklungsteam und Kunden",
             "Entwurf und Optimierung von Datenbanksystemen (Einrichtung, Planung und Struktur) für individuelle Webanwendungen",
@@ -39,7 +39,7 @@
         {
           "title": "Entwicklung & Koordination (Open-Source-Community-Projekt)",
           "company": "Narutorpg.de",
-          "right": "Mai 2009 - heute  |  Bottrop",
+          "right": "05.2009 - heute  |  Bottrop",
           "bullets": [
             "Analyse und Kartierung einer historisch gewachsenen Legacy-Codebasis mit komplexen, undokumentierten Abhängigkeiten innerhalb eines proprietären Frameworks",
             "Erweiterung und Debugging des Systems unter Wahrung der bestehenden Architektur",
@@ -80,11 +80,11 @@
       "items": [
         {
           "degree": "Fachinformatikerin für Anwendungsentwicklung",
-          "detail": "wpt-online Domainmarketing UG, Gelsenkirchen | Aug. 2019 - Juni 2021. Ausbildung mit Bestnote abgeschlossen; anschließend Festanstellung."
+          "detail": "wpt-online Domainmarketing UG, Gelsenkirchen | 08.2019 - 06.2021. Ausbildung mit Bestnote abgeschlossen; anschließend Festanstellung."
         },
         {
           "degree": "Studium IT-Sicherheit (nicht abgeschlossen)",
-          "detail": "Ruhr-Universität Bochum, Bochum | Sep. 2013 - Feb. 2017. Grundlage für sicherheitsorientiertes Denken."
+          "detail": "Ruhr-Universität Bochum, Bochum | 09.2013 - 02.2017. Grundlage für sicherheitsorientiertes Denken."
         }
       ]
     },
