@@ -1,0 +1,264 @@
+{
+  "meta": {
+    "owner": "Jacqueline Urban",
+    "version": 1,
+    "last_updated": "2026-07-24",
+    "source_documents": [
+      "CVEnglish2026.pdf",
+      "Application_Standards_and_Career_Guidelines.pdf",
+      "Impact_Portfolio_Detailed.pdf",
+      "Project_Learnings_Portfolio.pdf",
+      "Job_Skills_By_Role.pdf"
+    ],
+    "notes": "Single source of truth for CV and cover-letter generation. Never invent facts not present here. The user's principle: 'I never lie.'"
+  },
+
+  "personal": {
+    "full_name": "Jacqueline Urban",
+    "headline": "Full-Stack Developer | AI-Assisted Software Development",
+    "positioning_statement": "Software Engineer with Architecture and AI Focus",
+    "location": "Gelsenkirchen, 45879, Germany",
+    "phone": "+49 152 13839296",
+    "email_personal": "diejacky@gmx.net",
+    "email_for_applications": "info@perfectseowebsite.de",
+    "email_rule": "Use email_for_applications on all generated application documents (CVs, cover letters). email_personal is for internal reference only.",
+    "github": "github.com/Jackylyn1",
+    "linkedin": "linkedin.com/in/jacqueline-u-92753821b",
+    "drivers_license": "Class B",
+    "date_of_birth": "1990-12-16",
+    "nationality": "German",
+    "languages": [
+      { "language": "German", "level": "Native" },
+      { "language": "English", "level": "Fluent" }
+    ],
+    "hobbies_interests": ["Tech meetups", "Mentoring women in tech", "Travel", "Sports", "Nature"]
+  },
+
+  "skills": {
+    "backend": ["PHP (OOP)", "Laravel", "REST APIs", "PostgreSQL", "MySQL"],
+    "frontend": ["TypeScript", "JavaScript", "Vue.js", "Alpine.js", "Tailwind CSS", "HTML5", "CSS3/SCSS"],
+    "ai_assisted_development": ["Claude Code", "Prompt Engineering", "Agentic AI", "OpenAI API", "Anthropic API", "MCP", "AI Agents", "AI Workflow Design"],
+    "devops_tools": ["Docker", "GitLab CI/CD", "Git", "Linux", "Apache", "Composer", "npm"],
+    "quality_methodologies": ["Codeception", "PHPUnit", "Behavior-Driven Development (Gherkin)", "Domain-Driven Design", "Software Architecture", "Agile Methodologies", "SOLID", "Design Patterns", "Clean Code", "Static Analysis", "Event-Driven Architecture", "System Design", "Requirements Engineering", "Performance Optimization", "Security"],
+    "marketing": ["SEO", "SEM"],
+    "data_python": ["Python", "NumPy", "JIT compilation (Numba)", "Backtesting", "Data pipelines", "Algorithm optimization"]
+  },
+
+  "technical_strengths_to_emphasize": [
+    "Software Architecture", "Requirements Engineering", "Greenfield Development",
+    "Domain-Driven Design", "Event-Driven Architecture", "API Design",
+    "Performance Optimization", "Security", "CI/CD", "PHP", "Laravel",
+    "TypeScript", "Docker", "AI Engineering", "AI Agents", "Prompt Engineering",
+    "MCP", "Clean Code", "System Design"
+  ],
+
+  "soft_skills_to_emphasize": [
+    "Analytical thinking", "Systems thinking", "Technical communication",
+    "Stakeholder communication", "Leadership", "Continuous learning",
+    "Structured problem solving", "Pragmatic decision making",
+    "Mentoring mindset", "Curiosity and ownership"
+  ],
+
+  "core_differentiator": "Designs systems rather than merely implementing features. Emphasizes measurable optimization, architecture decisions, AI integration, performance engineering, and continuous improvement.",
+
+  "professional_profile": {
+    "note": "Source: Application_Differentiators_and_Professional_Profile.pdf. Use these to shape the narrative/voice of CVs and cover letters — they describe how Jacqueline works, not new hard skills.",
+    "differentiators": [
+      { "title": "Validate, then optimize", "points": ["Builds first, measures the outcome, then improves it.", "Work guided by evidence rather than assumptions.", "Examples: algorithm optimization, AI token optimization, software architecture refinement, data-driven LinkedIn experiments."] },
+      { "title": "Bridge business and technology", "points": ["Translates business requirements into technical solutions.", "Considers maintainability, scalability, stakeholder needs and business value — not just implementation."] },
+      { "title": "Systems thinking", "points": ["Thinks beyond individual features.", "Prefers understanding how an entire system works and how its components interact."] },
+      { "title": "Continuous learning", "points": ["Deliberately explores unfamiliar technologies and underlying concepts instead of staying in one stack.", "Focuses on principles that transfer across tools and frameworks."] },
+      { "title": "Optimization mindset", "points": ["Enjoys improving performance, architecture, workflows, learning processes and engineering practices.", "Optimization is a recurring pattern across her projects."] },
+      { "title": "Build before claiming expertise", "points": ["Demonstrates competence through projects and practical work rather than broad claims about expertise."] },
+      { "title": "Intellectual honesty", "points": ["Comfortable changing her opinion when new evidence appears.", "Communicates uncertainty honestly while actively working toward understanding."] },
+      { "title": "AI as an engineering tool", "points": ["Uses AI to support reasoning, architecture, experimentation and productivity — not as a substitute for engineering judgment."] },
+      { "title": "Ownership", "points": ["Interests naturally extend toward architecture, communication, leadership, requirements engineering and long-term product thinking."] }
+    ],
+    "core_differentiator_narrative": "Her strongest differentiator is not a specific programming language or framework. It is her habit of understanding complete systems, measuring outcomes, making thoughtful engineering decisions, and continuously improving solutions.",
+    "engineering_philosophy_quote": "The projects I enjoy most are the ones where I can understand a system end-to-end, make thoughtful architectural decisions, measure the results, and iteratively improve the solution. That is the way I like to work, whether I am building backend software, designing AI workflows, or collaborating with stakeholders.",
+    "personal_positioning": [
+      "Software Engineer with Architecture and AI Focus.",
+      "Engineer who enjoys understanding complex systems and making them better.",
+      "Someone who values thoughtful engineering, continuous learning and measurable improvement."
+    ],
+    "four_questions_every_application_answers": [
+      "What kinds of problems do I enjoy solving?",
+      "How do I approach unfamiliar technologies?",
+      "What evidence demonstrates how I work?",
+      "Why does that make me valuable for this specific role?"
+    ]
+  },
+
+  "work_experience": [
+    {
+      "title": "AI-Assisted Web Development",
+      "company": "Gastro IT GmbH",
+      "location": "Wuppertal",
+      "start": "2025-03",
+      "end": "present",
+      "bullets": [
+        "Design and implementation of the software architecture for a restaurant point-of-sale (POS) system (greenfield project) based on Laravel and PostgreSQL in the backend and Alpine.js with TypeScript in the frontend",
+        "Effective use of AI tools for code analysis, architectural design, code generation, and automation in daily development workflows",
+        "Customization and maintenance of CI/CD pipelines in GitLab and containerization using Docker",
+        "Test automation with Codeception and PHPUnit (BDD)",
+        "Feature conception using Gherkin in collaboration with executive management and the Product Owner"
+      ]
+    },
+    {
+      "title": "AI-Assisted Web Development",
+      "company": "wpt-online Domainmarketing UG",
+      "location": "Gelsenkirchen",
+      "start": "2021-06",
+      "end": "2024-09",
+      "bullets": [
+        "Independent planning, implementation, and maintenance/extension of software projects (ticketing systems, websites, social media marketing tools, and other web applications)",
+        "Productive use of AI tools for code analysis, architectural design, code generation, and automation in daily development workflows",
+        "Test automation with PHPUnit and documentation using PHPDoc",
+        "Client communication and coordination"
+      ]
+    },
+    {
+      "title": "Development / Coordination",
+      "company": "Narutorpg.de – Private Open Source Community Project",
+      "location": "Bottrop",
+      "start": "2009-05",
+      "end": "present",
+      "bullets": [
+        "Took over and further developed a historically grown codebase with non-standard-compliant source code within a proprietary framework",
+        "Analysis of complex legacy dependencies and identification of technical dependencies, even in the absence of existing documentation",
+        "Debugging and further development of complex legacy systems while maintaining the existing architecture",
+        "Documentation of technical processes and creation of game rules and a game world using MediaWiki",
+        "Coordination of a ten-person team and alignment of technical and organizational tasks"
+      ]
+    },
+    {
+      "title": "Management + Web Development + SEO",
+      "company": "Private Animal Shelter Happyquieker",
+      "location": "Bottrop",
+      "start": "2005-05",
+      "end": "2010-06",
+      "bullets": [
+        "Led and further developed the website, including concept development, implementation, and maintenance",
+        "Planned and implemented SEO measures to improve online visibility",
+        "Managed and further developed the technical infrastructure as well as maintained web content",
+        "Coordinated organizational processes and collaborated with other private animal shelters"
+      ]
+    }
+  ],
+
+  "education": [
+    {
+      "title": "IT Specialist for Application Development",
+      "institution": "Wpt-online Domainmarketing UG",
+      "location": "Gelsenkirchen",
+      "start": "2019-08",
+      "end": "2021-06",
+      "notes": "Same responsibilities as in the subsequent permanent role following completion of the apprenticeship"
+    },
+    {
+      "title": "IT Security Studies (not completed)",
+      "institution": "Ruhr University Bochum",
+      "location": "Bochum",
+      "start": "2013-09",
+      "end": "2017-02"
+    }
+  ],
+
+  "projects": [
+    {
+      "name": "Execution Research & Backtesting Platform",
+      "goal": "Design a quantitative execution research environment capable of evaluating enormous parameter spaces quickly enough to iterate on strategies.",
+      "technologies": ["Python", "NumPy", "JIT compilation (Numba)", "algorithm optimization", "backtesting", "scoring engines", "data pipelines"],
+      "impact": [
+        "Learned to process tens to hundreds of millions of parameter combinations efficiently instead of relying on naive brute-force loops",
+        "Optimized runtime through JIT compilation, vectorization and algorithmic improvements",
+        "Designed reproducible backtesting workflows",
+        "Learned to evaluate strategy quality statistically instead of relying on intuition",
+        "Built modular scoring concepts for comparing strategies"
+      ],
+      "transferable_skills": ["Performance engineering", "Data-driven decision making", "Research methodology", "Working with large datasets", "Optimization mindset"]
+    },
+    {
+      "name": "AI-Enabled Restaurant POS System (Greenfield)",
+      "goal": "Design and implement a modern restaurant POS system from scratch.",
+      "technologies": ["PHP", "Laravel", "TypeScript", "Alpine.js", "MySQL", "Docker", "REST APIs", "Architecture"],
+      "impact": [
+        "Designed software architecture instead of only implementing features",
+        "Translated business requirements into maintainable code",
+        "Applied DDD concepts and event-driven thinking",
+        "Balanced maintainability, performance and security"
+      ],
+      "key_learnings": ["Layered architecture", "Requirements engineering", "API design", "Clean Code", "DDD", "Event-driven thinking", "Performance optimization", "Security", "CI/CD", "Stakeholder communication"],
+      "transferable_skills": ["Architecture thinking", "Requirements engineering", "Communication with stakeholders", "Long-term planning"]
+    },
+    {
+      "name": "AI Engineering Experiments",
+      "goal": "Build practical AI applications rather than only experimenting with prompts. Built and evaluated AI workflows, agents and integrations while exploring production use of LLMs.",
+      "technologies": ["OpenAI API", "Anthropic API", "MCP", "AI Agents", "Prompt Engineering"],
+      "impact": [
+        "Designed agent workflows",
+        "Optimized prompts and token usage",
+        "Compared model strengths and weaknesses",
+        "Integrated AI into software workflows"
+      ],
+      "key_learnings": ["Prompt design", "Context management", "Token optimization", "Model comparison", "Workflow orchestration", "Agent design", "Cost vs quality trade-offs", "Practical AI integration"],
+      "transferable_skills": ["Systems thinking", "Experiment-driven learning", "Rapid prototyping"]
+    },
+    {
+      "name": "LinkedIn Personal Brand",
+      "goal": "Created a technical personal brand focused on AI, software architecture and engineering.",
+      "technologies": ["LinkedIn", "Analytics", "Content Strategy"],
+      "key_learnings": ["Storytelling", "Technical writing", "Audience analysis", "SEO for profiles", "Thought leadership", "Data-driven iteration", "Community engagement"],
+      "transferable_skills": ["Thought leadership", "Professional communication", "Career strategy"]
+    },
+    {
+      "name": "Book: Souveränität, Stabilität und Erfolg",
+      "goal": "Write a practical self-development book focused on stability and sustainable success. Developed the concept, structure and writing style.",
+      "technologies": ["Writing frameworks", "editing", "content strategy"],
+      "impact": [
+        "Created a consistent writing framework",
+        "Translated complex psychological concepts into actionable advice",
+        "Maintained a clear tone across chapters"
+      ],
+      "key_learnings": ["Leadership communication", "Empathy", "Coaching mindset", "Structured thinking", "Audience-oriented writing", "Long-form content", "Consistency", "Personal reflection"],
+      "transferable_skills": ["Leadership", "Empathy", "Coaching", "Structured communication"]
+    },
+    {
+      "name": "Career Positioning & AI Learning Roadmap",
+      "goal": "Optimized CV, role targeting and career strategy toward AI-focused positions. Created a structured roadmap from PHP developer toward AI Software Developer, Solution Architect and AI Consultant.",
+      "technologies": ["ATS optimization", "competency mapping", "Roadmapping", "architecture", "AI ecosystem"],
+      "key_learnings": ["Skill-gap analysis", "Market research", "Role comparison", "Career planning", "Value proposition", "Negotiation preparation", "Prioritization", "Learning strategy", "Technology evaluation", "Framework selection", "Long-term planning"]
+    }
+  ],
+
+  "overall_narrative": "Across these projects the emphasis shifted from implementing features to designing systems, optimizing performance, making data-driven decisions, communicating technical ideas, and leading projects through architecture, planning, and continuous improvement.",
+
+  "career_goals": {
+    "target_roles": ["AI Software Developer", "AI Consultant", "Solution Architect", "Software Architect", "PHP Developer"],
+    "direction": "Move from PHP developer toward AI Software Developer, Solution Architect and AI Consultant. Position for senior AI-focused roles.",
+    "core_message": "Demonstrate that she designs systems rather than merely implementing features."
+  },
+
+  "role_skill_map": {
+    "AI Software Developer": {
+      "already_have": ["PHP", "Laravel", "TypeScript", "JavaScript", "SQL/MySQL", "REST APIs", "Git", "Docker", "Linux", "CI/CD", "Software Architecture", "System Design", "DDD", "Event-Driven Architecture", "Requirements Engineering", "SOLID", "Design Patterns", "Clean Code", "PHPUnit", "Static Analysis", "Performance Optimization", "Security", "Prompt Engineering", "OpenAI API", "Anthropic API", "AI Agents", "MCP", "Communication"],
+      "must_learn": ["Python", "RAG", "Vector Databases", "Embeddings", "FastAPI", "Hugging Face", "MLOps", "AWS/Azure", "Kubernetes"]
+    },
+    "AI Consultant": {
+      "already_have": ["AI Agents", "Prompt Engineering", "OpenAI/Anthropic APIs", "Requirements Engineering", "Software Architecture", "Communication", "Technical Documentation", "Business Process Thinking", "AI Workflow Design", "MCP"],
+      "must_learn": ["AI Strategy", "AI Governance", "EU AI Act", "Workshop Facilitation", "Business Case Development", "Change Management", "Enterprise AI Adoption"]
+    },
+    "Solution Architect": {
+      "already_have": ["Software Architecture", "System Design", "DDD", "Event-Driven Architecture", "Requirements Engineering", "Docker", "CI/CD", "Security", "Performance Optimization", "REST APIs", "PHP", "Laravel", "SQL", "Git", "Communication", "Technical Documentation", "AI Knowledge"],
+      "must_learn": ["AWS", "Azure", "Kubernetes", "Terraform", "Enterprise Security Architecture", "TOGAF (optional)"]
+    },
+    "Software Architect": {
+      "already_have": ["Software Architecture", "Clean Code", "SOLID", "Design Patterns", "DDD", "Event-Driven Architecture", "PHP", "Laravel", "Docker", "CI/CD", "PHPUnit", "Static Analysis", "Performance Optimization", "Security", "Requirements Engineering", "AI Knowledge"],
+      "must_learn": ["Cloud Architecture", "Kubernetes", "Distributed Systems", "Kafka", "RabbitMQ", "OpenTelemetry"]
+    },
+    "PHP Developer": {
+      "already_have": ["PHP", "Laravel", "TypeScript", "JavaScript", "HTML", "CSS", "SQL/MySQL", "REST APIs", "Git", "Docker", "Composer", "MVC", "OOP", "SOLID", "Design Patterns", "Clean Code", "PHPUnit", "Static Analysis", "CI/CD", "Performance Optimization", "Security", "Requirements Engineering", "Software Architecture", "AI-assisted Development"],
+      "must_learn": ["Symfony (optional)", "Redis", "Queue Systems", "Elasticsearch", "AWS", "Kubernetes", "GraphQL"]
+    }
+  }
+}
