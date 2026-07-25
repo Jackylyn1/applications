@@ -10,7 +10,22 @@
     {
       "heading": "PROFIL",
       "type": "summary",
-      "text": "Als IT-Beraterin arbeite ich an der Schnittstelle zwischen Fachbereich und Technik. Seit 2019 analysiere ich Geschäftsprozesse, ermittle den tatsächlichen Kundenbedarf und übersetze Anforderungen in funktionierende Software - von User Storys mit Kunden bis zum Entwurf und Aufbau der zugehörigen Architektur. In einer Online-Marketing-Agentur habe ich Web- und Programmierprojekte geleitet und koordiniert und strukturierte Aufgabenpakete an das Entwicklungsteam übergeben; in einem langjährigen Open-Source-Projekt koordiniere ich ein zehnköpfiges Team. Aktuell integriere ich LLMs und KI-Agenten in reale Entwicklungsabläufe - eine praktische Grundlage, um zu beraten, wo KI einem Geschäftsprozess messbaren Nutzen bringt und wo nicht. Ich möchte Systeme end-to-end verstehen, Ergebnisse messen und kontinuierlich verbessern. Die strategische Beratungsseite baue ich gezielt aus: KI-Governance, EU AI Act, Change-Management und Workshop-Moderation."
+      "text": "IT-Beraterin und Softwareentwicklerin an der Schnittstelle von Business und Technologie. Ich entwickle seit über 15 Jahren Software, zunächst ehrenamtlich in Open-Source- und Community-Projekten und seit 2019 auch beruflich. Mein Schwerpunkt liegt darauf, fachliche Anforderungen zu erheben, Geschäftsprozesse zu analysieren und gemeinsam mit Kundinnen und Kunden in tragfähige technische Lösungen zu übersetzen - von Requirements Engineering und User Stories über Datenbank- und Architekturentwurf bis zur Projektleitung. In den letzten zwei Jahren habe ich KI praxisnah in reale Arbeits- und Entwicklungs-Workflows eingeführt: KI-Workflows und Agenten entworfen, Prompts optimiert und LLMs produktiv integriert (OpenAI- und Anthropic-API, MCP). Ich verstehe Systeme gern von Anfang bis Ende, messe Ergebnisse und verbessere sie iterativ. Aktuell vertiefe ich KI-Strategie und -Governance (u. a. EU AI Act) sowie Workshop-Moderation."
+    },
+    {
+      "heading": "KENNTNISSE",
+      "type": "skills",
+      "lines": [
+        "Beratung & Kommunikation: Requirements Engineering, User Stories, Anforderungsanalyse, Geschäftsprozessanalyse, Stakeholder- & Kundenkommunikation, Projektleitung & -koordination, technische Dokumentation",
+        "KI-Beratung & LLM-Adoption: KI-Workflow- & Agenten-Design, Prompt Engineering, LLM-Integration, praktische LLM-Einführung, MCP, OpenAI API, Anthropic API, Token- & Kostenoptimierung, KI-gestützte Entwicklung (Claude Code)",
+        "Backend & Datenbanken: PHP (OOP), Laravel, Symfony, REST APIs, OpenAPI, OAuth, Datenbankdesign, PostgreSQL, MySQL, Redis",
+        "Frontend: TypeScript, JavaScript, Vue.js, Alpine.js, Tailwind CSS, HTML5, CSS3/SCSS",
+        "Architektur & Qualität: Softwarearchitektur, System Design, DDD, Event-Driven Architecture, SOLID, Clean Code, PHPUnit, BDD (Gherkin), Performance-Optimierung, Security",
+        "Python & Data: Python, FastAPI, SQLAlchemy, Pydantic, NumPy, pytest, Data-Pipelines",
+        "DevOps: Docker, Docker Compose, GitLab CI/CD, Git, Linux, Composer, npm",
+        "In Einarbeitung: KI-Strategie & -Governance (EU AI Act), Workshop-Moderation, Change-Management",
+        "Sprachen: Deutsch (Muttersprache), Englisch (fließend)"
+      ]
     },
     {
       "heading": "BERUFSERFAHRUNG",
@@ -21,10 +36,10 @@
           "company": "Gastro IT GmbH",
           "right": "03.2025 - heute  |  Wuppertal (Remote)",
           "bullets": [
-            "Übersetzung der Anforderungen von Geschäftsführung und Product Owner in Features, spezifiziert als Gherkin-/BDD-Szenarien, für ein Greenfield-Kassensystem (POS) für die Gastronomie",
-            "Entwurf der Softwarearchitektur (Backend mit Laravel/PostgreSQL, Frontend mit TypeScript und Alpine.js) mit Blick auf Wartbarkeit, Performance und Security",
-            "Integration von KI-Werkzeugen - LLMs und Agenten - in die tägliche Entwicklung für Codeanalyse, Architekturentwurf, Codegenerierung und Automatisierung; praktische Grundlage für die Beratung zur KI-Einführung",
-            "Pflege der CI/CD-Pipelines in GitLab und Containerisierung mit Docker; Testautomatisierung mit Codeception und PHPUnit"
+            "Core-Contributor (Top 3 eines rund siebenköpfigen Teams) an einer bestehenden Greenfield-Kassensystem-Plattform (POS) für die Gastronomie; verantwortlich für einzelne Komponenten end-to-end, nicht für die Gesamtarchitektur.",
+            "Anforderungsklärung, Konzeption und Umsetzung der externen REST-API (API Platform) mit mandantenfähigem, berechtigungsbasiertem Zugriffsmodell (Tenant-Isolation, JWT) inkl. OpenAPI-Dokumentation als Schnittstelle zu Drittsystemen.",
+            "Entwurf und Umsetzung des Echtzeit-Synchronisationsmechanismus über Pivot-Events (Mercure/SSE) innerhalb einer event-getriebenen Architektur; der zugrunde liegende Open-Source-Beitrag entstand als eigenständige Erweiterung eines Laravel-Pakets.",
+            "Integration von KI in den täglichen Entwicklungs-Workflow und Aufbau eines internen KI-gestützten Code-Audit-Toolsets (Claude Code, Slash-Commands/Subagents mit deterministischer Verifikation) für Soft-Delete-, CRUD-Logging- und Feldberechtigungs-Prüfungen."
           ]
         },
         {
@@ -32,21 +47,28 @@
           "company": "wpt-online Domainmarketing UG",
           "right": "06.2021 - 09.2024  |  Gelsenkirchen",
           "bullets": [
-            "Ermittlung des Kundenbedarfs und Ableitung der erforderlichen Maßnahmen; Analyse von Geschäftsprozessen und Gegebenheiten im jeweiligen Anwendungsbereich (Geschäftsprozessanalyse)",
-            "Leitung und Koordination von Web-, Programmier- und Online-Marketing-Projekten; Formulierung von Programmieraufgaben, Übergabe an das Team sowie Prüfung und Abnahme der Ergebnisse",
-            "Konzeption anforderungsgerechter Softwarelösungen und Entwicklung individueller Anwendungen (Ticketsysteme, Webanwendungen, Marketing-Tools) inkl. Anpassung und Erweiterung bestehender Software",
-            "Erstellung von User Storys gemeinsam mit Entwicklungsteam und Kunden; Verantwortung für Kundenkommunikation und -koordination",
-            "Planung und Optimierung von Datenbanksystemen; Testautomatisierung mit PHPUnit"
+            "Ermittlung des Kundenbedarfs und Ableitung der erforderlichen Maßnahmen; Konzeption anforderungsgerechter Individualsoftware.",
+            "Erstellung von User Stories gemeinsam mit Entwicklungsteam und Kundinnen/Kunden; Formulierung von Programmieraufgaben und Übergabe an das Team.",
+            "Leitung und Koordination von Projekten in Online-Marketing, Webdesign und Programmierung; Prüfung und Abnahme von Programmierprojekten.",
+            "Analyse von Geschäftsprozessen und Abläufen beim Kunden bzw. im jeweiligen Fachbereich sowie Qualitätssicherung; Planung, Aufbau und Optimierung der Datenbanksysteme.",
+            "Direkte Kundenkommunikation und produktiver Einsatz von KI-Tools im Entwicklungsalltag; im Arbeitszeugnis mit der Bestnote bewertet."
           ]
         },
         {
           "title": "Entwicklung & Teamkoordination",
-          "company": "Narutorpg.de (Open-Source-Community-Projekt)",
-          "right": "seit 05.2009  |  Bottrop",
+          "company": "Narutorpg.de - Open-Source-Community-Projekt (ehrenamtlich)",
+          "right": "05.2009 - heute  |  Remote",
           "bullets": [
-            "Koordination eines zehnköpfigen Teams und Abstimmung technischer mit organisatorischen Aufgaben",
-            "Analyse komplexer Legacy-Abhängigkeiten und Identifikation technischer Abhängigkeiten ohne vorhandene Dokumentation",
-            "Dokumentation technischer Prozesse und Pflege einer Wissensbasis sowie eines Regelwerks in MediaWiki"
+            "Langfristige Weiterentwicklung eines gewachsenen PHP-Browsergames im Team; Modernisierung der Codebasis in Richtung Symfony und Doctrine ORM.",
+            "Koordination eines rund zehnköpfigen Teams und Abstimmung technischer und organisatorischer Aufgaben; Dokumentation von Prozessen und Regelwerk (MediaWiki)."
+          ]
+        },
+        {
+          "title": "IT-Mentorin (ehrenamtlich)",
+          "company": "CoffeeCodeBreak",
+          "right": "01.2025 - heute  |  Remote",
+          "bullets": [
+            "Mentoring von Frauen beim Ein- und Wiedereinstieg in die IT; Vermittlung von Entwicklungs-Know-how und Begleitung beim Karrierestart."
           ]
         }
       ]
@@ -57,12 +79,30 @@
       "items": [
         {
           "title": "AI Engineering Experiments",
-          "company": "Eigenständiges Projekt",
+          "company": "Eigenprojekt",
           "right": "2024 - heute",
           "bullets": [
-            "Aufbau und Bewertung von KI-Workflows, Agenten und Integrationen, um den produktiven Einsatz von LLMs zu verstehen - nicht nur das Prompting",
-            "Entwurf von Agenten-Workflows, Optimierung von Prompts und Token-Verbrauch sowie Vergleich der Modellstärken gegen Kosten-/Qualitäts-Abwägungen",
-            "Grundlage für ehrliche Beratung zur KI-Einführung: wo KI einem Geschäftsprozess messbaren Nutzen bringt und wo nicht"
+            "Aufbau und Bewertung von KI-Workflows, Agenten und Integrationen, um von reinen Prompt-Experimenten hin zum praxisnahen, produktionsorientierten Einsatz von LLMs zu kommen.",
+            "Entwurf von Agenten-Workflows und Orchestrierung mehrstufiger Aufgaben mit der OpenAI- und Anthropic-API und MCP.",
+            "Optimierung von Prompts und Token-Verbrauch mit Abwägung von Kosten und Ergebnisqualität; Vergleich von Modell-Stärken, um pro Aufgabe das passende Modell zu wählen."
+          ]
+        },
+        {
+          "title": "Trading Research & Backtesting Platform",
+          "company": "Eigenprojekt",
+          "right": "2025 - 2026",
+          "bullets": [
+            "Entwurf und Aufbau eines algorithmischen Trading- und Backtesting-Systems in Python auf Basis des event-getriebenen NautilusTrader-Frameworks, inkl. Walk-Forward-Validierung und Monte-Carlo-Simulation.",
+            "Performance-Engineering: Auswertung sehr großer Parameterräume durch Vektorisierung und JIT-Kompilierung (NumPy, Numba) statt Brute-Force-Schleifen.",
+            "Aufbau eines verteilten Signal-Trading-Systems (FastAPI-Dashboard, mehrere Docker-Container, MetaTrader-5-Anbindung) mit Risikomanagement und umfangreicher Testabdeckung (pytest)."
+          ]
+        },
+        {
+          "title": "Laravel Pivot Events - Custom-IDs-Feature (Open-Source-Beitrag)",
+          "company": "github.com/Jackylyn1",
+          "right": "2025",
+          "bullets": [
+            "Bestehendes Open-Source-Laravel-Paket um Unterstützung für eigene IDs und Timestamps auf Pivot-Tabellen erweitert; Einarbeitung in die Eloquent-Beziehungs-Interna (BelongsToMany/MorphToMany, Model-Events)."
           ]
         }
       ]
@@ -79,18 +119,6 @@
           "degree": "Studium IT-Sicherheit (ohne Abschluss)",
           "detail": "Ruhr-Universität Bochum, Bochum  |  09.2013 - 02.2017"
         }
-      ]
-    },
-    {
-      "heading": "KENNTNISSE",
-      "type": "skills",
-      "lines": [
-        "Beratung & Anforderungen: Requirements Engineering, Geschäftsprozessanalyse, User Storys (Gherkin/BDD), Stakeholder- & Kundenkommunikation, Projektleitung & -koordination, individuelle Softwarelösungen",
-        "KI-Einführung: LLM-Integration (OpenAI- & Anthropic-APIs), KI-Agenten, MCP, Prompt Engineering, KI-Workflow-Design",
-        "Architektur & Engineering: Softwarearchitektur, System Design, DDD, ereignisgesteuerte Architektur, REST/OpenAPI, PHP/Laravel, TypeScript/Vue/Alpine.js, PostgreSQL/MySQL",
-        "Umsetzung & Qualität: Docker, GitLab CI/CD, Git, Codeception/PHPUnit, Clean Code, SOLID, Performance-Optimierung, Security",
-        "Aktuell im Aufbau: KI-Strategie & -Governance, EU AI Act, Change-Management, Workshop-Moderation",
-        "Sprachen: Deutsch (Muttersprache), Englisch (fließend)"
       ]
     }
   ]

@@ -10,7 +10,21 @@
     {
       "heading": "PROFESSIONAL SUMMARY",
       "type": "summary",
-      "text": "Software engineer with an architecture focus - I design systems rather than only implement features. I currently own the software architecture of a greenfield restaurant POS system (Laravel, PostgreSQL, TypeScript/Alpine.js), applying layered architecture, Domain-Driven Design and event-driven thinking while balancing maintainability, performance and security. I also steward a large, historically grown legacy codebase, where I map undocumented dependencies before changing them. I work from principles - Clean Code, SOLID, design patterns - and back decisions with tests (Codeception, PHPUnit) and static analysis. I am currently deepening cloud architecture, Kubernetes and distributed systems (Kafka)."
+      "text": "Software engineer with a focus on software architecture. I have been building software for over 15 years, first through volunteer open-source and community projects and professionally since 2019, using PHP/Laravel and TypeScript. My focus is Domain-Driven Design, modular monoliths (package-oriented architecture), event-driven systems, and clean, test-driven code. On a greenfield POS platform I designed and own specific components end-to-end: a real-time pivot-event synchronization mechanism (Mercure/SSE) and an external REST API with a multi-tenant permission system. I value Clean Code, design patterns, and quality discipline (PHPStan level 9, BDD). I like to understand a system end-to-end, measure the results, and keep improving it. Currently deepening cloud architecture, Kubernetes, and message brokers (Kafka/RabbitMQ)."
+    },
+    {
+      "heading": "SKILLS",
+      "type": "skills",
+      "lines": [
+        "Architecture & Quality: Software Architecture, Domain-Driven Design (DDD), modular monolith / package-oriented architecture, Event-Driven Architecture, System Design, SOLID, Design Patterns, Clean Code, Requirements Engineering, PHPStan level 9 (Larastan), BDD (Gherkin/Behat), PHPUnit, Pest, Codeception, Static Analysis, Performance Optimization, Security",
+        "Backend: PHP (OOP), Laravel, API Platform (REST + OpenAPI), Laravel Octane, Laravel Horizon (Redis queues), Mercure / Server-Sent Events (SSE), JWT, Symfony, Doctrine ORM, REST APIs, OAuth, Guzzle, PostgreSQL, MySQL, Redis",
+        "Frontend: TypeScript, JavaScript, Vue.js, Alpine.js, Tailwind CSS, HTML5, CSS3/SCSS",
+        "Python & Data: Python, FastAPI, SQLAlchemy, Pydantic, NumPy, Numba (JIT), pytest, backtesting, data pipelines, algorithm optimization",
+        "AI & LLM Engineering: Agentic AI, AI Agents, LLM integration, Prompt Engineering, MCP, OpenAI API, Anthropic API, AI-assisted development (Claude Code)",
+        "DevOps: Docker, Docker Compose, DDEV, GitLab CI/CD, Git, Linux, Apache, Composer, npm",
+        "Currently learning: cloud architecture, Kubernetes, Kafka / RabbitMQ, OpenTelemetry",
+        "Languages: German (native), English (fluent)"
+      ]
     },
     {
       "heading": "EXPERIENCE",
@@ -21,11 +35,10 @@
           "company": "Gastro IT GmbH",
           "right": "Mar 2025 - Present  |  Wuppertal (Remote)",
           "bullets": [
-            "Own the software architecture of a greenfield restaurant POS system: a layered Laravel/PostgreSQL backend and a TypeScript/Alpine.js frontend, designed for clear separation of concerns and long-term maintainability.",
-            "Apply Domain-Driven Design and event-driven thinking to model the domain, and translate business requirements from executive management and the Product Owner into a maintainable design.",
-            "Define quality gates: test automation with Codeception and PHPUnit (BDD, Gherkin) plus static analysis, so the codebase stays reviewable as it grows.",
-            "Maintain CI/CD pipelines in GitLab and the container setup with Docker.",
-            "Use AI tools for code analysis, architectural exploration and code generation in daily development workflows."
+            "Core contributor (top 3 of a ~7-person team) on a greenfield restaurant point-of-sale (POS) platform: a distributed, layered system built on a Domain-Driven, package-oriented Laravel monolith (14 domains, 8 internal Composer packages).",
+            "Designed and own the real-time pivot-event synchronization mechanism (a custom laravel-pivot-events package plus a dedicated PivotEvents domain, pushed via Mercure/SSE) within an event-driven architecture backed by Redis queues (Laravel Horizon) and Laravel Octane.",
+            "Designed the platform's external REST API end-to-end (API Platform) with multi-tenant, permission-scoped access control: row-level query extensions, tenant-isolation write guards, JWT-based API credentials and permission management, and OpenAPI documentation.",
+            "Automated tests across the stack (PHPUnit, BDD with Behat/Gherkin and Pest, Selenium) within a GitLab CI pipeline enforcing PHPStan level 9 (Larastan) and ECS code style."
           ]
         },
         {
@@ -33,22 +46,19 @@
           "company": "wpt-online Domainmarketing UG",
           "right": "Jun 2021 - Sep 2024  |  Gelsenkirchen",
           "bullets": [
-            "Conceived requirements-appropriate software solutions and built custom applications (ticketing systems, web applications) end to end, from requirements engineering to implementation and maintenance.",
-            "Designed, planned and optimized database systems, including schema design and performance.",
-            "Reviewed and approved programming work, formulated tasks for the team and wrote user stories with clients - early technical-leadership and design responsibility.",
-            "Automated tests with PHPUnit and documented code with PHPDoc.",
-            "Formally rated \"sehr gut\" (very good) in the employment reference; described as an indispensable employee with analytical, solution-oriented thinking."
+            "Conceived requirements-appropriate custom software and designed the underlying database systems (ticketing systems, web applications, marketing tools) end to end, from requirements engineering to implementation and maintenance.",
+            "Wrote user stories with the development team and clients, reviewed and approved programming work, and coordinated technical work within the team - early technical-leadership and design responsibility.",
+            "Automated tests with PHPUnit and documented code with PHPDoc; used AI tools productively for code analysis, architectural design, and automation."
           ]
         },
         {
-          "title": "Development / Coordination",
-          "company": "Narutorpg.de - Open Source Community Project",
-          "right": "May 2009 - Present  |  Bottrop",
+          "title": "Development & Coordination",
+          "company": "Narutorpg.de - open-source community project (volunteer)",
+          "right": "2009 - Present  |  Remote",
           "bullets": [
-            "Took over a historically grown, non-standard legacy codebase inside a proprietary framework and continue to evolve it.",
-            "Analyze complex legacy dependencies and identify technical coupling without existing documentation before making changes.",
-            "Debug and extend the system while preserving the existing architecture.",
-            "Coordinate a ten-person team, align technical and organizational work, and document processes and domain rules in MediaWiki."
+            "Long-term team development of a large PHP browser game as a major contributor; modernizing a historically-grown legacy codebase toward Symfony and Doctrine ORM (incl. migrations).",
+            "Analyzing complex legacy dependencies and identifying technical coupling without existing documentation before making changes; refactoring while preserving the existing architecture.",
+            "Coordinating a ~10-person team and documenting technical processes and domain rules in MediaWiki."
           ]
         }
       ]
@@ -58,21 +68,30 @@
       "type": "experience",
       "items": [
         {
-          "title": "Laravel Pivot Events (Open Source)",
-          "company": "PHP · Laravel · Composer",
-          "right": "2025 - Present",
+          "title": "Trading Research & Backtesting Platform",
+          "company": "Self-directed project",
+          "right": "2025 - 2026",
           "bullets": [
-            "Designed and published an open-source Laravel package that adds pivot (many-to-many) events with custom IDs, working against Laravel's internals.",
-            "Focused the package on a clean, predictable API - a small exercise in design from the consumer's point of view."
+            "Designed an algorithmic trading and backtesting system in Python on the event-driven NautilusTrader framework, including walk-forward validation and Monte Carlo portfolio simulation.",
+            "Built a distributed signal-trading system (FastAPI dashboard, multiple Docker containers, MetaTrader 5 integration) with layered risk management and extensive test coverage (pytest).",
+            "Performance engineering: evaluated very large parameter spaces via vectorization and JIT compilation (NumPy, Numba) instead of brute-force loops."
           ]
         },
         {
-          "title": "Trading Research & Backtesting Platform",
-          "company": "Python · NumPy · Numba",
-          "right": "2025 - 2026",
+          "title": "Laravel Pivot Events - custom-IDs feature (open-source contribution)",
+          "company": "github.com/Jackylyn1",
+          "right": "2025 - Present",
           "bullets": [
-            "Built a quantitative backtesting environment to evaluate very large parameter spaces (tens to hundreds of millions of combinations) fast enough to iterate on strategies.",
-            "Optimized runtime through JIT compilation, vectorization and algorithmic improvements instead of naive brute force, and designed reproducible, modular scoring workflows."
+            "Extended an existing open-source Laravel package with support for custom IDs and timestamps on pivot tables; worked within its Eloquent relationship internals (BelongsToMany/MorphToMany, model events)."
+          ]
+        },
+        {
+          "title": "AI Engineering Experiments",
+          "company": "Self-directed project",
+          "right": "2024 - Present",
+          "bullets": [
+            "Designed and evaluated AI workflows, agents, and integrations with the OpenAI and Anthropic APIs and MCP; orchestrated multi-step tasks.",
+            "Optimized prompts and token usage, weighing cost against output quality; integrated AI into real development workflows."
           ]
         }
       ]
@@ -82,27 +101,13 @@
       "type": "education",
       "items": [
         {
-          "degree": "IT Specialist for Application Development (Fachinformatikerin, Anwendungsentwicklung)",
-          "detail": "Wpt-online Domainmarketing UG, Gelsenkirchen  |  Aug 2019 - Jun 2021"
+          "degree": "IT Specialist for Application Development (Fachinformatikerin Anwendungsentwicklung)",
+          "detail": "wpt-online Domainmarketing UG, Gelsenkirchen  |  Aug 2019 - Jun 2021"
         },
         {
           "degree": "IT Security Studies (not completed)",
-          "detail": "Ruhr University Bochum  |  Sep 2013 - Feb 2017"
+          "detail": "Ruhr University Bochum  |  2013 - 2017"
         }
-      ]
-    },
-    {
-      "heading": "SKILLS",
-      "type": "skills",
-      "lines": [
-        "Architecture & Design: Software Architecture, Clean Code, SOLID, Design Patterns, Layered Architecture, Domain-Driven Design, Event-Driven Architecture, System Design, Requirements Engineering",
-        "Backend: PHP (OOP), Laravel, Symfony, REST APIs, OpenAPI, OAuth, PostgreSQL, MySQL",
-        "Frontend: TypeScript, JavaScript, Vue.js, Alpine.js, Tailwind CSS, HTML5, CSS3/SCSS",
-        "Quality & Testing: PHPUnit, Codeception, BDD (Gherkin), Static Analysis, Performance Optimization, Security",
-        "DevOps & Tools: Docker, GitLab CI/CD, Git, Linux, Apache, Composer, npm",
-        "AI-Assisted Development: Claude Code, Prompt Engineering, LLMs, OpenAI & Anthropic APIs, MCP, AI Agents",
-        "Currently learning: Cloud Architecture, Kubernetes, Distributed Systems, Kafka",
-        "Languages: German (native), English (fluent)"
       ]
     }
   ]
