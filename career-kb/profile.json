@@ -1,8 +1,8 @@
 {
   "meta": {
     "owner": "Jacqueline Urban",
-    "version": 3,
-    "last_updated": "2026-07-24",
+    "version": 4,
+    "last_updated": "2026-07-25",
     "source_documents": [
       "CVEnglish2026.pdf",
       "Application_Standards_and_Career_Guidelines.pdf",
@@ -10,7 +10,8 @@
       "Project_Learnings_Portfolio.pdf",
       "Job_Skills_By_Role.pdf",
       "LinkedIn profile screencast (li.webm, extracted 2026-07-24)",
-      "Arbeitszeugnis_JU.pdf (wpt-online employment reference, stored at documents/Arbeitszeugnis_wpt-online_2024.pdf)"
+      "Arbeitszeugnis_JU.pdf (wpt-online employment reference, stored at documents/Arbeitszeugnis_wpt-online_2024.pdf)",
+      "GitHub repositories analysis (~/Documents/projects, all 23 local clones, extracted 2026-07-25) -> see github_repositories"
     ],
     "notes": "Single source of truth for CV and cover-letter generation. Never invent facts not present here. The user's principle: 'I never lie.'"
   },
@@ -47,19 +48,31 @@
   },
 
   "skills": {
-    "backend": ["PHP (OOP)", "Laravel", "Symfony", "REST APIs", "OpenAPI", "OAuth", "JSON", "XML", "AJAX", "PostgreSQL", "MySQL"],
-    "frontend": ["TypeScript", "JavaScript", "Vue.js", "Alpine.js", "Tailwind CSS", "HTML5", "CSS3/SCSS"],
+    "backend": ["PHP (OOP)", "Laravel", "Laravel Sanctum", "Symfony", "REST APIs", "OpenAPI", "OAuth", "Guzzle (HTTP)", "PhpSpreadsheet", "JSON", "XML", "AJAX", "PostgreSQL", "MySQL", "SQLite"],
+    "frontend": ["TypeScript", "JavaScript", "Vue.js", "React", "Alpine.js", "Tailwind CSS", "HTML5", "CSS3/SCSS", "Vite"],
     "ai_assisted_development": ["Claude Code", "Prompt Engineering", "Agentic AI", "Large Language Models (LLM)", "OpenAI API", "Anthropic API", "MCP", "AI Agents", "AI Workflow Design"],
-    "devops_tools": ["Docker", "GitLab CI/CD", "Git", "SVN / TortoiseSVN", "Linux", "Apache", "Composer", "npm"],
-    "quality_methodologies": ["Codeception", "PHPUnit", "Behavior-Driven Development (Gherkin)", "Domain-Driven Design", "Software Architecture", "Agile Methodologies", "SOLID", "Design Patterns", "Clean Code", "Static Analysis", "Event-Driven Architecture", "Event-Driven Programming", "System Design", "Requirements Engineering", "Performance Optimization", "Security"],
-    "cms_wiki": ["MediaWiki"],
+    "devops_tools": ["Docker", "Docker Compose", "DDEV", "GitLab CI/CD", "Git", "SVN / TortoiseSVN", "Linux", "Apache", "Composer", "npm"],
+    "quality_methodologies": ["Codeception", "PHPUnit", "pytest", "Behavior-Driven Development (Gherkin)", "Domain-Driven Design", "Software Architecture", "Agile Methodologies", "SOLID", "Design Patterns", "Clean Code", "Static Analysis (PHPStan, ruff, mypy)", "Security tooling (bandit)", "Event-Driven Architecture", "Event-Driven Programming", "System Design", "Requirements Engineering", "Performance Optimization", "Security"],
+    "cms_wiki": ["MediaWiki", "WordPress (plugin development, Gutenberg, WP REST API)"],
     "marketing": ["SEO", "Off-Page SEO", "SEM", "Google Ads", "Facebook / Social Media Marketing", "Web content writing"],
-    "data_python": ["Python", "NumPy", "JIT compilation (Numba)", "Backtesting", "Data pipelines", "Algorithm optimization"]
+    "data_python": ["Python", "FastAPI", "SQLAlchemy", "Pydantic", "NumPy", "JIT compilation (Numba)", "TA-Lib", "Telethon (Telegram API)", "pytest", "Backtesting", "Data pipelines", "Algorithm optimization"],
+    "also_used_in_personal_or_exploratory_projects": {
+      "note": "Genuinely present in her repos but from smaller, exploratory, or take-home projects — verify depth before headlining on a CV; safe to mention as exposure.",
+      "items": ["execution framework (event-driven execution framework)", "MT 5 integration (mt5linux/RPyC)", "React Native / Expo", "Redux Toolkit", "Node.js / Express", "MongoDB / Mongoose", "JWT / bcrypt", "Vue 3 / Quasar", "Shopware 6 / dockware", "Jinja2", "Uvicorn"]
+    }
   },
 
   "certifications": [
     { "name": "LinkedIn Skill Assessment passed — PHP", "issuer": "LinkedIn", "source": "LinkedIn profile" },
     { "name": "LinkedIn Skill Assessment passed — Google Ads", "issuer": "LinkedIn", "source": "LinkedIn profile" }
+  ],
+
+  "continuing_education": [
+    { "name": "Alpine.js v3 course", "provider": "Online course", "evidence": "Completion certificate (stored in Documents) + practice repo 'alpinecourse'", "type": "course completion" },
+    { "name": "Web Components", "provider": "Udemy", "evidence": "Course material (stored in Documents)", "type": "course" },
+    { "name": "PHPUnit", "provider": "Udemy", "evidence": "Practice repo 'phpUnitUdemy'", "type": "course" },
+    { "name": "Software Architecture and Design of Large Scale Systems", "provider": "Workbook / self-study", "evidence": "Workbook (stored in Documents)", "type": "self-study" },
+    { "name": "CS50: Introduction to Computer Science", "provider": "HarvardX", "status": "Enrolled/started (2019)", "type": "course", "honesty_note": "Repo is an empty CS50-bot scaffold; no submitted coursework visible. Only claim as 'started/took', not completed." }
   ],
 
   "technical_strengths_to_emphasize": [
@@ -265,11 +278,12 @@
 
   "projects": [
     {
-      "name": "Laravel Pivot Events (Open Source)",
-      "goal": "Open-source Laravel package enabling pivot (many-to-many) events with custom IDs.",
+      "name": "Laravel Pivot Events — custom-IDs feature (open-source fork)",
+      "goal": "Extended an existing open-source Laravel package (mikebronner/laravel-pivot-events, itself a fork of fico7489/laravel-pivot) with support for custom IDs and timestamps on pivot tables.",
       "url": "https://github.com/Jackylyn1/laravel-pivot-events-with-custom-id",
-      "technologies": ["PHP", "Laravel", "Composer"],
-      "transferable_skills": ["Open-source contribution", "Package design", "Laravel internals"]
+      "technologies": ["PHP", "Laravel/Illuminate", "Composer", "PHPUnit", "Orchestra Testbench"],
+      "honesty_note": "FORK, not an original project. Her own contribution is a single focused commit (2025-04-17, 'Add custom ids and timestamps') on top of 187 upstream commits. Frame as 'contributed a custom feature to / worked inside an existing OSS Laravel package and understood Eloquent relationship internals' — NEVER as 'built an open-source package'.",
+      "transferable_skills": ["Working within an existing OSS codebase", "Laravel Eloquent internals (BelongsToMany/MorphToMany, model events)", "PHP package structure"]
     },
     {
       "name": "Execution Research & Backtesting Platform",
@@ -338,6 +352,140 @@
   ],
 
   "overall_narrative": "Across these projects the emphasis shifted from implementing features to designing systems, optimizing performance, making data-driven decisions, communicating technical ideas, and leading projects through architecture, planning, and continuous improvement.",
+
+  "github_repositories": {
+    "source": "Extracted 2026-07-25 from local clones in ~/Documents/projects. All 23 repositories analyzed. Profile: github.com/Jackylyn1.",
+    "profile_url": "https://github.com/Jackylyn1",
+    "honesty_rules": "Only 'flagship_own' and 'secondary_own' are genuinely her own substantive work. 'assessment_takehomes' are job trial tasks (label as such). 'open_source_contribution' is a fork with one small commit. 'learning_selfstudy' are course-along/scaffold repos. 'not_own_do_not_cite' are clones/forks she barely or never authored, and empty scaffolds — never present these as her projects. All quantitative performance/test figures are the repos' own README claims and are not independently verified.",
+    "flagship_own": [
+      {
+        "name": "Automated Telegram-Signal Execution System (Signal Pipeline)",
+        "repos": ["SignalTelegramParser", "SignalApp"],
+        "urls": ["https://github.com/Jackylyn1/SignalTelegramParser", "https://github.com/Jackylyn1/SignalApp"],
+        "dates": "2026-03 to 2026-04 (~2 months, very high cadence: 192 + 168 commits)",
+        "description": "Self-built distributed system that receives German-language execution signals from ~32 Telegram channels, parses them, and auto-executes trades on MT 5 with a multi-gate risk-management pipeline and a FastAPI web dashboard. SignalApp is the earlier iteration; SignalTelegramParser ('Signal Pipeline') is the more mature, English-documented evolution — present as ONE evolving project, not two.",
+        "technologies": ["Python 3.12", "Telethon", "MT 5 (mt5linux/RPyC)", "FastAPI", "Uvicorn", "SQLAlchemy", "SQLite", "Pydantic", "Jinja2", "TA-Lib", "NumPy", "Docker Compose (multi-container: monitor/dashboard/MT5-in-Wine+VNC)", "pytest", "ruff", "mypy", "bandit"],
+        "learnings": ["Domain-driven layout (broker/channels/signals/telegram)", "Reliability engineering: dual push+poll signal delivery with dedup cache keyed on (chat_id, msg_id, text_hash)", "Layered risk gates (auto SL/TP, SL tightening, spread gate, equity-based risk cap with documented float tolerance)", "Integrating a legacy GUI execution platform (MT5) over RPyC, containerized under Wine+VNC", "Async Python", "Security awareness (bandit, .env, dry-run mode)"],
+        "tests": "Extensive; README claims 227 tests (parsers, risk guards, DB, API, trade service).",
+        "relevance": "high — strongest portfolio piece: real distributed architecture, reliability/risk design, large test suite, strong docs.",
+        "caveat": "Handles real money/credentials; keep private. Overlaps with SignalApp — cite as one project."
+      },
+      {
+        "name": "Algorithmic Execution & Backtesting System (execution framework)",
+        "repos": ["ExecutionSystem"],
+        "urls": ["https://github.com/Jackylyn1/ExecutionSystem"],
+        "dates": "2026-03 to 2026-04 (43 commits, ~2.5 weeks)",
+        "description": "Quant execution system on the execution framework framework running 10 walk-forward-validated mean-reversion/momentum strategies live on MT5, plus a large research/backtesting harness (scans 205 symbols x 17 signal types; README claims ~130M backtests) with composite-score ranking and Monte Carlo portfolio simulation.",
+        "technologies": ["Python 3.12", "execution framework", "Numba (JIT)", "NumPy", "custom MT5 adapter over RPyC", "Docker Compose", "pytest", "ruff"],
+        "learnings": ["Quantitative research pipeline (strategy scanning, walk-forward validation, two-stage promotion gate, Monte Carlo risk-of-ruin)", "Performance-oriented backtesting with Numba", "Writing a custom adapter into a third-party execution framework", "Strategy design, position sizing, drawdown/risk modeling"],
+        "tests": "Present (~10 test modules; README claims 57 unit tests).",
+        "relevance": "high — shows quantitative/algorithmic depth distinct from CRUD/integration work.",
+        "caveat": "This maps to the existing 'Execution Research & Backtesting Platform' project entry. The sibling repo 'ExecutionSystemApp-highspeed-backtest-' is an earlier snapshot of the SAME project — do NOT count twice."
+      },
+      {
+        "name": "Laravel Auth & CSV Import (Sanctum API + session)",
+        "repos": ["Simple-Login-Sanctum--API--CSV"],
+        "urls": ["https://github.com/Jackylyn1/Simple-Login-Sanctum--API--CSV"],
+        "dates": "2024-10 (~10 days, 56 commits — iterative)",
+        "description": "Laravel 11 app demonstrating two auth approaches (Sanctum token auth for a JSON API + session-based web login) and CSV contact import via PhpSpreadsheet.",
+        "technologies": ["PHP 8.2+", "Laravel 11", "Laravel Sanctum", "PhpSpreadsheet", "MariaDB", "Docker", "Vite", "PHPUnit (configured)", "Pint"],
+        "learnings": ["Interface-driven service-layer architecture (AuthentificationInterface, FileHandlerInterface -> Sanctum/Session/CSV services)", "Custom middleware (CheckLoginToken)", "Artisan console command (FlushSessions)", "Progressive refactoring (auth logic out of controllers into services)", "Separate API vs web controllers", "PHPDoc pipeline"],
+        "tests": "No real coverage — only default Laravel stubs; README lists 'add automated tests' as a TODO.",
+        "relevance": "high — strongest PHP piece: deliberate SOLID-style architecture + meaningful refactoring history + two non-trivial features.",
+        "caveat": "Personal playground with unfinished TODOs and no actual tests despite phpunit setup — be honest if asked."
+      },
+      {
+        "name": "WordPress + React/TypeScript Article Plugin",
+        "repos": ["wordpressPlugin"],
+        "urls": ["https://github.com/Jackylyn1/wordpressPlugin"],
+        "dates": "2024-10 to 2024-11 (~1 week, 24 commits — iterative)",
+        "description": "A WordPress plugin ('article-app') embedding a React/TypeScript SPA into WordPress via a shortcode and a custom Gutenberg editor button; the SPA fetches articles/users/categories through the WP REST API and renders an article grid.",
+        "technologies": ["PHP (WordPress plugin, OOP, PHPDocs)", "React 18", "TypeScript", "Vite", "WordPress REST API", "Gutenberg block editor API", "DDEV", "npm"],
+        "learnings": ["Bridging a modern React/TS SPA into a legacy PHP CMS", "WordPress plugin architecture & hooks", "Dynamic asset registration for hashed Vite build filenames", "Generic, typed API-call base component (typed contracts)", "Reproducible local dev via DDEV pre-stop/post-start DB hooks", "Documented clean-code / OOP-vs-functional trade-offs"],
+        "tests": "None (test script is a stub).",
+        "relevance": "high — real iterative full-stack PHP + React/TS work with clear engineering reasoning.",
+        "caveat": "README reads like a candidate submission (login creds, 'what I'd do with more time') — almost certainly a job take-home. No tests; committed WP core/node_modules hurt repo hygiene."
+      }
+    ],
+    "secondary_own": [
+      {
+        "name": "laravelHarrypotter",
+        "url": "https://github.com/Jackylyn1/laravelHarrypotter",
+        "dates": "2024-11 (one day, 4 commits)",
+        "description": "Laravel 11 app consuming an external Harry Potter REST API via Guzzle (Characters/Houses/Spells) with an artisan command to populate spells; DDEV env with DB export/import hooks.",
+        "technologies": ["PHP 8.2+", "Laravel 11", "Guzzle", "DDEV", "Docker", "Tailwind CSS", "Vite", "PHPUnit"],
+        "learnings": ["Third-party HTTP API integration behind an interface (APIConnectionService)", "Service layer", "Eloquent modelling of related entities", "Reproducible DDEV setup"],
+        "tests": "Has real unit tests (Character/House/Spell) — README notes they were AI-assisted.",
+        "relevance": "medium — genuine own work; small scope, one-day build."
+      },
+      {
+        "name": "entwicklerheld",
+        "url": "https://github.com/Jackylyn1/entwicklerheld",
+        "dates": "Uploaded 2024-10; README says solutions written over ~3 years",
+        "description": "Her own solutions to challenges from EntwicklerHeld.de, organized by tech: plain PHP, Symfony, Laravel (FizzBuzz, markdown parser refactoring, validation, a multi-stage Symfony 'Tickets' task, etc.).",
+        "technologies": ["PHP (plain)", "Symfony", "Laravel"],
+        "learnings": ["PHP fundamentals", "Algorithmic problem-solving", "Refactoring", "Working within Symfony and Laravel", "Spec-driven challenges"],
+        "relevance": "medium — genuine own work, directly evidences PHP + Symfony/Laravel; curated showcase of small challenge solutions."
+      },
+      {
+        "name": "Login",
+        "url": "https://github.com/Jackylyn1/Login",
+        "dates": "2019-05 (one-off)",
+        "description": "Minimal PHP login/auth mini-app (login page, dashboard, classes, DB config, CSS). Early self-authored PHP work.",
+        "technologies": ["PHP (OOP)", "MySQL/SQL", "CSS"],
+        "relevance": "low-medium — genuine early work but tiny, undocumented, dated 2019. Useful only as an early datapoint."
+      },
+      {
+        "name": "LoveEvolutionApp",
+        "url": "https://github.com/Jackylyn1/LoveEvolutionApp",
+        "dates": "2025-09 to 2026-04 (only 2 commits)",
+        "description": "Ambitious full-stack relationship/self-help mobile app: React Native + Expo frontend (auth, assessment, exercises, AI coach) + Express/MongoDB REST API (JWT auth). Broad modern stack.",
+        "technologies": ["React Native 0.72", "Expo", "React Navigation", "Redux Toolkit", "Node.js/Express", "MongoDB/Mongoose", "JWT", "bcrypt"],
+        "relevance": "low-medium — impressive stack breadth on paper, but git history (2 commits, mislabeled 'Create Next App' scaffold), .ts/JSX mismatch, and no tests suggest a largely AI-generated skeleton that likely does not build/run.",
+        "caveat": "Do NOT present as shipped/working. Safest framing: 'explored a full React Native + Node/Mongo architecture'. Verify it runs before featuring."
+      }
+    ],
+    "assessment_takehomes": [
+      {
+        "name": "Vue-coding-challenge (Trafo2 'Bewerbungs-Quiz')",
+        "url": "https://github.com/Jackylyn1/Vue-coding-challenge",
+        "dates": "2025-02 (single commit, ~1h task by design)",
+        "description": "Employer take-home (Trafo2): finished a Vue 3 / Quasar quiz app — implemented IndexPage.vue + QuestionCard.vue (load questions, answer + immediate feedback, lock, score, restart) under StandardJS rules.",
+        "technologies": ["Vue 3", "Quasar Framework 2", "vue-router", "ESLint/StandardJS", "SASS", "Vite"],
+        "relevance": "medium — genuine, focused Vue/Quasar evidence; small and time-boxed. Label as an application task, not a product."
+      },
+      {
+        "name": "shopware6probeaufgabe",
+        "url": "https://github.com/Jackylyn1/shopware6probeaufgabe",
+        "dates": "2026-04 (single commit)",
+        "description": "A job trial task ('Probeaufgabe') on a dockware-based Shopware 6 environment. Shows she can run Shopware via dockware.",
+        "technologies": ["Shopware 6", "dockware/dev", "docker-compose", "PHP 8.2", "MySQL", "Xdebug"],
+        "relevance": "low-medium — genuine application task, but the committed repo contains only stock demo plugins (whole install + volumes committed), so the actual solution is not visible as reviewable code.",
+        "caveat": "Verify with Jacqueline where the task logic actually lives before citing."
+      }
+    ],
+    "open_source_contribution": [
+      {
+        "name": "laravel-pivot-events-with-custom-id",
+        "url": "https://github.com/Jackylyn1/laravel-pivot-events-with-custom-id",
+        "note": "FORK of mikebronner/laravel-pivot-events; her contribution is ONE commit (2025-04-17) adding custom IDs + timestamps. See projects[] entry. Frame as an OSS contribution, not an original package."
+      }
+    ],
+    "learning_selfstudy": [
+      { "name": "alpinecourse", "url": "https://github.com/Jackylyn1/alpinecourse", "note": "Alpine.js v3 course-along material (has a completion certificate). Self-study of Alpine.js reactive directives." },
+      { "name": "Docker", "url": "https://github.com/Jackylyn1/Docker", "note": "Two trivial practice Dockerfiles (one syntactically wrong). Intro Docker exposure only." },
+      { "name": "phpUnitUdemy", "url": "https://github.com/Jackylyn1/phpUnitUdemy", "note": "Udemy PHPUnit course follow-along. Supports 'familiarity with PHPUnit' only." },
+      { "name": "cs50", "url": "https://github.com/Jackylyn1/cs50", "note": "Empty CS50-bot scaffold (2019). Only evidences starting Harvard's CS50; no code." }
+    ],
+    "not_own_do_not_cite": [
+      { "name": "5Minds.CodingDojo", "reason": "Clone of a former employer's internal coding-dojo repo; only 2 of 514 commits are hers. Demonstrates dojo participation at most; not her project." },
+      { "name": "hackergarten.github.io", "reason": "Clone of the well-known Hackergarten open-source community site; ZERO commits by her. Do not present as her work; at most indicates awareness of the community." },
+      { "name": "shopware6-dockware", "reason": "A committed Shopware 6 dockware dev environment with only stock demo plugins; no authored application code. Env-setup familiarity only (likely the base for the Probeaufgabe)." },
+      { "name": "restaurantManagementSystemLaravel", "reason": "Name implies a management system, but it is only a fresh Laravel 12 skeleton + laravel/ui auth scaffold + a Docker Compose file. No restaurant domain logic. Do not present as a real project." },
+      { "name": "laravelproject", "reason": "Empty placeholder — only a DDEV config file, no application code." },
+      { "name": "Documents", "reason": "Not a code repo — a private store of documents (POS spec, execution-app planning notes, certificates, an unpublished book manuscript, personal files). Keep private; the certificates were extracted into continuing_education. Do not publish or cite as portfolio." }
+    ]
+  },
 
   "career_goals": {
     "target_roles": ["AI Software Developer", "AI Consultant", "Solution Architect", "Software Architect", "PHP Developer"],
