@@ -13,6 +13,20 @@
       "text": "Softwareentwicklerin mit Schwerpunkt Softwarearchitektur und angewandter KI. Ich entwickle seit über 15 Jahren Software, zunächst ehrenamtlich in Open-Source- und Community-Projekten und seit 2019 auch beruflich, mit PHP/Laravel und TypeScript, von der Greenfield-Architektur über CI/CD bis zur Testautomatisierung. In den letzten zwei Jahren habe ich LLMs in reale Entwicklungs-Workflows integriert: KI-Agenten entworfen, Prompts optimiert sowie Token-Verbrauch und Kosten reduziert, unter anderem mit der OpenAI- und Anthropic-API und MCP. Ich verstehe Systeme gern von Anfang bis Ende, messe Ergebnisse und verbessere sie iterativ. Aktuell vertiefe ich Python für KI-Arbeit und arbeite mich in RAG und Vektordatenbanken ein."
     },
     {
+      "heading": "KENNTNISSE",
+      "type": "skills",
+      "lines": [
+        "KI & LLM-Engineering: Agentic AI, AI Agents, LLM-Integration, Prompt Engineering, MCP, OpenAI API, Anthropic API, KI-Workflow-Design, Token- & Kostenoptimierung, KI-gestützte Entwicklung (Claude Code)",
+        "Backend: PHP (OOP), Laravel, Laravel Sanctum, Symfony, REST APIs, API Platform, OpenAPI, JWT, Guzzle, Mercure/SSE, PostgreSQL, MySQL, Redis",
+        "Frontend: TypeScript, JavaScript, Vue.js, Alpine.js, Tailwind CSS, HTML5, CSS3/SCSS",
+        "Python & Data: Python, FastAPI, SQLAlchemy, Pydantic, NumPy, Numba (JIT), pytest, Backtesting, Data-Pipelines, Algorithmusoptimierung",
+        "Architektur & Qualität: Softwarearchitektur, System Design, DDD, Event-Driven Architecture, SOLID, Design Patterns, Clean Code, Requirements Engineering, PHPUnit, BDD (Behat/Gherkin, Pest), statische Analyse (PHPStan Level 9), Performance-Optimierung, Security",
+        "DevOps: Docker, Docker Compose, DDEV, GitLab CI/CD, Git, Linux, Apache, Composer, npm",
+        "In Einarbeitung: RAG, Vektordatenbanken, Embeddings",
+        "Sprachen: Deutsch (Muttersprache), Englisch (fließend)"
+      ]
+    },
+    {
       "heading": "BERUFSERFAHRUNG",
       "type": "experience",
       "items": [
@@ -21,11 +35,11 @@
           "company": "Gastro IT GmbH",
           "right": "03.2025 - heute  |  Wuppertal (Remote)",
           "bullets": [
-            "Konzeption und Umsetzung der Softwarearchitektur für ein Kassensystem (POS) für die Gastronomie als Greenfield-Projekt: Backend mit Laravel und PostgreSQL, Frontend mit Alpine.js und TypeScript.",
-            "Integration von KI-Tools in den täglichen Entwicklungs-Workflow für Code-Analyse, Architekturentwurf, Code-Generierung und Automatisierung.",
-            "Aufbau und Pflege der CI/CD-Pipelines in GitLab sowie Containerisierung der Anwendung mit Docker.",
-            "Testautomatisierung mit Codeception und PHPUnit nach dem BDD-Ansatz.",
-            "Feature-Konzeption mit Gherkin in Zusammenarbeit mit der Geschäftsführung und dem Product Owner."
+            "Kernentwicklerin (Top-3 im rund siebenköpfigen Team) an einer bestehenden Greenfield-POS-Plattform für die Gastronomie: verteiltes System aus zentralem Laravel/Filament-Cloud-Backoffice, On-Premise-Standortservern und Capacitor/TypeScript-Terminals auf Basis eines Domain-Driven, paketorientierten Laravel-Monolithen.",
+            "Aufbau einer internen KI-gestützten Code-Audit-Toolsuite (Claude-Code-Slash-Commands und Subagenten mit deterministischer Verifikation) für Soft-Delete-, CRUD-Logging- und Feld-Berechtigungs-Audits; Integration von KI-Tools in den täglichen Entwicklungs-Workflow.",
+            "Eigenverantwortlicher Entwurf und Umsetzung der externen REST-API (API Platform auf Laravel) end-to-end, inkl. mandantenfähiger, berechtigungsbasierter Zugriffskontrolle: Row-Level-Query-Extensions, Tenant-Isolation, JWT-basierte API-Credentials und OpenAPI-Dokumentation.",
+            "Entwurf und Implementierung des Echtzeit-Pivot-Event-Sync-Mechanismus (eigenes laravel-pivot-events-Paket plus dedizierte PivotEvents-Domain, ausgeliefert über Mercure/SSE) in einer event-getriebenen Architektur mit Redis-Queues (Laravel Horizon) und Laravel Octane.",
+            "Testautomatisierung über den gesamten Stack (PHPUnit, BDD mit Behat/Gherkin und Pest, Selenium, Bruno) in einer GitLab-CI-Pipeline mit PHPStan Level 9 (Larastan) und ECS."
           ]
         },
         {
@@ -44,7 +58,7 @@
           "company": "Narutorpg.de - Open-Source-Community-Projekt (ehrenamtlich)",
           "right": "2009 - heute  |  Remote",
           "bullets": [
-            "Langfristige Weiterentwicklung eines gewachsenen PHP-Browsergames im Team; Modernisierung der Codebasis in Richtung Symfony und Doctrine ORM (inkl. Migrationen).",
+            "Wesentlicher Beitragender in einem mehrköpfigen Team an einem langlebigen PHP-Browsergame (ehrenamtlich); Modernisierung einer historisch gewachsenen Codebasis in Richtung Symfony und Doctrine ORM (inkl. Migrationen).",
             "Analyse und Refactoring komplexer Legacy-Strukturen unter Wahrung der bestehenden Architektur; Koordination eines rund zehnköpfigen Teams."
           ]
         }
@@ -68,17 +82,17 @@
         {
           "title": "Execution Research & Backtesting Platform",
           "company": "Eigenprojekt",
-          "right": "2025 - 2026",
+          "right": "2025 - 2026  |  Python, execution framework, FastAPI",
           "bullets": [
             "Entwurf und Aufbau eines algorithmischen Execution- und Backtesting-Systems in Python auf Basis des event-getriebenen execution framework-Frameworks, inkl. Walk-Forward-Validierung und Monte-Carlo-Portfolio-Simulation.",
             "Performance-Engineering: Auswertung sehr großer Parameterräume durch Vektorisierung und JIT-Kompilierung (NumPy, Numba) statt Brute-Force-Schleifen.",
-            "Aufbau eines verteilten Signal-Execution-Systems (FastAPI-Dashboard, mehrere Docker-Container, MT 5-5-Anbindung) mit Risikomanagement und umfangreicher Testabdeckung (pytest)."
+            "Aufbau eines verteilten Signal-Execution-Systems (FastAPI-Dashboard, mehrere Docker-Container, MT 5-5-Anbindung) mit mehrstufigem Risikomanagement und Testabdeckung (pytest)."
           ]
         },
         {
           "title": "Laravel Pivot Events - Custom-IDs-Feature (Open-Source-Beitrag)",
           "company": "github.com/Jackylyn1",
-          "right": "2025",
+          "right": "2025 - heute",
           "bullets": [
             "Bestehendes Open-Source-Laravel-Paket um Unterstützung für eigene IDs und Timestamps auf Pivot-Tabellen erweitert; Einarbeitung in die Eloquent-Beziehungs-Interna (BelongsToMany/MorphToMany, Model-Events)."
           ]
@@ -91,26 +105,12 @@
       "items": [
         {
           "degree": "Fachinformatikerin für Anwendungsentwicklung",
-          "detail": "wpt-online Domainmarketing UG, Gelsenkirchen  |  2019 - 2021"
+          "detail": "wpt-online Domainmarketing UG, Gelsenkirchen  |  08.2019 - 06.2021"
         },
         {
           "degree": "Studium IT-Sicherheit (nicht abgeschlossen)",
           "detail": "Ruhr-Universität Bochum  |  2013 - 2017"
         }
-      ]
-    },
-    {
-      "heading": "KENNTNISSE",
-      "type": "skills",
-      "lines": [
-        "KI & LLM-Engineering: Agentic AI, AI Agents, LLM-Integration, Prompt Engineering, MCP, OpenAI API, Anthropic API, KI-Workflow-Design, Token- & Kostenoptimierung, KI-gestützte Entwicklung (Claude Code)",
-        "Backend: PHP (OOP), Laravel, Laravel Sanctum, Symfony, REST APIs, OpenAPI, OAuth, Guzzle, PostgreSQL, MySQL",
-        "Frontend: TypeScript, JavaScript, Vue.js, Alpine.js, Tailwind CSS, HTML5, CSS3/SCSS",
-        "Python & Data: Python, FastAPI, SQLAlchemy, Pydantic, NumPy, Numba (JIT), pytest, Backtesting, Data-Pipelines, Algorithmusoptimierung",
-        "Architektur & Qualität: Softwarearchitektur, System Design, DDD, Event-Driven Architecture, SOLID, Design Patterns, Clean Code, Requirements Engineering, PHPUnit, Codeception, BDD (Gherkin), statische Analyse, Performance-Optimierung, Security",
-        "DevOps: Docker, Docker Compose, DDEV, GitLab CI/CD, Git, Linux, Apache, Composer, npm",
-        "In Einarbeitung: RAG, Vektordatenbanken, Embeddings",
-        "Sprachen: Deutsch (Muttersprache), Englisch (fließend)"
       ]
     }
   ]

@@ -10,7 +10,22 @@
     {
       "heading": "PROFESSIONAL SUMMARY",
       "type": "summary",
-      "text": "IT consultant profile working at the boundary between business and technology. Since 2019 I have analysed business processes, determined what customers actually need, and translated those requirements into working software - from writing user stories with clients to designing and building the architecture behind them. At an online-marketing agency I led and coordinated web and programming projects and handed structured tasks to a development team; on a long-running open-source project I coordinate a ten-person team. I now integrate LLMs and AI agents into real development workflows, which gives me practical grounding to advise on where AI genuinely helps a business and where it does not. I prefer to understand a system end to end, measure results, and keep improving it. I am openly building out the strategy side of consulting: AI governance, the EU AI Act, change management and workshop facilitation."
+      "text": "IT consultant and software engineer working at the intersection of business and technology. I have been building software for over 15 years, first through volunteer open-source and community projects and professionally since 2019. My focus is on eliciting business requirements, analyzing business processes, and translating them together with clients into workable technical solutions - from requirements engineering and user stories through database and architecture design to project leadership. Over the last two years I have introduced AI into real work and development workflows in a hands-on way: designing AI workflows and agents, engineering prompts, and integrating LLMs productively (OpenAI and Anthropic APIs, MCP). I like to understand a system end-to-end, measure the results, and keep improving it. Currently deepening AI strategy and governance (incl. the EU AI Act) and workshop facilitation."
+    },
+    {
+      "heading": "SKILLS",
+      "type": "skills",
+      "lines": [
+        "Consulting & Communication: Requirements Engineering, user stories, requirements analysis, business-process analysis, stakeholder & client communication, project leadership & coordination, technical documentation",
+        "AI Consulting & LLM Adoption: AI workflow & agent design, Prompt Engineering, LLM integration, hands-on LLM rollout, MCP, OpenAI API, Anthropic API, token & cost optimization, AI-assisted development (Claude Code)",
+        "Backend & Databases: PHP (OOP), Laravel, Symfony, REST APIs, OpenAPI, OAuth, database design, PostgreSQL, MySQL, Redis",
+        "Frontend: TypeScript, JavaScript, Vue.js, Alpine.js, Tailwind CSS, HTML5, CSS3/SCSS",
+        "Architecture & Quality: Software Architecture, System Design, DDD, Event-Driven Architecture, SOLID, Clean Code, PHPUnit, BDD (Gherkin), Performance Optimization, Security",
+        "Python & Data: Python, FastAPI, SQLAlchemy, Pydantic, NumPy, pytest, data pipelines",
+        "DevOps: Docker, Docker Compose, GitLab CI/CD, Git, Linux, Composer, npm",
+        "Currently learning: AI strategy & governance (EU AI Act), workshop facilitation, change management",
+        "Languages: German (native), English (fluent)"
+      ]
     },
     {
       "heading": "EXPERIENCE",
@@ -21,10 +36,10 @@
           "company": "Gastro IT GmbH",
           "right": "Mar 2025 - Present  |  Wuppertal (Remote)",
           "bullets": [
-            "Translate requirements from executive management and the Product Owner into features, specified as Gherkin/BDD scenarios, for a greenfield restaurant point-of-sale (POS) system",
-            "Design the software architecture (Laravel/PostgreSQL backend, TypeScript and Alpine.js frontend), balancing maintainability, performance and security",
-            "Integrate AI tools - LLMs and agents - into daily development for code analysis, architecture design, code generation and automation; practical evidence for advising on AI adoption",
-            "Maintain CI/CD pipelines in GitLab and containerization with Docker; test automation with Codeception and PHPUnit"
+            "Core contributor (top 3 of a ~7-person team) on an existing greenfield restaurant point-of-sale (POS) platform; responsible for specific components end-to-end rather than the overall architecture.",
+            "Requirements clarification, design, and delivery of the external REST API (API Platform) with a multi-tenant, permission-scoped access model (tenant isolation, JWT) and OpenAPI documentation as the interface to third-party systems.",
+            "Designed and implemented the real-time synchronization mechanism via pivot events (Mercure/SSE) within an event-driven architecture; the underlying open-source contribution was a self-authored extension to a Laravel package.",
+            "Integrated AI into daily development and built an internal AI-assisted code-audit toolset (Claude Code slash-commands/subagents with deterministic verification) for soft-delete, CRUD-logging, and field-permission audits."
           ]
         },
         {
@@ -32,21 +47,28 @@
           "company": "wpt-online Domainmarketing UG",
           "right": "Jun 2021 - Sep 2024  |  Gelsenkirchen",
           "bullets": [
-            "Determined customer needs and derived the necessary measures; analysed business processes and conditions in the respective application area (business-process analysis)",
-            "Led and coordinated web, programming and online-marketing projects; formulated programming tasks, handed them to the team, and reviewed and approved the results",
-            "Conceived requirements-appropriate software solutions and developed custom applications (ticketing systems, web applications, marketing tools), adapting and extending existing software",
-            "Wrote user stories together with the development team and clients; owned client communication and coordination",
-            "Planned and optimized database systems; test automation with PHPUnit"
+            "Determined customer needs and derived the necessary measures; conceived requirements-appropriate custom software.",
+            "Wrote user stories together with the development team and clients; formulated programming tasks and handed them over to the team.",
+            "Led and coordinated projects across online marketing, web design, and programming; reviewed and approved programming projects.",
+            "Analyzed business processes and conditions at the customer / in the respective application department and assured quality; planned, built, and optimized the database systems.",
+            "Communicated directly with clients and used AI tools productively in daily development; rated top grade in the employment reference."
           ]
         },
         {
           "title": "Development & Team Coordination",
-          "company": "Narutorpg.de (Open-Source Community Project)",
-          "right": "May 2009 - Present  |  Bottrop",
+          "company": "Narutorpg.de - open-source community project (volunteer)",
+          "right": "May 2009 - Present  |  Remote",
           "bullets": [
-            "Coordinate a ten-person team and align technical with organizational tasks",
-            "Analyse complex legacy dependencies and identify technical dependencies without existing documentation",
-            "Document technical processes and maintain a knowledge base and rule set in MediaWiki"
+            "Long-term team development of a large PHP browser game; modernizing a historically-grown codebase toward Symfony and Doctrine ORM.",
+            "Coordinated a ~10-person team and aligned technical and organizational tasks; documented processes and game rules (MediaWiki)."
+          ]
+        },
+        {
+          "title": "IT Mentor (volunteer)",
+          "company": "CoffeeCodeBreak",
+          "right": "Jan 2025 - Present  |  Remote",
+          "bullets": [
+            "Mentor women entering or re-entering IT; share development experience and guide them through starting their careers."
           ]
         }
       ]
@@ -57,12 +79,30 @@
       "items": [
         {
           "title": "AI Engineering Experiments",
-          "company": "Self-directed",
+          "company": "Self-directed project",
           "right": "2024 - Present",
           "bullets": [
-            "Built and evaluated AI workflows, agents and integrations to understand production use of LLMs rather than only prompting",
-            "Designed agent workflows, optimized prompts and token usage, and compared model strengths against cost/quality trade-offs",
-            "Foundation for honest AI-adoption advice: where AI adds measurable value to a business process and where it does not"
+            "Built and evaluated AI workflows, agents, and integrations to move from prompt experiments toward practical, production-oriented use of LLMs.",
+            "Designed agent workflows and orchestrated multi-step tasks with the OpenAI and Anthropic APIs and MCP.",
+            "Optimized prompts and token usage, weighing cost against output quality; compared model strengths to choose the right model per task."
+          ]
+        },
+        {
+          "title": "Execution Research & Backtesting Platform",
+          "company": "Self-directed project",
+          "right": "2025 - 2026",
+          "bullets": [
+            "Designed and built an algorithmic execution and backtesting system in Python on the event-driven execution framework framework, including walk-forward validation and Monte Carlo simulation.",
+            "Performance engineering: evaluated very large parameter spaces via vectorization and JIT compilation (NumPy, Numba) instead of brute-force loops.",
+            "Built a distributed signal-execution system (FastAPI dashboard, multiple Docker containers, MT 5 integration) with risk management and extensive test coverage (pytest)."
+          ]
+        },
+        {
+          "title": "Laravel Pivot Events - custom-IDs feature (open-source contribution)",
+          "company": "github.com/Jackylyn1",
+          "right": "2025",
+          "bullets": [
+            "Extended an existing open-source Laravel package with support for custom IDs and timestamps on pivot tables; worked within its Eloquent relationship internals (BelongsToMany/MorphToMany, model events)."
           ]
         }
       ]
@@ -79,18 +119,6 @@
           "degree": "IT Security Studies (not completed)",
           "detail": "Ruhr University Bochum, Bochum  |  Sep 2013 - Feb 2017"
         }
-      ]
-    },
-    {
-      "heading": "SKILLS",
-      "type": "skills",
-      "lines": [
-        "Consulting & Requirements: Requirements Engineering, Business-Process Analysis, User Stories (Gherkin/BDD), Stakeholder & Client Communication, Project Leadership & Coordination, Custom Software Solutions",
-        "AI Adoption: LLM Integration (OpenAI & Anthropic APIs), AI Agents, MCP, Prompt Engineering, AI Workflow Design",
-        "Architecture & Engineering: Software Architecture, System Design, DDD, Event-Driven Architecture, REST/OpenAPI, PHP/Laravel, TypeScript/Vue/Alpine.js, PostgreSQL/MySQL",
-        "Delivery & Quality: Docker, GitLab CI/CD, Git, Codeception/PHPUnit, Clean Code, SOLID, Performance Optimization, Security",
-        "Currently developing: AI Strategy & Governance, EU AI Act, Change Management, Workshop Facilitation",
-        "Languages: German (native), English (fluent)"
       ]
     }
   ]

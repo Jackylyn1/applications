@@ -10,7 +10,22 @@
     {
       "heading": "PROFESSIONAL SUMMARY",
       "type": "summary",
-      "text": "PHP developer with around five years of experience building and maintaining production web applications, most of it in Laravel. My focus is the backend: modelling the domain with OOP, Clean Code, SOLID and DDD, designing REST APIs, and working with MySQL and PostgreSQL. I test with PHPUnit and Codeception (BDD / Gherkin), ship through Docker and GitLab CI/CD, and keep an eye on performance and security. I like understanding a system end to end and continuing to improve it once it works, rather than stopping at the first version that runs."
+      "text": "PHP developer with a focus on backend architecture (Laravel and Symfony). I have been building software for over 15 years, first through volunteer open-source and community projects (Narutorpg.de since 2009) and professionally since 2019. My focus is clean, test-driven PHP backends: multi-tenant REST APIs (API Platform, OpenAPI), event-driven real-time synchronization (Mercure/SSE, Redis queues), plus CI/CD and test automation (PHPUnit, Pest, Behat, PHPStan level 9). I like to understand a system end-to-end, measure the results, and keep improving it. I also integrate LLMs into development workflows and am currently learning RAG and vector databases."
+    },
+    {
+      "heading": "SKILLS",
+      "type": "skills",
+      "lines": [
+        "Backend: PHP (OOP), Laravel, Laravel Sanctum, Symfony, Filament, Livewire, Laravel Octane, Laravel Horizon (Redis queues), API Platform (REST + OpenAPI), REST APIs, JWT, OAuth, Guzzle, Mercure/SSE, PhpSpreadsheet, Twig",
+        "Databases: PostgreSQL, MySQL, SQLite, Redis",
+        "Frontend: TypeScript, JavaScript, Vue.js, Alpine.js, Tailwind CSS, HTML5, CSS3/SCSS, Vite",
+        "Architecture & Quality: Software Architecture, DDD, Event-Driven Architecture, SOLID, Design Patterns, Clean Code, Requirements Engineering, PHPUnit, Pest, Behat/BDD (Gherkin), PHPStan/Larastan (level 9), ECS, Performance Optimization, Security",
+        "DevOps: Docker, Docker Compose, DDEV, GitLab CI/CD, Git, Linux, Apache, Composer, npm",
+        "Python & Data: Python, FastAPI, SQLAlchemy, Pydantic, NumPy, pytest",
+        "AI & LLM Engineering: AI-assisted development (Claude Code), Prompt Engineering, OpenAI API, Anthropic API, MCP, AI Agents",
+        "Currently learning: RAG, vector databases, embeddings",
+        "Languages: German (native), English (fluent)"
+      ]
     },
     {
       "heading": "EXPERIENCE",
@@ -21,11 +36,11 @@
           "company": "Gastro IT GmbH",
           "right": "Mar 2025 - Present  |  Wuppertal (Remote)",
           "bullets": [
-            "Designed and built the backend of a greenfield restaurant point-of-sale (POS) system in PHP with Laravel and PostgreSQL, structuring the domain with a layered architecture and DDD concepts.",
-            "Designed and consumed REST APIs; frontend in TypeScript and Alpine.js on top of the Laravel backend.",
-            "Wrote automated tests with Codeception and PHPUnit following a BDD approach; specified features with Gherkin together with management and the Product Owner.",
-            "Maintained GitLab CI/CD pipelines and Docker-based development and deployment environments.",
-            "Applied Clean Code, SOLID and design patterns; used AI tools for code analysis, generation and refactoring in daily work."
+            "Core contributor (top 3 of a ~7-person team) on an existing greenfield restaurant point-of-sale (POS) platform: a Domain-Driven, package-oriented Laravel 13 monolith (Filament, Livewire) with PostgreSQL and Redis; owning specific components rather than the overall architecture.",
+            "Designed and owned end-to-end the platform's external REST API (API Platform on Laravel) with multi-tenant, permission-scoped access control: row-level query extensions, tenant-isolation write guards, JWT-based API credentials and permission management, and OpenAPI documentation.",
+            "Designed and implemented the real-time pivot-event synchronization mechanism (a custom laravel-pivot-events package plus a dedicated PivotEvents domain, pushed via Mercure/SSE) within an event-driven architecture backed by Redis queues (Laravel Horizon) and Laravel Octane.",
+            "Automated tests across the stack: PHPUnit plus full-stack BDD (Behat/Gherkin, Pest, Selenium) and Bruno API collections in a GitLab CI pipeline enforcing PHPStan level 9 (Larastan) and ECS.",
+            "Containerized development and CI with Docker Compose (PostgreSQL, Redis, TSE emulator); integrated German fiscal compliance (TSE/KassenSichV, DSFinV-K) and OPI payment terminals; additionally used AI tools in daily development."
           ]
         },
         {
@@ -33,21 +48,19 @@
           "company": "wpt-online Domainmarketing UG",
           "right": "Jun 2021 - Sep 2024  |  Gelsenkirchen",
           "bullets": [
-            "Independently planned, implemented and maintained custom PHP web applications (ticketing systems, websites, marketing tools) for small and mid-sized clients.",
-            "Translated client requirements into software: wrote user stories with the team and clients, conceived requirements-appropriate solutions, and reviewed and approved programming work.",
-            "Designed, set up and optimized the underlying database systems.",
-            "Wrote automated tests with PHPUnit and documented code with PHPDoc.",
-            "Coordinated projects and handed programming tasks to the team; used AI tools to support analysis, design and code generation."
+            "Independently planned, built, and maintained custom PHP web applications (ticketing systems, websites, marketing tools) from requirements gathering through to operation.",
+            "Translated client requirements into software: wrote user stories with the team and clients, conceived requirements-appropriate custom software, and reviewed and approved programming work.",
+            "Designed, set up, and optimized the underlying database systems.",
+            "Coordinated and led projects; automated tests with PHPUnit and documented code with PHPDoc; additionally used AI tools for code analysis and automation."
           ]
         },
         {
-          "title": "PHP Developer / Project Coordination",
-          "company": "Narutorpg.de - Open Source Community Project",
-          "right": "May 2009 - Present  |  Bottrop",
+          "title": "PHP Developer / Coordination",
+          "company": "Narutorpg.de - open-source community project (volunteer)",
+          "right": "2009 - Present  |  Remote",
           "bullets": [
-            "Took over a large, historically grown PHP codebase in a proprietary framework and continued developing it while preserving the existing architecture.",
-            "Analyzed complex legacy dependencies without existing documentation; debugged and extended the system safely.",
-            "Documented technical processes and coordinated a ten-person team."
+            "Long-term team development of a large, historically-grown PHP browser game (volunteer since 2009, second-most commits); modernizing the codebase toward Symfony and Doctrine ORM (incl. migrations).",
+            "Analyzing and refactoring complex legacy structures while preserving the existing architecture; coordinating a ~10-person team."
           ]
         }
       ]
@@ -57,12 +70,38 @@
       "type": "experience",
       "items": [
         {
-          "title": "Laravel Pivot Events (Open Source)",
+          "title": "Laravel Auth & CSV Import (Sanctum API + session)",
           "company": "github.com/Jackylyn1",
-          "right": "2025 - Present  |  PHP  |  Laravel  |  Composer",
+          "right": "2024  |  Laravel 11, Sanctum, PhpSpreadsheet",
           "bullets": [
-            "Open-source Laravel package that fires events for pivot (many-to-many) table changes with custom IDs, filling a gap in Laravel's default Eloquent behavior.",
-            "Required working with Laravel's Eloquent internals and event system; distributed via Composer."
+            "Laravel 11 application demonstrating two authentication approaches: Sanctum token auth for a JSON API and session-based web login; CSV contact import via PhpSpreadsheet.",
+            "Interface-driven service-layer architecture (AuthentificationInterface, FileHandlerInterface -> Sanctum/Session/CSV services), custom middleware, and an Artisan command; progressive refactoring of auth logic out of controllers into services."
+          ]
+        },
+        {
+          "title": "Laravel Pivot Events - custom-IDs feature (open-source contribution)",
+          "company": "github.com/Jackylyn1",
+          "right": "2025  |  PHP, Laravel, PHPUnit",
+          "bullets": [
+            "Extended an existing open-source Laravel package with support for custom IDs and timestamps on pivot tables; worked within its Eloquent relationship internals (BelongsToMany/MorphToMany, model events)."
+          ]
+        },
+        {
+          "title": "WordPress + React/TypeScript Article Plugin",
+          "company": "github.com/Jackylyn1",
+          "right": "2024  |  PHP (WordPress), React, TypeScript",
+          "bullets": [
+            "WordPress plugin that embeds a React/TypeScript SPA via a shortcode and a custom Gutenberg editor button; the SPA fetches articles, users, and categories through the WordPress REST API.",
+            "OOP plugin architecture with hooks, dynamic asset registration for hashed Vite builds, and a generic, typed API base component; reproducible local development via DDEV."
+          ]
+        },
+        {
+          "title": "Execution Research & Backtesting Platform",
+          "company": "Self-directed project",
+          "right": "2025 - 2026  |  Python, FastAPI, Docker",
+          "bullets": [
+            "Designed and built an algorithmic execution and backtesting system in Python on the event-driven execution framework framework, including walk-forward validation and Monte Carlo portfolio simulation.",
+            "Built a distributed signal-execution system (FastAPI dashboard, multiple Docker containers, MT 5 integration) with layered risk management and extensive test coverage (pytest)."
           ]
         }
       ]
@@ -72,27 +111,13 @@
       "type": "education",
       "items": [
         {
-          "degree": "IT Specialist for Application Development (Fachinformatikerin fur Anwendungsentwicklung)",
-          "detail": "wpt-online Domainmarketing UG, Gelsenkirchen  ·  Aug 2019 - Jun 2021. Apprenticeship completed; top-grade employment reference."
+          "degree": "IT Specialist for Application Development (Fachinformatikerin Anwendungsentwicklung)",
+          "detail": "wpt-online Domainmarketing UG, Gelsenkirchen  |  Aug 2019 - Jun 2021"
         },
         {
           "degree": "IT Security Studies (not completed)",
-          "detail": "Ruhr University Bochum  ·  Sep 2013 - Feb 2017."
+          "detail": "Ruhr University Bochum  |  2013 - 2017"
         }
-      ]
-    },
-    {
-      "heading": "SKILLS",
-      "type": "skills",
-      "lines": [
-        "Languages: PHP (OOP), TypeScript, JavaScript, SQL, HTML5, CSS3/SCSS",
-        "Frameworks: Laravel, Symfony, Vue.js, Alpine.js, Tailwind CSS",
-        "Backend & APIs: REST APIs, OpenAPI, OAuth, JSON, XML, AJAX, MySQL, PostgreSQL",
-        "Testing & Quality: PHPUnit, Codeception, BDD (Gherkin), Static Analysis, Clean Code, SOLID, Design Patterns",
-        "Architecture: Domain-Driven Design, Event-Driven Architecture, Requirements Engineering, System Design, Performance Optimization, Security",
-        "DevOps & Tools: Docker, GitLab CI/CD, Git, Composer, npm, Linux, Apache",
-        "AI-Assisted Development: Claude Code, Prompt Engineering, LLM / OpenAI & Anthropic APIs, MCP",
-        "Certifications & Languages: LinkedIn Skill Assessment - PHP; German (native), English (fluent)"
       ]
     }
   ]

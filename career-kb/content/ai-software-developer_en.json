@@ -13,6 +13,20 @@
       "text": "Software engineer with a focus on software architecture and applied AI. I have been building software for over 15 years, first through volunteer open-source and community projects and professionally since 2019, using PHP/Laravel and TypeScript, from greenfield architecture through CI/CD to test automation. Over the last two years I have integrated LLMs into real development workflows: designing AI agents, engineering prompts, and optimizing token usage and cost, using the OpenAI and Anthropic APIs and MCP. I like to understand a system end-to-end, measure the results, and keep improving it. Currently deepening Python for AI work and learning RAG and vector databases."
     },
     {
+      "heading": "SKILLS",
+      "type": "skills",
+      "lines": [
+        "AI & LLM Engineering: Agentic AI, AI Agents, LLM integration, Prompt Engineering, MCP, OpenAI API, Anthropic API, AI workflow design, token & cost optimization, AI-assisted development (Claude Code)",
+        "Backend: PHP (OOP), Laravel, Laravel Sanctum, Symfony, REST APIs, API Platform, OpenAPI, JWT, Guzzle, Mercure/SSE, PostgreSQL, MySQL, Redis",
+        "Frontend: TypeScript, JavaScript, Vue.js, Alpine.js, Tailwind CSS, HTML5, CSS3/SCSS",
+        "Python & Data: Python, FastAPI, SQLAlchemy, Pydantic, NumPy, Numba (JIT), pytest, backtesting, data pipelines, algorithm optimization",
+        "Architecture & Quality: Software Architecture, System Design, DDD, Event-Driven Architecture, SOLID, Design Patterns, Clean Code, Requirements Engineering, PHPUnit, BDD (Behat/Gherkin, Pest), Static Analysis (PHPStan level 9), Performance Optimization, Security",
+        "DevOps: Docker, Docker Compose, DDEV, GitLab CI/CD, Git, Linux, Apache, Composer, npm",
+        "Currently learning: RAG, vector databases, embeddings",
+        "Languages: German (native), English (fluent)"
+      ]
+    },
+    {
       "heading": "EXPERIENCE",
       "type": "experience",
       "items": [
@@ -21,11 +35,11 @@
           "company": "Gastro IT GmbH",
           "right": "Mar 2025 - Present  |  Wuppertal (Remote)",
           "bullets": [
-            "Designed and implemented the software architecture for a greenfield restaurant point-of-sale (POS) system: Laravel and PostgreSQL in the backend, Alpine.js with TypeScript in the frontend.",
-            "Integrated AI tools into daily development for code analysis, architectural design, code generation, and automation.",
-            "Built and maintained CI/CD pipelines in GitLab and containerized the application with Docker.",
-            "Automated tests with Codeception and PHPUnit using a behavior-driven (BDD) approach.",
-            "Specified features with Gherkin together with executive management and the Product Owner."
+            "Core contributor (top-3 of a ~7-person team) on an existing greenfield restaurant point-of-sale platform: a distributed system (central Laravel/Filament cloud back-office, on-premise location servers, Capacitor/TypeScript terminals) built on a Domain-Driven, package-oriented Laravel monolith.",
+            "Built an internal AI-assisted code-audit tooling suite (Claude Code slash-commands and subagents with deterministic verification) for soft-delete, CRUD-logging, and field-permission audits; integrated AI tools into daily development.",
+            "Designed and owns the platform's external REST API end-to-end (API Platform on Laravel) with multi-tenant, permission-scoped access control: row-level query extensions, tenant-isolation write guards, JWT-based API credentials, and OpenAPI documentation.",
+            "Designed and implemented the real-time pivot-event synchronization mechanism (a custom laravel-pivot-events package plus a dedicated PivotEvents domain, pushed via Mercure/SSE) within an event-driven architecture backed by Redis queues (Laravel Horizon) and Laravel Octane.",
+            "Authored automated tests across the stack (PHPUnit, BDD with Behat/Gherkin and Pest, Selenium, Bruno) within a GitLab CI pipeline enforcing PHPStan level 9 (Larastan) and ECS."
           ]
         },
         {
@@ -44,7 +58,7 @@
           "company": "Narutorpg.de - open-source community project (volunteer)",
           "right": "2009 - Present  |  Remote",
           "bullets": [
-            "Long-term team development of a large PHP browser game; modernizing a historically-grown codebase toward Symfony and Doctrine ORM (incl. migrations).",
+            "Major contributor on a multi-developer team building a long-running PHP browser game (volunteer); modernizing a historically-grown codebase toward Symfony and Doctrine ORM (incl. migrations).",
             "Analyzing and refactoring complex legacy structures while preserving the existing architecture; coordinating a ~10-person team."
           ]
         }
@@ -68,17 +82,17 @@
         {
           "title": "Execution Research & Backtesting Platform",
           "company": "Self-directed project",
-          "right": "2025 - 2026",
+          "right": "2025 - 2026  |  Python, execution framework, FastAPI",
           "bullets": [
             "Designed and built an algorithmic execution and backtesting system in Python on the event-driven execution framework framework, including walk-forward validation and Monte Carlo portfolio simulation.",
             "Performance engineering: evaluated very large parameter spaces via vectorization and JIT compilation (NumPy, Numba) instead of brute-force loops.",
-            "Built a distributed signal-execution system (FastAPI dashboard, multiple Docker containers, MT 5 integration) with risk management and extensive test coverage (pytest)."
+            "Built a distributed signal-execution system (FastAPI dashboard, multiple Docker containers, MT 5 integration) with a multi-gate risk-management pipeline and test coverage (pytest)."
           ]
         },
         {
           "title": "Laravel Pivot Events - custom-IDs feature (open-source contribution)",
           "company": "github.com/Jackylyn1",
-          "right": "2025",
+          "right": "2025 - Present",
           "bullets": [
             "Extended an existing open-source Laravel package with support for custom IDs and timestamps on pivot tables; worked within its Eloquent relationship internals (BelongsToMany/MorphToMany, model events)."
           ]
@@ -91,26 +105,12 @@
       "items": [
         {
           "degree": "IT Specialist for Application Development (Fachinformatikerin Anwendungsentwicklung)",
-          "detail": "wpt-online Domainmarketing UG, Gelsenkirchen  |  2019 - 2021"
+          "detail": "wpt-online Domainmarketing UG, Gelsenkirchen  |  Aug 2019 - Jun 2021"
         },
         {
           "degree": "IT Security Studies (not completed)",
           "detail": "Ruhr University Bochum  |  2013 - 2017"
         }
-      ]
-    },
-    {
-      "heading": "SKILLS",
-      "type": "skills",
-      "lines": [
-        "AI & LLM Engineering: Agentic AI, AI Agents, LLM integration, Prompt Engineering, MCP, OpenAI API, Anthropic API, AI workflow design, token & cost optimization, AI-assisted development (Claude Code)",
-        "Backend: PHP (OOP), Laravel, Laravel Sanctum, Symfony, REST APIs, OpenAPI, OAuth, Guzzle, PostgreSQL, MySQL",
-        "Frontend: TypeScript, JavaScript, Vue.js, Alpine.js, Tailwind CSS, HTML5, CSS3/SCSS",
-        "Python & Data: Python, FastAPI, SQLAlchemy, Pydantic, NumPy, Numba (JIT), pytest, backtesting, data pipelines, algorithm optimization",
-        "Architecture & Quality: Software Architecture, System Design, DDD, Event-Driven Architecture, SOLID, Design Patterns, Clean Code, Requirements Engineering, PHPUnit, Codeception, BDD (Gherkin), Static Analysis, Performance Optimization, Security",
-        "DevOps: Docker, Docker Compose, DDEV, GitLab CI/CD, Git, Linux, Apache, Composer, npm",
-        "Currently learning: RAG, vector databases, embeddings",
-        "Languages: German (native), English (fluent)"
       ]
     }
   ]
