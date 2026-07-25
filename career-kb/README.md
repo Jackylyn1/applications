@@ -8,10 +8,13 @@ job offer.
 | File | Purpose |
 |------|---------|
 | `profile.json` | **Source of truth — all facts/data.** Personal data, skills, experience, projects, goals, role/skill map, professional profile & differentiators, engineering philosophy. Query this first. |
-| `cv-standards.md` | Hard rules for CVs (ATS, content, email swap, PDF). |
-| `cover-letter-standards.md` | Hard rules for cover letters (structure, tone). |
-| `general-standards.md` | Project-description standard, writing principles, language matching, career positioning. |
-| `communication-rules.md` | Voice/tone rules for authentic applications + cover-letter structure + the four questions every application answers. |
+| `general-standards.md` | **Universal branding standards** — positioning, evidence-over-claims, engineering philosophy, target impression, career positioning. Applies to EVERY channel (CV, cover letter, LinkedIn, social). |
+| `communication-rules.md` | **Universal voice/tone** — mindset, preferred tone, writing style, avoid-list, authentic phrasing. Applies to every channel. |
+| `application-standards.md` | **CV & cover-letter only** — fact source (profile.json), language/register matching, Project Description Standard, ATS keywords, email swap, PDF output, the four questions. |
+| `cv-standards.md` | CV-build specifics (template/layout, section order, dates, skills bullets, Variant-A summary, page rule). |
+| `cover-letter-standards.md` | Cover-letter structure specifics (40/40/20, flow, one page). |
+| `linkedin-standards.md` | LinkedIn profile specifics (goal, core & AI positioning, profile impression). |
+| `social-media-standards.md` | Social-media content specifics (storytelling, hooks, value, brevity, images, tone). |
 | `templates/CV_Template_Rezi_Dec2025.docx` | **Canonical CV layout template**, stored verbatim (byte-identical, unmodified). The ONLY layout — never design a new one. |
 | `tools/build_cv.py` | Fills the template from a content JSON, preserving all styling. Its docstring is the content JSON schema. |
 | `.venv/` | Python venv with `python-docx` (used by build_cv.py). Run as `./.venv/bin/python tools/build_cv.py ...`. |

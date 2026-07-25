@@ -1,6 +1,6 @@
 ## Communication Rules for Authentic Applications
 
-These govern the **voice** of every generated document. Source: `Communication_Rules_for_Authentic_Applications.pdf`.
+These govern the **voice** across **every** channel — CV, cover letter, LinkedIn profile and social media (not just applications). Sources: `Communication_Rules_for_Authentic_Applications.pdf`, `Professional_Branding_Standards.pdf` (Group A writing style).
 
 ### Core principle
 - Write like an engineer, not like a marketer.
@@ -31,9 +31,10 @@ These govern the **voice** of every generated document. Source: `Communication_R
 Problem solving · architecture thinking · requirements engineering · optimization & performance · AI integration where relevant · learning through real projects · transferable engineering skills.
 
 ### Avoid
-- Buzzwords and generic phrases.
+- Buzzwords, empty adjectives and marketing language.
+- Generic claims and generic phrases.
 - Exaggerated self-praise.
-- Corporate clichés (e.g. "passionate", "dynamic", "results-driven").
+- Corporate and AI clichés (e.g. "passionate", "dynamic", "results-driven").
 - Claims without evidence.
 - Artificial enthusiasm.
 
@@ -43,14 +44,5 @@ Problem solving · architecture thinking · requirements engineering · optimiza
 - "I enjoy learning unfamiliar technologies by understanding the underlying concepts."
 - "I prefer making well-reasoned engineering decisions over following trends."
 
-### Application structure (cover letters)
-1. Start with the company's problem or mission.
-2. Connect her experience to that need.
-3. Support claims with one or two concrete project examples.
-4. Close by explaining why she wants to contribute — not by flattering the company.
+<!-- Cover-letter structure lives in cover-letter-standards.md; the "four questions every application answers" live in application-standards.md (kept out of this universal voice file to avoid duplication). -->
 
-### Four questions every application should answer
-1. What kinds of problems do I enjoy solving?
-2. How do I approach unfamiliar technologies?
-3. What evidence demonstrates how I work?
-4. Why does that make me valuable for this specific role?

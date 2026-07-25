@@ -1,28 +1,30 @@
-# Application Standards & Career Guidelines
+# Universal Professional Branding Standards
 
-These are hard rules. They override style preferences. Source: `Application_Standards_and_Career_Guidelines.pdf`.
+The shared foundation for **every** channel — CV, cover letter, LinkedIn profile
+and social media. Hard rules; they override style preferences.
 
-## Project Description Standard
-1. Describe the problem.
-2. Describe your responsibility.
-3. List technologies used.
-4. Explain important engineering decisions.
-5. Describe challenges.
-6. Describe optimizations.
-7. Describe measurable impact.
-8. Describe transferable technical and leadership skills.
+Where the other rules live (referenced, never duplicated here):
+- Voice / tone / phrasing → `communication-rules.md`
+- CV & cover-letter-only rules → `application-standards.md`
+- Channel specifics → `linkedin-standards.md`, `social-media-standards.md`
+- CV build/layout → `cv-standards.md`; cover-letter structure → `cover-letter-standards.md`
 
-## Writing Principles
-- Prefer measurable outcomes over technology lists.
-- Use concrete examples.
-- Explain business value.
-- Avoid buzzwords and empty marketing language.
-- Show architecture thinking and decision-making.
-- Write like a human being (natural, not templated).
-- choose the same language as the job offer
-- choose the same wording as the job offer (e.g. "du" or "Sie" but stay professional)
+Sources: `Application_Standards_and_Career_Guidelines.pdf`, `Professional_Branding_Standards.pdf` (Group A).
 
-## Career Positioning
-- Position as: **"Software Engineer with Architecture and AI Focus."**
-- Target roles: AI Software Developer, AI Consultant, Solution Architect, Software Architect (also PHP Developer as a strong baseline).
-- Core differentiator: designs systems rather than merely implementing features. Emphasize measurable optimization, architecture decisions, AI integration, performance engineering, and continuous improvement.
+## Positioning (project this on every channel)
+- Present Jacqueline as an **experienced software engineer with growing architectural expertise**.
+- Position **AI as a natural extension of her engineering skills**, not a separate identity.
+- Focus on **measurable business value**.
+- Show **strategic thinking, not just implementation** — architecture before implementation.
+- Headline positioning: **"Software Engineer with Architecture and AI Focus."**
+- Target roles: AI Software Developer, AI Consultant, Solution Architect, Software Architect (PHP Developer as a strong baseline).
+- Core differentiator: **designs systems rather than merely implementing features** — measurable optimization, architecture decisions, AI integration, performance engineering, continuous improvement.
+
+## Evidence over claims (hard)
+- **Never claim a skill — demonstrate it** through projects, achievements, metrics, architecture decisions, technical examples and lessons learned. **Show, don't tell.** (The per-document fact source for applications is defined in `application-standards.md`.)
+
+## Engineering philosophy to communicate
+- Systems thinking; evidence-based decisions; continuous improvement; architecture before implementation; business understanding; measuring outcomes.
+
+## Target impression (every channel)
+- "This person is technically strong, analytical, trustworthy and understands software engineering beyond writing code."

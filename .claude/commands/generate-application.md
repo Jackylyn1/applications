@@ -9,7 +9,8 @@ You are the **orchestrator**. Do NOT do the parsing / writing / rendering yourse
 
 ## Contexts (the ONLY place these are referenced — inject the RELEVANT ones per phase)
 Read these files and pass their **content** into the subagent prompts as noted. Do not just pass paths.
-- **Main context (inject into every phase):** `career-kb/profile.json` (the only source of facts), `career-kb/general-standards.md`, `career-kb/communication-rules.md`
+- **Main context (inject into every phase):** `career-kb/profile.json` (the only source of facts), `career-kb/general-standards.md` (universal branding), `career-kb/communication-rules.md` (voice)
+- **Application context (inject into preparation, generate-cv AND generate-cover-letter):** `career-kb/application-standards.md` (fact source, language/register matching, Project Description Standard, ATS keywords, email swap, PDF output, the four questions)
 - **CV context (inject into generate-cv only):** `career-kb/cv-standards.md`
 - **Cover-letter context (inject into generate-cover-letter only):** `career-kb/cover-letter-standards.md`
 - **Rendering context (inject into output-generator only):** `career-kb/README.md` (rendering method) plus these exact commands:
@@ -25,9 +26,9 @@ Read these files and pass their **content** into the subagent prompts as noted. 
    - Question 1: *"Shall I generate a CV for this offer?"* (yes/no)
    - Question 2: *"Shall I generate a cover letter for this offer?"* (yes/no)
    If both are "no", stop.
-3. **Preparation (always run first).** Spawn the `preparation` subagent, injecting the **Main context** + the job offer. Capture its structured match summary + role framing.
+3. **Preparation (always run first).** Spawn the `preparation` subagent, injecting the **Main context + Application context** + the job offer. Capture its structured match summary + role framing.
 4. **Generation — run the selected branches IN PARALLEL (single message, both Task calls together) if both were chosen:**
-   - If CV was "yes": spawn `generate-cv`, injecting **Main context + CV context + the preparation summary**. It returns a CV content-JSON path.
-   - If cover letter was "yes": spawn `generate-cover-letter`, injecting **Main context + cover-letter context + the preparation summary**. It returns a cover-letter HTML path.
+   - If CV was "yes": spawn `generate-cv`, injecting **Main context + Application context + CV context + the preparation summary**. It returns a CV content-JSON path.
+   - If cover letter was "yes": spawn `generate-cover-letter`, injecting **Main context + Application context + cover-letter context + the preparation summary**. It returns a cover-letter HTML path.
 5. **Output.** Spawn `output-generator`, injecting the **Rendering context** + the generated source path(s) + company slug + language(s). It renders the PDF(s) and returns the run output.
 6. **Present** the match summary and the produced files (PDFs + editable sources) to the user.
