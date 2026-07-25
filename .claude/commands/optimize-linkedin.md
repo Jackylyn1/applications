@@ -20,6 +20,6 @@ Read these and pass their content into the subagent prompts (do not just pass pa
 `linkedin-analyze` → `linkedin-optimize`.
 
 ## Steps
-1. **Analyze.** Spawn `linkedin-analyze`, injecting the **Main + LinkedIn context**. Capture its optimization brief (keyword strategy, multi-role umbrella, what to include, skills plan, gaps, honesty fixes).
-2. **Optimize.** Spawn `linkedin-optimize`, injecting the **Main + LinkedIn context + the brief**. It writes `career-kb/output/LinkedIn_Profile_optimized.txt`.
+1. **Analyze.** Spawn `linkedin-analyze`, injecting the **Main + LinkedIn context + Language**. Capture its optimization brief (keyword strategy, multi-role umbrella, what to include, skills plan, gaps, honesty fixes).
+2. **Optimize.** Spawn `linkedin-optimize` twice, one for a German result and one for an English result, injecting the **Main + LinkedIn context + the brief + Language**. It writes `career-kb/output/LinkedIn_Profile_optimized_[language].txt`.
 3. **Present** the .txt path and a short changelog (what changed + why it improves discoverability/trust) to the user.
