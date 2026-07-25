@@ -60,7 +60,7 @@
         {
           "title": "Laravel Pivot Events (Open Source)",
           "company": "PHP · Laravel · Composer",
-          "right": "github.com/Jackylyn1",
+          "right": "2025 - Present",
           "bullets": [
             "Designed and published an open-source Laravel package that adds pivot (many-to-many) events with custom IDs, working against Laravel's internals.",
             "Focused the package on a clean, predictable API - a small exercise in design from the consumer's point of view."
@@ -69,7 +69,7 @@
         {
           "title": "Execution Research & Backtesting Platform",
           "company": "Python · NumPy · Numba",
-          "right": "Personal project",
+          "right": "2025 - 2026",
           "bullets": [
             "Built a quantitative backtesting environment to evaluate very large parameter spaces (tens to hundreds of millions of combinations) fast enough to iterate on strategies.",
             "Optimized runtime through JIT compilation, vectorization and algorithmic improvements instead of naive brute force, and designed reproducible, modular scoring workflows."

@@ -10,7 +10,7 @@
     {
       "heading": "PROFIL",
       "type": "summary",
-      "text": "Softwareentwicklerin mit Schwerpunkt Softwarearchitektur und angewandter KI. Seit 2019 entwickle und pflege ich Web-Anwendungen mit PHP/Laravel und TypeScript, von der Greenfield-Architektur über CI/CD bis zur Testautomatisierung. In den letzten zwei Jahren habe ich LLMs in reale Entwicklungs-Workflows integriert: KI-Agenten entworfen, Prompts optimiert sowie Token-Verbrauch und Kosten reduziert, unter anderem mit der OpenAI- und Anthropic-API und MCP. Ich verstehe Systeme gern von Anfang bis Ende, messe Ergebnisse und verbessere sie iterativ. Aktuell vertiefe ich Python für KI-Arbeit und arbeite mich in RAG und Vektordatenbanken ein."
+      "text": "Softwareentwicklerin mit Schwerpunkt Softwarearchitektur und angewandter KI. Ich entwickle seit über 15 Jahren Software, zunächst ehrenamtlich in Open-Source- und Community-Projekten und seit 2019 auch beruflich, mit PHP/Laravel und TypeScript, von der Greenfield-Architektur über CI/CD bis zur Testautomatisierung. In den letzten zwei Jahren habe ich LLMs in reale Entwicklungs-Workflows integriert: KI-Agenten entworfen, Prompts optimiert sowie Token-Verbrauch und Kosten reduziert, unter anderem mit der OpenAI- und Anthropic-API und MCP. Ich verstehe Systeme gern von Anfang bis Ende, messe Ergebnisse und verbessere sie iterativ. Aktuell vertiefe ich Python für KI-Arbeit und arbeite mich in RAG und Vektordatenbanken ein."
     },
     {
       "heading": "BERUFSERFAHRUNG",
@@ -48,7 +48,7 @@
         {
           "title": "AI Engineering Experiments",
           "company": "Eigenprojekt",
-          "right": "",
+          "right": "2024 - heute",
           "bullets": [
             "Aufbau und Bewertung von KI-Workflows, Agenten und Integrationen, um von reinen Prompt-Experimenten hin zum praxisnahen, produktionsorientierten Einsatz von LLMs zu kommen.",
             "Entwurf von Agenten-Workflows und Orchestrierung mehrstufiger Aufgaben mit der OpenAI- und Anthropic-API und MCP.",
@@ -59,7 +59,7 @@
         {
           "title": "Execution Research & Backtesting Platform",
           "company": "Eigenprojekt",
-          "right": "",
+          "right": "2025 - 2026",
           "bullets": [
             "Entwurf einer Python-Forschungsumgebung, um große Parameterräume von Execution-Strategien schnell genug für zügige Iteration auszuwerten.",
             "Verarbeitung von zehn- bis hunderten Millionen Parameterkombinationen durch Ersetzen von Brute-Force-Schleifen mit Vektorisierung und JIT-Kompilierung (NumPy, Numba).",
@@ -69,7 +69,7 @@
         {
           "title": "Laravel Pivot Events (Open Source)",
           "company": "github.com/Jackylyn1",
-          "right": "",
+          "right": "2025 - heute",
           "bullets": [
             "Veröffentlichung eines Laravel-Pakets, das Pivot-Events (Many-to-Many) mit eigenen IDs ermöglicht."
           ]

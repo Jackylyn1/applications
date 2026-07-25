@@ -59,7 +59,7 @@
         {
           "title": "Laravel Pivot Events (Open Source)",
           "company": "github.com/Jackylyn1",
-          "right": "PHP  |  Laravel  |  Composer",
+          "right": "2025 - Present  |  PHP  |  Laravel  |  Composer",
           "bullets": [
             "Open-source Laravel package that fires events for pivot (many-to-many) table changes with custom IDs, filling a gap in Laravel's default Eloquent behavior.",
             "Required working with Laravel's Eloquent internals and event system; distributed via Composer."

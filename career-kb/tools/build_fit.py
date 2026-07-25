@@ -20,9 +20,12 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import json
 from build_cv import build
 
-# (spacing_scale, drop_bullets), least-destructive first: exhaust non-destructive
-# spacing tightening before removing any content.
-STEPS = [(1.0, 0), (0.9, 0), (0.8, 0), (0.7, 0)] + [(0.7, k) for k in range(1, 9)]
+# (spacing_scale, drop_bullets), least-destructive first: exhaust gentle spacing
+# tightening before removing any content, and CAP the damage — never squeeze
+# below 0.82 spacing and never drop more than 3 bullets to force one page. If a
+# clean single page needs more than that, a clean 2-pager is the better outcome
+# (see the fallback in main()), rather than gutting the CV.
+STEPS = [(1.0, 0), (0.92, 0), (0.85, 0), (0.82, 0), (0.82, 1), (0.82, 2), (0.82, 3)]
 
 
 def render_pdf(docx, outdir):
@@ -76,14 +79,17 @@ def main():
                 chosen = (scale, drop, pages, p2, dropped, pdf)
                 break
         if chosen is None:
-            # One page was unreachable without gutting the CV. A mangled 2-page
-            # result (bullets removed but still two pages) helps no one, so fall
-            # back to the intact original and leave the sparse page 2.
-            print("  WARNING: could not reach 1 page; reverting to intact original")
+            # One page was only reachable by cutting too much (> the caps in
+            # STEPS). A clean 2-pager with all content beats a gutted 1-pager,
+            # so revert to the intact original and flag the sparse page 2.
             doc, dropped = build(c, args.template, 1.0, 0)
             doc.save(args.out)
             pdf = render_pdf(args.out, tmp)
             pages, p2, scale, drop = page_count(pdf), page2_lines(pdf), 1.0, 0
+            print(f"  NOTE: one page would need cutting >3 bullets; kept intact "
+                  f"{pages} pages (page 2 has {p2} lines, below the "
+                  f"{args.min_lines}-line target) — trim content manually if a "
+                  f"single page is required.")
 
         if chosen is not None:
             scale, drop, pages, p2, dropped, pdf = chosen
