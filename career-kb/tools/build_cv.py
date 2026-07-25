@@ -38,6 +38,7 @@ e.g. German). Only the four `type` values above are recognized.
 """
 import argparse, copy, json, sys
 from docx import Document
+from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 
 W_T = qn('w:t')
@@ -308,11 +309,9 @@ def build(c, template, spacing_scale=1.0, drop_bullets=0):
                 if i < len(sec['items']) - 1:
                     out.append(fill(proto['empty']))
         elif t == 'skills':
-            lines = sec['lines']
-            for i, ln in enumerate(lines):
-                out.append(fill(proto['skill'], ln))
-                if i < len(lines) - 1:
-                    out.append(fill(proto['empty']))
+            # Bulleted, bold-labelled, same spacing as other sections (no spacers).
+            for ln in sec['lines']:
+                out.append(fill_skill(proto['bullet'], ln))
         else:
             raise SystemExit(f"Unknown section type: {t}")
 
@@ -320,6 +319,47 @@ def build(c, template, spacing_scale=1.0, drop_bullets=0):
         body.insert(list(body).index(sectPr), para)
 
     return doc, dropped
+
+
+def fill_skill(proto_bullet, line):
+    """Render a skills line as a bullet with a BOLD category label:
+    '<bullet> **KI & LLM-Engineering:** Agentic AI, AI Agents, ...'. Uses the
+    bullet prototype so skills get the same marker and spacing as every other
+    section (no more custom spacers). Bold has no negative ATS impact — the
+    label text still extracts verbatim."""
+    p = copy.deepcopy(proto_bullet)
+    runs = p.findall(W_R)
+    first = next((r for r in runs if r.find(W_T) is not None), None)
+    if first is None:
+        return fill(proto_bullet, line)
+    if ':' in line:
+        label, rest = line.split(':', 1)
+        label, rest = _norm(label) + ':', _norm(rest.strip())
+    else:
+        label, rest = _norm(line), ''
+    t = first.find(W_T)
+    t.text = label
+    t.set(qn('xml:space'), 'preserve')
+    rpr = first.find(qn('w:rPr'))
+    if rpr is None:
+        rpr = OxmlElement('w:rPr')
+        first.insert(0, rpr)
+    if rpr.find(qn('w:b')) is None:
+        rpr.append(OxmlElement('w:b'))
+    for r in runs:
+        if r is not first and r.find(W_T) is not None:
+            r.find(W_T).text = ''
+    if rest:
+        r2 = copy.deepcopy(first)
+        rpr2 = r2.find(qn('w:rPr'))
+        b = rpr2.find(qn('w:b'))
+        if b is not None:
+            rpr2.remove(b)
+        t2 = r2.find(W_T)
+        t2.text = ' ' + rest
+        t2.set(qn('xml:space'), 'preserve')
+        first.addnext(r2)
+    return p
 
 
 def main():

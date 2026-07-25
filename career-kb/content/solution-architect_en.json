@@ -1,6 +1,11 @@
 {
   "name": "Jacqueline Urban",
-  "contact": ["Gelsenkirchen, Germany", "info@perfectseowebsite.de", "+49 152 13839296", "in/jacqueline-u-92753821b  |  github.com/Jackylyn1"],
+  "contact": [
+    "Gelsenkirchen, Germany",
+    "info@perfectseowebsite.de",
+    "+49 152 13839296",
+    "in/jacqueline-u-92753821b  |  github.com/Jackylyn1"
+  ],
   "sections": [
     {
       "heading": "PROFILE",
@@ -56,7 +61,7 @@
         {
           "title": "Trading Research & Backtesting Platform",
           "company": "Personal project",
-          "right": "Python, NumPy, Numba",
+          "right": "2025 - 2026  |  Python, NumPy, Numba",
           "bullets": [
             "Designed a quantitative research environment to evaluate very large parameter spaces (tens to hundreds of millions of combinations) efficiently instead of naive brute-force loops",
             "Optimized runtime through JIT compilation (Numba), vectorization and algorithmic improvements; built reproducible, modular backtesting and scoring workflows",
@@ -66,7 +71,7 @@
         {
           "title": "Laravel Pivot Events (Open Source)",
           "company": "github.com/Jackylyn1",
-          "right": "PHP, Laravel, Composer",
+          "right": "2025 - Present  |  PHP, Laravel, Composer",
           "bullets": [
             "Published an open-source Laravel package that adds pivot (many-to-many) events with custom IDs",
             "Required understanding framework internals and designing a clean, reusable API for other developers"

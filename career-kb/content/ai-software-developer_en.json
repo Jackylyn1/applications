@@ -10,7 +10,7 @@
     {
       "heading": "PROFESSIONAL SUMMARY",
       "type": "summary",
-      "text": "Software engineer with a focus on software architecture and applied AI. Since 2019 I have built and maintained PHP/Laravel and TypeScript web applications, from greenfield architecture through CI/CD to test automation. Over the last two years I have integrated LLMs into real development workflows: designing AI agents, engineering prompts, and optimizing token usage and cost, using the OpenAI and Anthropic APIs and MCP. I like to understand a system end-to-end, measure the results, and keep improving it. Currently deepening Python for AI work and learning RAG and vector databases."
+      "text": "Software engineer with a focus on software architecture and applied AI. I have been building software for over 15 years, first through volunteer open-source and community projects and professionally since 2019, using PHP/Laravel and TypeScript, from greenfield architecture through CI/CD to test automation. Over the last two years I have integrated LLMs into real development workflows: designing AI agents, engineering prompts, and optimizing token usage and cost, using the OpenAI and Anthropic APIs and MCP. I like to understand a system end-to-end, measure the results, and keep improving it. Currently deepening Python for AI work and learning RAG and vector databases."
     },
     {
       "heading": "EXPERIENCE",
@@ -48,7 +48,7 @@
         {
           "title": "AI Engineering Experiments",
           "company": "Self-directed project",
-          "right": "",
+          "right": "2024 - Present",
           "bullets": [
             "Built and evaluated AI workflows, agents, and integrations to move from prompt experiments toward practical, production-oriented use of LLMs.",
             "Designed agent workflows and orchestrated multi-step tasks with the OpenAI and Anthropic APIs and MCP.",
@@ -59,7 +59,7 @@
         {
           "title": "Trading Research & Backtesting Platform",
           "company": "Self-directed project",
-          "right": "",
+          "right": "2025 - 2026",
           "bullets": [
             "Designed a Python research environment to evaluate large trading-strategy parameter spaces fast enough to iterate on ideas.",
             "Processed tens to hundreds of millions of parameter combinations by replacing brute-force loops with vectorization and JIT compilation (NumPy, Numba).",
@@ -69,7 +69,7 @@
         {
           "title": "Laravel Pivot Events (Open Source)",
           "company": "github.com/Jackylyn1",
-          "right": "",
+          "right": "2025 - Present",
           "bullets": [
             "Published a Laravel package that adds pivot (many-to-many) model events with custom IDs."
           ]
