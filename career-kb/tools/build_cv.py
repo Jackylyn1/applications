@@ -45,6 +45,13 @@ W_P = qn('w:p')
 W_SECTPR = qn('w:sectPr')
 
 
+# Canonical section order, mirroring the stored template layout:
+# Profile/Summary, then Skills, then Experience (+Projects), then Education.
+# Sections are emitted in this order regardless of the content JSON's order, so
+# every generated CV matches the template (skills sit directly under the profile).
+_SECTION_ORDER = {'summary': 0, 'skills': 1, 'experience': 2, 'education': 3}
+
+
 def _norm(v):
     """ATS hygiene: normalize em/en dashes to a plain hyphen. A few legacy ATS
     engines (Taleo, older iCIMS) mangle '—'/'–' inconsistently, so no
@@ -262,7 +269,11 @@ def build(c, template, spacing_scale=1.0, drop_bullets=0):
     out.append(fill(proto['name'], c['name']))
     out.append(fill_contact(proto['contact'], c['contact']))
 
-    for sec in c['sections']:
+    # Emit sections in the template's canonical order (skills right under the
+    # profile). sorted() is stable, so two experience-type sections (Experience,
+    # Projects) keep their original relative order.
+    ordered = sorted(c['sections'], key=lambda s: _SECTION_ORDER.get(s.get('type'), 99))
+    for sec in ordered:
         out.append(fill(proto['section'], sec['heading']))
         t = sec['type']
         if t == 'summary':
