@@ -354,7 +354,7 @@
   "overall_narrative": "Across these projects the emphasis shifted from implementing features to designing systems, optimizing performance, making data-driven decisions, communicating technical ideas, and leading projects through architecture, planning, and continuous improvement.",
 
   "github_repositories": {
-    "source": "Extracted 2026-07-25 from local clones in ~/Documents/projects. All 23 repositories analyzed. Profile: github.com/Jackylyn1.",
+    "source": "Extracted 2026-07-25 from local clones in ~/Documents/projects (24 repos analyzed incl. narutorpg added 2026-07-25). Profile: github.com/Jackylyn1.",
     "profile_url": "https://github.com/Jackylyn1",
     "honesty_rules": "Only 'flagship_own' and 'secondary_own' are genuinely her own substantive work. 'assessment_takehomes' are job trial tasks (label as such). 'open_source_contribution' is a fork with one small commit. 'learning_selfstudy' are course-along/scaffold repos. 'not_own_do_not_cite' are clones/forks she barely or never authored, and empty scaffolds — never present these as her projects. All quantitative performance/test figures are the repos' own README claims and are not independently verified.",
     "flagship_own": [
@@ -405,6 +405,20 @@
         "tests": "None (test script is a stub).",
         "relevance": "high — real iterative full-stack PHP + React/TS work with clear engineering reasoning.",
         "caveat": "README reads like a candidate submission (login creds, 'what I'd do with more time') — almost certainly a job take-home. No tests; committed WP core/node_modules hurt repo hygiene."
+      },
+      {
+        "name": "Naruto RPG — long-running community browser game (major contributor)",
+        "repos": ["narutorpg"],
+        "urls": ["https://github.com/mikaykun/narutorpg"],
+        "dates": "Project since 2009 (see work_experience: 2009-05 to present). IMPORTANT: the git history starts only 2022-10-08 because the project was migrated from SVN to git then — do NOT use the git first-commit date as the start; the real start is 2009. Git activity window: 2022-10 to 2026-02.",
+        "role": "Major contributor on a multi-developer team: 170 of 747 git commits are hers (2nd-most, after 405), plus years of pre-git SVN work. Frame as 'co-developer / major contributor', not sole author.",
+        "description": "A large PHP browser-based Naruto role-playing game (deep game world, combat system, inventory/items, admin tooling). Long-lived open-source community project (GPL-2.0). Ongoing modernization of a historically-grown codebase (a 'legacy/' tree remains) onto a modern Symfony + Doctrine stack.",
+        "technologies": ["PHP 8.2", "Symfony (framework-bundle, console, form, security-bundle, mailer, lock, dotenv, flex, runtime, asset, monolog)", "Doctrine ORM + Migrations", "league/plates + Twig (templating)", "league/flysystem", "Pagerfanta", "PHPMailer", "MariaDB / MySQL", "Bootstrap 5", "SASS", "SWC", "Stylelint", "DDEV", "Docker", "PHPUnit", "Pint", "Rector"],
+        "learnings": ["Modernizing a large legacy codebase (proprietary/non-standard origins) toward Symfony/Doctrine", "Long-term multi-developer team collaboration", "Database-heavy domain modelling (152 SQL files + migrations)", "Templating (Plates/Twig), auth/security, mailing, pagination", "Coordination of a ~10-person team (per work_experience)"],
+        "scale": "~407 PHP files, 152 SQL, 61 Twig, 37 JS; 747 git commits (2022-2026 window) plus pre-git SVN history back to 2009.",
+        "tests": "PHPUnit configured (phpunit.xml.dist).",
+        "relevance": "high — her longest-running project and the backbone of the 'building since ~2009' narrative; genuine substantial team contribution with a real legacy-modernization story. Matches work_experience 'Development / Coordination @ Narutorpg.de' (2009-present).",
+        "caveat": "Team project (major but not sole contributor). Upstream repo hosted at github.com/mikaykun/narutorpg. The Symfony/Doctrine stack is the MODERNIZED state; the project began on a proprietary/legacy framework (SVN era)."
       }
     ],
     "secondary_own": [
