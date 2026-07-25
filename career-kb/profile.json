@@ -48,7 +48,7 @@
   },
 
   "skills": {
-    "backend": ["PHP (OOP)", "Laravel", "Laravel Sanctum", "Symfony", "REST APIs", "OpenAPI", "OAuth", "Guzzle (HTTP)", "PhpSpreadsheet", "JSON", "XML", "AJAX", "PostgreSQL", "MySQL", "SQLite"],
+    "backend": ["PHP (OOP)", "Laravel", "Laravel Sanctum", "Symfony", "REST APIs", "OpenAPI", "OAuth", "Guzzle (HTTP)", "PhpSpreadsheet", "JSON", "XML", "AJAX", "PostgreSQL", "MySQL", "SQLite", "Redis"],
     "frontend": ["TypeScript", "JavaScript", "Vue.js", "React", "Alpine.js", "Tailwind CSS", "HTML5", "CSS3/SCSS", "Vite"],
     "ai_assisted_development": ["Claude Code", "Prompt Engineering", "Agentic AI", "Large Language Models (LLM)", "OpenAI API", "Anthropic API", "MCP", "AI Agents", "AI Workflow Design"],
     "devops_tools": ["Docker", "Docker Compose", "DDEV", "GitLab CI/CD", "Git", "SVN / TortoiseSVN", "Linux", "Apache", "Composer", "npm"],
@@ -80,7 +80,7 @@
     "Domain-Driven Design", "Event-Driven Architecture", "API Design",
     "Performance Optimization", "Security", "CI/CD", "PHP", "Laravel",
     "TypeScript", "Docker", "AI Engineering", "AI Agents", "Prompt Engineering",
-    "MCP", "Clean Code", "System Design"
+    "MCP", "Clean Code", "System Design", "Python", "Symfony"
   ],
 
   "soft_skills_to_emphasize": [
@@ -509,24 +509,24 @@
 
   "role_skill_map": {
     "AI Software Developer": {
-      "already_have": ["PHP", "Laravel", "TypeScript", "JavaScript", "SQL/MySQL", "REST APIs", "Git", "Docker", "Linux", "CI/CD", "Software Architecture", "System Design", "DDD", "Event-Driven Architecture", "Requirements Engineering", "SOLID", "Design Patterns", "Clean Code", "PHPUnit", "Static Analysis", "Performance Optimization", "Security", "Prompt Engineering", "OpenAI API", "Anthropic API", "AI Agents", "MCP", "Communication"],
-      "must_learn": ["Python", "RAG", "Vector Databases", "Embeddings", "FastAPI", "Hugging Face", "MLOps", "AWS/Azure", "Kubernetes"]
+      "already_have": ["PHP", "Laravel", "Symfony", "Python", "FastAPI", "TypeScript", "JavaScript", "SQL/MySQL", "Redis", "REST APIs", "Git", "Docker", "Docker Compose", "Linux", "CI/CD", "Software Architecture", "System Design", "DDD", "Event-Driven Architecture", "Requirements Engineering", "SOLID", "Design Patterns", "Clean Code", "PHPUnit", "pytest", "Static Analysis", "Performance Optimization", "Security", "Prompt Engineering", "OpenAI API", "Anthropic API", "AI Agents", "MCP", "Communication"],
+      "must_learn": ["RAG", "Vector Databases", "Embeddings", "Hugging Face", "MLOps", "AWS/Azure", "Kubernetes"]
     },
     "AI Consultant": {
       "already_have": ["AI Agents", "Prompt Engineering", "OpenAI/Anthropic APIs", "Requirements Engineering", "Software Architecture", "Communication", "Technical Documentation", "Business Process Thinking", "AI Workflow Design", "MCP"],
       "must_learn": ["AI Strategy", "AI Governance", "EU AI Act", "Workshop Facilitation", "Business Case Development", "Change Management", "Enterprise AI Adoption"]
     },
     "Solution Architect": {
-      "already_have": ["Software Architecture", "System Design", "DDD", "Event-Driven Architecture", "Requirements Engineering", "Docker", "CI/CD", "Security", "Performance Optimization", "REST APIs", "PHP", "Laravel", "SQL", "Git", "Communication", "Technical Documentation", "AI Knowledge"],
+      "already_have": ["Software Architecture", "System Design", "DDD", "Event-Driven Architecture", "Requirements Engineering", "Docker", "Docker Compose", "CI/CD", "Security", "Performance Optimization", "REST APIs", "PHP", "Laravel", "Symfony", "Python", "FastAPI", "SQL", "Redis", "Git", "Communication", "Technical Documentation", "AI Knowledge", "Distributed systems (multi-container, message dedup)"],
       "must_learn": ["AWS", "Azure", "Kubernetes", "Terraform", "Enterprise Security Architecture", "TOGAF (optional)"]
     },
     "Software Architect": {
-      "already_have": ["Software Architecture", "Clean Code", "SOLID", "Design Patterns", "DDD", "Event-Driven Architecture", "PHP", "Laravel", "Docker", "CI/CD", "PHPUnit", "Static Analysis", "Performance Optimization", "Security", "Requirements Engineering", "AI Knowledge"],
-      "must_learn": ["Cloud Architecture", "Kubernetes", "Distributed Systems", "Kafka", "RabbitMQ", "OpenTelemetry"]
+      "already_have": ["Software Architecture", "Clean Code", "SOLID", "Design Patterns", "DDD", "Event-Driven Architecture", "PHP", "Laravel", "Symfony", "Python", "Docker", "Docker Compose", "CI/CD", "PHPUnit", "pytest", "Static Analysis", "Performance Optimization", "Security", "Requirements Engineering", "Distributed systems (multi-container)", "AI Knowledge"],
+      "must_learn": ["Cloud Architecture", "Kubernetes", "Kafka", "RabbitMQ", "OpenTelemetry"]
     },
     "PHP Developer": {
-      "already_have": ["PHP", "Laravel", "TypeScript", "JavaScript", "HTML", "CSS", "SQL/MySQL", "REST APIs", "Git", "Docker", "Composer", "MVC", "OOP", "SOLID", "Design Patterns", "Clean Code", "PHPUnit", "Static Analysis", "CI/CD", "Performance Optimization", "Security", "Requirements Engineering", "Software Architecture", "AI-assisted Development"],
-      "must_learn": ["Symfony (optional)", "Redis", "Queue Systems", "Elasticsearch", "AWS", "Kubernetes", "GraphQL"]
+      "already_have": ["PHP", "Laravel", "Symfony", "Laravel Sanctum", "TypeScript", "JavaScript", "HTML", "CSS", "SQL/MySQL", "Redis", "REST APIs", "Guzzle", "Git", "Docker", "Docker Compose", "Composer", "MVC", "OOP", "SOLID", "Design Patterns", "Clean Code", "PHPUnit", "Static Analysis", "CI/CD", "Performance Optimization", "Security", "Requirements Engineering", "Software Architecture", "AI-assisted Development"],
+      "must_learn": ["Queue Systems", "Elasticsearch", "AWS", "Kubernetes", "GraphQL"]
     }
   }
 }
