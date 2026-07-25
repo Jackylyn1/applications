@@ -388,7 +388,7 @@
         "Core contributor (top-3 of a ~7-person team) on a greenfield restaurant point-of-sale platform: a distributed, multi-component system (central Laravel/Filament cloud back-office, on-premise location servers, Capacitor/TypeScript mobile terminals) built on a Domain-Driven, package-oriented Laravel monolith (14 domains, 8 internal Composer packages).",
         "Designed and shipped the platform's external REST API end-to-end (API Platform on Laravel) with multi-tenant, permission-scoped access control: row-level query extensions, tenant-isolation write guards, JWT-based API credentials and permission management, and OpenAPI documentation.",
         "Authored automated tests across the stack — PHPUnit feature/unit suites plus full-stack BDD (Behat/Gherkin, Pest, Selenium) and Bruno API collections — within a GitLab CI pipeline enforcing PHPStan level 9 (Larastan) and ECS code style.",
-        "Worked in an event-driven, real-time architecture (Mercure/SSE push, pivot-event sync) with Redis-backed queues (Laravel Horizon) and Laravel Octane, on a system integrating German fiscal compliance (TSE/KassenSichV, DSFinV-K/TAR) and OPI payment terminals.",
+        "Designed and implemented the real-time pivot-event synchronization mechanism (a custom laravel-pivot-events package plus a dedicated PivotEvents domain, pushed via Mercure/SSE) within an event-driven architecture backed by Redis queues (Laravel Horizon) and Laravel Octane; on a platform integrating German fiscal compliance (TSE/KassenSichV, DSFinV-K/TAR) and OPI payment terminals.",
         "Containerized development and CI with Docker Compose (PostgreSQL, Redis, TSE emulator); integrated AI tools into daily development and built an internal AI-assisted code-audit tooling suite (Claude Code slash-commands/subagents with deterministic verification) for soft-delete, CRUD-logging and field-permission audits."
       ],
       "technologies": [
@@ -415,7 +415,7 @@
         "PHPStan level 9 (Larastan)",
         "ECS"
       ],
-      "honesty_note": "Team project (~7 devs), NOT solo. She joined ~2025-03, about 4 months after the Nov-2024 kickoff, so she did NOT originate the architecture (lead/architect: Martin Schophaus). Frame as 'core contributor / built features within' the architecture; her genuine end-to-end ownership is the external REST API + permission system. Proprietary code on a private GitLab — describe capabilities generically, never publish internal package names, API design, or snippets."
+      "honesty_note": "Team project (~7 devs). She did NOT start the project from zero / did not originate the overall greenfield architecture (joined ~2025-03, ~4 months after the Nov-2024 kickoff; lead/architect: Martin Schophaus). BUT she DID design and architect specific parts herself — notably the real-time pivot-event sync mechanism (custom laravel-pivot-events package + PivotEvents domain; relates to her GitHub laravel-pivot-events fork) and the external REST API + multi-tenant permission system, which she owns end-to-end. Correct framing: 'designed and owns specific components within an existing greenfield platform' — NOT 'architected the whole system', and NOT merely 'built features'. Proprietary code on private GitLab — describe capabilities generically, no internal names/snippets."
     },
     {
       "title": "AI-Assisted Web Development",
@@ -638,7 +638,7 @@
         "Communication with stakeholders",
         "Long-term planning"
       ],
-      "honesty_note": "This is her JOB (Gastro IT), not a personal project, and she did not design the architecture from scratch (joined ~4 months after kickoff). Do not claim 'designed a greenfield POS from scratch'. Proprietary — describe generically."
+      "honesty_note": "Her JOB at Gastro IT (team project) — she did NOT start it from zero. She DID design/architect specific parts (real-time pivot-event sync; external REST API + permission system, end-to-end). Do not claim she 'designed a greenfield POS from scratch'. Proprietary — describe generically. See work_experience for detail."
     },
     {
       "name": "AI Engineering Experiments",
