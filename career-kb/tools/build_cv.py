@@ -53,8 +53,96 @@ def _norm(v):
     return str(v).replace('—', '-').replace('–', '-')
 
 
+import re as _re
+_TIMESPAN_RE = _re.compile(r'(?:19|20)\d{2}|\d{2}\.\d{4}|heute|present|lfd\.', _re.I)
+
+
+def _split_timespan(right):
+    """Split an experience `right` field into (timespan, rest).
+    Jobs use 'timespan | location' (e.g. '03.2025 - heute | Wuppertal'); the
+    leading segment matches a date pattern -> returned as the timespan, the
+    remainder as location. Projects use `right` for tech/URLs (no date) -> no
+    timespan, the whole string is returned as `rest`."""
+    if not right:
+        return '', ''
+    parts = [p.strip() for p in right.split('|')]
+    first = parts[0]
+    if _TIMESPAN_RE.search(first) or first.lower().startswith('seit'):
+        return first, ' · '.join(p for p in parts[1:] if p)
+    return '', right
+
+
 def get_ts(p):
     return p.findall('.//' + W_T)
+
+
+W_R = qn('w:r')
+W_PPR = qn('w:pPr')
+W_PBDR = qn('w:pBdr')
+W_NUMPR = qn('w:numPr')
+W_TAB = qn('w:tab')
+
+
+def _ptext(p):
+    return ''.join((t.text or '') for t in p.findall('.//' + W_T))
+
+
+def _has_border(p):
+    ppr = p.find(W_PPR)
+    return ppr is not None and ppr.find(W_PBDR) is not None
+
+
+def _has_numpr(p):
+    ppr = p.find(W_PPR)
+    return ppr is not None and ppr.find(W_NUMPR) is not None
+
+
+def _has_run_tab(p):
+    return any(r.find(W_TAB) is not None for r in p.findall(W_R))
+
+
+def find_prototypes(doc):
+    """Locate prototype paragraphs BY STYLE, not by fixed index — the template's
+    section order has been reordered before (SKILLS moved above EXPERIENCE),
+    which silently broke hardcoded indices. Style markers are stable:
+      * section heading  -> has a bottom border (w:pBdr)
+      * bullet           -> has list numbering (w:numPr)
+      * company/date line-> has a run-level tab (w:tab)  [the experience line]
+      * job title        -> the paragraph immediately before that line
+      * body/skill text  -> the paragraph right after the first heading (summary)
+    """
+    paras = [pp._p for pp in doc.paragraphs]
+    heads = [i for i, e in enumerate(paras) if _has_border(e)]
+    bullets = [i for i, e in enumerate(paras) if _has_numpr(e)]
+    if not (heads and bullets and bullets[0] >= 2):
+        raise SystemExit("Template prototypes not found (headings/bullets).")
+    # An experience entry is: title, company/date line, then bullets. Anchor on
+    # the first bullet: the two paragraphs just above it are the company/date
+    # line and the job title. (Independent of the off-page tab, which the
+    # templates no longer use.)
+    hi, bi = heads[0], bullets[0]
+    ci = bi - 1
+
+    def first_empty_after(idx):
+        for i in range(idx + 1, len(paras)):
+            if not _ptext(paras[i]).strip() and not _has_numpr(paras[i]):
+                return i
+        for i, e in enumerate(paras):
+            if not _ptext(e).strip() and not _has_numpr(e):
+                return i
+        return idx
+
+    return {
+        'name':     copy.deepcopy(paras[0]),
+        'contact':  copy.deepcopy(paras[1]),
+        'section':  copy.deepcopy(paras[hi]),
+        'body':     copy.deepcopy(paras[hi + 1]),
+        'title':    copy.deepcopy(paras[ci - 1]),
+        'compdate': copy.deepcopy(paras[ci]),
+        'bullet':   copy.deepcopy(paras[bi]),
+        'empty':    copy.deepcopy(paras[first_empty_after(bi)]),
+        'skill':    copy.deepcopy(paras[hi + 1]),
+    }
 
 
 def fill(proto, *values):
@@ -151,31 +239,15 @@ def build(c, template, spacing_scale=1.0, drop_bullets=0):
     _, dropped = _drop_bullets(c['sections'], drop_bullets)
 
     doc = Document(template)
-    p = doc.paragraphs
-    # Prototypes captured from the real template, then deep-copied.
-    proto = {
-        'name':     copy.deepcopy(p[0]._p),   # centered bold 14.5
-        'contact':  copy.deepcopy(p[1]._p),   # centered 6.5, multi-run
-        'section':  copy.deepcopy(p[2]._p),   # bold 10 heading
-        'body':     copy.deepcopy(p[3]._p),   # 7.5 normal paragraph
-        'title':    copy.deepcopy(p[5]._p),   # bold 9 job/degree title
-        'compdate': copy.deepcopy(p[6]._p),   # 7.5, company \t date (right tab)
-        'bullet':   copy.deepcopy(p[7]._p),   # 7.5 list item (numId=1)
-        'empty':    copy.deepcopy(p[12]._p),  # spacer
-        'skill':    copy.deepcopy(p[36]._p),  # 7.5 skills line
-    }
+    proto = find_prototypes(doc)
 
-    # Fix the date tab stop: the template defines a right tab at 20000 twips,
-    # which is off the page (usable width ~10800 twips) and overflows in
-    # LibreOffice. Re-anchor it to the actual right margin. (Design intent
-    # preserved: date stays right-aligned; we only correct an off-page value.)
-    sect = doc.sections[0]
-    usable_twips = int((sect.page_width - sect.left_margin - sect.right_margin) / 635)
-    ppr = proto['compdate'].find(qn('w:pPr'))
-    if ppr is not None:
-        for tab in ppr.iter(qn('w:tab')):
-            tab.set(qn('w:val'), 'right')
-            tab.set(qn('w:pos'), str(usable_twips))
+    # The timespan now leads the job title (left-aligned), so the compdate line
+    # is a plain left-aligned "company · location". Drop the run-level tab
+    # character that used to right-align the date (its tab stop sat off-page at
+    # 20000 twips, pushing the date off the page in the raw template).
+    for r in proto['compdate'].findall(qn('w:r')):
+        for tab in r.findall(qn('w:tab')):
+            r.remove(tab)
 
     if spacing_scale != 1.0:
         for pr in proto.values():
@@ -197,14 +269,22 @@ def build(c, template, spacing_scale=1.0, drop_bullets=0):
             out.append(fill(proto['body'], sec['text']))
         elif t == 'experience':
             for i, it in enumerate(sec['items']):
-                out.append(fill(proto['title'], it['title']))
-                # Trailing space on company guarantees a whitespace token between
-                # company and the right-tabbed date, so PDF text extraction can
-                # never fuse them (e.g. "...UG" + "Jun 2021" -> "UGJun").
+                # Timespan leads the title line: "03.2025 - heute | Job Title".
+                # (Projects have no date in `right`, so the title is unchanged.)
+                timespan, location = _split_timespan(it.get('right', ''))
+                title = it['title']
+                if timespan:
+                    title = f"{timespan} | {title}"
+                out.append(fill(proto['title'], title))
+                # Second line, left-aligned: "Company · Location" (or company /
+                # location / project-tech alone, whichever is present).
                 comp = it.get('company', '')
-                if comp:
-                    comp = comp + ' '
-                out.append(fill(proto['compdate'], comp, it.get('right', '')))
+                if comp and location:
+                    out.append(fill(proto['compdate'], comp, ' · ' + location))
+                elif comp:
+                    out.append(fill(proto['compdate'], comp))
+                elif location:
+                    out.append(fill(proto['compdate'], location))
                 for b in it.get('bullets', []):
                     out.append(fill(proto['bullet'], b))
                 if i < len(sec['items']) - 1:
