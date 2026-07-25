@@ -20,6 +20,12 @@ paragraphs BY INDEX, so every paragraph/run must stay in place. Editing <w:t>
 text keeps the structure identical. The placeholder text never ships (build_cv
 overwrites all body text); this exists so the template file itself scans clean.
 
+REGENERATION ORDER (important): run this on a PRISTINE English template (original
+tabbed layout, e.g. restored from git), THEN run tools/apply_timespan_layout.py on
+BOTH templates. apply_timespan_layout rewrites the experience placeholders in
+place, so the on-disk EN template is normally already in "timespan-in-front"
+layout — re-running make_de on that restructured EN would leave dates untranslated.
+
 Run: python tools/make_de_template.py
 """
 import os, zipfile
