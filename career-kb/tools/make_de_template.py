@@ -2,17 +2,17 @@
 """make_de_template.py — Derive the German CV template from the (ATS-fixed)
 English template by string-replacing ONLY text content.
 
-Rules (per user): the German template must be *exactly the same* as the English
-one; only the language of the prose changes to German and dates become MM.YYYY.
-Therefore:
-  * SECTION HEADERS ARE LEFT IN ENGLISH (PROFESSIONAL SUMMARY / SKILLS /
-    EXPERIENCE / PROJECT / EDUCATION). The ATS keys on the literal labels
-    EXPERIENCE/EDUCATION/SKILLS; translating them makes the ATS report them
-    missing. They are structural keys, not prose.
-  * Only the readable prose (summary, skills lines, bullets, titles, education)
-    is translated, and it is translated FAITHFULLY from the English placeholder
-    (no invented tech tokens like "PHPUnit"/"PHPDoc" — those tripped the ATS
-    "flattened blob" check).
+Rules (per user): the German template must be structurally identical to the
+English one; the language changes to German and dates become MM.YYYY. The
+German CV targets GERMAN ATS (which recognize BERUFSERFAHRUNG/AUSBILDUNG/
+KENNTNISSE), not English-only scanners, so:
+  * SECTION HEADERS ARE TRANSLATED TO GERMAN (PROFIL / KENNTNISSE /
+    BERUFSERFAHRUNG / PROJEKTE / AUSBILDUNG) — matching the German content
+    JSONs' headings.
+  * Prose (summary, skills lines, bullets, titles, education) is translated
+    FAITHFULLY from the English placeholder — do NOT inject tech tokens like
+    "PHPUnit"/"PHPDoc" into bullets (they tripped an ATS "flattened blob"
+    heuristic).
   * Dates -> MM.YYYY, ongoing -> "heute".
 
 Why string replacement (not paragraph edits): build_cv.py captures prototype
@@ -29,8 +29,14 @@ SRC = os.path.join(HERE, "templates", "CV_Template_Rezi_Dec2025.docx")
 DST = os.path.join(HERE, "templates", "CV_Template_Rezi_DE_Dec2025.docx")
 
 # Exact English source string -> German. Matches raw document.xml (entities such
-# as &amp; / &lt; preserved). Section headers are deliberately absent -> kept EN.
+# as &amp; / &lt; preserved).
 REPS = {
+    # --- section headers (German; match the DE content JSONs' headings) ---
+    "PROFESSIONAL SUMMARY": "PROFIL",
+    "SKILLS": "KENNTNISSE",
+    "EXPERIENCE": "BERUFSERFAHRUNG",
+    "PROJECT": "PROJEKTE",
+    "EDUCATION": "AUSBILDUNG",
     # --- name + contact (placeholder; never ships). Each field is its own run,
     # so replace them individually. "Seoul, South Korea" as a contact field is
     # replaced here; the experience-date "..., Seoul, South Korea" is handled by
