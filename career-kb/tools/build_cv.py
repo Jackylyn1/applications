@@ -109,27 +109,35 @@ def _has_run_tab(p):
     return any(r.find(W_TAB) is not None for r in p.findall(W_R))
 
 
+EXPERIENCE_HEADINGS = {'EXPERIENCE', 'BERUFSERFAHRUNG'}
+
+
 def find_prototypes(doc):
-    """Locate prototype paragraphs BY STYLE, not by fixed index — the template's
-    section order has been reordered before (SKILLS moved above EXPERIENCE),
-    which silently broke hardcoded indices. Style markers are stable:
-      * section heading  -> has a bottom border (w:pBdr)
-      * bullet           -> has list numbering (w:numPr)
-      * company/date line-> has a run-level tab (w:tab)  [the experience line]
-      * job title        -> the paragraph immediately before that line
-      * body/skill text  -> the paragraph right after the first heading (summary)
+    """Locate prototype paragraphs by style/anchor, NOT fixed index (the template
+    gets reordered and reformatted, which silently broke hardcoded indices).
+    Anchor the experience prototypes on the EXPERIENCE/BERUFSERFAHRUNG heading so
+    that skills — which may themselves be bullets and sit ABOVE experience — never
+    get mistaken for the job title/company/first bullet:
+      * section heading -> bottom border (w:pBdr); first one = the summary heading
+      * experience block-> the first list bullet AFTER the experience heading; the
+                           two non-empty non-bullet lines above it = title, company
+      * bullet          -> that first experience bullet
+      * empty spacer    -> first empty paragraph after it
     """
     paras = [pp._p for pp in doc.paragraphs]
     heads = [i for i, e in enumerate(paras) if _has_border(e)]
-    bullets = [i for i, e in enumerate(paras) if _has_numpr(e)]
-    if not (heads and bullets and bullets[0] >= 2):
+    nums = [i for i, e in enumerate(paras) if _has_numpr(e)]
+    if not (heads and nums):
         raise SystemExit("Template prototypes not found (headings/bullets).")
-    # An experience entry is: title, company/date line, then bullets. Anchor on
-    # the first bullet: the two paragraphs just above it are the company/date
-    # line and the job title. (Independent of the off-page tab, which the
-    # templates no longer use.)
-    hi, bi = heads[0], bullets[0]
-    ci = bi - 1
+    exp = next((i for i, e in enumerate(paras)
+                if _ptext(e).strip().upper() in EXPERIENCE_HEADINGS), None)
+    bi = next((i for i in nums if exp is None or i > exp), nums[0])
+    start = exp if exp is not None else 0
+    between = [i for i in range(start + 1, bi)
+               if _ptext(paras[i]).strip() and not _has_numpr(paras[i])]
+    ti = between[-2] if len(between) >= 2 else bi - 2
+    ci = between[-1] if len(between) >= 1 else bi - 1
+    hi = heads[0]
 
     def first_empty_after(idx):
         for i in range(idx + 1, len(paras)):
@@ -145,11 +153,10 @@ def find_prototypes(doc):
         'contact':  copy.deepcopy(paras[1]),
         'section':  copy.deepcopy(paras[hi]),
         'body':     copy.deepcopy(paras[hi + 1]),
-        'title':    copy.deepcopy(paras[ci - 1]),
+        'title':    copy.deepcopy(paras[ti]),
         'compdate': copy.deepcopy(paras[ci]),
         'bullet':   copy.deepcopy(paras[bi]),
         'empty':    copy.deepcopy(paras[first_empty_after(bi)]),
-        'skill':    copy.deepcopy(paras[hi + 1]),
     }
 
 
