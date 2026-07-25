@@ -1,7 +1,7 @@
 {
   "meta": {
     "owner": "Jacqueline Urban",
-    "version": 4,
+    "version": 5,
     "last_updated": "2026-07-25",
     "source_documents": [
       "CVEnglish2026.pdf",
@@ -11,11 +11,11 @@
       "Job_Skills_By_Role.pdf",
       "LinkedIn profile screencast (li.webm, extracted 2026-07-24)",
       "Arbeitszeugnis_JU.pdf (wpt-online employment reference, stored at documents/Arbeitszeugnis_wpt-online_2024.pdf)",
-      "GitHub repositories analysis (~/Documents/projects, all 23 local clones, extracted 2026-07-25) -> see github_repositories"
+      "GitHub repositories analysis (~/Documents/projects, all 23 local clones, extracted 2026-07-25) -> see github_repositories",
+      "Gastro IT POS project analysis ([local checkout], proprietary GitLab monorepo, extracted 2026-07-25) -> enriched Gastro IT work_experience + skills"
     ],
     "notes": "Single source of truth for CV and cover-letter generation. Never invent facts not present here. The user's principle: 'I never lie.'"
   },
-
   "personal": {
     "full_name": "Jacqueline Urban",
     "headline": "Full-Stack Developer | AI-Assisted Software Development",
@@ -32,78 +32,333 @@
     "date_of_birth": "1990-12-16",
     "nationality": "German",
     "languages": [
-      { "language": "German", "level": "Native" },
-      { "language": "English", "level": "Fluent" }
+      {
+        "language": "German",
+        "level": "Native"
+      },
+      {
+        "language": "English",
+        "level": "Fluent"
+      }
     ],
-    "hobbies_interests": ["Tech meetups", "Mentoring women in tech", "Travel", "Sports", "Nature"]
+    "hobbies_interests": [
+      "Tech meetups",
+      "Mentoring women in tech",
+      "Travel",
+      "Sports",
+      "Nature"
+    ]
   },
-
   "open_to_work": {
     "source": "LinkedIn 'Offen für Jobangebote' settings",
-    "target_job_titles": ["PHP-Entwickler / PHP Developer", "AI Software Developer", "Lösungsarchitekt / Solution Architect", "Software-Architekt / Software Architect", "IT-Berater / IT Consultant"],
+    "target_job_titles": [
+      "PHP-Entwickler / PHP Developer",
+      "AI Software Developer",
+      "Lösungsarchitekt / Solution Architect",
+      "Software-Architekt / Software Architect",
+      "IT-Berater / IT Consultant"
+    ],
     "location_type": "Remote",
     "location": "Gelsenkirchen",
     "availability": "Immediately; actively applying (Sofort; ich bewerbe mich aktiv)",
     "employment_type": "Full-time (Vollzeit)"
   },
-
   "skills": {
-    "backend": ["PHP (OOP)", "Laravel", "Laravel Sanctum", "Symfony", "REST APIs", "OpenAPI", "OAuth", "Guzzle (HTTP)", "PhpSpreadsheet", "JSON", "XML", "AJAX", "PostgreSQL", "MySQL", "SQLite", "Redis"],
-    "frontend": ["TypeScript", "JavaScript", "Vue.js", "React", "Alpine.js", "Tailwind CSS", "HTML5", "CSS3/SCSS", "Vite"],
-    "ai_assisted_development": ["Claude Code", "Prompt Engineering", "Agentic AI", "Large Language Models (LLM)", "OpenAI API", "Anthropic API", "MCP", "AI Agents", "AI Workflow Design"],
-    "devops_tools": ["Docker", "Docker Compose", "DDEV", "GitLab CI/CD", "Git", "SVN / TortoiseSVN", "Linux", "Apache", "Composer", "npm"],
-    "quality_methodologies": ["Codeception", "PHPUnit", "pytest", "Behavior-Driven Development (Gherkin)", "Domain-Driven Design", "Software Architecture", "Agile Methodologies", "SOLID", "Design Patterns", "Clean Code", "Static Analysis (PHPStan, ruff, mypy)", "Security tooling (bandit)", "Event-Driven Architecture", "Event-Driven Programming", "System Design", "Requirements Engineering", "Performance Optimization", "Security"],
-    "cms_wiki": ["MediaWiki", "WordPress (plugin development, Gutenberg, WP REST API)"],
-    "marketing": ["SEO", "Off-Page SEO", "SEM", "Google Ads", "Facebook / Social Media Marketing", "Web content writing"],
-    "data_python": ["Python", "FastAPI", "SQLAlchemy", "Pydantic", "NumPy", "JIT compilation (Numba)", "TA-Lib", "Telethon (Telegram API)", "pytest", "Backtesting", "Data pipelines", "Algorithm optimization"],
+    "backend": [
+      "PHP (OOP)",
+      "Laravel",
+      "Laravel Sanctum",
+      "Symfony",
+      "REST APIs",
+      "OpenAPI",
+      "OAuth",
+      "Guzzle (HTTP)",
+      "PhpSpreadsheet",
+      "JSON",
+      "XML",
+      "AJAX",
+      "PostgreSQL",
+      "MySQL",
+      "SQLite",
+      "Redis",
+      "Filament",
+      "Livewire",
+      "Laravel Octane",
+      "Laravel Horizon (Redis queues)",
+      "Laravel Telescope",
+      "API Platform (REST + OpenAPI)",
+      "JWT (lcobucci/jwt)",
+      "Mercure / Server-Sent Events (SSE)",
+      "amphp (async PHP)",
+      "Twig",
+      "Browsershot (headless-Chrome PDF)"
+    ],
+    "frontend": [
+      "TypeScript",
+      "JavaScript",
+      "Vue.js",
+      "React",
+      "Alpine.js",
+      "Tailwind CSS",
+      "HTML5",
+      "CSS3/SCSS",
+      "Vite"
+    ],
+    "ai_assisted_development": [
+      "Claude Code",
+      "Prompt Engineering",
+      "Agentic AI",
+      "Large Language Models (LLM)",
+      "OpenAI API",
+      "Anthropic API",
+      "MCP",
+      "AI Agents",
+      "AI Workflow Design"
+    ],
+    "devops_tools": [
+      "Docker",
+      "Docker Compose",
+      "DDEV",
+      "GitLab CI/CD",
+      "Git",
+      "SVN / TortoiseSVN",
+      "Linux",
+      "Apache",
+      "Composer",
+      "npm",
+      "Renovate",
+      "Tideways (APM)"
+    ],
+    "quality_methodologies": [
+      "Codeception",
+      "PHPUnit",
+      "pytest",
+      "Behavior-Driven Development (Gherkin)",
+      "Domain-Driven Design",
+      "Software Architecture",
+      "Agile Methodologies",
+      "SOLID",
+      "Design Patterns",
+      "Clean Code",
+      "Static Analysis (PHPStan, ruff, mypy)",
+      "Security tooling (bandit)",
+      "Event-Driven Architecture",
+      "Event-Driven Programming",
+      "System Design",
+      "Requirements Engineering",
+      "Performance Optimization",
+      "Security",
+      "Pest",
+      "Behat",
+      "Selenium / php-webdriver (E2E)",
+      "Bruno (API testing)",
+      "Larastan (PHPStan level 9)",
+      "ECS (Easy Coding Standard)"
+    ],
+    "cms_wiki": [
+      "MediaWiki",
+      "WordPress (plugin development, Gutenberg, WP REST API)"
+    ],
+    "marketing": [
+      "SEO",
+      "Off-Page SEO",
+      "SEM",
+      "Google Ads",
+      "Facebook / Social Media Marketing",
+      "Web content writing"
+    ],
+    "data_python": [
+      "Python",
+      "FastAPI",
+      "SQLAlchemy",
+      "Pydantic",
+      "NumPy",
+      "JIT compilation (Numba)",
+      "TA-Lib",
+      "Telethon (Telegram API)",
+      "pytest",
+      "Backtesting",
+      "Data pipelines",
+      "Algorithm optimization"
+    ],
     "also_used_in_personal_or_exploratory_projects": {
       "note": "Genuinely present in her repos but from smaller, exploratory, or take-home projects — verify depth before headlining on a CV; safe to mention as exposure.",
-      "items": ["NautilusTrader (event-driven trading framework)", "MetaTrader 5 integration (mt5linux/RPyC)", "React Native / Expo", "Redux Toolkit", "Node.js / Express", "MongoDB / Mongoose", "JWT / bcrypt", "Vue 3 / Quasar", "Shopware 6 / dockware", "Jinja2", "Uvicorn"]
-    }
+      "items": [
+        "NautilusTrader (event-driven trading framework)",
+        "MetaTrader 5 integration (mt5linux/RPyC)",
+        "React Native / Expo",
+        "Redux Toolkit",
+        "Node.js / Express",
+        "MongoDB / Mongoose",
+        "JWT / bcrypt",
+        "Vue 3 / Quasar",
+        "Shopware 6 / dockware",
+        "Jinja2",
+        "Uvicorn"
+      ]
+    },
+    "mobile": [
+      "Capacitor",
+      "Ionic",
+      "Android / mobile app development",
+      "OTA live updates (Capgo)"
+    ],
+    "domain_expertise": [
+      "German POS fiscal compliance (TSE / KassenSichV, DSFinV-K / TAR exports)",
+      "OPI (Open Payment Interface) payment-terminal integration",
+      "Multi-tenancy / tenant isolation",
+      "Modular monolith / package-oriented monorepo architecture",
+      "Real-time sync (Mercure / SSE, pivot events)"
+    ]
   },
-
   "certifications": [
-    { "name": "LinkedIn Skill Assessment passed — PHP", "issuer": "LinkedIn", "source": "LinkedIn profile" },
-    { "name": "LinkedIn Skill Assessment passed — Google Ads", "issuer": "LinkedIn", "source": "LinkedIn profile" }
+    {
+      "name": "LinkedIn Skill Assessment passed — PHP",
+      "issuer": "LinkedIn",
+      "source": "LinkedIn profile"
+    },
+    {
+      "name": "LinkedIn Skill Assessment passed — Google Ads",
+      "issuer": "LinkedIn",
+      "source": "LinkedIn profile"
+    }
   ],
-
   "continuing_education": [
-    { "name": "Alpine.js v3 course", "provider": "Online course", "evidence": "Completion certificate (stored in Documents) + practice repo 'alpinecourse'", "type": "course completion" },
-    { "name": "Web Components", "provider": "Udemy", "evidence": "Course material (stored in Documents)", "type": "course" },
-    { "name": "PHPUnit", "provider": "Udemy", "evidence": "Practice repo 'phpUnitUdemy'", "type": "course" },
-    { "name": "Software Architecture and Design of Large Scale Systems", "provider": "Workbook / self-study", "evidence": "Workbook (stored in Documents)", "type": "self-study" },
-    { "name": "CS50: Introduction to Computer Science", "provider": "HarvardX", "status": "Enrolled/started (2019)", "type": "course", "honesty_note": "Repo is an empty CS50-bot scaffold; no submitted coursework visible. Only claim as 'started/took', not completed." }
+    {
+      "name": "Alpine.js v3 course",
+      "provider": "Online course",
+      "evidence": "Completion certificate (stored in Documents) + practice repo 'alpinecourse'",
+      "type": "course completion"
+    },
+    {
+      "name": "Web Components",
+      "provider": "Udemy",
+      "evidence": "Course material (stored in Documents)",
+      "type": "course"
+    },
+    {
+      "name": "PHPUnit",
+      "provider": "Udemy",
+      "evidence": "Practice repo 'phpUnitUdemy'",
+      "type": "course"
+    },
+    {
+      "name": "Software Architecture and Design of Large Scale Systems",
+      "provider": "Workbook / self-study",
+      "evidence": "Workbook (stored in Documents)",
+      "type": "self-study"
+    },
+    {
+      "name": "CS50: Introduction to Computer Science",
+      "provider": "HarvardX",
+      "status": "Enrolled/started (2019)",
+      "type": "course",
+      "honesty_note": "Repo is an empty CS50-bot scaffold; no submitted coursework visible. Only claim as 'started/took', not completed."
+    }
   ],
-
   "technical_strengths_to_emphasize": [
-    "Software Architecture", "Requirements Engineering", "Greenfield Development",
-    "Domain-Driven Design", "Event-Driven Architecture", "API Design",
-    "Performance Optimization", "Security", "CI/CD", "PHP", "Laravel",
-    "TypeScript", "Docker", "AI Engineering", "AI Agents", "Prompt Engineering",
-    "MCP", "Clean Code", "System Design", "Python", "Symfony"
+    "Software Architecture",
+    "Requirements Engineering",
+    "Greenfield Development",
+    "Domain-Driven Design",
+    "Event-Driven Architecture",
+    "API Design",
+    "Performance Optimization",
+    "Security",
+    "CI/CD",
+    "PHP",
+    "Laravel",
+    "TypeScript",
+    "Docker",
+    "AI Engineering",
+    "AI Agents",
+    "Prompt Engineering",
+    "MCP",
+    "Clean Code",
+    "System Design",
+    "Python",
+    "Symfony",
+    "Multi-tenant REST API design (API Platform / OpenAPI)",
+    "Test automation (BDD, PHPStan level 9)",
+    "Real-time / event-driven systems"
   ],
-
   "soft_skills_to_emphasize": [
-    "Analytical thinking", "Systems thinking", "Technical communication",
-    "Stakeholder communication", "Leadership", "Continuous learning",
-    "Structured problem solving", "Pragmatic decision making",
-    "Mentoring mindset", "Curiosity and ownership"
+    "Analytical thinking",
+    "Systems thinking",
+    "Technical communication",
+    "Stakeholder communication",
+    "Leadership",
+    "Continuous learning",
+    "Structured problem solving",
+    "Pragmatic decision making",
+    "Mentoring mindset",
+    "Curiosity and ownership"
   ],
-
   "core_differentiator": "Designs systems rather than merely implementing features. Emphasizes measurable optimization, architecture decisions, AI integration, performance engineering, and continuous improvement.",
-
   "professional_profile": {
     "note": "Source: Application_Differentiators_and_Professional_Profile.pdf. Use these to shape the narrative/voice of CVs and cover letters — they describe how Jacqueline works, not new hard skills.",
     "differentiators": [
-      { "title": "Validate, then optimize", "points": ["Builds first, measures the outcome, then improves it.", "Work guided by evidence rather than assumptions.", "Examples: algorithm optimization, AI token optimization, software architecture refinement, data-driven LinkedIn experiments."] },
-      { "title": "Bridge business and technology", "points": ["Translates business requirements into technical solutions.", "Considers maintainability, scalability, stakeholder needs and business value — not just implementation."] },
-      { "title": "Systems thinking", "points": ["Thinks beyond individual features.", "Prefers understanding how an entire system works and how its components interact."] },
-      { "title": "Continuous learning", "points": ["Deliberately explores unfamiliar technologies and underlying concepts instead of staying in one stack.", "Focuses on principles that transfer across tools and frameworks."] },
-      { "title": "Optimization mindset", "points": ["Enjoys improving performance, architecture, workflows, learning processes and engineering practices.", "Optimization is a recurring pattern across her projects."] },
-      { "title": "Build before claiming expertise", "points": ["Demonstrates competence through projects and practical work rather than broad claims about expertise."] },
-      { "title": "Intellectual honesty", "points": ["Comfortable changing her opinion when new evidence appears.", "Communicates uncertainty honestly while actively working toward understanding."] },
-      { "title": "AI as an engineering tool", "points": ["Uses AI to support reasoning, architecture, experimentation and productivity — not as a substitute for engineering judgment."] },
-      { "title": "Ownership", "points": ["Interests naturally extend toward architecture, communication, leadership, requirements engineering and long-term product thinking."] }
+      {
+        "title": "Validate, then optimize",
+        "points": [
+          "Builds first, measures the outcome, then improves it.",
+          "Work guided by evidence rather than assumptions.",
+          "Examples: algorithm optimization, AI token optimization, software architecture refinement, data-driven LinkedIn experiments."
+        ]
+      },
+      {
+        "title": "Bridge business and technology",
+        "points": [
+          "Translates business requirements into technical solutions.",
+          "Considers maintainability, scalability, stakeholder needs and business value — not just implementation."
+        ]
+      },
+      {
+        "title": "Systems thinking",
+        "points": [
+          "Thinks beyond individual features.",
+          "Prefers understanding how an entire system works and how its components interact."
+        ]
+      },
+      {
+        "title": "Continuous learning",
+        "points": [
+          "Deliberately explores unfamiliar technologies and underlying concepts instead of staying in one stack.",
+          "Focuses on principles that transfer across tools and frameworks."
+        ]
+      },
+      {
+        "title": "Optimization mindset",
+        "points": [
+          "Enjoys improving performance, architecture, workflows, learning processes and engineering practices.",
+          "Optimization is a recurring pattern across her projects."
+        ]
+      },
+      {
+        "title": "Build before claiming expertise",
+        "points": [
+          "Demonstrates competence through projects and practical work rather than broad claims about expertise."
+        ]
+      },
+      {
+        "title": "Intellectual honesty",
+        "points": [
+          "Comfortable changing her opinion when new evidence appears.",
+          "Communicates uncertainty honestly while actively working toward understanding."
+        ]
+      },
+      {
+        "title": "AI as an engineering tool",
+        "points": [
+          "Uses AI to support reasoning, architecture, experimentation and productivity — not as a substitute for engineering judgment."
+        ]
+      },
+      {
+        "title": "Ownership",
+        "points": [
+          "Interests naturally extend toward architecture, communication, leadership, requirements engineering and long-term product thinking."
+        ]
+      }
     ],
     "core_differentiator_narrative": "Her strongest differentiator is not a specific programming language or framework. It is her habit of understanding complete systems, measuring outcomes, making thoughtful engineering decisions, and continuously improving solutions.",
     "engineering_philosophy_quote": "The projects I enjoy most are the ones where I can understand a system end-to-end, make thoughtful architectural decisions, measure the results, and iteratively improve the solution. That is the way I like to work, whether I am building backend software, designing AI workflows, or collaborating with stakeholders.",
@@ -119,7 +374,6 @@
       "Why does that make me valuable for this specific role?"
     ]
   },
-
   "work_experience": [
     {
       "title": "AI-Assisted Web Development",
@@ -131,12 +385,37 @@
       "start": "2025-03",
       "end": "present",
       "bullets": [
-        "Design and implementation of the software architecture for a restaurant point-of-sale (POS) system (greenfield project) based on Laravel and PostgreSQL in the backend and Alpine.js with TypeScript in the frontend",
-        "Effective use of AI tools for code analysis, architectural design, code generation, and automation in daily development workflows",
-        "Customization and maintenance of CI/CD pipelines in GitLab and containerization using Docker",
-        "Test automation with Codeception and PHPUnit (BDD)",
-        "Feature conception using Gherkin in collaboration with executive management and the Product Owner"
-      ]
+        "Core contributor (top-3 of a ~7-person team) on a greenfield restaurant point-of-sale platform: a distributed, multi-component system (central Laravel/Filament cloud back-office, on-premise location servers, Capacitor/TypeScript mobile terminals) built on a Domain-Driven, package-oriented Laravel monolith (14 domains, 8 internal Composer packages).",
+        "Designed and shipped the platform's external REST API end-to-end (API Platform on Laravel) with multi-tenant, permission-scoped access control: row-level query extensions, tenant-isolation write guards, JWT-based API credentials and permission management, and OpenAPI documentation.",
+        "Authored automated tests across the stack — PHPUnit feature/unit suites plus full-stack BDD (Behat/Gherkin, Pest, Selenium) and Bruno API collections — within a GitLab CI pipeline enforcing PHPStan level 9 (Larastan) and ECS code style.",
+        "Worked in an event-driven, real-time architecture (Mercure/SSE push, pivot-event sync) with Redis-backed queues (Laravel Horizon) and Laravel Octane, on a system integrating German fiscal compliance (TSE/KassenSichV, DSFinV-K/TAR) and OPI payment terminals.",
+        "Containerized development and CI with Docker Compose (PostgreSQL, Redis, TSE emulator); integrated AI tools into daily development and built an internal AI-assisted code-audit tooling suite (Claude Code slash-commands/subagents with deterministic verification) for soft-delete, CRUD-logging and field-permission audits."
+      ],
+      "technologies": [
+        "PHP 8.x",
+        "Laravel 13",
+        "Filament v5",
+        "Livewire",
+        "API Platform",
+        "Laravel Octane",
+        "Laravel Horizon",
+        "Redis",
+        "PostgreSQL",
+        "Mercure / SSE",
+        "amphp",
+        "JWT",
+        "Domain-Driven Design",
+        "Twig + Browsershot",
+        "Capacitor/TypeScript (terminal)",
+        "Docker Compose",
+        "GitLab CI",
+        "PHPUnit",
+        "Behat/Pest",
+        "Selenium",
+        "PHPStan level 9 (Larastan)",
+        "ECS"
+      ],
+      "honesty_note": "Team project (~7 devs), NOT solo. She joined ~2025-03, about 4 months after the Nov-2024 kickoff, so she did NOT originate the architecture (lead/architect: Martin Schophaus). Frame as 'core contributor / built features within' the architecture; her genuine end-to-end ownership is the external REST API + permission system. Proprietary code on a private GitLab — describe capabilities generically, never publish internal package names, API design, or snippets."
     },
     {
       "title": "AI-Assisted Web Development",
@@ -191,7 +470,6 @@
       ]
     }
   ],
-
   "volunteering": [
     {
       "role": "IT Mentor",
@@ -211,7 +489,6 @@
       "description": "Primarily responsible for management and placement; co-responsible for finances. Same organization as the freelance Management + Web Development + SEO role in work_experience."
     }
   ],
-
   "education": [
     {
       "title": "IT Specialist for Application Development",
@@ -229,7 +506,6 @@
       "end": "2017-02"
     }
   ],
-
   "references": [
     {
       "document_type": "Arbeitszeugnis (German employment reference letter)",
@@ -242,7 +518,10 @@
       "employment_period": "2019-08-01 to 2024-09-30",
       "role_progression": "Began with an apprenticeship as Fachinformatikerin für Anwendungsentwicklung (IT Specialist for Application Development), completed 2021-06-23, then continued in permanent employment (Festanstellung).",
       "termination": "Ended 2024-09-30 by mutual agreement (in gegenseitigem Einvernehmen).",
-      "covers": ["work_experience: wpt-online (2021-06 to 2024-09)", "education: IT Specialist for Application Development (2019-08 to 2021-06)"],
+      "covers": [
+        "work_experience: wpt-online (2021-06 to 2024-09)",
+        "education: IT Specialist for Application Development (2019-08 to 2021-06)"
+      ],
       "overall_rating": "Top grade (equivalent to 'sehr gut' / very good). Wording: tasks always performed 'mit großem Engagement und Erfolg'; 'unverzichtbare Mitarbeiterin' (indispensable employee).",
       "documented_responsibilities": [
         "Project management, including coordination and leadership of projects in online marketing, web design and programming",
@@ -275,20 +554,37 @@
       "usage_note": "This is verified third-party evidence — safe to cite for the wpt-online period. It broadens that role beyond 'AI-assisted web development' to include requirements engineering, database design, project leadership, custom software, and online-marketing/SEO. Use relevant parts when tailoring; German quotes are available verbatim in the stored PDF for German applications."
     }
   ],
-
   "projects": [
     {
       "name": "Laravel Pivot Events — custom-IDs feature (open-source fork)",
       "goal": "Extended an existing open-source Laravel package (mikebronner/laravel-pivot-events, itself a fork of fico7489/laravel-pivot) with support for custom IDs and timestamps on pivot tables.",
       "url": "https://github.com/Jackylyn1/laravel-pivot-events-with-custom-id",
-      "technologies": ["PHP", "Laravel/Illuminate", "Composer", "PHPUnit", "Orchestra Testbench"],
+      "technologies": [
+        "PHP",
+        "Laravel/Illuminate",
+        "Composer",
+        "PHPUnit",
+        "Orchestra Testbench"
+      ],
       "honesty_note": "FORK, not an original project. Her own contribution is a single focused commit (2025-04-17, 'Add custom ids and timestamps') on top of 187 upstream commits. Frame as 'contributed a custom feature to / worked inside an existing OSS Laravel package and understood Eloquent relationship internals' — NEVER as 'built an open-source package'.",
-      "transferable_skills": ["Working within an existing OSS codebase", "Laravel Eloquent internals (BelongsToMany/MorphToMany, model events)", "PHP package structure"]
+      "transferable_skills": [
+        "Working within an existing OSS codebase",
+        "Laravel Eloquent internals (BelongsToMany/MorphToMany, model events)",
+        "PHP package structure"
+      ]
     },
     {
       "name": "Trading Research & Backtesting Platform",
       "goal": "Design a quantitative trading research environment capable of evaluating enormous parameter spaces quickly enough to iterate on strategies.",
-      "technologies": ["Python", "NumPy", "JIT compilation (Numba)", "algorithm optimization", "backtesting", "scoring engines", "data pipelines"],
+      "technologies": [
+        "Python",
+        "NumPy",
+        "JIT compilation (Numba)",
+        "algorithm optimization",
+        "backtesting",
+        "scoring engines",
+        "data pipelines"
+      ],
       "impact": [
         "Learned to process tens to hundreds of millions of parameter combinations efficiently instead of relying on naive brute-force loops",
         "Optimized runtime through JIT compilation, vectorization and algorithmic improvements",
@@ -296,63 +592,165 @@
         "Learned to evaluate strategy quality statistically instead of relying on intuition",
         "Built modular scoring concepts for comparing strategies"
       ],
-      "transferable_skills": ["Performance engineering", "Data-driven decision making", "Research methodology", "Working with large datasets", "Optimization mindset"]
+      "transferable_skills": [
+        "Performance engineering",
+        "Data-driven decision making",
+        "Research methodology",
+        "Working with large datasets",
+        "Optimization mindset"
+      ]
     },
     {
-      "name": "AI-Enabled Restaurant POS System (Greenfield)",
-      "goal": "Design and implement a modern restaurant POS system from scratch.",
-      "technologies": ["PHP", "Laravel", "TypeScript", "Alpine.js", "MySQL", "Docker", "REST APIs", "Architecture"],
-      "impact": [
-        "Designed software architecture instead of only implementing features",
-        "Translated business requirements into maintainable code",
-        "Applied DDD concepts and event-driven thinking",
-        "Balanced maintainability, performance and security"
+      "name": "Restaurant POS Platform (Gastro IT GmbH — professional, team)",
+      "goal": "Greenfield, distributed restaurant POS platform (see work_experience: Gastro IT GmbH). She is a core team contributor — NOT the sole/original architect.",
+      "technologies": [
+        "PHP",
+        "Laravel 13",
+        "Filament",
+        "API Platform",
+        "PostgreSQL",
+        "Redis",
+        "Mercure/SSE",
+        "Docker",
+        "DDD",
+        "Capacitor/TypeScript"
       ],
-      "key_learnings": ["Layered architecture", "Requirements engineering", "API design", "Clean Code", "DDD", "Event-driven thinking", "Performance optimization", "Security", "CI/CD", "Stakeholder communication"],
-      "transferable_skills": ["Architecture thinking", "Requirements engineering", "Communication with stakeholders", "Long-term planning"]
+      "impact": [
+        "Built the external REST API end-to-end with multi-tenant, permission-scoped access control (row-level query extensions, tenant-isolation guards, JWT)",
+        "Contributed across a DDD, package-oriented Laravel monolith (14 domains, 8 internal packages)",
+        "Authored cross-stack tests (PHPUnit, Behat/Pest BDD, Selenium) under PHPStan level 9 + ECS in GitLab CI"
+      ],
+      "key_learnings": [
+        "Layered architecture",
+        "Requirements engineering",
+        "API design",
+        "Clean Code",
+        "DDD",
+        "Event-driven thinking",
+        "Performance optimization",
+        "Security",
+        "CI/CD",
+        "Stakeholder communication"
+      ],
+      "transferable_skills": [
+        "Architecture thinking",
+        "Requirements engineering",
+        "Communication with stakeholders",
+        "Long-term planning"
+      ],
+      "honesty_note": "This is her JOB (Gastro IT), not a personal project, and she did not design the architecture from scratch (joined ~4 months after kickoff). Do not claim 'designed a greenfield POS from scratch'. Proprietary — describe generically."
     },
     {
       "name": "AI Engineering Experiments",
       "goal": "Build practical AI applications rather than only experimenting with prompts. Built and evaluated AI workflows, agents and integrations while exploring production use of LLMs.",
-      "technologies": ["OpenAI API", "Anthropic API", "MCP", "AI Agents", "Prompt Engineering"],
+      "technologies": [
+        "OpenAI API",
+        "Anthropic API",
+        "MCP",
+        "AI Agents",
+        "Prompt Engineering"
+      ],
       "impact": [
         "Designed agent workflows",
         "Optimized prompts and token usage",
         "Compared model strengths and weaknesses",
         "Integrated AI into software workflows"
       ],
-      "key_learnings": ["Prompt design", "Context management", "Token optimization", "Model comparison", "Workflow orchestration", "Agent design", "Cost vs quality trade-offs", "Practical AI integration"],
-      "transferable_skills": ["Systems thinking", "Experiment-driven learning", "Rapid prototyping"]
+      "key_learnings": [
+        "Prompt design",
+        "Context management",
+        "Token optimization",
+        "Model comparison",
+        "Workflow orchestration",
+        "Agent design",
+        "Cost vs quality trade-offs",
+        "Practical AI integration"
+      ],
+      "transferable_skills": [
+        "Systems thinking",
+        "Experiment-driven learning",
+        "Rapid prototyping"
+      ]
     },
     {
       "name": "LinkedIn Personal Brand",
       "goal": "Created a technical personal brand focused on AI, software architecture and engineering.",
-      "technologies": ["LinkedIn", "Analytics", "Content Strategy"],
-      "key_learnings": ["Storytelling", "Technical writing", "Audience analysis", "SEO for profiles", "Thought leadership", "Data-driven iteration", "Community engagement"],
-      "transferable_skills": ["Thought leadership", "Professional communication", "Career strategy"]
+      "technologies": [
+        "LinkedIn",
+        "Analytics",
+        "Content Strategy"
+      ],
+      "key_learnings": [
+        "Storytelling",
+        "Technical writing",
+        "Audience analysis",
+        "SEO for profiles",
+        "Thought leadership",
+        "Data-driven iteration",
+        "Community engagement"
+      ],
+      "transferable_skills": [
+        "Thought leadership",
+        "Professional communication",
+        "Career strategy"
+      ]
     },
     {
       "name": "Book: Souveränität, Stabilität und Erfolg",
       "goal": "Write a practical self-development book focused on stability and sustainable success. Developed the concept, structure and writing style.",
-      "technologies": ["Writing frameworks", "editing", "content strategy"],
+      "technologies": [
+        "Writing frameworks",
+        "editing",
+        "content strategy"
+      ],
       "impact": [
         "Created a consistent writing framework",
         "Translated complex psychological concepts into actionable advice",
         "Maintained a clear tone across chapters"
       ],
-      "key_learnings": ["Leadership communication", "Empathy", "Coaching mindset", "Structured thinking", "Audience-oriented writing", "Long-form content", "Consistency", "Personal reflection"],
-      "transferable_skills": ["Leadership", "Empathy", "Coaching", "Structured communication"]
+      "key_learnings": [
+        "Leadership communication",
+        "Empathy",
+        "Coaching mindset",
+        "Structured thinking",
+        "Audience-oriented writing",
+        "Long-form content",
+        "Consistency",
+        "Personal reflection"
+      ],
+      "transferable_skills": [
+        "Leadership",
+        "Empathy",
+        "Coaching",
+        "Structured communication"
+      ]
     },
     {
       "name": "Career Positioning & AI Learning Roadmap",
       "goal": "Optimized CV, role targeting and career strategy toward AI-focused positions. Created a structured roadmap from PHP developer toward AI Software Developer, Solution Architect and AI Consultant.",
-      "technologies": ["ATS optimization", "competency mapping", "Roadmapping", "architecture", "AI ecosystem"],
-      "key_learnings": ["Skill-gap analysis", "Market research", "Role comparison", "Career planning", "Value proposition", "Negotiation preparation", "Prioritization", "Learning strategy", "Technology evaluation", "Framework selection", "Long-term planning"]
+      "technologies": [
+        "ATS optimization",
+        "competency mapping",
+        "Roadmapping",
+        "architecture",
+        "AI ecosystem"
+      ],
+      "key_learnings": [
+        "Skill-gap analysis",
+        "Market research",
+        "Role comparison",
+        "Career planning",
+        "Value proposition",
+        "Negotiation preparation",
+        "Prioritization",
+        "Learning strategy",
+        "Technology evaluation",
+        "Framework selection",
+        "Long-term planning"
+      ]
     }
   ],
-
   "overall_narrative": "Across these projects the emphasis shifted from implementing features to designing systems, optimizing performance, making data-driven decisions, communicating technical ideas, and leading projects through architecture, planning, and continuous improvement.",
-
   "github_repositories": {
     "source": "Extracted 2026-07-25 from local clones in ~/Documents/projects (24 repos analyzed incl. narutorpg added 2026-07-25). Profile: github.com/Jackylyn1.",
     "profile_url": "https://github.com/Jackylyn1",
@@ -360,61 +758,178 @@
     "flagship_own": [
       {
         "name": "Automated Telegram-Signal Trading System (SigTrader)",
-        "repos": ["TradingTelegramParser", "TradingApp"],
-        "urls": ["https://github.com/Jackylyn1/TradingTelegramParser", "https://github.com/Jackylyn1/TradingApp"],
+        "repos": [
+          "TradingTelegramParser",
+          "TradingApp"
+        ],
+        "urls": [
+          "https://github.com/Jackylyn1/TradingTelegramParser",
+          "https://github.com/Jackylyn1/TradingApp"
+        ],
         "dates": "2026-03 to 2026-04 (~2 months, very high cadence: 192 + 168 commits)",
         "description": "Self-built distributed system that receives German-language trading signals from ~32 Telegram channels, parses them, and auto-executes trades on MetaTrader 5 with a multi-gate risk-management pipeline and a FastAPI web dashboard. TradingApp is the earlier iteration; TradingTelegramParser ('SigTrader') is the more mature, English-documented evolution — present as ONE evolving project, not two.",
-        "technologies": ["Python 3.12", "Telethon", "MetaTrader5 (mt5linux/RPyC)", "FastAPI", "Uvicorn", "SQLAlchemy", "SQLite", "Pydantic", "Jinja2", "TA-Lib", "NumPy", "Docker Compose (multi-container: monitor/dashboard/MT5-in-Wine+VNC)", "pytest", "ruff", "mypy", "bandit"],
-        "learnings": ["Domain-driven layout (broker/channels/signals/telegram)", "Reliability engineering: dual push+poll signal delivery with dedup cache keyed on (chat_id, msg_id, text_hash)", "Layered risk gates (auto SL/TP, SL tightening, spread gate, equity-based risk cap with documented float tolerance)", "Integrating a legacy GUI trading platform (MT5) over RPyC, containerized under Wine+VNC", "Async Python", "Security awareness (bandit, .env, dry-run mode)"],
+        "technologies": [
+          "Python 3.12",
+          "Telethon",
+          "MetaTrader5 (mt5linux/RPyC)",
+          "FastAPI",
+          "Uvicorn",
+          "SQLAlchemy",
+          "SQLite",
+          "Pydantic",
+          "Jinja2",
+          "TA-Lib",
+          "NumPy",
+          "Docker Compose (multi-container: monitor/dashboard/MT5-in-Wine+VNC)",
+          "pytest",
+          "ruff",
+          "mypy",
+          "bandit"
+        ],
+        "learnings": [
+          "Domain-driven layout (broker/channels/signals/telegram)",
+          "Reliability engineering: dual push+poll signal delivery with dedup cache keyed on (chat_id, msg_id, text_hash)",
+          "Layered risk gates (auto SL/TP, SL tightening, spread gate, equity-based risk cap with documented float tolerance)",
+          "Integrating a legacy GUI trading platform (MT5) over RPyC, containerized under Wine+VNC",
+          "Async Python",
+          "Security awareness (bandit, .env, dry-run mode)"
+        ],
         "tests": "Extensive; README claims 227 tests (parsers, risk guards, DB, API, trade service).",
         "relevance": "high — strongest portfolio piece: real distributed architecture, reliability/risk design, large test suite, strong docs.",
         "caveat": "Handles real money/credentials; keep private. Overlaps with TradingApp — cite as one project."
       },
       {
         "name": "Algorithmic Trading & Backtesting System (NautilusTrader)",
-        "repos": ["NautilusTrading"],
-        "urls": ["https://github.com/Jackylyn1/NautilusTrading"],
+        "repos": [
+          "NautilusTrading"
+        ],
+        "urls": [
+          "https://github.com/Jackylyn1/NautilusTrading"
+        ],
         "dates": "2026-03 to 2026-04 (43 commits, ~2.5 weeks)",
         "description": "Quant trading system on the NautilusTrader framework running 10 walk-forward-validated mean-reversion/momentum strategies live on MT5, plus a large research/backtesting harness (scans 205 symbols x 17 signal types; README claims ~130M backtests) with composite-score ranking and Monte Carlo portfolio simulation.",
-        "technologies": ["Python 3.12", "NautilusTrader", "Numba (JIT)", "NumPy", "custom MT5 adapter over RPyC", "Docker Compose", "pytest", "ruff"],
-        "learnings": ["Quantitative research pipeline (strategy scanning, walk-forward validation, two-stage promotion gate, Monte Carlo risk-of-ruin)", "Performance-oriented backtesting with Numba", "Writing a custom adapter into a third-party trading framework", "Strategy design, position sizing, drawdown/risk modeling"],
+        "technologies": [
+          "Python 3.12",
+          "NautilusTrader",
+          "Numba (JIT)",
+          "NumPy",
+          "custom MT5 adapter over RPyC",
+          "Docker Compose",
+          "pytest",
+          "ruff"
+        ],
+        "learnings": [
+          "Quantitative research pipeline (strategy scanning, walk-forward validation, two-stage promotion gate, Monte Carlo risk-of-ruin)",
+          "Performance-oriented backtesting with Numba",
+          "Writing a custom adapter into a third-party trading framework",
+          "Strategy design, position sizing, drawdown/risk modeling"
+        ],
         "tests": "Present (~10 test modules; README claims 57 unit tests).",
         "relevance": "high — shows quantitative/algorithmic depth distinct from CRUD/integration work.",
         "caveat": "This maps to the existing 'Trading Research & Backtesting Platform' project entry. The sibling repo 'NautilusTradingApp-highspeed-backtest-' is an earlier snapshot of the SAME project — do NOT count twice."
       },
       {
         "name": "Laravel Auth & CSV Import (Sanctum API + session)",
-        "repos": ["Simple-Login-Sanctum--API--CSV"],
-        "urls": ["https://github.com/Jackylyn1/Simple-Login-Sanctum--API--CSV"],
+        "repos": [
+          "Simple-Login-Sanctum--API--CSV"
+        ],
+        "urls": [
+          "https://github.com/Jackylyn1/Simple-Login-Sanctum--API--CSV"
+        ],
         "dates": "2024-10 (~10 days, 56 commits — iterative)",
         "description": "Laravel 11 app demonstrating two auth approaches (Sanctum token auth for a JSON API + session-based web login) and CSV contact import via PhpSpreadsheet.",
-        "technologies": ["PHP 8.2+", "Laravel 11", "Laravel Sanctum", "PhpSpreadsheet", "MariaDB", "Docker", "Vite", "PHPUnit (configured)", "Pint"],
-        "learnings": ["Interface-driven service-layer architecture (AuthentificationInterface, FileHandlerInterface -> Sanctum/Session/CSV services)", "Custom middleware (CheckLoginToken)", "Artisan console command (FlushSessions)", "Progressive refactoring (auth logic out of controllers into services)", "Separate API vs web controllers", "PHPDoc pipeline"],
+        "technologies": [
+          "PHP 8.2+",
+          "Laravel 11",
+          "Laravel Sanctum",
+          "PhpSpreadsheet",
+          "MariaDB",
+          "Docker",
+          "Vite",
+          "PHPUnit (configured)",
+          "Pint"
+        ],
+        "learnings": [
+          "Interface-driven service-layer architecture (AuthentificationInterface, FileHandlerInterface -> Sanctum/Session/CSV services)",
+          "Custom middleware (CheckLoginToken)",
+          "Artisan console command (FlushSessions)",
+          "Progressive refactoring (auth logic out of controllers into services)",
+          "Separate API vs web controllers",
+          "PHPDoc pipeline"
+        ],
         "tests": "No real coverage — only default Laravel stubs; README lists 'add automated tests' as a TODO.",
         "relevance": "high — strongest PHP piece: deliberate SOLID-style architecture + meaningful refactoring history + two non-trivial features.",
         "caveat": "Personal playground with unfinished TODOs and no actual tests despite phpunit setup — be honest if asked."
       },
       {
         "name": "WordPress + React/TypeScript Article Plugin",
-        "repos": ["wordpressPlugin"],
-        "urls": ["https://github.com/Jackylyn1/wordpressPlugin"],
+        "repos": [
+          "wordpressPlugin"
+        ],
+        "urls": [
+          "https://github.com/Jackylyn1/wordpressPlugin"
+        ],
         "dates": "2024-10 to 2024-11 (~1 week, 24 commits — iterative)",
         "description": "A WordPress plugin ('article-app') embedding a React/TypeScript SPA into WordPress via a shortcode and a custom Gutenberg editor button; the SPA fetches articles/users/categories through the WP REST API and renders an article grid.",
-        "technologies": ["PHP (WordPress plugin, OOP, PHPDocs)", "React 18", "TypeScript", "Vite", "WordPress REST API", "Gutenberg block editor API", "DDEV", "npm"],
-        "learnings": ["Bridging a modern React/TS SPA into a legacy PHP CMS", "WordPress plugin architecture & hooks", "Dynamic asset registration for hashed Vite build filenames", "Generic, typed API-call base component (typed contracts)", "Reproducible local dev via DDEV pre-stop/post-start DB hooks", "Documented clean-code / OOP-vs-functional trade-offs"],
+        "technologies": [
+          "PHP (WordPress plugin, OOP, PHPDocs)",
+          "React 18",
+          "TypeScript",
+          "Vite",
+          "WordPress REST API",
+          "Gutenberg block editor API",
+          "DDEV",
+          "npm"
+        ],
+        "learnings": [
+          "Bridging a modern React/TS SPA into a legacy PHP CMS",
+          "WordPress plugin architecture & hooks",
+          "Dynamic asset registration for hashed Vite build filenames",
+          "Generic, typed API-call base component (typed contracts)",
+          "Reproducible local dev via DDEV pre-stop/post-start DB hooks",
+          "Documented clean-code / OOP-vs-functional trade-offs"
+        ],
         "tests": "None (test script is a stub).",
         "relevance": "high — real iterative full-stack PHP + React/TS work with clear engineering reasoning.",
         "caveat": "README reads like a candidate submission (login creds, 'what I'd do with more time') — almost certainly a job take-home. No tests; committed WP core/node_modules hurt repo hygiene."
       },
       {
         "name": "Naruto RPG — long-running community browser game (major contributor)",
-        "repos": ["narutorpg"],
-        "urls": ["https://github.com/mikaykun/narutorpg"],
+        "repos": [
+          "narutorpg"
+        ],
+        "urls": [
+          "https://github.com/mikaykun/narutorpg"
+        ],
         "dates": "Project since 2009 (see work_experience: 2009-05 to present). IMPORTANT: the git history starts only 2022-10-08 because the project was migrated from SVN to git then — do NOT use the git first-commit date as the start; the real start is 2009. Git activity window: 2022-10 to 2026-02.",
         "role": "Major contributor on a multi-developer team: 170 of 747 git commits are hers (2nd-most, after 405), plus years of pre-git SVN work. Frame as 'co-developer / major contributor', not sole author.",
         "description": "A large PHP browser-based Naruto role-playing game (deep game world, combat system, inventory/items, admin tooling). Long-lived open-source community project (GPL-2.0). Ongoing modernization of a historically-grown codebase (a 'legacy/' tree remains) onto a modern Symfony + Doctrine stack.",
-        "technologies": ["PHP 8.2", "Symfony (framework-bundle, console, form, security-bundle, mailer, lock, dotenv, flex, runtime, asset, monolog)", "Doctrine ORM + Migrations", "league/plates + Twig (templating)", "league/flysystem", "Pagerfanta", "PHPMailer", "MariaDB / MySQL", "Bootstrap 5", "SASS", "SWC", "Stylelint", "DDEV", "Docker", "PHPUnit", "Pint", "Rector"],
-        "learnings": ["Modernizing a large legacy codebase (proprietary/non-standard origins) toward Symfony/Doctrine", "Long-term multi-developer team collaboration", "Database-heavy domain modelling (152 SQL files + migrations)", "Templating (Plates/Twig), auth/security, mailing, pagination", "Coordination of a ~10-person team (per work_experience)"],
+        "technologies": [
+          "PHP 8.2",
+          "Symfony (framework-bundle, console, form, security-bundle, mailer, lock, dotenv, flex, runtime, asset, monolog)",
+          "Doctrine ORM + Migrations",
+          "league/plates + Twig (templating)",
+          "league/flysystem",
+          "Pagerfanta",
+          "PHPMailer",
+          "MariaDB / MySQL",
+          "Bootstrap 5",
+          "SASS",
+          "SWC",
+          "Stylelint",
+          "DDEV",
+          "Docker",
+          "PHPUnit",
+          "Pint",
+          "Rector"
+        ],
+        "learnings": [
+          "Modernizing a large legacy codebase (proprietary/non-standard origins) toward Symfony/Doctrine",
+          "Long-term multi-developer team collaboration",
+          "Database-heavy domain modelling (152 SQL files + migrations)",
+          "Templating (Plates/Twig), auth/security, mailing, pagination",
+          "Coordination of a ~10-person team (per work_experience)"
+        ],
         "scale": "~407 PHP files, 152 SQL, 61 Twig, 37 JS; 747 git commits (2022-2026 window) plus pre-git SVN history back to 2009.",
         "tests": "PHPUnit configured (phpunit.xml.dist).",
         "relevance": "high — her longest-running project and the backbone of the 'building since ~2009' narrative; genuine substantial team contribution with a real legacy-modernization story. Matches work_experience 'Development / Coordination @ Narutorpg.de' (2009-present).",
@@ -427,8 +942,22 @@
         "url": "https://github.com/Jackylyn1/laravelHarrypotter",
         "dates": "2024-11 (one day, 4 commits)",
         "description": "Laravel 11 app consuming an external Harry Potter REST API via Guzzle (Characters/Houses/Spells) with an artisan command to populate spells; DDEV env with DB export/import hooks.",
-        "technologies": ["PHP 8.2+", "Laravel 11", "Guzzle", "DDEV", "Docker", "Tailwind CSS", "Vite", "PHPUnit"],
-        "learnings": ["Third-party HTTP API integration behind an interface (APIConnectionService)", "Service layer", "Eloquent modelling of related entities", "Reproducible DDEV setup"],
+        "technologies": [
+          "PHP 8.2+",
+          "Laravel 11",
+          "Guzzle",
+          "DDEV",
+          "Docker",
+          "Tailwind CSS",
+          "Vite",
+          "PHPUnit"
+        ],
+        "learnings": [
+          "Third-party HTTP API integration behind an interface (APIConnectionService)",
+          "Service layer",
+          "Eloquent modelling of related entities",
+          "Reproducible DDEV setup"
+        ],
         "tests": "Has real unit tests (Character/House/Spell) — README notes they were AI-assisted.",
         "relevance": "medium — genuine own work; small scope, one-day build."
       },
@@ -437,8 +966,18 @@
         "url": "https://github.com/Jackylyn1/entwicklerheld",
         "dates": "Uploaded 2024-10; README says solutions written over ~3 years",
         "description": "Her own solutions to challenges from EntwicklerHeld.de, organized by tech: plain PHP, Symfony, Laravel (FizzBuzz, markdown parser refactoring, validation, a multi-stage Symfony 'Tickets' task, etc.).",
-        "technologies": ["PHP (plain)", "Symfony", "Laravel"],
-        "learnings": ["PHP fundamentals", "Algorithmic problem-solving", "Refactoring", "Working within Symfony and Laravel", "Spec-driven challenges"],
+        "technologies": [
+          "PHP (plain)",
+          "Symfony",
+          "Laravel"
+        ],
+        "learnings": [
+          "PHP fundamentals",
+          "Algorithmic problem-solving",
+          "Refactoring",
+          "Working within Symfony and Laravel",
+          "Spec-driven challenges"
+        ],
         "relevance": "medium — genuine own work, directly evidences PHP + Symfony/Laravel; curated showcase of small challenge solutions."
       },
       {
@@ -446,7 +985,11 @@
         "url": "https://github.com/Jackylyn1/Login",
         "dates": "2019-05 (one-off)",
         "description": "Minimal PHP login/auth mini-app (login page, dashboard, classes, DB config, CSS). Early self-authored PHP work.",
-        "technologies": ["PHP (OOP)", "MySQL/SQL", "CSS"],
+        "technologies": [
+          "PHP (OOP)",
+          "MySQL/SQL",
+          "CSS"
+        ],
         "relevance": "low-medium — genuine early work but tiny, undocumented, dated 2019. Useful only as an early datapoint."
       },
       {
@@ -454,7 +997,16 @@
         "url": "https://github.com/Jackylyn1/LoveEvolutionApp",
         "dates": "2025-09 to 2026-04 (only 2 commits)",
         "description": "Ambitious full-stack relationship/self-help mobile app: React Native + Expo frontend (auth, assessment, exercises, AI coach) + Express/MongoDB REST API (JWT auth). Broad modern stack.",
-        "technologies": ["React Native 0.72", "Expo", "React Navigation", "Redux Toolkit", "Node.js/Express", "MongoDB/Mongoose", "JWT", "bcrypt"],
+        "technologies": [
+          "React Native 0.72",
+          "Expo",
+          "React Navigation",
+          "Redux Toolkit",
+          "Node.js/Express",
+          "MongoDB/Mongoose",
+          "JWT",
+          "bcrypt"
+        ],
         "relevance": "low-medium — impressive stack breadth on paper, but git history (2 commits, mislabeled 'Create Next App' scaffold), .ts/JSX mismatch, and no tests suggest a largely AI-generated skeleton that likely does not build/run.",
         "caveat": "Do NOT present as shipped/working. Safest framing: 'explored a full React Native + Node/Mongo architecture'. Verify it runs before featuring."
       }
@@ -465,7 +1017,14 @@
         "url": "https://github.com/Jackylyn1/Vue-coding-challenge",
         "dates": "2025-02 (single commit, ~1h task by design)",
         "description": "Employer take-home (Trafo2): finished a Vue 3 / Quasar quiz app — implemented IndexPage.vue + QuestionCard.vue (load questions, answer + immediate feedback, lock, score, restart) under StandardJS rules.",
-        "technologies": ["Vue 3", "Quasar Framework 2", "vue-router", "ESLint/StandardJS", "SASS", "Vite"],
+        "technologies": [
+          "Vue 3",
+          "Quasar Framework 2",
+          "vue-router",
+          "ESLint/StandardJS",
+          "SASS",
+          "Vite"
+        ],
         "relevance": "medium — genuine, focused Vue/Quasar evidence; small and time-boxed. Label as an application task, not a product."
       },
       {
@@ -473,7 +1032,14 @@
         "url": "https://github.com/Jackylyn1/shopware6probeaufgabe",
         "dates": "2026-04 (single commit)",
         "description": "A job trial task ('Probeaufgabe') on a dockware-based Shopware 6 environment. Shows she can run Shopware via dockware.",
-        "technologies": ["Shopware 6", "dockware/dev", "docker-compose", "PHP 8.2", "MySQL", "Xdebug"],
+        "technologies": [
+          "Shopware 6",
+          "dockware/dev",
+          "docker-compose",
+          "PHP 8.2",
+          "MySQL",
+          "Xdebug"
+        ],
         "relevance": "low-medium — genuine application task, but the committed repo contains only stock demo plugins (whole install + volumes committed), so the actual solution is not visible as reviewable code.",
         "caveat": "Verify with Jacqueline where the task logic actually lives before citing."
       }
@@ -486,47 +1052,260 @@
       }
     ],
     "learning_selfstudy": [
-      { "name": "alpinecourse", "url": "https://github.com/Jackylyn1/alpinecourse", "note": "Alpine.js v3 course-along material (has a completion certificate). Self-study of Alpine.js reactive directives." },
-      { "name": "Docker", "url": "https://github.com/Jackylyn1/Docker", "note": "Two trivial practice Dockerfiles (one syntactically wrong). Intro Docker exposure only." },
-      { "name": "phpUnitUdemy", "url": "https://github.com/Jackylyn1/phpUnitUdemy", "note": "Udemy PHPUnit course follow-along. Supports 'familiarity with PHPUnit' only." },
-      { "name": "cs50", "url": "https://github.com/Jackylyn1/cs50", "note": "Empty CS50-bot scaffold (2019). Only evidences starting Harvard's CS50; no code." }
+      {
+        "name": "alpinecourse",
+        "url": "https://github.com/Jackylyn1/alpinecourse",
+        "note": "Alpine.js v3 course-along material (has a completion certificate). Self-study of Alpine.js reactive directives."
+      },
+      {
+        "name": "Docker",
+        "url": "https://github.com/Jackylyn1/Docker",
+        "note": "Two trivial practice Dockerfiles (one syntactically wrong). Intro Docker exposure only."
+      },
+      {
+        "name": "phpUnitUdemy",
+        "url": "https://github.com/Jackylyn1/phpUnitUdemy",
+        "note": "Udemy PHPUnit course follow-along. Supports 'familiarity with PHPUnit' only."
+      },
+      {
+        "name": "cs50",
+        "url": "https://github.com/Jackylyn1/cs50",
+        "note": "Empty CS50-bot scaffold (2019). Only evidences starting Harvard's CS50; no code."
+      }
     ],
     "not_own_do_not_cite": [
-      { "name": "5Minds.CodingDojo", "reason": "Clone of a former employer's internal coding-dojo repo; only 2 of 514 commits are hers. Demonstrates dojo participation at most; not her project." },
-      { "name": "hackergarten.github.io", "reason": "Clone of the well-known Hackergarten open-source community site; ZERO commits by her. Do not present as her work; at most indicates awareness of the community." },
-      { "name": "shopware6-dockware", "reason": "A committed Shopware 6 dockware dev environment with only stock demo plugins; no authored application code. Env-setup familiarity only (likely the base for the Probeaufgabe)." },
-      { "name": "restaurantManagementSystemLaravel", "reason": "Name implies a management system, but it is only a fresh Laravel 12 skeleton + laravel/ui auth scaffold + a Docker Compose file. No restaurant domain logic. Do not present as a real project." },
-      { "name": "laravelproject", "reason": "Empty placeholder — only a DDEV config file, no application code." },
-      { "name": "Documents", "reason": "Not a code repo — a private store of documents (POS spec, trading-app planning notes, certificates, an unpublished book manuscript, personal files). Keep private; the certificates were extracted into continuing_education. Do not publish or cite as portfolio." }
+      {
+        "name": "5Minds.CodingDojo",
+        "reason": "Clone of a former employer's internal coding-dojo repo; only 2 of 514 commits are hers. Demonstrates dojo participation at most; not her project."
+      },
+      {
+        "name": "hackergarten.github.io",
+        "reason": "Clone of the well-known Hackergarten open-source community site; ZERO commits by her. Do not present as her work; at most indicates awareness of the community."
+      },
+      {
+        "name": "shopware6-dockware",
+        "reason": "A committed Shopware 6 dockware dev environment with only stock demo plugins; no authored application code. Env-setup familiarity only (likely the base for the Probeaufgabe)."
+      },
+      {
+        "name": "restaurantManagementSystemLaravel",
+        "reason": "Name implies a management system, but it is only a fresh Laravel 12 skeleton + laravel/ui auth scaffold + a Docker Compose file. No restaurant domain logic. Do not present as a real project."
+      },
+      {
+        "name": "laravelproject",
+        "reason": "Empty placeholder — only a DDEV config file, no application code."
+      },
+      {
+        "name": "Documents",
+        "reason": "Not a code repo — a private store of documents (POS spec, trading-app planning notes, certificates, an unpublished book manuscript, personal files). Keep private; the certificates were extracted into continuing_education. Do not publish or cite as portfolio."
+      }
     ]
   },
-
   "career_goals": {
-    "target_roles": ["AI Software Developer", "AI Consultant", "Solution Architect", "Software Architect", "PHP Developer"],
+    "target_roles": [
+      "AI Software Developer",
+      "AI Consultant",
+      "Solution Architect",
+      "Software Architect",
+      "PHP Developer"
+    ],
     "direction": "Move from PHP developer toward AI Software Developer, Solution Architect and AI Consultant. Position for senior AI-focused roles.",
     "core_message": "Demonstrate that she designs systems rather than merely implementing features."
   },
-
   "role_skill_map": {
     "AI Software Developer": {
-      "already_have": ["PHP", "Laravel", "Symfony", "Python", "FastAPI", "TypeScript", "JavaScript", "SQL/MySQL", "Redis", "REST APIs", "Git", "Docker", "Docker Compose", "Linux", "CI/CD", "Software Architecture", "System Design", "DDD", "Event-Driven Architecture", "Requirements Engineering", "SOLID", "Design Patterns", "Clean Code", "PHPUnit", "pytest", "Static Analysis", "Performance Optimization", "Security", "Prompt Engineering", "OpenAI API", "Anthropic API", "AI Agents", "MCP", "Communication"],
-      "must_learn": ["RAG", "Vector Databases", "Embeddings", "Hugging Face", "MLOps", "AWS/Azure", "Kubernetes"]
+      "already_have": [
+        "PHP",
+        "Laravel",
+        "Symfony",
+        "Python",
+        "FastAPI",
+        "TypeScript",
+        "JavaScript",
+        "SQL/MySQL",
+        "Redis",
+        "REST APIs",
+        "Git",
+        "Docker",
+        "Docker Compose",
+        "Linux",
+        "CI/CD",
+        "Software Architecture",
+        "System Design",
+        "DDD",
+        "Event-Driven Architecture",
+        "Requirements Engineering",
+        "SOLID",
+        "Design Patterns",
+        "Clean Code",
+        "PHPUnit",
+        "pytest",
+        "Static Analysis",
+        "Performance Optimization",
+        "Security",
+        "Prompt Engineering",
+        "OpenAI API",
+        "Anthropic API",
+        "AI Agents",
+        "MCP",
+        "Communication",
+        "API Platform (REST + OpenAPI)",
+        "Filament",
+        "Laravel Octane",
+        "Redis queues (Horizon)"
+      ],
+      "must_learn": [
+        "RAG",
+        "Vector Databases",
+        "Embeddings",
+        "Hugging Face",
+        "MLOps",
+        "AWS/Azure",
+        "Kubernetes"
+      ]
     },
     "AI Consultant": {
-      "already_have": ["AI Agents", "Prompt Engineering", "OpenAI/Anthropic APIs", "Requirements Engineering", "Software Architecture", "Communication", "Technical Documentation", "Business Process Thinking", "AI Workflow Design", "MCP"],
-      "must_learn": ["AI Strategy", "AI Governance", "EU AI Act", "Workshop Facilitation", "Business Case Development", "Change Management", "Enterprise AI Adoption"]
+      "already_have": [
+        "AI Agents",
+        "Prompt Engineering",
+        "OpenAI/Anthropic APIs",
+        "Requirements Engineering",
+        "Software Architecture",
+        "Communication",
+        "Technical Documentation",
+        "Business Process Thinking",
+        "AI Workflow Design",
+        "MCP"
+      ],
+      "must_learn": [
+        "AI Strategy",
+        "AI Governance",
+        "EU AI Act",
+        "Workshop Facilitation",
+        "Business Case Development",
+        "Change Management",
+        "Enterprise AI Adoption"
+      ]
     },
     "Solution Architect": {
-      "already_have": ["Software Architecture", "System Design", "DDD", "Event-Driven Architecture", "Requirements Engineering", "Docker", "Docker Compose", "CI/CD", "Security", "Performance Optimization", "REST APIs", "PHP", "Laravel", "Symfony", "Python", "FastAPI", "SQL", "Redis", "Git", "Communication", "Technical Documentation", "AI Knowledge", "Distributed systems (multi-container, message dedup)"],
-      "must_learn": ["AWS", "Azure", "Kubernetes", "Terraform", "Enterprise Security Architecture", "TOGAF (optional)"]
+      "already_have": [
+        "Software Architecture",
+        "System Design",
+        "DDD",
+        "Event-Driven Architecture",
+        "Requirements Engineering",
+        "Docker",
+        "Docker Compose",
+        "CI/CD",
+        "Security",
+        "Performance Optimization",
+        "REST APIs",
+        "PHP",
+        "Laravel",
+        "Symfony",
+        "Python",
+        "FastAPI",
+        "SQL",
+        "Redis",
+        "Git",
+        "Communication",
+        "Technical Documentation",
+        "AI Knowledge",
+        "Distributed systems (multi-container, message dedup)",
+        "API Platform (REST + OpenAPI)",
+        "Multi-tenancy / tenant isolation",
+        "Real-time (Mercure / SSE)",
+        "Async PHP (amphp)",
+        "Modular monolith architecture"
+      ],
+      "must_learn": [
+        "AWS",
+        "Azure",
+        "Kubernetes",
+        "Terraform",
+        "Enterprise Security Architecture",
+        "TOGAF (optional)"
+      ]
     },
     "Software Architect": {
-      "already_have": ["Software Architecture", "Clean Code", "SOLID", "Design Patterns", "DDD", "Event-Driven Architecture", "PHP", "Laravel", "Symfony", "Python", "Docker", "Docker Compose", "CI/CD", "PHPUnit", "pytest", "Static Analysis", "Performance Optimization", "Security", "Requirements Engineering", "Distributed systems (multi-container)", "AI Knowledge"],
-      "must_learn": ["Cloud Architecture", "Kubernetes", "Kafka", "RabbitMQ", "OpenTelemetry"]
+      "already_have": [
+        "Software Architecture",
+        "Clean Code",
+        "SOLID",
+        "Design Patterns",
+        "DDD",
+        "Event-Driven Architecture",
+        "PHP",
+        "Laravel",
+        "Symfony",
+        "Python",
+        "Docker",
+        "Docker Compose",
+        "CI/CD",
+        "PHPUnit",
+        "pytest",
+        "Static Analysis",
+        "Performance Optimization",
+        "Security",
+        "Requirements Engineering",
+        "Distributed systems (multi-container)",
+        "AI Knowledge",
+        "Modular monolith / package-oriented architecture",
+        "Real-time / event-driven sync (Mercure/SSE)",
+        "API Platform"
+      ],
+      "must_learn": [
+        "Cloud Architecture",
+        "Kubernetes",
+        "Kafka",
+        "RabbitMQ",
+        "OpenTelemetry"
+      ]
     },
     "PHP Developer": {
-      "already_have": ["PHP", "Laravel", "Symfony", "Laravel Sanctum", "TypeScript", "JavaScript", "HTML", "CSS", "SQL/MySQL", "Redis", "REST APIs", "Guzzle", "Git", "Docker", "Docker Compose", "Composer", "MVC", "OOP", "SOLID", "Design Patterns", "Clean Code", "PHPUnit", "Static Analysis", "CI/CD", "Performance Optimization", "Security", "Requirements Engineering", "Software Architecture", "AI-assisted Development"],
-      "must_learn": ["Queue Systems", "Elasticsearch", "AWS", "Kubernetes", "GraphQL"]
+      "already_have": [
+        "PHP",
+        "Laravel",
+        "Symfony",
+        "Laravel Sanctum",
+        "TypeScript",
+        "JavaScript",
+        "HTML",
+        "CSS",
+        "SQL/MySQL",
+        "Redis",
+        "REST APIs",
+        "Guzzle",
+        "Git",
+        "Docker",
+        "Docker Compose",
+        "Composer",
+        "MVC",
+        "OOP",
+        "SOLID",
+        "Design Patterns",
+        "Clean Code",
+        "PHPUnit",
+        "Static Analysis",
+        "CI/CD",
+        "Performance Optimization",
+        "Security",
+        "Requirements Engineering",
+        "Software Architecture",
+        "AI-assisted Development",
+        "Queue Systems (Laravel Horizon / Redis)",
+        "Filament",
+        "Livewire",
+        "Laravel Octane",
+        "API Platform (REST + OpenAPI)",
+        "JWT",
+        "Mercure / SSE"
+      ],
+      "must_learn": [
+        "Elasticsearch",
+        "AWS",
+        "Kubernetes",
+        "GraphQL"
+      ]
     }
   }
 }
