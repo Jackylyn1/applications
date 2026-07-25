@@ -38,6 +38,15 @@
             "Conceived requirements-appropriate custom software and designed the underlying database systems.",
             "Automated tests with PHPUnit and documented code with PHPDoc; coordinated projects and communicated directly with clients."
           ]
+        },
+        {
+          "title": "Development & Coordination",
+          "company": "Narutorpg.de - open-source community project (volunteer)",
+          "right": "2009 - Present  |  Remote",
+          "bullets": [
+            "Long-term team development of a large PHP browser game; modernizing a historically-grown codebase toward Symfony and Doctrine ORM (incl. migrations).",
+            "Analyzing and refactoring complex legacy structures while preserving the existing architecture; coordinating a ~10-person team."
+          ]
         }
       ]
     },
@@ -61,17 +70,17 @@
           "company": "Self-directed project",
           "right": "2025 - 2026",
           "bullets": [
-            "Designed a Python research environment to evaluate large trading-strategy parameter spaces fast enough to iterate on ideas.",
-            "Processed tens to hundreds of millions of parameter combinations by replacing brute-force loops with vectorization and JIT compilation (NumPy, Numba).",
-            "Built reproducible backtesting workflows and modular scoring to compare strategies statistically instead of by intuition."
+            "Designed and built an algorithmic trading and backtesting system in Python on the event-driven NautilusTrader framework, including walk-forward validation and Monte Carlo portfolio simulation.",
+            "Performance engineering: evaluated very large parameter spaces via vectorization and JIT compilation (NumPy, Numba) instead of brute-force loops.",
+            "Built a distributed signal-trading system (FastAPI dashboard, multiple Docker containers, MetaTrader 5 integration) with risk management and extensive test coverage (pytest)."
           ]
         },
         {
-          "title": "Laravel Pivot Events (Open Source)",
+          "title": "Laravel Pivot Events - custom-IDs feature (open-source contribution)",
           "company": "github.com/Jackylyn1",
-          "right": "2025 - Present",
+          "right": "2025",
           "bullets": [
-            "Published a Laravel package that adds pivot (many-to-many) model events with custom IDs."
+            "Extended an existing open-source Laravel package with support for custom IDs and timestamps on pivot tables; worked within its Eloquent relationship internals (BelongsToMany/MorphToMany, model events)."
           ]
         }
       ]
@@ -95,12 +104,12 @@
       "type": "skills",
       "lines": [
         "AI & LLM Engineering: Agentic AI, AI Agents, LLM integration, Prompt Engineering, MCP, OpenAI API, Anthropic API, AI workflow design, token & cost optimization, AI-assisted development (Claude Code)",
-        "Backend: PHP (OOP), Laravel, Symfony, REST APIs, OpenAPI, OAuth, PostgreSQL, MySQL",
+        "Backend: PHP (OOP), Laravel, Laravel Sanctum, Symfony, REST APIs, OpenAPI, OAuth, Guzzle, PostgreSQL, MySQL",
         "Frontend: TypeScript, JavaScript, Vue.js, Alpine.js, Tailwind CSS, HTML5, CSS3/SCSS",
-        "Python & Data: Python, NumPy, Numba (JIT), backtesting, data pipelines, algorithm optimization",
+        "Python & Data: Python, FastAPI, SQLAlchemy, Pydantic, NumPy, Numba (JIT), pytest, backtesting, data pipelines, algorithm optimization",
         "Architecture & Quality: Software Architecture, System Design, DDD, Event-Driven Architecture, SOLID, Design Patterns, Clean Code, Requirements Engineering, PHPUnit, Codeception, BDD (Gherkin), Static Analysis, Performance Optimization, Security",
-        "DevOps: Docker, GitLab CI/CD, Git, Linux, Apache, Composer, npm",
-        "Currently learning: RAG, vector databases, embeddings, FastAPI",
+        "DevOps: Docker, Docker Compose, DDEV, GitLab CI/CD, Git, Linux, Apache, Composer, npm",
+        "Currently learning: RAG, vector databases, embeddings",
         "Languages: German (native), English (fluent)"
       ]
     }

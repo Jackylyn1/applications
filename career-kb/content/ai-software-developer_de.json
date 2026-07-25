@@ -38,6 +38,15 @@
             "Konzeption anforderungsgerechter Individualsoftware und Entwurf der zugrunde liegenden Datenbanksysteme.",
             "Testautomatisierung mit PHPUnit und Dokumentation mit PHPDoc; Projektkoordination und direkte Kundenkommunikation."
           ]
+        },
+        {
+          "title": "Entwicklung & Koordination",
+          "company": "Narutorpg.de - Open-Source-Community-Projekt (ehrenamtlich)",
+          "right": "2009 - heute  |  Remote",
+          "bullets": [
+            "Langfristige Weiterentwicklung eines gewachsenen PHP-Browsergames im Team; Modernisierung der Codebasis in Richtung Symfony und Doctrine ORM (inkl. Migrationen).",
+            "Analyse und Refactoring komplexer Legacy-Strukturen unter Wahrung der bestehenden Architektur; Koordination eines rund zehnköpfigen Teams."
+          ]
         }
       ]
     },
@@ -61,17 +70,17 @@
           "company": "Eigenprojekt",
           "right": "2025 - 2026",
           "bullets": [
-            "Entwurf einer Python-Forschungsumgebung, um große Parameterräume von Trading-Strategien schnell genug für zügige Iteration auszuwerten.",
-            "Verarbeitung von zehn- bis hunderten Millionen Parameterkombinationen durch Ersetzen von Brute-Force-Schleifen mit Vektorisierung und JIT-Kompilierung (NumPy, Numba).",
-            "Aufbau reproduzierbarer Backtesting-Workflows und modularer Scoring-Konzepte, um Strategien statistisch statt intuitiv zu vergleichen."
+            "Entwurf und Aufbau eines algorithmischen Trading- und Backtesting-Systems in Python auf Basis des event-getriebenen NautilusTrader-Frameworks, inkl. Walk-Forward-Validierung und Monte-Carlo-Portfolio-Simulation.",
+            "Performance-Engineering: Auswertung sehr großer Parameterräume durch Vektorisierung und JIT-Kompilierung (NumPy, Numba) statt Brute-Force-Schleifen.",
+            "Aufbau eines verteilten Signal-Trading-Systems (FastAPI-Dashboard, mehrere Docker-Container, MetaTrader-5-Anbindung) mit Risikomanagement und umfangreicher Testabdeckung (pytest)."
           ]
         },
         {
-          "title": "Laravel Pivot Events (Open Source)",
+          "title": "Laravel Pivot Events - Custom-IDs-Feature (Open-Source-Beitrag)",
           "company": "github.com/Jackylyn1",
-          "right": "2025 - heute",
+          "right": "2025",
           "bullets": [
-            "Veröffentlichung eines Laravel-Pakets, das Pivot-Events (Many-to-Many) mit eigenen IDs ermöglicht."
+            "Bestehendes Open-Source-Laravel-Paket um Unterstützung für eigene IDs und Timestamps auf Pivot-Tabellen erweitert; Einarbeitung in die Eloquent-Beziehungs-Interna (BelongsToMany/MorphToMany, Model-Events)."
           ]
         }
       ]
@@ -95,12 +104,12 @@
       "type": "skills",
       "lines": [
         "KI & LLM-Engineering: Agentic AI, AI Agents, LLM-Integration, Prompt Engineering, MCP, OpenAI API, Anthropic API, KI-Workflow-Design, Token- & Kostenoptimierung, KI-gestützte Entwicklung (Claude Code)",
-        "Backend: PHP (OOP), Laravel, Symfony, REST APIs, OpenAPI, OAuth, PostgreSQL, MySQL",
+        "Backend: PHP (OOP), Laravel, Laravel Sanctum, Symfony, REST APIs, OpenAPI, OAuth, Guzzle, PostgreSQL, MySQL",
         "Frontend: TypeScript, JavaScript, Vue.js, Alpine.js, Tailwind CSS, HTML5, CSS3/SCSS",
-        "Python & Data: Python, NumPy, Numba (JIT), Backtesting, Data-Pipelines, Algorithmusoptimierung",
+        "Python & Data: Python, FastAPI, SQLAlchemy, Pydantic, NumPy, Numba (JIT), pytest, Backtesting, Data-Pipelines, Algorithmusoptimierung",
         "Architektur & Qualität: Softwarearchitektur, System Design, DDD, Event-Driven Architecture, SOLID, Design Patterns, Clean Code, Requirements Engineering, PHPUnit, Codeception, BDD (Gherkin), statische Analyse, Performance-Optimierung, Security",
-        "DevOps: Docker, GitLab CI/CD, Git, Linux, Apache, Composer, npm",
-        "In Einarbeitung: RAG, Vektordatenbanken, Embeddings, FastAPI",
+        "DevOps: Docker, Docker Compose, DDEV, GitLab CI/CD, Git, Linux, Apache, Composer, npm",
+        "In Einarbeitung: RAG, Vektordatenbanken, Embeddings",
         "Sprachen: Deutsch (Muttersprache), Englisch (fließend)"
       ]
     }
