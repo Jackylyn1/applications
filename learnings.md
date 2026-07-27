@@ -736,3 +736,78 @@ source of truth. `profile.json` is the only file allowed to be right.
   the way, says overengineering. One style rule, two different answers depending
   on the language — which is exactly the kind of rule a generator will get wrong
   unless you write it down."*
+
+## 2026-07-27 — /optimize-linkedin, DE + EN: the cheapest phase found the expensive bug
+
+Four agents, $9.68, 47 calls, 39m15s model time / 46m wall, 90.4 % cache hit.
+
+| phase | cost | share |
+|---|---|---|
+| audit (`linkedin-analyze`) | $1.30 | 13.5 % |
+| writer EN | $2.88 | 29.7 % |
+| writer DE | $2.62 | 27.1 % |
+| orchestrator (me) | $2.88 | 29.7 % |
+
+Caveat per this file's honesty rule: token counts, call counts and all timings
+are measured; the dollar figures still rest on the estimated `claude-opus-5`
+rates in `pricing.json` ($5/$25 per Mtok), so treat the ratios as solid and the
+absolute dollars as approximate.
+
+### The audit was the bargain
+
+For $1.30 the audit found a structural defect no amount of good writing would
+have fixed: the wpt-online **developer** position (06.2021–09.2024) has no
+LinkedIn entry at all, only the concurrent Marketingkommunikation role. So the
+profile shows a marketing job for three years and ~3 years 4 months of
+primary-framework Laravel is invisible to exactly the "3+ years Laravel" filters
+she genuinely passes. The two writing phases cost $5.50 together and could not
+have found it — they render what the plan says.
+
+Second-cheapest insight from the same phase: `PHP` was missing from the headline
+entirely, while `Agentic Coding` occupied the first slot — the ~35 characters
+that survive mobile truncation. Her only LinkedIn-verified skill badge is PHP.
+
+### Resuming a dead agent beats re-running it
+
+The German writer died on `API Error: Connection closed mid-response` **one
+sentence before writing its file** — all thinking done, nothing on disk. Resumed
+it from its own transcript with a two-line "continue from there" message: it
+wrote the file and returned. A fresh spawn would have cost ~$2.60 and ten
+minutes to rediscover what it already knew. The context is the expensive part of
+an agent, not the tokens it emits.
+
+### Why the orchestrator cost as much as a writer
+
+I wrote nothing and still spent 29.7 %. The cause is prompt construction: the
+three rule files are injected verbatim into every subagent prompt (the command
+requires it, and it guarantees the agent follows the *current* rules). What I
+refused to inline was `profile.json` (44 KB) and the audit brief (7k tokens):
+the facts went in by path, and the brief was written to disk once and referenced
+twice instead of pasted into both writer prompts. Inlining both would have added
+roughly 20k output tokens and produced three drifting copies of the single
+source of truth.
+
+### Honesty fixes the audit forced
+
+- `Core contributor (top-3 of a ~7-person team)` — an unmeasurable self-ranking
+  with no basis in `profile.json`. Replaced by named component ownership.
+- Two positions titled `AI-Assisted Web Development`, one starting **June 2021**.
+  Retro-labelling a 2021 role as AI-assisted invites a plausibility question in
+  public, where she does not get to answer it.
+- Symfony: skills list and the community-project entry only, ranked below
+  Laravel, never in the headline, never beside Laravel as an equal.
+
+### Raw material for LinkedIn / posts
+
+- *"The $1.30 phase found what the $5.50 phases couldn't: three years of Laravel
+  missing from my own profile, because one position had no entry. Writing better
+  copy would never have surfaced it — auditing structure did."*
+- *"An agent died one sentence before saving its work. Resuming it from its
+  transcript cost cents; restarting it would have cost $2.60 and ten minutes.
+  Treat agent context as the asset, not the output."*
+- *"My orchestrator spent as much as the agent that wrote a 42,000-character
+  profile — and it produced no profile. Whatever you paste into every subagent
+  prompt is what you're really buying."*
+- *"'Core contributor, top 3 of 7' reads like a fact and is an opinion with a
+  number on it. On a public profile, the reader gets to ask 'measured how?' and
+  you never get to answer."*
