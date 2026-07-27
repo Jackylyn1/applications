@@ -1,6 +1,6 @@
 ## Communication Rules for Authentic Applications
 
-These govern the **voice** across **every** channel — CV, cover letter, LinkedIn profile and social media (not just applications). Sources: `Communication_Rules_for_Authentic_Applications.pdf`, `Professional_Branding_Standards.pdf` (Group A writing style).
+These govern the **voice** across **every** channel — CV, cover letter, LinkedIn profile and social media (not just applications). Sources: `Communication_Rules_for_Authentic_Applications.pdf`, `Professional_Branding_Standards.pdf` (Group A writing style), `LinkedIn_Profile_Standards.pdf` (its "Writing Style" and "Technical Communication" sections apply to every channel, so they live here, not in `linkedin-standards.md`).
 
 ### Core principle
 - Write like an engineer, not like a marketer.
@@ -34,9 +34,10 @@ Problem solving · architecture thinking · requirements engineering · optimiza
 - Buzzwords, empty adjectives and marketing language.
 - Generic claims and generic phrases.
 - Exaggerated self-praise.
-- Corporate and AI clichés (e.g. "passionate", "dynamic", "results-driven").
+- Corporate and AI clichés (e.g. "passionate", "dynamic", "innovative", "results-driven").
 - Claims without evidence.
 - Artificial enthusiasm.
+- **Sounding AI-generated.** Text that reads like ChatGPT wrote it discredits the content, however accurate it is: uniform sentence rhythm, three-item lists everywhere, "not only … but also", a closing sentence that summarises what was just said, adjectives doing the work evidence should do.
 - The "keep optimizing" idea **without its pragmatic qualifier**, and especially in German: "ich höre selten bei der ersten Lösung auf, die funktioniert" reads as overengineering, not as craft (Jacqueline, 2026-07-27). The English pattern *with* "if time allows it" is explicitly allowed — it is the unqualified version, and the German rendering in particular, that sends the opposite signal. In German either carry an equivalent constraint ("wenn es die Zeit zulässt") or show the behaviour through a result instead of claiming it.
 
 ### Authentic phrasing patterns (tone reference, not copy-paste)
@@ -44,6 +45,7 @@ Problem solving · architecture thinking · requirements engineering · optimiza
 - "I usually continue optimizing after the first working solution if time allows it." — the qualifier is load-bearing: it turns craft into judgement about time. Never drop it, and do not translate this one into German unqualified (see **Avoid**).
 - "I enjoy learning unfamiliar technologies by understanding the underlying concepts."
 - "I prefer making well-reasoned engineering decisions over following trends."
+- AI work stated concretely, naming the engineering outcome rather than the model: "Built AI-assisted workflows for software development." · "Applied LLMs to improve development productivity and automate engineering tasks."
 
 <!-- Cover-letter structure lives in cover-letter-standards.md; the "four questions every application answers" live in application-standards.md (kept out of this universal voice file to avoid duplication). -->
 
