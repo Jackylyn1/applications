@@ -1,0 +1,5 @@
+# Pinned to Langfuse SDK v2: its imperative trace()/generation() API accepts
+# explicit historical timestamps and cost_details, which is exactly what a
+# backfill exporter of past Claude Code sessions needs. (v3 is OTEL/span based
+# and timestamps at call time, which does not fit historical backfill.)
+langfuse>=2.53,<3
