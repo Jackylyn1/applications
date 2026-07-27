@@ -36,10 +36,13 @@ CONTENT JSON SCHEMA
 Section order and headings are taken from the JSON (headings may be localized,
 e.g. German). Only the four `type` values above are recognized.
 """
-import argparse, copy, json, sys
+import argparse, copy, json, os, sys
 from docx import Document
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from ats_hygiene import norm_text as _norm
 
 W_T = qn('w:t')
 W_P = qn('w:p')
@@ -51,14 +54,6 @@ W_SECTPR = qn('w:sectPr')
 # Sections are emitted in this order regardless of the content JSON's order, so
 # every generated CV matches the template (skills sit directly under the profile).
 _SECTION_ORDER = {'summary': 0, 'skills': 1, 'experience': 2, 'education': 3}
-
-
-def _norm(v):
-    """ATS hygiene: normalize em/en dashes to a plain hyphen. A few legacy ATS
-    engines (Taleo, older iCIMS) mangle '—'/'–' inconsistently, so no
-    generated CV should ever contain them regardless of what the content JSON
-    holds."""
-    return str(v).replace('—', '-').replace('–', '-')
 
 
 import re as _re
