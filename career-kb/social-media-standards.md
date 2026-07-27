@@ -2,7 +2,8 @@
 
 Channel-specific rules for social-media content (including LinkedIn posts).
 Inherits the universal branding (`general-standards.md`) and voice
-(`communication-rules.md`). Source: `Professional_Branding_Standards.pdf` (Group C).
+(`communication-rules.md`). Sources: `Professional_Branding_Standards.pdf` (Group C),
+`LinkedIn_Profile_Standards.pdf` ("LinkedIn Content Standards" — same rules, independently confirmed).
 
 ## Storytelling
 - Prefer personal experiences, practical lessons and real engineering examples over pure explanations or abstract theory.
