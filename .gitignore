@@ -7,5 +7,20 @@ career-kb/.venv/
 # LibreOffice lock files
 .~lock.*#
 
+# job-watch runtime data (scraped postings + dedupe state — regenerable, bulky)
+job-watch/inbox/
+job-watch/state.db
+job-watch/watch.log
+
+# Secrets — Langfuse keys etc. (keep .env.example, ignore the real one)
+.env
+**/.env
+
 # OS cruft
 .DS_Store
+
+# Local cost store (regenerable from transcripts via cc_costs.py ingest)
+observability/costs.db
+
+# Derived profile digests (rebuild: .claude/scripts/rebuild-digests.sh)
+career-kb/.digest/
