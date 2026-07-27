@@ -12,15 +12,12 @@ job-watch/inbox/
 job-watch/state.db
 job-watch/watch.log
 
-# Secrets — Langfuse keys etc. (keep .env.example, ignore the real one)
+# Secrets — never commit a real .env (keep any .env.example)
 .env
 **/.env
 
 # OS cruft
 .DS_Store
-
-# Local cost store (regenerable from transcripts via cc_costs.py ingest)
-observability/costs.db
 
 # Derived profile digests (rebuild: .claude/scripts/rebuild-digests.sh)
 career-kb/.digest/
