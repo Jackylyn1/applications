@@ -37,10 +37,11 @@ Problem solving · architecture thinking · requirements engineering · optimiza
 - Corporate and AI clichés (e.g. "passionate", "dynamic", "results-driven").
 - Claims without evidence.
 - Artificial enthusiasm.
+- The "keep optimizing" idea **without its pragmatic qualifier**, and especially in German: "ich höre selten bei der ersten Lösung auf, die funktioniert" reads as overengineering, not as craft (Jacqueline, 2026-07-27). The English pattern *with* "if time allows it" is explicitly allowed — it is the unqualified version, and the German rendering in particular, that sends the opposite signal. In German either carry an equivalent constraint ("wenn es die Zeit zulässt") or show the behaviour through a result instead of claiming it.
 
 ### Authentic phrasing patterns (tone reference, not copy-paste)
 - "I wanted to understand why it works, not only make it work."
-- "I usually continue optimizing after the first working solution."
+- "I usually continue optimizing after the first working solution if time allows it." — the qualifier is load-bearing: it turns craft into judgement about time. Never drop it, and do not translate this one into German unqualified (see **Avoid**).
 - "I enjoy learning unfamiliar technologies by understanding the underlying concepts."
 - "I prefer making well-reasoned engineering decisions over following trends."
 

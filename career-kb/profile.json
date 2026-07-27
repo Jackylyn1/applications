@@ -1,8 +1,8 @@
 {
   "meta": {
     "owner": "Jacqueline Urban",
-    "version": 5,
-    "last_updated": "2026-07-25",
+    "version": 6,
+    "last_updated": "2026-07-26",
     "source_documents": [
       "CVEnglish2026.pdf",
       "Application_Standards_and_Career_Guidelines.pdf",
@@ -12,7 +12,9 @@
       "LinkedIn profile screencast (li.webm, extracted 2026-07-24)",
       "Arbeitszeugnis_JU.pdf (wpt-online employment reference, stored at documents/Arbeitszeugnis_wpt-online_2024.pdf)",
       "GitHub repositories analysis (~/Documents/projects, all 23 local clones, extracted 2026-07-25) -> see github_repositories",
-      "Gastro IT POS project analysis ([local checkout], proprietary GitLab monorepo, extracted 2026-07-25) -> enriched Gastro IT work_experience + skills"
+      "Gastro IT POS project analysis ([local checkout], proprietary GitLab monorepo, extracted 2026-07-25) -> enriched Gastro IT work_experience + skills",
+      "Correction confirmed by Jacqueline 2026-07-26: Laravel was the PRIMARY framework in the wpt-online permanent role (2021-06 to 2024-09), used for custom client web applications. v5 named no framework for that role, which caused generated applications to understate her Laravel experience by ~3 years.",
+      "Correction confirmed by Jacqueline 2026-07-27: Symfony/Doctrine is PRIVATE/VOLUNTEER experience only (Narutorpg.de) and far below full-time intensity - never present it as multi-year professional experience."
     ],
     "notes": "Single source of truth for CV and cover-letter generation. Never invent facts not present here. The user's principle: 'I never lie.'"
   },
@@ -64,6 +66,7 @@
     "employment_type": "Full-time (Vollzeit)"
   },
   "skills": {
+    "symfony_note": "Symfony/Doctrine experience is PRIVATE/VOLUNTEER only (Narutorpg.de modernization) and far below full-time intensity (confirmed by Jacqueline 2026-07-27). List Symfony as a known framework, but NEVER as 'mehrjaehrige Erfahrung' / multi-year professional experience and never on the same level as Laravel.",
     "backend": [
       "PHP (OOP)",
       "Laravel",
@@ -424,11 +427,18 @@
       "start": "2021-06",
       "end": "2024-09",
       "bullets": [
-        "Independent planning, implementation, and maintenance/extension of software projects (ticketing systems, websites, social media marketing tools, and other web applications)",
+        "Independent planning, implementation, and maintenance/extension of software projects: custom client web applications built primarily on Laravel, plus ticketing systems, websites, social media marketing tools, and other web applications",
         "Productive use of AI tools for code analysis, architectural design, code generation, and automation in daily development workflows",
         "Test automation with PHPUnit and documentation using PHPDoc",
         "Client communication and coordination"
-      ]
+      ],
+      "technologies": [
+        "PHP (OOP)",
+        "Laravel",
+        "PHPUnit",
+        "PHPDoc"
+      ],
+      "laravel_note": "Laravel was the PRIMARY framework in this role (confirmed by Jacqueline 2026-07-26), used for custom client web applications across the full 2021-06 to 2024-09 period (~3 years 4 months). Combined with Gastro IT (2025-03 to present) this is roughly 4 years 9 months of production Laravel, with a gap between 2024-10 and 2025-02. Postings requiring '3+ years of Laravel' are therefore GENUINELY MET - state the experience plainly and do NOT fall back on a 'depth over duration' framing."
     },
     {
       "title": "Marketing Communications Specialist",
