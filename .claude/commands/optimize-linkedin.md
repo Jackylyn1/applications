@@ -1,25 +1,19 @@
 ---
-description: Analyze and optimize Jacqueline Urban's LinkedIn PROFILE (not posts) for recruiter discoverability, trust and multi-role fit. Produces a copy-paste-ready, keyword-optimized profile as a .txt. Orchestrates the linkedin-analyze and linkedin-optimize subagents and injects the relevant context into each.
+description: Analyze and optimize Jacqueline Urban's LinkedIn **profile** (not posts) for recruiter discoverability, trust, and multi-role fit. Produces copy-paste-ready, keyword-optimized `.txt` files by orchestrating the `linkedin-analyze` and `linkedin-optimize` subagents.
 model: opus
 ---
-
 # /optimize-linkedin — LinkedIn profile optimization (orchestrator)
-
-You are the **orchestrator**. Do NOT do the audit/writing yourself — dispatch each phase to its subagent (Task tool) and **inject** the relevant context into that subagent's prompt. This command is the ONLY place that references contexts and subagents; the subagents never read the context files themselves.
-
+You are the **orchestrator**. Never audit or write yourself—delegate every phase to subagents (Task tool) and **inject** the required context into each prompt. Only this command references context files and subagents.
 ## Goal
-A completely optimized, keyword-rich, **honest** LinkedIn profile that yields: more recruiter findings for the target roles, more trust, and more discoverability overall. **Comprehensive** — list ALL genuine positions + strong projects + the full skills list (top-3 pinned); exclude noise (empty scaffolds, non-own clones). Optimize for as MANY target roles as possible via one multi-role umbrella (headline / About / skills); prioritize the most important (AI + architecture direction; PHP as keyword baseline).
-
-## Contexts (the ONLY place these are referenced — inject the RELEVANT ones per phase)
-Read these and pass their content into the subagent prompts (do not just pass paths).
-- **Main context (inject into both phases):** `career-kb/profile.json` (only source of facts), `career-kb/general-standards.md` (universal branding), `career-kb/communication-rules.md` (voice)
-- **LinkedIn context (inject into both phases):** `career-kb/linkedin-standards.md`
-- (`career-kb/social-media-standards.md` is for POSTS — not used in profile optimization.)
-
-## Subagents (referenced only here)
-`linkedin-analyze` → `linkedin-optimize`.
-
+Create a fully optimized, keyword-rich, **honest** LinkedIn profile that maximizes recruiter discoverability, trust, and multi-role fit. Include all genuine roles, strong projects, and the complete skills list (top 3 pinned); exclude empty scaffolds and non-own clones. Optimize under one multi-role umbrella (headline/About/skills), prioritizing AI + architecture while keeping PHP as a baseline keyword.
+## Contexts
+Read these files and inject their **contents** (never paths).
+- **Main (both phases):** `career-kb/profile.json` (facts), `career-kb/general-standards.md` (branding), `career-kb/communication-rules.md` (voice)
+- **LinkedIn (both phases):** `career-kb/linkedin-standards.md`
+- Ignore `career-kb/social-media-standards.md` (posts only).
+## Subagents
+`linkedin-analyze` → `linkedin-optimize`
 ## Steps
-1. **Analyze.** Spawn `linkedin-analyze`, injecting the **Main + LinkedIn context + Language**. Capture its optimization brief (keyword strategy, multi-role umbrella, what to include, skills plan, gaps, honesty fixes).
-2. **Optimize.** Spawn `linkedin-optimize` twice, one for a German result and one for an English result, injecting the **Main + LinkedIn context + the brief + Language**. It writes `career-kb/output/LinkedIn_Profile_optimized_[language].txt`.
-3. **Present** the .txt path and a short changelog (what changed + why it improves discoverability/trust) to the user.
+1. Spawn `linkedin-analyze`, injecting **Main + LinkedIn context + language**. Capture its optimization brief (keyword strategy, role umbrella, content, skills, gaps, honesty fixes).
+2. Spawn `linkedin-optimize` twice (German and English), injecting **Main + LinkedIn context + brief + language**. Write `career-kb/output/LinkedIn_Profile_optimized_[language].txt`.
+3. Return both `.txt` paths and a brief changelog explaining what changed and why it improves discoverability and trust.
