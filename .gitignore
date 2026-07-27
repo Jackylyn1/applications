@@ -12,6 +12,9 @@ job-watch/inbox/
 job-watch/state.db
 job-watch/watch.log
 
+# Machine-local Claude Code settings and the harness's temp copies of them
+**/.claude/settings.local.json.tmp.*
+
 # Secrets — never commit a real .env (keep any .env.example)
 .env
 **/.env
