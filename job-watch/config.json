@@ -1,0 +1,60 @@
+{
+  "sources": ["indeed", "linkedin", "stepstone"],
+
+  "linkedin_fetch_description": true,
+  "stepstone_delay": 1.5,
+  "min_description_chars": 300,
+
+  "queries": [
+    {
+      "term": "AI Software Developer",
+      "location": "Germany",
+      "country": "Germany",
+      "results": 15,
+      "hours_old": 72,
+      "stepstone_url": "https://www.stepstone.de/jobs/ai-software-developer?sort=2"
+    },
+    {
+      "term": "PHP Entwickler",
+      "location": "Germany",
+      "country": "Germany",
+      "results": 15,
+      "hours_old": 72,
+      "stepstone_url": "https://www.stepstone.de/jobs/php-entwickler?sort=2"
+    },
+    {
+      "term": "Solution Architect",
+      "location": "Germany",
+      "country": "Germany",
+      "results": 15,
+      "hours_old": 72,
+      "stepstone_url": "https://www.stepstone.de/jobs/solution-architect?sort=2"
+    },
+    {
+      "term": "Software Architekt",
+      "location": "Germany",
+      "country": "Germany",
+      "results": 15,
+      "hours_old": 72,
+      "stepstone_url": "https://www.stepstone.de/jobs/software-architekt?sort=2"
+    },
+    {
+      "term": "IT Consultant",
+      "location": "Gelsenkirchen, Germany",
+      "country": "Germany",
+      "results": 10,
+      "hours_old": 72,
+      "radius": 50
+    }
+  ],
+
+  "notify": [
+    "# Put real channels here. Tokens come from the environment as ${VAR}.",
+    "# ntfy (simplest — install the app, pick a hard-to-guess topic, no account):",
+    "# ntfy://jacqueline-jobs-8f3a2c",
+    "# Telegram bot:",
+    "# tgram://${TELEGRAM_BOT_TOKEN}/${TELEGRAM_CHAT_ID}",
+    "# E-mail via your own SMTP:",
+    "# mailtos://j.urban:${SMTP_PASSWORD}@gastroit.net"
+  ]
+}
