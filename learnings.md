@@ -811,3 +811,75 @@ source of truth.
 - *"'Core contributor, top 3 of 7' reads like a fact and is an opinion with a
   number on it. On a public profile, the reader gets to ask 'measured how?' and
   you never get to answer."*
+
+## 2026-07-27 — self-hosted Langfuse: four traps, and where config belongs
+
+Installed Langfuse locally (Docker, six containers) and activated Langfuse's
+official Claude Code plugin. Measured, not estimated: the stack holds
+**2,003 MiB** RAM, the shallow clone is **61 MB**, and of the 236 lines of
+configuration only **57 are ours** (13-line port override + 44-line `.env`) —
+the other 179 are upstream.
+
+### Trap 1 — `POSTGRES_PASSWORD` is only honoured on first init
+
+First start died on `P1000: Authentication failed against database server`. The
+cause was not a typo: Docker's Postgres image applies `POSTGRES_PASSWORD` only
+when it *initialises* a cluster. The compose project reused an existing volume
+(`langfuse_langfuse_postgres_data`, created earlier the same day), so the freshly
+generated password never matched. Renamed the project
+(`COMPOSE_PROJECT_NAME=langfuse-local`) to get clean volumes instead of deleting
+data whose provenance I did not know — it turned out to hold one org, user,
+project and API key.
+
+### Trap 2 — a password test that proves nothing
+
+`docker compose exec postgres psql -U postgres` with the new password succeeded
+while the app kept failing. Local socket connections use `trust` in that image:
+the password is never checked. **Verify credentials over the same transport the
+application uses**, or the test is theatre. This one nearly sent me looking for
+a bug in the app.
+
+### Trap 3 — a plugin can be installed and still do nothing
+
+`claude plugin install` reported "already installed (scope: user)" — from an
+earlier attempt — and then: *5 userConfig options not yet set*. So the plugin had
+been sitting there tracing nothing. `--config` is only read during install and a
+second install call is a no-op, so the fix was uninstall + reinstall with
+`--config`. Installed ≠ configured ≠ active.
+
+### Trap 4 — the same stack twice on one machine
+
+A second Langfuse was already running inside the `gpos-dev` project, plus an
+orphaned third volume set. Two Postgres containers on one data volume would
+corrupt it; these had separate volumes, but checking the mounts before starting
+anything was the only reason I knew that. Langfuse is multi-tenant by design —
+one instance, one *project* per context, not one stack per repo.
+
+### Where this config belongs — and where it does not
+
+I first argued for versioning our 57 lines in this repo for reproducibility. Then
+I read them: ports, secrets, container-internal URLs, a telemetry switch, the
+headless org/user init. **Not one line references this project**, and the plugin
+traces every Claude Code session on the machine regardless of directory. So it is
+machine setup, not project code, and it stays out of the applications repo. The
+README keeps only what is project-relevant (that tracing exists, the URL, how to
+operate it, how to activate the plugin) plus pointers to where the values live —
+documenting the values twice is exactly the drift that produced three of the five
+pipeline defects on 2026-07-25.
+
+### Raw material for LinkedIn / posts
+
+- *"`POSTGRES_PASSWORD` is applied when the cluster is initialised and never
+  again. Every 'authentication failed' against a container database that used to
+  work is this, and no amount of re-reading your connection string will show
+  it."*
+- *"My password test passed while the app kept failing auth. The test connected
+  over the Unix socket, where that image trusts everyone. Test over the transport
+  your application actually uses, or you are testing the wrong thing."*
+- *"The observability plugin had been installed for hours and traced nothing —
+  five config options unset. Installed, configured and active are three different
+  states, and only the last one produces data."*
+- *"I almost committed 57 lines of infrastructure config into a career knowledge
+  base for 'reproducibility'. Then I read them: ports, secrets, container URLs.
+  Nothing about the project. Ask what a file is about before you ask where it
+  should live."*
