@@ -24,6 +24,12 @@ Rank these by what the posting asks for and keep only what earns its line:
 
 Problem, responsibility and challenges are **context for choosing the bullet, not content for it.** They explain to the writer why the bullet matters; spelled out in the text they become the "because" that bullets must not carry (`communication-rules.md`, *Writing style*), and "responsibility" phrasing in particular reintroduces the duty-oriented wording the bullet rule forbids. Carry them into the cover letter or the interview instead.
 
+## Salary, start date, relocation (hard)
+Jacqueline, 2026-07-30.
+- **Never volunteer a salary expectation or a start date.** If the posting does not ask for one, neither appears anywhere — not in the subject line, not in the closing paragraph. "ab sofort verfügbar" counts as a start-date statement and goes out with them.
+- **If a posting explicitly asks** for a salary expectation, an earliest start date or any other figure, **ask her for the number** — never derive, estimate or hedge one.
+- **No relocation, ever.** She does not move for a job. Nothing in a document may imply willingness to relocate, and no application invents a readiness to move closer. For a role advertised as on-site outside her range, the arrangement she needs (remote/hybrid, or on-site only during onboarding) is **her decision per application** — ask, and write the plain sentence she chooses. Never apologise for it and never frame it as a limitation (`communication-rules.md`, *Never frame by negation*).
+
 ## Relevance filter (both documents)
 - Include only what supports her suitability for **this** role — everything else, however interesting, stays out. Name technologies only where they are relevant to the posting. In the CV this drives which bullets are surfaced, reordered or dropped (`cv-standards.md`); in the letter it decides which experience is worth a sentence.
 
