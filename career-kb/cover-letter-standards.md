@@ -1,8 +1,13 @@
 ## Cover Letter Standards
 
 Cover-letter-specific structure only. Voice/tone → `communication-rules.md`;
-fact source, language/register matching, email swap and PDF output →
+fact source, language/register matching, relevance filter, email swap and PDF output →
 `application-standards.md`; positioning → `general-standards.md`.
+
+**The letter is prose in the LinkedIn-About register** — same sentence shape, different content
+(`communication-rules.md`, *The person description stays prose*, which names the cover-letter
+body as one of its three surfaces). Same style never means same substance: the About text
+describes her, the letter connects her to *this* company's problem (*Don't retell the CV*).
 
 **This is a framework, not a template.** The rules below are guardrails: they define what
 every letter has to achieve, not the sentences or the paragraph order it has to use. Two
@@ -20,8 +25,7 @@ one specific company.
 - **Make the fit obvious early.** Why she suits *this* position must be clear within the first few lines, not something the reader deduces at the end.
 - **Establish a credible link** to the company or the role: something specific and verifiable (their product, their domain, a technical problem they have), never generic praise or a researched fact dropped in for effect.
 - **Map requirements to evidence.** Take the posting's actual requirements and connect the important ones to her most relevant experience, skills and results.
-- **Impact over activity.** Emphasise problems solved and outcomes produced, not tasks performed or tools used.
-- **Relevance filter.** Include only what supports her suitability for this role — everything else, however interesting, stays out. Mention technologies only when relevant.
+- **Impact over activity** → `general-standards.md`, *Name the outcome, not just the activity*. It applies here in prose form: the letter states what her work changed, in sentences that carry the "because" a bullet cannot.
 - **Competence *and* personality.** The letter is the one document where how she thinks and works comes through, not only what she can do (phrasing patterns: `communication-rules.md`).
 - **Never name individual side or private projects.** Offering to bring work samples along is fine and welcome — listing *which* ones (repo names, private/volunteer projects, their stack) is not. Keep the offer generic ("Arbeitsproben bringe ich gern mit"); the details belong in the conversation, not in the letter.
 - **Close forward-looking:** why she wants to contribute, plus a confident, non-pushy line about looking forward to a personal conversation. Not flattery, and not a restatement of the opening.
