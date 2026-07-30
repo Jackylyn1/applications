@@ -36,3 +36,4 @@ Ask only when guessing would be unsafe or waste work.
    - `generate-cover-letter`: inject **Main + Application + Cover-letter context + preparation summary + `cl_source` output path**.
 5. Run `output-generator`, injecting the **Rendering context**, company slug, and language(s). It renders and verifies the outputs.
 6. Present the match summary and generated files (PDFs + editable sources).
+7. Inform me if the company has any special whishes (e.g. application only per e-mail)

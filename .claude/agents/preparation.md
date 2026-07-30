@@ -27,3 +27,4 @@ Return a structured summary containing:
 - Honest gaps
 - Chosen role framing
 - Closest base content JSON (`career-kb/content/<role>_<lang>.json`)
+- special whishes of the company (e.g., application only per e-mail)
