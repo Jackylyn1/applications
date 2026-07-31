@@ -22,5 +22,15 @@ job-watch/watch.log
 # OS cruft
 .DS_Store
 
-# Derived profile digests (rebuild: .claude/scripts/rebuild-digests.sh)
-career-kb/.digest/
+# Generated application documents (Jacqueline, 2026-07-31). Reproducible from
+# career-kb/content/*.json plus a template in ~1.7s, so they are output, not
+# knowledge. Pipeline INPUTS never live here — the cover-letter tone reference
+# is career-kb/examples/coverletter_dmc_de.html precisely because of this rule.
+career-kb/output/
+
+# career-kb/.digest/ is deliberately NOT ignored (Jacqueline, 2026-07-31).
+# The digests are generated, but they are what the agents actually read instead
+# of profile.json, so tracking them makes a stale digest visible in `git diff`
+# rather than silently shipping outdated facts, and a fresh clone works without
+# a build step. Rebuild with .claude/scripts/rebuild-digests.sh after every
+# profile.json change.

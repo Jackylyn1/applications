@@ -16,7 +16,7 @@
       "heading": "KENNTNISSE",
       "type": "skills",
       "lines": [
-        "Backend: PHP (OOP), Laravel, Laravel Sanctum, Symfony, Filament, Livewire, Laravel Octane, Laravel Horizon (Redis-Queues), API Platform (REST + OpenAPI), REST APIs, JWT, OAuth, Guzzle, Mercure/SSE, PhpSpreadsheet, Twig",
+        "Backend: PHP (OOP), Laravel, Laravel Sanctum, Symfony, Filament, Livewire, Laravel Octane, Laravel Horizon (Redis-Queues), API Platform (REST + OpenAPI), REST APIs, JWT, OAuth, Guzzle, Mercure/SSE, Twig",
         "Datenbanken: PostgreSQL, MySQL, SQLite, Redis",
         "Frontend: TypeScript, JavaScript, Vue.js, Alpine.js, Tailwind CSS, HTML5, CSS3/SCSS, Vite",
         "Architektur & Qualität: Softwarearchitektur, DDD, Event-Driven Architecture, SOLID, Design Patterns, Clean Code, Requirements Engineering, PHPUnit, Pest, Behat/BDD (Gherkin), PHPStan/Larastan (Level 9), ECS, Performance-Optimierung, Security",
@@ -72,9 +72,9 @@
         {
           "title": "Laravel Auth & CSV-Import (Sanctum-API + Session)",
           "company": "github.com/Jackylyn1",
-          "right": "2024  |  Laravel 11, Sanctum, PhpSpreadsheet",
+          "right": "2024  |  Laravel 11, Sanctum",
           "bullets": [
-            "Laravel-11-Anwendung mit zwei Authentifizierungsansätzen: Token-Authentifizierung über Laravel Sanctum für eine JSON-API sowie sessionbasiertes Web-Login; CSV-Kontaktimport mit PhpSpreadsheet.",
+            "Laravel-11-Anwendung mit zwei Authentifizierungsansätzen: Token-Authentifizierung über Laravel Sanctum für eine JSON-API sowie sessionbasiertes Web-Login; CSV-Kontaktimport.",
             "Interface-getriebene Service-Layer-Architektur (AuthentificationInterface, FileHandlerInterface -> Sanctum-/Session-/CSV-Services), eigene Middleware und Artisan-Command; schrittweises Refactoring der Auth-Logik aus den Controllern in Services."
           ]
         },

@@ -69,6 +69,9 @@ Jacqueline, 2026-07-28. Never state what she did **not** do, what does **not** e
 - No highlighting of gaps. Writing "2021–2024 and since 2025" spells out an employment gap that a plain date range would have carried silently; write the roles with their own dates and stop.
 - Honesty questions (does she really have this skill, was she really responsible) are settled by *what is written*, never by *appending a limitation*. If something cannot be stated honestly without a disclaimer, leave it out instead.
 
+### Grammatical gender (hard)
+Jacqueline, 2026-07-30. She is a **woman** — every text about her uses the **feminine form**, in every channel and in every language that marks gender. "Softwareentwicklerin", "Entwicklerin", "Werkstudentin", "Mentorin"; never the generic masculine ("Softwareentwickler") and never a neutralising construction that avoids the issue ("Person mit Erfahrung in …"). This applies to job titles she holds, to role nouns in prose and to bullets alike. Gender-star or colon forms (`Entwickler:in`) belong to *postings addressing an open group* — quoting the advertised job title verbatim is correct, but when she writes about **herself**, the plain feminine form is the one to use.
+
 ### Fixed terminology
 - **"Execution" is not used** as a label anywhere (Jacqueline, 2026-07-28) — not in project names, headings or descriptions. Describe what the system does technically (signal ingestion, parsing, order execution, risk gates, backtesting, quantitative research). The domain term inside a sentence where it is unavoidable is fine; the word as a *heading or identity* is not.
 - **"MT 5"**, never "MT 5" or "MT 5".
