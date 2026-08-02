@@ -37,7 +37,7 @@
           "bullets": [
             "Core contributor (top 3 of a ~7-person team) on a greenfield restaurant point-of-sale (POS) platform: a distributed, layered system built on a Domain-Driven, package-oriented Laravel monolith (14 domains, 8 internal Composer packages).",
             "Designed and own the real-time pivot-event synchronization mechanism (a custom laravel-pivot-events package plus a dedicated PivotEvents domain, pushed via Mercure/SSE) within an event-driven architecture backed by Redis queues (Laravel Horizon) and Laravel Octane.",
-            "Designed the platform's external REST API end-to-end (API Platform) with multi-tenant, permission-scoped access control: row-level query extensions, tenant-isolation write guards, JWT-based API credentials and permission management, and OpenAPI documentation.",
+            "Designed the platform's external REST API end-to-end (API Platform) with multi-tenant, permission-scoped access control: row-level query extensions, tenant-isolation write guards, Sanctum-based API credentials and permission management, and OpenAPI documentation.",
             "Automated tests across the stack (PHPUnit, BDD with Behat/Gherkin and Pest, Selenium) within a GitLab CI pipeline enforcing PHPStan level 9 (Larastan) and ECS code style."
           ]
         },

@@ -37,7 +37,7 @@
           "right": "Mar 2025 - Present  |  Wuppertal (Remote)",
           "bullets": [
             "Core contributor (top 3 of a ~7-person team) on an existing greenfield restaurant point-of-sale (POS) platform; responsible for specific components end-to-end rather than the overall architecture.",
-            "Requirements clarification, design, and delivery of the external REST API (API Platform) with a multi-tenant, permission-scoped access model (tenant isolation, JWT) and OpenAPI documentation as the interface to third-party systems.",
+            "Requirements clarification, design, and delivery of the external REST API (API Platform) with a multi-tenant, permission-scoped access model (tenant isolation, Sanctum tokens) and OpenAPI documentation as the interface to third-party systems.",
             "Designed and implemented the real-time synchronization mechanism via pivot events (Mercure/SSE) within an event-driven architecture; the underlying open-source contribution was a self-authored extension to a Laravel package.",
             "Integrated AI into daily development and built an internal AI-assisted code-audit toolset (Claude Code slash-commands/subagents with deterministic verification) for soft-delete, CRUD-logging, and field-permission audits."
           ]

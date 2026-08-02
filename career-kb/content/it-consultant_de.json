@@ -36,8 +36,8 @@
           "company": "Gastro IT GmbH",
           "right": "03.2025 - heute  |  Wuppertal (Remote)",
           "bullets": [
-            "Core-Contributor (Top 3 eines rund siebenköpfigen Teams) an einer bestehenden Greenfield-Kassensystem-Plattform (POS) für die Gastronomie; verantwortlich für einzelne Komponenten end-to-end, nicht für die Gesamtarchitektur.",
-            "Anforderungsklärung, Konzeption und Umsetzung der externen REST-API (API Platform) mit mandantenfähigem, berechtigungsbasiertem Zugriffsmodell (Tenant-Isolation, JWT) inkl. OpenAPI-Dokumentation als Schnittstelle zu Drittsystemen.",
+            "Entwicklerin an einer bestehenden Greenfield-Kassensystem-Plattform (POS) für die Gastronomie; verantwortlich für einzelne Komponenten end-to-end, nicht für die Gesamtarchitektur.",
+            "Anforderungsklärung, Konzeption und Umsetzung der externen REST-API (API Platform) mit mandantenfähigem, berechtigungsbasiertem Zugriffsmodell (Tenant-Isolation, Sanctum-Tokens) inkl. OpenAPI-Dokumentation als Schnittstelle zu Drittsystemen.",
             "Entwurf und Umsetzung des Echtzeit-Synchronisationsmechanismus über Pivot-Events (Mercure/SSE) innerhalb einer event-getriebenen Architektur; der zugrunde liegende Open-Source-Beitrag entstand als eigenständige Erweiterung eines Laravel-Pakets.",
             "Integration von KI in den täglichen Entwicklungs-Workflow und Aufbau eines internen KI-gestützten Code-Audit-Toolsets (Claude Code, Slash-Commands/Subagents mit deterministischer Verifikation) für Soft-Delete-, CRUD-Logging- und Feldberechtigungs-Prüfungen."
           ]
