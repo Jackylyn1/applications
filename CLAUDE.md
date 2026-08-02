@@ -13,5 +13,8 @@ If a required path isn't provided, **stop and say what's missing**. Don't work a
 Exploration increases context size and cost because every later call re-reads it. It also risks pulling unrelated content into the task. Stay within the specified paths.
 ## Verification belongs to the renderer, not the generator
 `render_application.py` already handles page fit, dash hygiene, email replacement, filenames, and failure checks. Do **not** duplicate those checks or iterate to fit a page. Write the document once to the specified path and stop.
+## Coding rules — read only for permanent code
+Before creating or changing **permanent** code (anything committed to the repo or kept after the run), read `CODING_RULES.md` and follow it.
+**Do not read it** for throwaway code: scratchpad scripts, one-off shell/Python snippets, temporary files deleted after the run. Those are exempt from the ruleset.
 ## Document a rule at the highest context that fits — never lower
 Every rule exists in exactly one file: the **most general** one in which it is still true. If it holds for every channel, it goes into the universal files (`career-kb/general-standards.md` for branding/positioning, `career-kb/communication-rules.md` for voice) and **never** into `cv-standards.md`, `cover-letter-standards.md`, `linkedin-standards.md` or `social-media-standards.md`. A rule only belongs in a channel file if it is *false* for the other channels. Channel files reference the general rule instead of restating it, and when a new source document repeats a universal rule, add nothing but the source reference.
