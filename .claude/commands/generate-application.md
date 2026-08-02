@@ -21,7 +21,7 @@ The fact base is injected as a **phase-scoped digest**, never as `profile.json`.
 - **generate-documents also gets:**
   - `career-kb/cv-standards.md`
   - `career-kb/cover-letter-standards.md`
-  - `career-kb/examples/coverletter_dmc_de.json` — the letter's tone/length reference. It lives in `examples/`, not `output/`, because `output/` is gitignored and this file is a pipeline **input**. Inject the **`.json`**, not the `.html`: it is the same letter in the exact shape the phase must emit, so it doubles as the schema example and carries no CSS.
+  - `career-kb/examples/coverletter_<slug>_<lang>.json` — the letter's tone/length reference. It lives in `examples/`, not `output/`, because `output/` holds disposable build artifacts and this file is a pipeline **input**. It names a real company, so it is kept locally and is NOT in git; on a fresh clone there is no tone reference and the cover-letter standards are the only guide. Inject the **`.json`**, not the `.html`: it is the same letter in the exact shape the phase must emit, so it doubles as the schema example and carries no CSS.
 
 Pass every path a phase needs. A subagent that has to discover a path will explore the filesystem, which is forbidden and expensive—and the generation phase has no `Bash` tool, so it *cannot* look one up.
 
