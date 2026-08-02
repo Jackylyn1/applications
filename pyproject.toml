@@ -1,0 +1,88 @@
+# Tool configuration only — this repo is a set of scripts, not a distributable
+# package, so there is no [project] table and nothing here is installable.
+#
+# Every tool in CODING_RULES.md's validation workflow is configured here rather
+# than passed as CLI flags, so `make check`, the CI job and an editor's
+# language server all enforce exactly the same rules.
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = ["career-kb/.venv", ".venv"]
+
+[tool.ruff.lint]
+# Explicit, not inherited: relying on Ruff's defaults means a Ruff upgrade can
+# silently change what "clean" means. Everything listed here currently passes.
+select = [
+    "F",      # pyflakes
+    "E", "W", # pycodestyle
+    "I",      # import sorting
+    "UP",     # pyupgrade
+    "B",      # bugbear — the loop-variable-capture class of bug
+    "BLE",    # blind excepts must be annotated with why
+    "C4",     # comprehensions
+    "SIM",    # simplifications
+    "RET",    # return-flow
+    "PERF",   # obvious performance traps
+    "DTZ",    # naive datetimes must be a deliberate, annotated choice
+    "S",      # bandit ruleset, as a fast pre-filter for the real Bandit run
+    "PL",     # pylint subset
+    "FURB",   # modernizations
+    "RUF",    # Ruff's own rules, incl. unused-noqa
+    "EXE",    # shebang/permission consistency
+]
+ignore = [
+    "E501",    # line length is the formatter's job, not a lint error
+    "PLR0913", # argument count — the CLI mains legitimately have many
+    "PLR2004", # magic values are fine in scripts of this size
+    "S404",    # "subprocess is imported" is not a finding on its own
+    "S603",    # every call site uses a fixed argv list, never a shell
+    "S607",    # soffice/chromium/pdfinfo are resolved from PATH on purpose
+    "S310",    # both urlopen call sites guard the scheme themselves - see
+               # watch.fetch() and the hardcoded https:// templates in find_boards
+]
+
+[tool.ruff.lint.per-file-ignores]
+# Tests deliberately reach into private helpers and import after a sys.path
+# insert, which is what makes the tool scripts importable without packaging.
+"tests/*" = ["S101", "SLF001", "E402"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["ats_hygiene", "apply_cv_patch", "build_cv", "build_letter", "watch"]
+
+[tool.ruff.format]
+# Preserve, not normalize: career-kb uses single quotes and job-watch uses
+# double quotes. Rewriting either would produce a diff that hides real changes
+# for no readability gain.
+quote-style = "preserve"
+
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true      # python-docx, jobspy and apprise ship no stubs
+warn_unused_ignores = true
+warn_redundant_casts = true
+warn_unreachable = true
+files = ["career-kb/tools", "job-watch", "tests"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q --strict-markers"
+
+[tool.coverage.run]
+source = ["career-kb/tools", "job-watch"]
+omit = ["*/.venv/*"]
+
+[tool.coverage.report]
+# The uncovered remainder is the subprocess/CLI layer: it is verified by
+# render_application.py's own end-to-end checks, not by unit tests.
+exclude_lines = ["pragma: no cover", "if __name__ == .__main__.:", "raise NotImplementedError"]
+show_missing = true
+
+[tool.bandit]
+exclude_dirs = [".venv", "career-kb/.venv", "job-watch/.venv", "tests"]
+
+[tool.vulture]
+# Per-component virtualenvs live inside the tree and are not ours to audit.
+exclude = ["*/.venv/*"]
+min_confidence = 80
+paths = ["career-kb/tools", "job-watch", "tests"]

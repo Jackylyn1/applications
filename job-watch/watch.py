@@ -38,11 +38,19 @@ CONFIG = os.path.join(HERE, "config.json")
 INBOX = os.path.join(HERE, "inbox")
 STATE = os.path.join(HERE, "state.db")
 
-UA = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
-      "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36")
+UA = (
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+)
 
 
 # ---------------------------------------------------------------- helpers
+
+
+def now_stamp():
+    """Local wall-clock timestamp: these records are read by a human in one place."""
+    return dt.datetime.now().isoformat(timespec="seconds")  # noqa: DTZ005
+
 
 def slugify(text, limit=60):
     text = unicodedata.normalize("NFKD", text or "")
@@ -80,11 +88,18 @@ def unwrap_hard_breaks(text):
 
 
 def fetch(url, timeout=25):
-    req = urllib.request.Request(url, headers={
-        "User-Agent": UA,
-        "Accept-Language": "de-DE,de;q=0.9,en;q=0.8",
-    })
-    with urllib.request.urlopen(req, timeout=timeout) as r:
+    # URLs come from config.json and from scraped pages, so the scheme is
+    # checked here: urlopen would otherwise happily read file:// paths.
+    if not url.startswith(("http://", "https://")):
+        raise ValueError(f"refusing non-HTTP URL: {url}")
+    req = urllib.request.Request(
+        url,
+        headers={
+            "User-Agent": UA,
+            "Accept-Language": "de-DE,de;q=0.9,en;q=0.8",
+        },
+    )
+    with urllib.request.urlopen(req, timeout=timeout) as r:  # nosec B310 - scheme checked above
         return r.read().decode(r.headers.get_content_charset() or "utf-8", "replace")
 
 
@@ -103,6 +118,7 @@ def expand_env(value):
 
 # ---------------------------------------------------------------- state
 
+
 def open_state():
     con = sqlite3.connect(STATE)
     con.execute("""CREATE TABLE IF NOT EXISTS seen (
@@ -118,10 +134,27 @@ def open_state():
 # else is kept — Indeed's job id lives in ?jk=, so blanket-stripping the query
 # string would collapse every Indeed hit onto one key.
 TRACKING_PARAMS = {
-    "utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term",
-    "refId", "trackingId", "trk", "trkInfo", "position", "pageNum", "eBP",
-    "refresh", "originalSubdomain", "src", "sid", "cd", "from", "gclid",
-    "sort", "action",
+    "utm_source",
+    "utm_medium",
+    "utm_campaign",
+    "utm_content",
+    "utm_term",
+    "refId",
+    "trackingId",
+    "trk",
+    "trkInfo",
+    "position",
+    "pageNum",
+    "eBP",
+    "refresh",
+    "originalSubdomain",
+    "src",
+    "sid",
+    "cd",
+    "from",
+    "gclid",
+    "sort",
+    "action",
 }
 
 
@@ -129,12 +162,14 @@ def normalize_url(url):
     if not url:
         return ""
     parts = urllib.parse.urlsplit(url)
-    query = sorted((k, v) for k, v in
-                   urllib.parse.parse_qsl(parts.query, keep_blank_values=True)
-                   if k not in TRACKING_PARAMS)
+    query = sorted(
+        (k, v)
+        for k, v in urllib.parse.parse_qsl(parts.query, keep_blank_values=True)
+        if k not in TRACKING_PARAMS
+    )
     return urllib.parse.urlunsplit(
-        (parts.scheme, parts.netloc, parts.path.rstrip("/"),
-         urllib.parse.urlencode(query), ""))
+        (parts.scheme, parts.netloc, parts.path.rstrip("/"), urllib.parse.urlencode(query), "")
+    )
 
 
 def dedupe_key(rec):
@@ -153,136 +188,174 @@ def alias_key(rec):
 
 # ---------------------------------------------------------------- sources
 
+
+def cell(row, key):
+    """Read one JobSpy dataframe field, mapping pandas' NaN placeholder to None."""
+    value = row.get(key)
+    return None if value is None or str(value) == "nan" else value
+
+
 def from_jobspy(query, sites, cfg):
     """LinkedIn / Indeed / Glassdoor / Google via the JobSpy scraper library."""
-    from jobspy import scrape_jobs
+    from jobspy import scrape_jobs  # noqa: PLC0415 - heavy import, only pay for it when used
 
     out = []
     for site in sites:
-        kwargs = dict(
-            site_name=[site],
-            search_term=query["term"],
-            location=query.get("location", ""),
-            results_wanted=query.get("results", 20),
-            hours_old=query.get("hours_old", 48),
-            country_indeed=query.get("country", "Germany"),
-            description_format="markdown",
-            verbose=0,
-        )
+        kwargs = {
+            "site_name": [site],
+            "search_term": query["term"],
+            "location": query.get("location", ""),
+            "results_wanted": query.get("results", 20),
+            "hours_old": query.get("hours_old", 48),
+            "country_indeed": query.get("country", "Germany"),
+            "description_format": "markdown",
+            "verbose": 0,
+        }
         if site == "linkedin":
             # one extra request per hit, but without it LinkedIn gives no body
             kwargs["linkedin_fetch_description"] = cfg.get("linkedin_fetch_description", True)
         if site == "google":
             kwargs["google_search_term"] = (
-                f"{query['term']} jobs in {query.get('location','')}".strip())
+                f"{query['term']} jobs in {query.get('location', '')}".strip()
+            )
         try:
             df = scrape_jobs(**kwargs)
-        except Exception as exc:  # one flaky board must not sink the run
+        except Exception as exc:  # noqa: BLE001 - one flaky board must not sink the run
             print(f"  ! {site}: {type(exc).__name__}: {exc}", file=sys.stderr)
             continue
         for _, row in df.iterrows():
-            get = lambda k: (None if row.get(k) is None or str(row.get(k)) == "nan"
-                             else row.get(k))
-            body = get("description") or ""
-            out.append({
-                "source": site,
-                "title": get("title") or "",
-                "company": get("company") or "",
-                "location": get("location") or query.get("location", ""),
-                "url": get("job_url") or get("job_url_direct") or "",
-                "date_posted": str(get("date_posted") or ""),
-                "job_type": get("job_type") or "",
-                "remote": bool(get("is_remote")),
-                "salary": " - ".join(str(x) for x in (get("min_amount"), get("max_amount")) if x),
-                "description": body,
-                "query": query["term"],
-            })
+            out.append(
+                {
+                    "source": site,
+                    "title": cell(row, "title") or "",
+                    "company": cell(row, "company") or "",
+                    "location": cell(row, "location") or query.get("location", ""),
+                    "url": cell(row, "job_url") or cell(row, "job_url_direct") or "",
+                    "date_posted": str(cell(row, "date_posted") or ""),
+                    "job_type": cell(row, "job_type") or "",
+                    "remote": bool(cell(row, "is_remote")),
+                    "salary": " - ".join(
+                        str(x) for x in (cell(row, "min_amount"), cell(row, "max_amount")) if x
+                    ),
+                    "description": cell(row, "description") or "",
+                    "query": query["term"],
+                }
+            )
         print(f"  {site}: {len(df)} hits")
     return out
 
 
-def from_stepstone(query, cfg):
-    """StepStone has no API. The search page is plain HTML and every detail page
-    carries a schema.org JobPosting with the complete description."""
-    url = query.get("stepstone_url")
-    if not url:
-        loc = slugify(query.get("location", "").split(",")[0]).lower()
-        url = (f"https://www.stepstone.de/jobs/{slugify(query['term']).lower()}"
-               f"/in-{loc}?radius={query.get('radius', 30)}&sort=2")
-    try:
-        page = fetch(url)
-    except Exception as exc:
-        print(f"  ! stepstone search: {type(exc).__name__}: {exc}", file=sys.stderr)
-        return []
+STEPSTONE_BASE = "https://www.stepstone.de"
+LD_JSON_RE = re.compile(r'<script[^>]*application/ld\+json[^>]*>(.*?)</script>', re.DOTALL)
 
+
+def stepstone_search_url(query):
+    return query.get("stepstone_url") or (
+        f"{STEPSTONE_BASE}/jobs/{slugify(query['term']).lower()}"
+        f"/in-{slugify(query.get('location', '').split(',')[0]).lower()}"
+        f"?radius={query.get('radius', 30)}&sort=2"
+    )
+
+
+def stepstone_detail_links(page):
+    """Absolute detail-page links from a search page, first occurrence wins."""
     links, seen = [], set()
     for href in re.findall(r'href="(/stellenangebote--[^"#]+)"', page):
         clean = href.split("?")[0]
         if clean not in seen:
             seen.add(clean)
-            links.append(urllib.parse.urljoin("https://www.stepstone.de", clean))
+            links.append(urllib.parse.urljoin(STEPSTONE_BASE, clean))
+    return links
 
-    cap = query.get("results", 20)
+
+def job_posting_ld(html_text):
+    """First schema.org JobPosting node in the page's JSON-LD blocks, or None."""
+    for block in LD_JSON_RE.findall(html_text):
+        try:
+            data = json.loads(block)
+        except json.JSONDecodeError:
+            continue
+        nodes = data.get("@graph", [data]) if isinstance(data, dict) else data
+        for node in nodes if isinstance(nodes, list) else [nodes]:
+            if isinstance(node, dict) and node.get("@type") == "JobPosting":
+                return node
+    return None
+
+
+def posting_to_record(posting, link, query):
+    loc = posting.get("jobLocation") or {}
+    loc = loc[0] if isinstance(loc, list) and loc else loc
+    addr = (loc or {}).get("address", {}) if isinstance(loc, dict) else {}
+    return {
+        "source": "stepstone",
+        "title": posting.get("title") or "",
+        "company": (posting.get("hiringOrganization") or {}).get("name") or "",
+        "location": addr.get("addressLocality") or query.get("location", ""),
+        "url": posting.get("url") or link,
+        "date_posted": (posting.get("datePosted") or "")[:10],
+        "job_type": posting.get("employmentType") or "",
+        "remote": False,
+        "salary": "",
+        "description": html_to_text(posting.get("description")),
+        "query": query["term"],
+    }
+
+
+def from_stepstone(query, cfg):
+    """StepStone has no API. The search page is plain HTML and every detail page
+    carries a schema.org JobPosting with the complete description."""
+    try:
+        page = fetch(stepstone_search_url(query))
+    except Exception as exc:  # noqa: BLE001 - a failed search must not sink the run
+        print(f"  ! stepstone search: {type(exc).__name__}: {exc}", file=sys.stderr)
+        return []
+
     out = []
-    for i, link in enumerate(links[:cap]):
+    for i, link in enumerate(stepstone_detail_links(page)[: query.get("results", 20)]):
         if i:
             time.sleep(cfg.get("stepstone_delay", 1.5))  # be a polite guest
         try:
             detail = fetch(link)
-        except Exception as exc:
+        except Exception as exc:  # noqa: BLE001 - one bad detail page must not sink the run
             print(f"  ! stepstone detail: {type(exc).__name__}: {exc}", file=sys.stderr)
             continue
-        posting = None
-        for block in re.findall(
-                r'<script[^>]*application/ld\+json[^>]*>(.*?)</script>', detail, re.S):
-            try:
-                data = json.loads(block)
-            except json.JSONDecodeError:
-                continue
-            nodes = data.get("@graph", [data]) if isinstance(data, dict) else data
-            for node in nodes if isinstance(nodes, list) else [nodes]:
-                if isinstance(node, dict) and node.get("@type") == "JobPosting":
-                    posting = node
-                    break
-            if posting:
-                break
-        if not posting:
-            continue
-        loc = posting.get("jobLocation") or {}
-        loc = loc[0] if isinstance(loc, list) and loc else loc
-        addr = (loc or {}).get("address", {}) if isinstance(loc, dict) else {}
-        out.append({
-            "source": "stepstone",
-            "title": posting.get("title") or "",
-            "company": (posting.get("hiringOrganization") or {}).get("name") or "",
-            "location": addr.get("addressLocality") or query.get("location", ""),
-            "url": posting.get("url") or link,
-            "date_posted": (posting.get("datePosted") or "")[:10],
-            "job_type": posting.get("employmentType") or "",
-            "remote": False,
-            "salary": "",
-            "description": html_to_text(posting.get("description")),
-            "query": query["term"],
-        })
+        posting = job_posting_ld(detail)
+        if posting:
+            out.append(posting_to_record(posting, link, query))
     print(f"  stepstone: {len(out)} hits")
     return out
 
 
 # ---------------------------------------------------------------- output
 
+
 def write_offer(rec, key):
     os.makedirs(INBOX, exist_ok=True)
-    stamp = dt.date.today().isoformat()
+    stamp = dt.date.today().isoformat()  # noqa: DTZ011 - local calendar day
     # the key hash keeps two same-titled postings (same employer, other city)
     # from overwriting each other
-    tag = hashlib.sha1(key.encode()).hexdigest()[:6]
-    name = (f"{stamp}_{rec['source']}_{slugify(rec['company'], 30)}"
-            f"_{slugify(rec['title'], 40)}_{tag}.md")
+    tag = hashlib.sha1(key.encode(), usedforsecurity=False).hexdigest()[:6]
+    name = (
+        f"{stamp}_{rec['source']}_{slugify(rec['company'], 30)}"
+        f"_{slugify(rec['title'], 40)}_{tag}.md"
+    )
     path = os.path.join(INBOX, name)
-    meta = {k: rec.get(k, "") for k in
-            ("source", "company", "title", "location", "url", "date_posted",
-             "job_type", "remote", "salary", "query")}
-    meta["first_seen"] = dt.datetime.now().isoformat(timespec="seconds")
+    meta = {
+        k: rec.get(k, "")
+        for k in (
+            "source",
+            "company",
+            "title",
+            "location",
+            "url",
+            "date_posted",
+            "job_type",
+            "remote",
+            "salary",
+            "query",
+        )
+    }
+    meta["first_seen"] = now_stamp()
     front = "\n".join(f"{k}: {json.dumps(v, ensure_ascii=False)}" for k, v in meta.items())
     body = unwrap_hard_breaks(rec.get("description") or "")
     with open(path, "w", encoding="utf-8") as fh:
@@ -293,8 +366,10 @@ def write_offer(rec, key):
 def notify(records, cfg, dry_run):
     urls = [expand_env(u) for u in cfg.get("notify", []) if not u.startswith("#")]
     urls = [u for u in urls if u]
-    lines = [f"- {r['title']} @ {r['company']} ({r['location'] or '?'}) [{r['source']}]\n  {r['url']}"
-             for r in records]
+    lines = [
+        f"- {r['title']} @ {r['company']} ({r['location'] or '?'}) [{r['source']}]\n  {r['url']}"
+        for r in records
+    ]
     body = "\n".join(lines)
     title = f"{len(records)} new job offer(s)"
 
@@ -304,7 +379,7 @@ def notify(records, cfg, dry_run):
             print("(no notify channels configured — inbox files written only)")
         return
     try:
-        import apprise
+        import apprise  # noqa: PLC0415 - optional dependency, absence is handled below
     except ImportError:
         print("(apprise not installed — skipping push notifications)", file=sys.stderr)
         return
@@ -316,8 +391,10 @@ def notify(records, cfg, dry_run):
 
 def list_recent(limit):
     con = open_state()
-    rows = con.execute("SELECT first_seen, source, company, title, url FROM seen "
-                       "ORDER BY first_seen DESC LIMIT ?", (limit,)).fetchall()
+    rows = con.execute(
+        "SELECT first_seen, source, company, title, url FROM seen ORDER BY first_seen DESC LIMIT ?",
+        (limit,),
+    ).fetchall()
     if not rows:
         print("nothing collected yet")
     for first_seen, source, company, title, url in rows:
@@ -326,17 +403,69 @@ def list_recent(limit):
 
 # ---------------------------------------------------------------- main
 
-def main():
-    ap = argparse.ArgumentParser(description=__doc__,
-                                 formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--dry-run", action="store_true",
-                    help="poll and report, but write no files and send no notifications")
-    ap.add_argument("--source", action="append", default=[],
-                    help="restrict to this source (repeatable)")
-    ap.add_argument("--recent", type=int, metavar="N",
-                    help="list the last N collected offers and exit")
+
+def parse_args(argv=None):
+    ap = argparse.ArgumentParser(
+        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
+    )
+    ap.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="poll and report, but write no files and send no notifications",
+    )
+    ap.add_argument(
+        "--source", action="append", default=[], help="restrict to this source (repeatable)"
+    )
+    ap.add_argument(
+        "--recent", type=int, metavar="N", help="list the last N collected offers and exit"
+    )
     ap.add_argument("--config", default=CONFIG)
-    args = ap.parse_args()
+    return ap.parse_args(argv)
+
+
+def poll(cfg, enabled):
+    """Run every configured query against every enabled source."""
+    jobspy_sites = [s for s in enabled if s != "stepstone"]
+    found = []
+    for query in cfg.get("queries", []):
+        print(f"\n> {query['term']} @ {query.get('location', 'anywhere')}")
+        if jobspy_sites:
+            found += from_jobspy(query, jobspy_sites, cfg)
+        if "stepstone" in enabled:
+            found += from_stepstone(query, cfg)
+    return found
+
+
+def split_thin(found, min_chars):
+    """Partition into (usable, too-thin-to-apply-with)."""
+    thin = [r for r in found if len(r.get("description") or "") < min_chars]
+    return [r for r in found if len(r.get("description") or "") >= min_chars], thin
+
+
+def select_fresh(found, con, cross_source):
+    """Drop everything already seen; return [(key, alias_key, record)] and the dupe count.
+
+    Sorted longest-description-first so the richest copy of a cross-posted job
+    is the one that claims the alias slot.
+    """
+    found = sorted(found, key=lambda r: len(r.get("description") or ""), reverse=True)
+    known = {row[0] for row in con.execute("SELECT key FROM seen")}
+    aliases = {row[0] for row in con.execute("SELECT akey FROM alias")}
+
+    fresh, dupes = [], 0
+    for rec in found:
+        key, akey = dedupe_key(rec), alias_key(rec)
+        if key in known or (cross_source and akey in aliases):
+            dupes += 1
+            continue
+        known.add(key)
+        aliases.add(akey)
+        fresh.append((key, akey, rec))
+    return fresh, dupes
+
+
+def main():
+    args = parse_args()
 
     if args.recent:
         list_recent(args.recent)
@@ -349,40 +478,17 @@ def main():
     if not enabled:
         print("no sources enabled", file=sys.stderr)
         return 1
-    jobspy_sites = [s for s in enabled if s != "stepstone"]
-
-    found = []
-    for query in cfg.get("queries", []):
-        print(f"\n> {query['term']} @ {query.get('location', 'anywhere')}")
-        if jobspy_sites:
-            found += from_jobspy(query, jobspy_sites, cfg)
-        if "stepstone" in enabled:
-            found += from_stepstone(query, cfg)
 
     min_chars = cfg.get("min_description_chars", 0)
-    thin = [r for r in found if len(r.get("description") or "") < min_chars]
-    found = [r for r in found if len(r.get("description") or "") >= min_chars]
-
-    # richest version of a cross-posted job wins the alias slot
-    found.sort(key=lambda r: len(r.get("description") or ""), reverse=True)
+    found, thin = split_thin(poll(cfg, enabled), min_chars)
 
     con = open_state()
-    known = {row[0] for row in con.execute("SELECT key FROM seen")}
-    aliases = {row[0] for row in con.execute("SELECT akey FROM alias")}
-    cross = cfg.get("cross_source_dedupe", True)
+    fresh, dupes = select_fresh(found, con, cfg.get("cross_source_dedupe", True))
 
-    fresh, dupes = [], 0
-    for rec in found:
-        key, akey = dedupe_key(rec), alias_key(rec)
-        if key in known or (cross and akey in aliases):
-            dupes += 1
-            continue
-        known.add(key)
-        aliases.add(akey)
-        fresh.append((key, akey, rec))
-
-    print(f"\n{len(found) + len(thin)} scraped | {len(fresh)} new | {dupes} already known"
-          + (f" | {len(thin)} skipped (description under {min_chars} chars)" if thin else ""))
+    print(
+        f"\n{len(found) + len(thin)} scraped | {len(fresh)} new | {dupes} already known"
+        + (f" | {len(thin)} skipped (description under {min_chars} chars)" if thin else "")
+    )
     if not fresh:
         return 0
 
@@ -391,9 +497,10 @@ def main():
         path = write_offer(rec, key) if not args.dry_run else "(dry-run)"
         records.append(rec)
         if not args.dry_run:
-            con.execute("INSERT OR REPLACE INTO seen VALUES (?,?,?,?,?,?,?)",
-                        (key, rec["source"], rec["title"], rec["company"], rec["url"],
-                         dt.datetime.now().isoformat(timespec="seconds"), path))
+            con.execute(
+                "INSERT OR REPLACE INTO seen VALUES (?,?,?,?,?,?,?)",
+                (key, rec["source"], rec["title"], rec["company"], rec["url"], now_stamp(), path),
+            )
             con.execute("INSERT OR REPLACE INTO alias VALUES (?,?)", (akey, key))
     con.commit()
     notify(records, cfg, args.dry_run)

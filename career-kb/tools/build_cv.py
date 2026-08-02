@@ -36,7 +36,14 @@ CONTENT JSON SCHEMA
 Section order and headings are taken from the JSON (headings may be localized,
 e.g. German). Only the four `type` values above are recognized.
 """
-import argparse, copy, json, os, sys
+
+import argparse
+import copy
+import json
+import os
+import re
+import sys
+
 from docx import Document
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
@@ -56,8 +63,7 @@ W_SECTPR = qn('w:sectPr')
 _SECTION_ORDER = {'summary': 0, 'skills': 1, 'experience': 2, 'education': 3}
 
 
-import re as _re
-_TIMESPAN_RE = _re.compile(r'(?:19|20)\d{2}|\d{2}\.\d{4}|heute|present|lfd\.', _re.I)
+_TIMESPAN_RE = re.compile(r'(?:19|20)\d{2}|\d{2}\.\d{4}|heute|present|lfd\.', re.IGNORECASE)
 
 
 def _split_timespan(right):
@@ -100,10 +106,6 @@ def _has_numpr(p):
     return ppr is not None and ppr.find(W_NUMPR) is not None
 
 
-def _has_run_tab(p):
-    return any(r.find(W_TAB) is not None for r in p.findall(W_R))
-
-
 EXPERIENCE_HEADINGS = {'EXPERIENCE', 'BERUFSERFAHRUNG'}
 
 
@@ -124,12 +126,14 @@ def find_prototypes(doc):
     nums = [i for i, e in enumerate(paras) if _has_numpr(e)]
     if not (heads and nums):
         raise SystemExit("Template prototypes not found (headings/bullets).")
-    exp = next((i for i, e in enumerate(paras)
-                if _ptext(e).strip().upper() in EXPERIENCE_HEADINGS), None)
+    exp = next(
+        (i for i, e in enumerate(paras) if _ptext(e).strip().upper() in EXPERIENCE_HEADINGS), None
+    )
     bi = next((i for i in nums if exp is None or i > exp), nums[0])
     start = exp if exp is not None else 0
-    between = [i for i in range(start + 1, bi)
-               if _ptext(paras[i]).strip() and not _has_numpr(paras[i])]
+    between = [
+        i for i in range(start + 1, bi) if _ptext(paras[i]).strip() and not _has_numpr(paras[i])
+    ]
     ti = between[-2] if len(between) >= 2 else bi - 2
     ci = between[-1] if len(between) >= 1 else bi - 1
     hi = heads[0]
@@ -144,14 +148,14 @@ def find_prototypes(doc):
         return idx
 
     return {
-        'name':     copy.deepcopy(paras[0]),
-        'contact':  copy.deepcopy(paras[1]),
-        'section':  copy.deepcopy(paras[hi]),
-        'body':     copy.deepcopy(paras[hi + 1]),
-        'title':    copy.deepcopy(paras[ti]),
+        'name': copy.deepcopy(paras[0]),
+        'contact': copy.deepcopy(paras[1]),
+        'section': copy.deepcopy(paras[hi]),
+        'body': copy.deepcopy(paras[hi + 1]),
+        'title': copy.deepcopy(paras[ti]),
         'compdate': copy.deepcopy(paras[ci]),
-        'bullet':   copy.deepcopy(paras[bi]),
-        'empty':    copy.deepcopy(paras[first_empty_after(bi)]),
+        'bullet': copy.deepcopy(paras[bi]),
+        'empty': copy.deepcopy(paras[first_empty_after(bi)]),
     }
 
 
@@ -181,7 +185,6 @@ def fill_contact(proto, items):
     profile). Map up to 4 items into those slots, preserving each icon.
     Unused trailing slots (icon + text) are removed."""
     p = copy.deepcopy(proto)
-    W_R = qn('w:r')
     runs = p.findall(W_R)
     # runs alternate: [icon][text][icon][text]... find text runs (have <w:t>)
     text_run_idx = [i for i, r in enumerate(runs) if r.find(W_T) is not None]
@@ -228,8 +231,7 @@ def _drop_bullets(sections, n):
     items = []
     for sec in sections:
         if sec.get('type') == 'experience':
-            for it in sec['items']:
-                items.append(it)
+            items.extend(sec['items'])
     dropped, remaining = [], n
     for it in reversed(items):
         b = it.get('bullets', [])
@@ -241,11 +243,55 @@ def _drop_bullets(sections, n):
     return sections, dropped
 
 
+def _experience_paragraphs(proto, item):
+    """One experience/project entry: title line, company line, bullets."""
+    # Timespan leads the title line: "03.2025 - heute | Job Title".
+    # (Projects have no date in `right`, so the title is unchanged.)
+    timespan, location = _split_timespan(item.get('right', ''))
+    title = f"{timespan} | {item['title']}" if timespan else item['title']
+    out = [fill(proto['title'], title)]
+    # Second line, left-aligned: "Company · Location" (or company / location /
+    # project-tech alone, whichever is present).
+    comp = item.get('company', '')
+    if comp and location:
+        out.append(fill(proto['compdate'], comp, ' · ' + location))
+    elif comp or location:
+        out.append(fill(proto['compdate'], comp or location))
+    out.extend(fill(proto['bullet'], b) for b in item.get('bullets', []))
+    return out
+
+
+def _education_paragraphs(proto, item):
+    out = [fill(proto['title'], item['degree'])]
+    if item.get('detail'):
+        out.append(fill(proto['body'], item['detail']))
+    return out
+
+
+def _section_paragraphs(proto, sec):
+    """Body paragraphs of one section, spacers between items included."""
+    t = sec['type']
+    if t == 'summary':
+        return [fill(proto['body'], sec['text'])]
+    if t == 'skills':
+        # Bulleted, bold-labelled, same spacing as other sections (no spacers).
+        return [fill_skill(proto['bullet'], ln) for ln in sec['lines']]
+    if t not in ('experience', 'education'):
+        raise SystemExit(f"Unknown section type: {t}")
+
+    render = _experience_paragraphs if t == 'experience' else _education_paragraphs
+    out = []
+    for i, item in enumerate(sec['items']):
+        out.extend(render(proto, item))
+        if i < len(sec['items']) - 1:
+            out.append(fill(proto['empty']))
+    return out
+
+
 def build(c, template, spacing_scale=1.0, drop_bullets=0):
     """Build the CV Document from content dict `c` using `template`.
     Returns (doc, dropped_bullets)."""
-    import copy as _copy
-    c = _copy.deepcopy(c)
+    c = copy.deepcopy(c)
     _, dropped = _drop_bullets(c['sections'], drop_bullets)
 
     doc = Document(template)
@@ -255,8 +301,8 @@ def build(c, template, spacing_scale=1.0, drop_bullets=0):
     # is a plain left-aligned "company · location". Drop the run-level tab
     # character that used to right-align the date (its tab stop sat off-page at
     # 20000 twips, pushing the date off the page in the raw template).
-    for r in proto['compdate'].findall(qn('w:r')):
-        for tab in r.findall(qn('w:tab')):
+    for r in proto['compdate'].findall(W_R):
+        for tab in r.findall(W_TAB):
             r.remove(tab)
 
     if spacing_scale != 1.0:
@@ -278,44 +324,7 @@ def build(c, template, spacing_scale=1.0, drop_bullets=0):
     ordered = sorted(c['sections'], key=lambda s: _SECTION_ORDER.get(s.get('type'), 99))
     for sec in ordered:
         out.append(fill(proto['section'], sec['heading']))
-        t = sec['type']
-        if t == 'summary':
-            out.append(fill(proto['body'], sec['text']))
-        elif t == 'experience':
-            for i, it in enumerate(sec['items']):
-                # Timespan leads the title line: "03.2025 - heute | Job Title".
-                # (Projects have no date in `right`, so the title is unchanged.)
-                timespan, location = _split_timespan(it.get('right', ''))
-                title = it['title']
-                if timespan:
-                    title = f"{timespan} | {title}"
-                out.append(fill(proto['title'], title))
-                # Second line, left-aligned: "Company · Location" (or company /
-                # location / project-tech alone, whichever is present).
-                comp = it.get('company', '')
-                if comp and location:
-                    out.append(fill(proto['compdate'], comp, ' · ' + location))
-                elif comp:
-                    out.append(fill(proto['compdate'], comp))
-                elif location:
-                    out.append(fill(proto['compdate'], location))
-                for b in it.get('bullets', []):
-                    out.append(fill(proto['bullet'], b))
-                if i < len(sec['items']) - 1:
-                    out.append(fill(proto['empty']))
-        elif t == 'education':
-            for i, it in enumerate(sec['items']):
-                out.append(fill(proto['title'], it['degree']))
-                if it.get('detail'):
-                    out.append(fill(proto['body'], it['detail']))
-                if i < len(sec['items']) - 1:
-                    out.append(fill(proto['empty']))
-        elif t == 'skills':
-            # Bulleted, bold-labelled, same spacing as other sections (no spacers).
-            for ln in sec['lines']:
-                out.append(fill_skill(proto['bullet'], ln))
-        else:
-            raise SystemExit(f"Unknown section type: {t}")
+        out.extend(_section_paragraphs(proto, sec))
 
     for para in out:
         body.insert(list(body).index(sectPr), para)
@@ -369,13 +378,20 @@ def main():
     ap.add_argument('--content', required=True)
     ap.add_argument('--out', required=True)
     ap.add_argument('--template', default=None)
-    ap.add_argument('--spacing-scale', type=float, default=1.0,
-                    help='Scale paragraph spacing (<1.0 tightens the layout).')
-    ap.add_argument('--drop-bullets', type=int, default=0,
-                    help='Drop N least-important bullets (older entries first).')
+    ap.add_argument(
+        '--spacing-scale',
+        type=float,
+        default=1.0,
+        help='Scale paragraph spacing (<1.0 tightens the layout).',
+    )
+    ap.add_argument(
+        '--drop-bullets',
+        type=int,
+        default=0,
+        help='Drop N least-important bullets (older entries first).',
+    )
     args = ap.parse_args()
 
-    import os
     here = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     template = args.template or os.path.join(here, 'templates', 'CV_Template_Rezi_Dec2025.docx')
 

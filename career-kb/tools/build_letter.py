@@ -30,19 +30,26 @@ THE DATE IS COMPUTED HERE, NOT WRITTEN BY THE MODEL
 
 CONTENT JSON
     {
-      "company":         "Company D",                  required
+      "company":         "Beispiel GmbH",            required
       "tagline":         "Softwareentwicklerin - ...",required
       "subject":         "Bewerbung als ...",         required
-      "salutation":      "Hallo Company D-Team,",       required
+      "salutation":      "Hallo Beispiel-Team,",      required
       "paragraphs":      ["...", "..."],              required (>= 1)
-      "addressee_lines": ["Company D", "HR"],           optional, default [company]
+      "addressee_lines": ["Beispiel GmbH", "HR"],     optional, default [company]
       "closing":         "Viele Gruesse"              optional, default per lang
     }
 
 Usage:
     build_letter.py --content <letter.json> --lang de|en --out <letter.html>
 """
-import argparse, datetime, html, json, os, string, sys
+
+import argparse
+import datetime
+import html
+import json
+import os
+import string
+import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from ats_hygiene import norm_text
@@ -56,12 +63,36 @@ TEMPLATES = {
 
 # Hardcoded so the rendered date never depends on the machine's locale.
 MONTHS = {
-    'de': ['Januar', 'Februar', 'Maerz', 'April', 'Mai', 'Juni', 'Juli',
-           'August', 'September', 'Oktober', 'November', 'Dezember'],
-    'en': ['January', 'February', 'March', 'April', 'May', 'June', 'July',
-           'August', 'September', 'October', 'November', 'December'],
+    'de': [
+        'Januar',
+        'Februar',
+        'Maerz',
+        'April',
+        'Mai',
+        'Juni',
+        'Juli',
+        'August',
+        'September',
+        'Oktober',
+        'November',
+        'Dezember',
+    ],
+    'en': [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+    ],
 }
-MONTHS['de'][2] = 'März'   # the one month name that needs a non-ASCII char
+MONTHS['de'][2] = 'März'  # the one month name that needs a non-ASCII char
 
 PLACE = 'Gelsenkirchen'
 DEFAULT_CLOSING = {'de': 'Viele Grüße', 'en': 'Best regards'}
@@ -70,7 +101,8 @@ REQUIRED = ('company', 'tagline', 'subject', 'salutation', 'paragraphs')
 
 
 def format_date(lang, today=None):
-    d = today or datetime.date.today()
+    # Local calendar day on purpose: the letter is dated where it is written.
+    d = today or datetime.date.today()  # noqa: DTZ011
     month = MONTHS[lang][d.month - 1]
     if lang == 'de':
         return f'{PLACE}, {d.day}. {month} {d.year}'
@@ -91,8 +123,9 @@ def _clean(value):
 def build(content, lang, today=None):
     missing = [k for k in REQUIRED if not content.get(k)]
     if missing:
-        raise SystemExit('error: cover-letter content JSON is missing required '
-                         f'field(s): {", ".join(missing)}')
+        raise SystemExit(
+            f'error: cover-letter content JSON is missing required field(s): {", ".join(missing)}'
+        )
 
     paragraphs = content['paragraphs']
     if isinstance(paragraphs, str) or not paragraphs:
@@ -101,11 +134,12 @@ def build(content, lang, today=None):
     addressee = content.get('addressee_lines') or [content['company']]
     body = '\n\n'.join(f'  <p>\n    {_clean(p)}\n  </p>' for p in paragraphs)
 
-    template = string.Template(open(TEMPLATES[lang], encoding='utf-8').read())
+    with open(TEMPLATES[lang], encoding='utf-8') as f:
+        template = string.Template(f.read())
     return template.safe_substitute(
         company=_clean(content['company']),
         tagline=_clean(content['tagline']),
-        addressee='<br>\n        '.join(_clean(l) for l in addressee),
+        addressee='<br>\n        '.join(_clean(line) for line in addressee),
         place_date=format_date(lang, today),
         subject=_clean(content['subject']),
         salutation=_clean(content['salutation']),
@@ -128,8 +162,10 @@ def main():
     with open(args.out, 'w', encoding='utf-8') as f:
         f.write(out)
     words = sum(len(str(p).split()) for p in content['paragraphs'])
-    print(f'  letter assembled from template: {len(content["paragraphs"])} '
-          f'paragraph(s), {words} words -> {args.out}')
+    print(
+        f'  letter assembled from template: {len(content["paragraphs"])} '
+        f'paragraph(s), {words} words -> {args.out}'
+    )
     return 0
 
 

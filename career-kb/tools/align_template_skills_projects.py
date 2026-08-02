@@ -15,14 +15,23 @@ skills bullets does not disturb prototype detection. Idempotent.
 
 Usage: python tools/align_template_skills_projects.py <template.docx> [...]
 """
-import copy, sys
+
+import copy
+import sys
+
 from docx import Document
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 
 W_PPR, W_PBDR, W_NUMPR, W_R, W_T, W_RPR, W_B = (
-    qn('w:pPr'), qn('w:pBdr'), qn('w:numPr'), qn('w:r'), qn('w:t'),
-    qn('w:rPr'), qn('w:b'))
+    qn('w:pPr'),
+    qn('w:pBdr'),
+    qn('w:numPr'),
+    qn('w:r'),
+    qn('w:t'),
+    qn('w:rPr'),
+    qn('w:b'),
+)
 
 
 def ptext(p):
@@ -47,9 +56,9 @@ def bold_label(p):
         return
     rpr0 = first.find(W_RPR)
     if rpr0 is not None and rpr0.find(W_B) is not None:
-        return                                   # already bolded -> idempotent
+        return  # already bolded -> idempotent
     full = ''.join((r.find(W_T).text or '') for r in runs if r.find(W_T) is not None)
-    if ':' not in full:                          # only lines with a "Label:" part
+    if ':' not in full:  # only lines with a "Label:" part
         return
     label, rest = full.split(':', 1)
     label, rest = label + ':', rest.strip()
@@ -97,7 +106,7 @@ def transform(path):
         for i in range(s + 1, e):
             p = paras[i]
             if not ptext(p).strip():
-                p.getparent().remove(p)                      # spacer
+                p.getparent().remove(p)  # spacer
                 continue
             old = p.find(W_PPR)
             new = copy.deepcopy(bullet_ppr)

@@ -49,7 +49,11 @@ Digests land in `career-kb/.digest/` and are a BUILD ARTIFACT: regenerate them
 whenever profile.json changes. The orchestrator injects the digest *path*; it
 never loads the fact base into its own context.
 """
-import argparse, json, os, sys
+
+import argparse
+import json
+import os
+import sys
 
 KB = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROFILE = os.path.join(KB, 'profile.json')
@@ -88,8 +92,13 @@ DROP_FIELDS = {
         # her evidence, and the URL/source lines are provenance for a human.
         # honesty_rules and not_own_do_not_cite ALWAYS stay, in every phase -
         # they are the contract that stops a repo being claimed wrongly.
-        'github_repositories': ['assessment_takehomes', 'learning_selfstudy',
-                                'open_source_contribution', 'source', 'profile_url'],
+        'github_repositories': [
+            'assessment_takehomes',
+            'learning_selfstudy',
+            'open_source_contribution',
+            'source',
+            'profile_url',
+        ],
         # LinkedIn wording belongs to /optimize-linkedin, which reads
         # profile.json directly and never touches these digests.
         'work_experience': ['linkedin_title_de', 'linkedin_title_en', 'linkedin_note'],
@@ -110,13 +119,20 @@ def prune_fields(value, fields):
     if isinstance(value, dict):
         return {k: v for k, v in value.items() if k not in fields}
     if isinstance(value, list):
-        return [{k: v for k, v in item.items() if k not in fields}
-                if isinstance(item, dict) else item for item in value]
+        return [
+            {k: v for k, v in item.items() if k not in fields} if isinstance(item, dict) else item
+            for item in value
+        ]
     return value
 
 
+def load_profile():
+    with open(PROFILE, encoding='utf-8') as f:
+        return json.load(f)
+
+
 def build(phase, profile=None):
-    data = profile if profile is not None else json.load(open(PROFILE, encoding='utf-8'))
+    data = profile if profile is not None else load_profile()
     kept = {k: v for k, v in data.items() if k not in DROP.get(phase, [])}
     for key, fields in DROP_FIELDS.get(phase, {}).items():
         if key in kept:
@@ -127,18 +143,23 @@ def build(phase, profile=None):
 
 
 def stats():
-    raw = open(PROFILE, encoding='utf-8').read()
+    with open(PROFILE, encoding='utf-8') as f:
+        raw = f.read()
     lines = raw.count('\n') + 1
-    read_cost = est_tokens(raw) + lines * 4   # Read prefixes every line
+    read_cost = est_tokens(raw) + lines * 4  # Read prefixes every line
     print(f"{'':<16}{'chars':>9}{'~tokens':>9}{'vs Read':>10}")
     print(f"{'profile.json':<16}{len(raw):>9,}{est_tokens(raw):>9,}")
     print(f"{'  + line numbers':<16}{'':>9}{read_cost:>9,}{'baseline':>10}")
     for phase in sorted(DROP):
         d = build(phase)
-        print(f"{phase:<16}{len(d):>9,}{est_tokens(d):>9,}"
-              f"{(1 - est_tokens(d) / read_cost) * 100:>9.0f}%")
-    print("\n'vs Read' = saving against reading pretty-printed profile.json,"
-          "\nwhich is what the agents did before. Per call, and every call re-reads it.")
+        print(
+            f"{phase:<16}{len(d):>9,}{est_tokens(d):>9,}"
+            f"{(1 - est_tokens(d) / read_cost) * 100:>9.0f}%"
+        )
+    print(
+        "\n'vs Read' = saving against reading pretty-printed profile.json,"
+        "\nwhich is what the agents did before. Per call, and every call re-reads it."
+    )
 
 
 def main():
@@ -157,7 +178,7 @@ def main():
         ap.error('pass --phase, --all or --stats')
 
     os.makedirs(DIGEST_DIR, exist_ok=True)
-    profile = json.load(open(PROFILE, encoding='utf-8'))
+    profile = load_profile()
     for phase in phases:
         out = args.out or os.path.join(DIGEST_DIR, f'profile_{phase}.json')
         text = build(phase, profile)
