@@ -13,7 +13,7 @@ The orchestrator injects the **paths** you need: the fact digest (`career-kb/.di
 
 Read each injected path **exactly once**, and read nothing else. Never read `career-kb/profile.json`—the digest replaces it. Re-reading the digest is the single most expensive mistake available to you: it is ~19k tokens, and it is re-sent on every turn you take afterwards.
 
-**Never explore.** No `ls`, `find`, `glob`, `git show`, `git log`, or grepping for files, and never read the pipeline's own tooling (`render_application.py`, `apply_cv_patch.py`, `build_letter.py`, `ats_hygiene.py`, `build_fit.py`) or the HTML template. The Company I letter is your only letter example—do not hunt through `output/` or git history for others. Read one base content JSON only, not several for comparison. If a path is genuinely missing, say which and stop.
+**Never explore.** No `ls`, `find`, `glob`, `git show`, `git log`, or grepping for files, and never read the pipeline's own tooling (`render_application.py`, `apply_cv_patch.py`, `build_letter.py`, `ats_hygiene.py`, `build_fit.py`) or the HTML template. The injected tone reference is your only letter example—do not hunt through `output/` or git history for others. Read one base content JSON only, not several for comparison. If a path is genuinely missing, say which and stop.
 
 Write both files in **one turn**, with two `Write` calls in the same message. Sequencing them costs a full re-read of everything above for no benefit.
 
@@ -50,17 +50,17 @@ Write **only the fields that change**. Every key is optional; omit anything you 
 ## Cover letter
 - Tailor the letter to the job. Structure: ~40% company/problem, ~40% solution/value, ~20% about Jacqueline.
 - Reference the company and role in the introduction.
-- Write roughly one page: the Company I reference is 6 paragraphs / ~500 words, which fits. Be confident, concise, solution-oriented, and match the posting's language and register (`du`/`Sie`).
-- **Do not verify page length, and do not render anything.** `render_application.py` owns page fitting: it scales the letter to one page and fails loudly if the text is too long. Checking it yourself turns into write → render → shorten → render, which measured 14 edits and 27 minutes in one run for a single page of text. Judge length against the Company I reference, write once, and stop. If the render later fails on length, the orchestrator will send it back to you with the failure.
+- Write roughly one page: the tone reference is 6 paragraphs / ~500 words, which fits. Be confident, concise, solution-oriented, and match the posting's language and register (`du`/`Sie`).
+- **Do not verify page length, and do not render anything.** `render_application.py` owns page fitting: it scales the letter to one page and fails loudly if the text is too long. Checking it yourself turns into write → render → shorten → render, which measured 14 edits and 27 minutes in one run for a single page of text. Judge length against the tone reference, write once, and stop. If the render later fails on length, the orchestrator will send it back to you with the failure.
 
 Write text only—no HTML, no `<p>` tags, no CSS, no date, no address block, no signature. That skeleton was ~2k output tokens of byte-identical boilerplate per run, so it lives in `templates/coverletter_template_<lang>.html` now. The A4 layout, the sender email and the signature are already there; you cannot improve them and must not restate them.
 
 ```json
 {
-  "company": "Company D",
+  "company": "Beispiel GmbH",
   "tagline": "Softwareentwicklerin - Agentic AI, Agent-Workflows & Backend-Entwicklung (Laravel, Python)",
   "subject": "Bewerbung als Software Developer - AI & Agentic Systems",
-  "salutation": "Hallo Company D-Team,",
+  "salutation": "Hallo Beispiel-Team,",
   "paragraphs": ["...", "...", "..."]
 }
 ```

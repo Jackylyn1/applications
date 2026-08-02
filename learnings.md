@@ -3,6 +3,10 @@
 A running log of what we built, what broke, what the numbers actually were, and
 why. Updated after every task.
 
+> Employers are pseudonymised as **Company A–J** (and `company-a`–`company-j` in
+> filenames). The mapping is stable across the whole log, so a run can still be
+> followed end to end — but who she applied to is not this repository's business.
+
 Three audiences, in this order:
 1. **Us** — so a fix is never rediscovered twice.
 2. **Applications** — concrete, measurable engineering evidence for CVs and
@@ -35,7 +39,7 @@ whole thing.
 | 1 | Orchestrator said "inject file *content*", agent specs said "*read* `profile.json`" — contradictory | fixed by hand |
 | 2 | Dash hygiene enforced only on the CV path; the cover letter shipped **12 en dashes** into the PDF | extracted `tools/ats_hygiene.py`, imported by both paths |
 | 3 | `README.md` duplicated the render commands and had **drifted** — it documented a CV rendered from HTML, contradicting the hard rule that CVs come from the stored DOCX template | README reduced to an index; commands documented once |
-| 4 | Two filename conventions in one run (`offer_Company A_de.json` vs `Urban_CV_Company A_de.pdf`) | naming defined once, in `tools/render_application.py`; agents call `--print-paths` |
+| 4 | Two filename conventions in one run (`offer_company-a_de.json` vs `Urban_CV_Company-A_de.pdf`) | naming defined once, in `tools/render_application.py`; agents call `--print-paths` |
 | 5 | Cover letter invented an `Anlagen:` line nothing had specified | banned in `cover-letter-standards.md` |
 
 The pattern in 2/3/4: **duplication drifts.** Every one of those defects was two
@@ -242,7 +246,7 @@ bottleneck.** Everything that mattered was around it.
 
 After run 2 finished, `career-kb/output/` and `career-kb/content/` were emptied
 of the run's outputs at 19:29, and a file nothing in this session wrote —
-`career-kb/offer_Company A_de.md`, self-described as a *reconstructed*
+`career-kb/offer_company-a_de.md`, self-described as a *reconstructed*
 job offer rebuilt from the phase-1 parse — appeared at 19:20. A **concurrent
 Claude Code session** was operating in the same repo.
 
@@ -703,7 +707,7 @@ the Laravel correction from 2026-07-26.
   generators actually see it (they read `.digest/`, not `profile.json` — a stale
   digest silently ignores a KB fix).
 - Letter and CV content edited in place, `render_application.py --company
-  Company C --lang de`, 12/12 checks passed (letter 501 words → 1 page, CV 2
+  company-c --lang de`, 12/12 checks passed (letter 501 words → 1 page, CV 2
   pages).
 
 ### Numbers
@@ -1169,7 +1173,7 @@ repo rather than recollection:
   those two numbers — because nobody ever ran the count. The multiplication
   would have been true-looking and unverified, which is the same as false."*
 
-## 2026-07-31 — Run: Company D (posted as "Company D alias") — Software Developer, RAG / Knowledge Graph / Agentic Systems, de
+## 2026-07-31 — Run: Company D (posted under a white-label brand) — Software Developer, RAG / Knowledge Graph / Agentic Systems, de
 
 ### Numbers
 - Offer requirements: 7 qualifications, 8 responsibilities. Genuine DIRECT match on 5 of 7
@@ -1308,7 +1312,7 @@ the pipeline, twice over.
 ### What was measured
 
 - **Cover letter:** the agent wrote the whole HTML document — doctype, A4 print CSS,
-  header, address table, date, signature. **5,588 bytes** (Company I) / **5,712** (Company D), of
+  header, address table, date, signature. **5,588 bytes** (company-i) / **5,712** (company-d), of
   which ~2,000 was byte-identical on every single run. Content JSON instead:
   **3,872 / 4,015 bytes** — a **30 %** cut, ~1,730 → ~1,215 output tokens.
 - **CV:** the agent rewrote the entire content JSON — **9,800 bytes**, ~2,970 output
@@ -1335,18 +1339,18 @@ names (not the system locale), so a letter can no longer be dated wrong by a mod
 
 ### The reference file that deleted itself
 
-`generate-cover-letter.md` pointed at `output/coverletter_dmc_de.html` as its structure
+`generate-cover-letter.md` pointed at `output/coverletter_company-i_de.html` as its structure
 reference. `output/` holds disposable build artifacts, so routine cleanup deleted it, and
 the phase was pointing at a missing file — while also being told "if a path is missing,
 stop". **A pipeline input stored in an output directory is a time bomb.** Both references
 now live where nothing sweeps them: `templates/coverletter_template_{de,en}.html` for the
-skeleton, `examples/coverletter_dmc_de.json` for tone. The example is stored in the exact
+skeleton, `examples/coverletter_company-i_de.json` for tone. The example is stored in the exact
 format the phase must emit, so one file is both the tone reference *and* the schema — and
 it carries no CSS.
 
 ### Verification
 
-Round-trip: the Company D letter was decomposed into a content JSON, reassembled through the
+Round-trip: the company-d letter was decomposed into a content JSON, reassembled through the
 template, and re-rendered. `pdftotext` output is **identical** to the original PDF. Renderer
 still 12/12 green on both documents; old-style artifacts (finished HTML + merged content
 JSON) render unchanged, so in-flight applications did not break.
@@ -1507,7 +1511,7 @@ inject a stale file that still looks current.
 
 ### Correction to yesterday's patch numbers — measured on a real run
 
-The Company F application is the first real run through the delta path, and it corrects
+The company-f application is the first real run through the delta path, and it corrects
 the figure I logged yesterday. I measured the CV saving with a **synthetic** patch that
 rewrote one bullet set: 522 B vs 9,800 B, i.e. −80%. A real tailoring run does far more
 work than that:
@@ -1546,7 +1550,7 @@ appended without reading up.
 ### Skills by reference — the last easy 375 tokens
 
 `skills` was the one section still restated in full on every run: nine lines, 1,248 bytes
-in the Company F patch, to express what is almost always just **a permutation**. Tailoring
+in the company-f patch, to express what is almost always just **a permutation**. Tailoring
 moves the required stack to the top; the line text rarely changes.
 
 `"skills": {"select": ["KI", "Backend", ...]}` says the same thing by reference:
@@ -1567,7 +1571,7 @@ renderer prints a NOTE whenever a `select` drops skill lines, for the same reaso
 for work-experience entries: the failure is silent in the PDF and expensive in the
 applicant tracking system.
 
-## Company G — PHP Vibe-Coder (Laravel), 2026-08-01
+## company-g — PHP Vibe-Coder (Laravel), 2026-08-01
 
 **Numbers.** Preparation 41,171 tokens / 5 tool uses / 46 s. Generation 58,455 tokens /
 11 tool uses / 55 s, plus a 61,028-token repair pass (12 tool uses, 105 s) because the
@@ -1589,14 +1593,14 @@ without shipping garbage? The answer that lands is not a speedup number, it is t
 verification layer — PHPStan level 9, BDD, audit subagents, Langfuse traces of every
 turn and tool call. Speed claims are unfalsifiable; a trace is not.
 
-## Company H SE — GenAI Engineering Coach (all genders), 2026-08-02
+## Company H — GenAI Engineering Coach (all genders), 2026-08-02
 
 **Numbers.** Preparation 41,130 tokens / 5 tool uses / 54 s. Generation 59,936 tokens /
 11 tool uses / 71 s. No repair pass. Render 12/12 checks on the first run: CV 2 pages
 (733 words, scale 1.0, 0 bullets dropped), letter 1 page (507 words, zoom 1.0, 6
 paragraphs / 456 source words). Base `it-consultant_de.json`, register `du`.
 
-**Why it ran clean this time.** Same two-phase shape as Company G, but the generation
+**Why it ran clean this time.** Same two-phase shape as company-g, but the generation
 phase invented no selectors. The difference was the preparation summary naming the
 evidence items explicitly (Langfuse, MCP client, code-audit suite, pivot events) instead
 of describing them by category. A selector the generator has seen spelled out is one it

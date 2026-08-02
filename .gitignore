@@ -24,9 +24,23 @@ job-watch/watch.log
 
 # Generated application documents (Jacqueline, 2026-07-31). Reproducible from
 # career-kb/content/*.json plus a template in ~1.7s, so they are output, not
-# knowledge. Pipeline INPUTS never live here — the cover-letter tone reference
-# is career-kb/examples/coverletter_dmc_de.html precisely because of this rule.
+# knowledge.
 career-kb/output/
+
+# NO COMPANY NAMES IN THE REPOSITORY (Jacqueline, 2026-08-02).
+# Every per-application artifact is named after the company it targets — the
+# naming convention itself lives in career-kb/tools/render_application.py. Who
+# she applied to is nobody else's business, so these stay on disk and out of
+# git. The role-generic base CVs in career-kb/content/ (php-developer_de.json
+# and friends) are tracked: they carry no target company.
+career-kb/content/offer_*.json
+career-kb/content/patch_*.json
+career-kb/offer_*.md
+career-kb/examples/coverletter_*
+
+# Private source documents (Arbeitszeugnisse, certificates). They name former
+# employers and were never meant for publication.
+career-kb/documents/
 
 # career-kb/.digest/ is deliberately NOT ignored (Jacqueline, 2026-07-31).
 # The digests are generated, but they are what the agents actually read instead
@@ -34,3 +48,4 @@ career-kb/output/
 # rather than silently shipping outdated facts, and a fresh clone works without
 # a build step. Rebuild with .claude/scripts/rebuild-digests.sh after every
 # profile.json change.
+.coverage
