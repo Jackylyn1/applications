@@ -1620,3 +1620,74 @@ trace. Self-hosted Langfuse over Docker Compose, every turn, generation, tool ca
 token counted — that is the difference between an AI opinion and an AI decision. Guardrails
 follow the same logic: an AI code audit is worth nothing until a deterministic check
 confirms what the model claimed.
+
+## Signature in the cover letter, 2026-08-02
+
+**What was built.** The handwritten signature was cut out of a scanned PDF page (photo of
+paper, 200 dpi render) and now sits in every letter automatically:
+`career-kb/assets/signature.png`, inlined as a base64 data URI by `build_letter.py` into
+both templates, above the typed name. Company H's letter was rebuilt with it and re-dated
+to 3 August 2026.
+
+**The cut was a colour problem, not a cropping problem.** The signature crosses a printed
+rule and the printed label under it, so no rectangle isolates it. Luminance alone keeps
+all three. What separates them is hue: the paper photographs warm (R roughly 20 above B),
+the printed toner stays warm even when dark, the ballpoint ink is the only thing where
+blue meets or beats red. Gate on `B - R > -3`, then take darkness against the paper level
+as the alpha, and the rule and the label disappear on their own. Two lines of arithmetic
+where a mask drawn by hand would have taken far longer and aged worse.
+
+**Data URI, not a relative path.** The letter is rendered from a scratch copy
+(`output/.fit.html`) that the page-fitting loop writes and deletes, and the fit loop can
+rewrite it several times. Any `src="../assets/…"` is one moved file away from a silently
+missing image in a PDF nobody re-opens. Inlining costs about 30 KB and cannot break.
+
+**The background is the page, not transparency.** The scan was composited onto pure white
+because that is the letter's page colour — same file works in Chromium and in the
+LibreOffice fallback, and nothing can render a grey halo around the ink.
+
+**Nachtrag: warum die erste saubere Version noch nach Ausschnitt aussah.** Binarisieren
+plus Morphologie macht die Linien topologisch richtig, aber gleich breit — und eine
+gleich breite Handschrift liest sich sofort als Grafik, nicht als Stift. Die Rettung war,
+beide Bilder zu behalten: die bereinigte Binärmaske entscheidet nur noch *wo* Tinte ist,
+die Graustufen aus dem Scan entscheiden *wie viel*. Multipliziert man beide, kommen
+Druckschwankung, Strichverjüngung an den Enden und die dünnen Stellen in den Kurven
+zurück, ohne dass die Verschmutzung wieder auftaucht. Die Auflösung blieb dabei voll
+(926 px breit, rund 590 dpi bei 12 mm Höhe, 42 KB) — Herunterrechnen auf Anzeigegröße war
+falsche Sparsamkeit, gedruckt sieht man den Unterschied.
+
+**Die restlichen Unterbrechungen kamen alle von derselben Stelle.** Nach der
+Dichte-Modulation sahen mehrere Striche noch aufgerissen aus, und zwar nicht zufällig:
+die Unterschrift wurde auf eine gedruckte Linie geschrieben, und mein Farbton-Filter
+entfernt diese Linie samt der Tinte, die genau darauf liegt. Jede Kreuzung ist damit eine
+Lücke von rund fünfzehn Pixeln. Sichtbar wurde das erst beim Zählen der
+Zusammenhangskomponenten: sieben statt der fünf, die die echten Absetzpunkte hergeben.
+Repariert wird jetzt gezielt — Strichenden ober- und unterhalb der Linie werden paarweise
+verbunden, mit der lokalen Strichbreite, und nur wenn auf beiden Seiten wirklich Tinte
+weitergeht. Der Absatz zwischen "b" und "a" ist echt (46 px, im Foto klar sichtbar) und
+bleibt offen; ein Bild "sauberer" zu machen als das Original ist keine Reinigung mehr.
+
+**Merkregel dafür.** Bei so einer Freistellung ist die Komponentenzahl die einzige
+Messung, die zählt. Ansehen genügt nicht — bei der Anzeigegröße von 12 mm sind fünfzehn
+Pixel unsichtbar, gedruckt und vergrößert nicht.
+
+**Die Kanten waren nicht zu retten — sie mussten weg.** Jede Filterrunde auf der Maske
+(glätten, öffnen, schließen) arbeitet weiter an einem Umriss, der aus Papierfasern und
+Handykamera besteht. Der Ausweg war, den Umriss ganz aufzugeben: die Maske auf eine ein
+Pixel breite Mittellinie ausdünnen (Zhang-Suen), diese Linie glätten und mit einer runden
+Feder neu zeichnen. Damit sind die Kanten gezeichnet statt fotografiert und mathematisch
+glatt, während Form und Strichführung erhalten bleiben.
+
+**Zwei Dinge, die dabei zuerst falsch aussahen.** Erstens Perlenschnur: die Federbreite
+pixelweise aus der Distanztransformation zu nehmen, reproduziert die Papierkörnung als
+Kette von Verdickungen — ein Kugelschreiber hat eine Breite, also gehört der Messwert
+stark geglättet und nach oben gedeckelt. Zweitens zu fett: die Maske ist durch Schließen,
+Brückenschlag und den Unschärfehof des Fotos deutlich breiter als der echte Strich, hier
+Faktor knapp zwei. Ohne diese Korrektur laufen enge Schleifen wie im "b" zu.
+
+**Und der Fallstrick beim Nachzeichnen.** Das Ausdünnen erfindet an jeder Ausbuchtung eine
+Verzweigung, die Kurve zerfällt in Fragmente, und jedes Fragmentende bekommt beim Zeichnen
+eine Verjüngung — das liest sich wieder als unterbrochener Strich. Nötig war beides:
+Fragmente wieder zusammennähen, wo genau zwei an einem Punkt sanft ineinander laufen, und
+verjüngen nur noch dort, wo die Mittellinie wirklich endet. Zur Kontrolle zählt das Skript
+am Ende die Mittellinienpixel, die kein Pfad aufgenommen hat; die Zahl muss null sein.

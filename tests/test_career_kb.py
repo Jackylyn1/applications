@@ -98,6 +98,31 @@ def test_build_letter_rejects_missing_fields():
         build_letter.build({'company': 'Acme'}, 'de')
 
 
+LETTER_CONTENT = {
+    'company': 'Acme',
+    'tagline': 'Tagline',
+    'subject': 'Subject',
+    'salutation': 'Hallo Acme-Team,',
+    'paragraphs': ['One paragraph.'],
+}
+
+
+# The real signature is untracked on purpose, so these tests supply their own
+# instead of reading it - otherwise CI and a fresh clone would fail here.
+@pytest.mark.parametrize('lang', ['de', 'en'])
+def test_build_letter_embeds_the_signature(lang, tmp_path, monkeypatch):
+    png = tmp_path / 'signature.png'
+    png.write_bytes(b'\x89PNG\r\n\x1a\n')
+    monkeypatch.setattr(build_letter, 'SIGNATURE', str(png))
+    assert 'src="data:image/png;base64,' in build_letter.build(LETTER_CONTENT, lang)
+
+
+def test_build_letter_asks_for_the_signature_when_it_is_missing(tmp_path, monkeypatch):
+    monkeypatch.setattr(build_letter, 'SIGNATURE', str(tmp_path / 'absent.png'))
+    with pytest.raises(SystemExit, match='signature image not found'):
+        build_letter.build(LETTER_CONTENT, 'de')
+
+
 # --------------------------------------------------------------- CV patch ----
 
 BASE = {

@@ -42,6 +42,13 @@ career-kb/examples/coverletter_*
 # employers and were never meant for publication.
 career-kb/documents/
 
+# The scanned signature (Jacqueline, 2026-08-02). A signature image is reusable
+# by anyone who has the file: it does not make a document legally binding, but it
+# is trivially pasted under one. It therefore never goes into a public
+# repository. build_letter.py fails with instructions when it is absent, so a
+# fresh clone gets a clear error instead of an unsigned letter.
+career-kb/assets/
+
 # career-kb/.digest/ is deliberately NOT ignored (Jacqueline, 2026-07-31).
 # The digests are generated, but they are what the agents actually read instead
 # of profile.json, so tracking them makes a stale digest visible in `git diff`
