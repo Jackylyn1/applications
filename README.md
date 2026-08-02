@@ -1,12 +1,16 @@
 # applications
 
 An agent-driven pipeline that turns a job posting into a tailored, ATS-ready CV
-and cover letter — and, upstream of that, finds the postings in the first place. Finding the posting is not yet implemented completely. Generating the CV is.
+and cover letter, verified before it is handed over.
 
 It is Jacqueline Urban's real job-search workspace, kept public as an engineering
 showcase. The interesting part is not that an LLM writes a cover letter. It is
 **where the boundary between the model and the code was drawn**, and what
 measuring that boundary was worth.
+
+The scope stops at a finished PDF, deliberately: finding postings and sending
+applications are separate problems, and both are discussed under
+[Not in scope](#not-in-scope) rather than half-built here.
 
 ---
 
@@ -35,15 +39,7 @@ job is a gap in an employment history, and gaps get asked about in interviews.
 
 ```mermaid
 flowchart TD
-    subgraph discover["job-watch — find the posting"]
-        A[LinkedIn / Indeed / Glassdoor / Google<br/>via JobSpy] --> C[dedupe: per-board key<br/>+ cross-board alias]
-        B[StepStone<br/>search HTML → schema.org JobPosting] --> C
-        C --> D[(state.db)]
-        C --> E[inbox/*.md<br/>posting text VERBATIM]
-        C --> F[notify once per offer<br/>via Apprise]
-    end
-
-    E --> G
+    E[job posting<br/>text or URL] --> G
 
     subgraph generate["/generate-application — two model phases"]
         G[preparation subagent<br/>match posting ↔ profile, flag gaps] --> H[generate-documents subagent<br/>writes DELTAS only]
@@ -64,7 +60,6 @@ flowchart TD
 
     P --> Q[PDF + editable source<br/>exit non-zero if any check fails]
 
-    style discover fill:#0d1117,stroke:#30363d,color:#c9d1d9
     style generate fill:#0d1117,stroke:#30363d,color:#c9d1d9
     style render fill:#0d1117,stroke:#30363d,color:#c9d1d9
 ```
@@ -78,9 +73,9 @@ career-kb/tools/render_application.py --company <company-slug> --lang de --print
 ```
 
 Its verification step is not decorative — it fails the run if the PDF has the
-wrong page count, if the text is not selectable, if an em dash survived, or if
-the personal email address leaked into a document that should carry the
-application address.
+wrong page count, if the text is not selectable, if an em dash survived, if the
+application address is missing, or if the private email address leaked into a
+document that should carry the application one.
 
 ---
 
@@ -89,9 +84,8 @@ application address.
 | Path | What it is |
 |---|---|
 | [`career-kb/`](career-kb/README.md) | The knowledge base: `profile.json` (single source of truth), channel-scoped writing standards, the DOCX templates, and the render tooling. |
-| [`job-watch/`](job-watch/README.md) | Polls the boards, keeps postings verbatim, notifies once per offer. |
 | `.claude/` | The agents and slash commands that orchestrate the above (`/generate-application`, `/optimize-linkedin`). |
-| `tests/` | 56 unit tests over the pure logic — parsing, merging, hygiene, dedupe. |
+| `tests/` | 35 unit tests over the pure logic — text hygiene, patch merging, template filling, date formatting. |
 | `CODING_RULES.md` | The rules every change to this repo follows. |
 | `CLAUDE.md` | Operating instructions for the agent working in this repo. |
 | `learnings.md` | The running log of what each measurement actually showed. |
@@ -111,10 +105,6 @@ data is in the repository on purpose:
   what the agents actually read instead of `profile.json`, so tracking them makes
   a stale digest show up in `git diff` rather than silently shipping outdated
   facts. A fresh clone also works with no build step.
-- **`job-watch/config.json`** — the real queries and sources. Notification
-  credentials are *not* in it: channels are written as `${VAR}` and resolved from
-  the environment, and a channel whose variable is unset is skipped with a warning
-  instead of failing at send time.
 
 **No company name belongs in this repository.** Who someone applied to, and when,
 is nobody else's business — least of all a recruiter's, reading the repo she
@@ -128,13 +118,23 @@ remembering. In `learnings.md` the runs are pseudonymised as **Company A–J**,
 consistently, so each run can still be followed end to end.
 
 Also not committed: the generated PDFs in `career-kb/output/` (reproducible in
-~1.7s, so they are output, not knowledge), the scraped `job-watch/inbox/` and its
-`state.db`, and the virtualenvs.
+~1.7s, so they are output, not knowledge) and the virtualenvs.
 
-The contact details in `profile.json` are the ones already printed on a CV that
-gets sent to strangers; the personal email address is a different one, and
-`render_application.py` has a check whose entire job is to fail the build if it
-ever appears in a generated document.
+Two things are kept out for reasons worth stating:
+
+- **`career-kb/assets/signature.png`** — the scanned signature the cover letter
+  embeds. A signature image does not make a document legally binding (German law
+  wants an *eigenhändige* signature for `Schriftform`, § 126 BGB), but it is
+  trivially pasted under anything by whoever holds the file. So it stays local,
+  and `build_letter.py` fails with instructions when it is missing rather than
+  quietly shipping an unsigned letter.
+- **the private email address** — the contact details in `profile.json` are the
+  ones already printed on a CV that goes to strangers. The private address is a
+  different one and is stored nowhere in this repository, because writing it down
+  would publish exactly the string that needs protecting. `render_application.py`
+  still checks that it never reaches a generated document; it reads the value from
+  `CAREER_KB_PERSONAL_EMAIL` and reports `SKIP`, not `OK`, when that is unset — an
+  unset variable must not be able to pass for a clean run.
 
 ---
 
@@ -170,72 +170,43 @@ thing.
 | Gate | Tool | Setting |
 |---|---|---|
 | Lint | Ruff | Explicit rule selection — never inherited defaults, so a Ruff upgrade cannot silently redefine "clean" |
-| Format | Ruff Formatter | `quote-style = "preserve"`; the two components differ and normalizing would bury real diffs |
-| Types | mypy | Clean across all 14 modules |
+| Format | Ruff Formatter | `quote-style = "preserve"` — letting the formatter rewrite quotes would bury real diffs |
+| Types | mypy | Clean across all 11 source files |
 | Security | Bandit | No medium-or-higher findings |
 | Complexity | Radon / Xenon | No block worse than C, no module worse than B, average A |
 | Dead code | Vulture | Clean |
-| Tests | pytest + coverage.py | 56 tests |
-| Dependencies | pip-audit | See below |
+| Tests | pytest + coverage.py | 35 tests |
+| Dependencies | pip-audit | Clean |
 
-Every suppression in the codebase carries its reason on the same line — the three
-`except Exception` in `watch.py` say *one flaky board must not sink the run*; the
-naive `datetime` calls say *local wall-clock is the point*; the lazy `import
-jobspy` says *heavy import, only pay for it when used*. A `noqa` without a reason
-is just a hidden bug.
+There are four suppressions in the whole codebase and every one carries its
+reason: the three `RUF001` say *this table is the definition of the dash rule, so
+it has to contain the dashes it forbids*, and the `DTZ011` says *local calendar day
+on purpose, the letter is dated where it is written*. A `noqa` without a reason is just a
+hidden bug.
 
-Coverage sits at **37%**, and that number is honest rather than flattering: the
-tests cover the pure logic where a refactor can silently change behaviour —
-patch merge and its failure modes, dash hygiene, timespan splitting, bullet
-dropping, URL normalization, cross-board dedupe, schema.org extraction. The
-uncovered remainder is the subprocess and CLI layer, which is verified end to end
-by `render_application.py`'s own checks. One test does build a real CV from the
-actual DOCX template, so the template-filling path is exercised against the real
-artifact rather than a mock.
-
-### Known open finding
-
-`pip-audit` reports `markdownify 0.13.1` (PYSEC-2026-1604, fixed in 0.14.1). It
-arrives transitively through `python-jobspy`, which pins it below the fixed
-version — adding the constraint here makes dependency resolution fail. It needs
-an upstream `python-jobspy` release, so CI reports it without failing the build.
-
-### A known quirk, documented rather than fixed
-
-`watch.slugify()` runs NFKD normalization *before* its `ä→ae` replacements, so the
-umlaut is already decomposed and the expansion never fires: "Müller" becomes
-`Muller`, not `Mueller`. That behaviour is pinned by a test with a comment
-explaining it, because `slugify` feeds the cross-board alias key — "fixing" it
-would make every already-seen German cross-posting look new and re-notify once.
-The cheap correct-looking change is the expensive one.
+Coverage sits at **38%**, and that number is honest rather than flattering: the
+tests cover the pure logic where a refactor can silently change behaviour — patch
+merge and every one of its failure modes, dash hygiene, timespan splitting, bullet
+dropping, date formatting, and the signature guard. The uncovered remainder is the
+subprocess and CLI layer, which is verified end to end by
+`render_application.py`'s own checks. One test does build a real CV from the actual
+DOCX template, so the template-filling path is exercised against the real artifact
+rather than a mock.
 
 ---
 
 ## Observability — session tracing
 
-Claude Code sessions are traced to a **self-hosted Langfuse** — turns,
-generations, tool calls and token usage — through Langfuse's official Claude Code
-plugin. It hooks `Stop` and `SessionEnd`, so it adds nothing to the model's
-context. This is where the token numbers at the top of this README come from:
-they are measurements, not estimates.
+Claude Code sessions are traced to a self-hosted **Langfuse** — turns, generations,
+tool calls and token usage — via Langfuse's official plugin. It hooks `Stop` and
+`SessionEnd`, so it adds nothing to the model's context. Every token and latency
+figure in [Learnings](#learnings) is read off those traces: they are measurements,
+not estimates.
 
-**UI: <http://localhost:33000>** (port 3000 is taken by another container on this
-machine).
-
-Langfuse is machine-level infrastructure, **not part of this project**: it traces
-every Claude Code session regardless of directory, and nothing in its
+Langfuse is machine-level infrastructure and **not part of this project** — it
+traces every Claude Code session regardless of directory, and nothing in its
 configuration references this repository. It therefore lives outside the repo and
 is deliberately not versioned here.
-
-| Where | What |
-|---|---|
-| `[path to langfuse]/` | the upstream clone — `docker compose up -d` · `down` · `ps` · `logs -f langfuse-web` |
-| `[path to langfuse]/.env` | ports, secrets, login (mode `0600`) — the only place these values exist |
-| `[path to langfuse]/docker-compose.override.yml` | the port bindings; upstream `docker-compose.yml` is untouched so `git pull` upgrades cleanly |
-| `~/.claude/settings.json` | plugin config: `LANGFUSE_PUBLIC_KEY`, `LANGFUSE_BASE_URL` (the secret key lives in the OS keychain) |
-| `~/.claude/state/langfuse_hook.log` | hook log — first place to look when traces don't arrive |
-
-Health check: `curl -s -o /dev/null -w '%{http_code}\n' http://localhost:33000/api/public/health` → `200`.
 
 <details>
 <summary>Activating it in Claude Code elsewhere</summary>
@@ -247,36 +218,44 @@ claude plugin marketplace add langfuse/Claude-Observability-Plugin
 claude plugin install langfuse-observability@langfuse-observability \
   --config LANGFUSE_PUBLIC_KEY=pk-lf-… \
   --config LANGFUSE_SECRET_KEY=sk-lf-… \
-  --config LANGFUSE_BASE_URL=http://localhost:33000
+  --config LANGFUSE_BASE_URL=http://localhost:3000
 ```
 
 `--config` is only read on install — a second `install` call on an already
 installed plugin is a no-op, so change values later with `/plugin configure
 langfuse-observability@langfuse-observability`. Hooks take effect in the **next**
-session. Requires `uv` on PATH (or Python 3.10+ with `langfuse>=4.0,<5`).
+session. Requires `uv` on PATH (or Python 3.10+ with `langfuse>=4.0,<5`). Setup
+pitfalls that cost time once are in [`learnings.md`](learnings.md).
 
 </details>
 
-Setup pitfalls that cost time once are recorded in
-[`learnings.md`](learnings.md), not repeated here.
-
 ---
 
-## Caveats, stated plainly
+## Not in scope
 
-- **job-watch is scraping.** None of the three boards has a usable public jobs
-  API. It is fine for personal, low-volume use at this cadence; it is against
-  LinkedIn's and Indeed's ToS, and selectors break when they redesign. A source
-  suddenly returning 0 hits is the usual symptom. See
-  [`job-watch/README.md`](job-watch/README.md) for what was verified and when.
-- **There is no free API to submit an application** to any board — every ATS
-  apply endpoint needs the employer's credentials. This pipeline ends at "here is
-  a finished, verified PDF"; sending stays manual, on purpose.
-- **This is one person's career, not a product.** There is no vector database
-  because embeddings would add an API dependency and fuzzy chunk retrieval to a
-  problem that exact structured lookup solves instantly and completely. The
-  upgrade path, if it were ever needed, is written down in
-  [`career-kb/README.md`](career-kb/README.md).
+Both ends of the pipeline are cut off on purpose, and neither is a stub waiting
+to be finished.
+
+**Finding the postings.** An earlier version of this repo polled LinkedIn,
+Indeed, Glassdoor, Google and StepStone, kept every posting verbatim, deduplicated
+per board and across boards, and notified once per offer. It worked, and it is
+removed rather than kept: none of those boards has a usable public jobs API, so all
+of it was scraping — against LinkedIn's and Indeed's terms of service, and broken
+by any redesign of theirs. Carrying a component whose failure mode is "a source
+silently returns 0 hits" is not worth it for a system whose value is the
+*generation* step. It is recoverable from the git history if a legitimate source
+appears; a board with a real API, or the Bundesagentur für Arbeit's
+Jobsuche API, would be the way back in.
+
+**Sending the application.** There is no free API to submit an application to any
+board — every ATS apply endpoint needs the employer's credentials. The pipeline
+therefore ends at "here is a finished, verified PDF", and sending stays manual.
+
+**Retrieval.** There is no vector database, because embeddings would add an API
+dependency and fuzzy chunk retrieval to a problem that exact structured lookup
+solves instantly and completely. This is one person's career, not a product. The
+upgrade path, if it were ever needed, is written down in
+[`career-kb/README.md`](career-kb/README.md).
 
 ---
 
@@ -304,6 +283,5 @@ with the numbers and the wrong turns that produced them, is in
 | **Build artifact as input** | A prompt pointed at a previous run's file in the gitignored output directory | Never let a prompt depend on a disposable artifact. Pipeline inputs live with the templates; outputs are deletable by definition. | Routine cleanup removed the reference letter the cover-letter phase used for tone, and the phase broke. The reference moved next to the templates, where nothing deletes it. |
 | **Stale generated digests** | Digests were gitignored and two days older than their source | Track a generated file when a stale copy is dangerous. Tracking makes staleness show up in `git diff` instead of shipping outdated facts silently. | The digests are what the agents actually read instead of the fact base, so a stale one means the pipeline is quietly working from old truth. Committing them also means a fresh clone works with no build step. |
 | **Inherited linter defaults** | No tool config; Ruff ran on whatever its defaults were that week | Pin the rule set explicitly. Inherited defaults mean a tool upgrade can redefine "clean" without a single line of your code changing. | An unpinned Ruff went from reporting nothing to reporting 51 findings across the same files. The rule list now lives in `pyproject.toml`, and CI runs the same commands as `make check`. |
-| **Bug fix breaks dedupe** | `slugify()` runs NFKD before its umlaut expansion, so "Müller" becomes `Muller` | A correct-looking fix in a function that feeds persisted keys is not a local change. Pin the current behaviour with a test and a reason instead. | The `ä→ae` expansion never fires, because the umlaut is already decomposed by the time it runs. Fixing it would change every cross-board alias key and re-notify every German cross-posting once, so the quirk stays documented. |
 | **Rewrites delete ignored files** | Assumed `git filter-repo` only touches history | `filter-repo` hard-resets the working tree and takes untracked, gitignored files with it. Take a bundle *and* a copy of the files before rewriting. | Untracking 17 private files left them safely on disk; the history rewrite half an hour later deleted every one. They came back from the backup bundle, which is the only reason this is a footnote and not an incident. |
 | **Untracking is not removing** | `git rm --cached` plus a `.gitignore` entry | Removing a file from HEAD leaves it in every previous commit, and leaves its *contents* in unrelated files' history. Purging needs both path filters and text replacement. | The private files were gone from the working tree and still one `git log` away, on a branch already pushed. Old versions of the log, the fact base and the agent docs carried the same names inside them, which no amount of untracking would have fixed. |

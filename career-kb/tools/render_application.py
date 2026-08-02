@@ -75,7 +75,12 @@ TEMPLATES = {
 }
 
 APPLICATION_EMAIL = 'info@perfectseowebsite.de'
-PERSONAL_EMAIL = 'diejacky@gmx.net'  # must never reach a generated document
+# The private address must never reach a generated document - but writing it in
+# here would publish, in a public repository, the exact string the check exists
+# to protect. It is read from the environment instead, and when it is unset the
+# check reports SKIP rather than OK, so an unset variable cannot pass for a
+# clean run.
+PERSONAL_EMAIL = os.environ.get('CAREER_KB_PERSONAL_EMAIL', '')
 
 
 # ---------------------------------------------------------------- naming ----
@@ -295,7 +300,11 @@ def render_cover_letter(html, pdf_out):
 
 
 def verify(pdf, label, expect_pages=None):
-    """Mechanical checks every generated document must pass."""
+    """Mechanical checks every generated document must pass.
+
+    A check is (message, ok), where ok is True, False, or None for "could not be
+    run" - see PERSONAL_EMAIL.
+    """
     checks = []
     ok_exists = os.path.exists(pdf) and os.path.getsize(pdf) > 0
     checks.append((f'{label}: file exists and is non-empty', ok_exists))
@@ -313,7 +322,10 @@ def verify(pdf, label, expect_pages=None):
         (f'{label}: text is selectable ({len(text.split())} words)', len(text.strip()) > 0)
     )
     checks.append((f'{label}: application email present', APPLICATION_EMAIL in text))
-    checks.append((f'{label}: personal email absent', PERSONAL_EMAIL not in text))
+    if PERSONAL_EMAIL:
+        checks.append((f'{label}: personal email absent', PERSONAL_EMAIL not in text))
+    else:
+        checks.append((f'{label}: personal email absent (CAREER_KB_PERSONAL_EMAIL unset)', None))
     dashes = count_violations(text)
     checks.append((f'{label}: no em/en dashes ({dashes} found)', dashes == 0))
     return checks
@@ -347,13 +359,17 @@ def resolve_inputs(args, p):
     return inputs
 
 
+STATUS = {True: 'OK', False: 'FAIL', None: 'SKIP'}
+
+
 def report(checks, produced):
     """Print the verification table and the artifact list; return the exit code."""
     print('\nVERIFICATION')
-    failed = 0
+    failed = skipped = 0
     for msg, ok in checks:
-        print(f'  [{"OK" if ok else "FAIL"}] {msg}')
-        failed += 0 if ok else 1
+        print(f'  [{STATUS[ok]}] {msg}')
+        failed += 1 if ok is False else 0
+        skipped += 1 if ok is None else 0
 
     print('\nPRODUCED')
     for f in produced:
@@ -362,7 +378,8 @@ def report(checks, produced):
     if failed:
         print(f'\n{failed} check(s) FAILED')
         return 1
-    print(f'\nAll {len(checks)} checks passed.')
+    passed = len(checks) - skipped
+    print(f'\nAll {passed} checks passed.' + (f' {skipped} skipped.' if skipped else ''))
     return 0
 
 
