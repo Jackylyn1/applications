@@ -13,12 +13,27 @@ this script instead:
 
 NAMING CONVENTION (defined once, here)
     company slug         always lowercase kebab-case (enforced, not assumed)
-    CV content JSON      content/offer_<slug>_<lang>.json
-    cover-letter source  output/coverletter_<slug>_<lang>.html
+    CV patch JSON        content/patch_<slug>_<lang>.json      <- model writes
+    CV content JSON      content/offer_<slug>_<lang>.json      <- merged here
+    letter content JSON  output/coverletter_<slug>_<lang>.json <- model writes
+    cover-letter source  output/coverletter_<slug>_<lang>.html <- assembled here
     CV output            output/Urban_CV_<slug>_<lang>.docx  (+ .pdf)
     cover-letter output  output/Urban_CoverLetter_<slug>_<lang>.pdf
     The `Urban_CV_` / `Urban_CoverLetter_` prefixes stay capitalized because a
     recruiter sees those filenames; the slug is always lowercase.
+
+THE MODEL WRITES DELTAS, THIS SCRIPT WRITES DOCUMENTS
+    Both generation phases emit only what is a judgement call, and this script
+    assembles the rest:
+      * the CV patch is merged onto its base by tools/apply_cv_patch.py, and
+        the merged content JSON is still written to the canonical path, so
+        build_fit.py is unchanged and the result stays diffable;
+      * the letter content JSON is poured into templates/coverletter_template_
+        <lang>.html by tools/build_letter.py, which also computes the date.
+    Retyping unchanged boilerplate cost ~3.5k output tokens per run - the most
+    expensive token class, and the whole of the serial wall-clock - so it moved
+    into code. Same rule as page fitting and dash hygiene: mechanical work is
+    the renderer's job.
 
 Rendering: the CV goes through tools/build_fit.py (template fill + the
 page-length rule). The cover letter is rendered by headless Chromium, with
@@ -27,15 +42,18 @@ its user profile under concurrency.
 
 Usage:
     render_application.py --company <slug> --lang de|en
-                          [--content <cv.json>] [--cover-letter <letter.html>]
+                          [--patch <cv_patch.json>] [--content <cv.json>]
+                          [--letter <letter.json>] [--cover-letter <letter.html>]
                           [--print-paths]
-At least one of --content / --cover-letter is required (unless --print-paths).
+With no input flags the canonical paths above are used when they exist.
 Exits non-zero if any verification fails.
 """
-import argparse, os, re, shutil, subprocess, sys
+import argparse, json, os, re, shutil, subprocess, sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from ats_hygiene import norm_file, count_violations
+from apply_cv_patch import apply_patch
+from build_letter import build as build_letter
 
 KB = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # career-kb/
 TOOLS = os.path.join(KB, 'tools')
@@ -66,7 +84,9 @@ def paths_for(company, lang):
     slug = normalize_slug(company)
     return {
         'slug': slug,
+        'cv_patch': os.path.join(CONTENT, f'patch_{slug}_{lang}.json'),
         'cv_content': os.path.join(CONTENT, f'offer_{slug}_{lang}.json'),
+        'cl_content': os.path.join(OUTPUT, f'coverletter_{slug}_{lang}.json'),
         'cl_source': os.path.join(OUTPUT, f'coverletter_{slug}_{lang}.html'),
         'cv_docx': os.path.join(OUTPUT, f'Urban_CV_{slug}_{lang}.docx'),
         'cv_pdf': os.path.join(OUTPUT, f'Urban_CV_{slug}_{lang}.pdf'),
@@ -87,6 +107,50 @@ def pdf_pages(pdf):
 def pdf_text(pdf):
     return subprocess.run(['pdftotext', pdf, '-'],
                           capture_output=True, text=True).stdout
+
+
+# -------------------------------------------------------------- assembling --
+
+def merge_cv_patch(patch_path, content_out, base_override=None):
+    """Merge the model's CV patch onto its base and write the content JSON."""
+    with open(patch_path, encoding='utf-8') as f:
+        patch = json.load(f)
+
+    base_path = base_override or patch.get('base')
+    if not base_path:
+        raise SystemExit(f'error: {patch_path} has no "base" - the patch must '
+                         f'name the base content JSON it applies to')
+    if not os.path.isabs(base_path):
+        base_path = os.path.join(CONTENT, os.path.basename(base_path))
+    if not os.path.exists(base_path):
+        raise SystemExit(f'error: base content JSON not found: {base_path}')
+
+    with open(base_path, encoding='utf-8') as f:
+        base = json.load(f)
+
+    merged, notes = apply_patch(base, patch)
+    with open(content_out, 'w', encoding='utf-8') as f:
+        json.dump(merged, f, ensure_ascii=False, indent=2)
+        f.write('\n')
+
+    touched = ', '.join(k for k in patch if k != 'base') or '(nothing)'
+    print(f'  patch applied to {os.path.basename(base_path)}: {touched}')
+    for n in notes:
+        print(f'  NOTE: {n}')
+    return content_out
+
+
+def assemble_letter(content_path, lang, html_out):
+    """Pour the model's letter content into the protected A4 template."""
+    with open(content_path, encoding='utf-8') as f:
+        content = json.load(f)
+    html_text = build_letter(content, lang)
+    with open(html_out, 'w', encoding='utf-8') as f:
+        f.write(html_text)
+    words = sum(len(str(p).split()) for p in content['paragraphs'])
+    print(f'  letter assembled from template: {len(content["paragraphs"])} '
+          f'paragraph(s), {words} words')
+    return html_out
 
 
 # --------------------------------------------------------------- rendering --
@@ -211,23 +275,18 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--company', help='company slug (lowercased)')
     ap.add_argument('--lang', choices=['de', 'en'])
-    ap.add_argument('--content', help='CV content JSON (default: canonical path)')
-    ap.add_argument('--cover-letter', help='cover-letter HTML (default: canonical path)')
+    ap.add_argument('--patch', help='CV patch JSON (default: canonical path)')
+    ap.add_argument('--base', help='base content JSON for the patch '
+                                   '(default: the patch\'s own "base" field)')
+    ap.add_argument('--content', help='pre-merged CV content JSON - skips the '
+                                      'patch step (default: canonical path)')
+    ap.add_argument('--letter', help='cover-letter content JSON '
+                                     '(default: canonical path)')
+    ap.add_argument('--cover-letter', help='pre-assembled cover-letter HTML - '
+                                           'skips the template step')
     ap.add_argument('--print-paths', action='store_true',
                     help='print the canonical paths and exit')
-    ap.add_argument('--page-check', metavar='HTML',
-                    help='render HTML to a scratch PDF, print its page count, '
-                         'and delete it (for the cover-letter agent to verify '
-                         'one page without inventing its own render command)')
     args = ap.parse_args()
-
-    if args.page_check:
-        os.makedirs(OUTPUT, exist_ok=True)
-        scratch = os.path.join(OUTPUT, '.pagecheck.pdf')
-        render_cover_letter(args.page_check, scratch)
-        print(f'pages: {pdf_pages(scratch)}')
-        os.remove(scratch)
-        return 0
 
     if not (args.company and args.lang):
         raise SystemExit('error: --company and --lang are required')
@@ -239,13 +298,28 @@ def main():
             print(f'{k}\t{v}')
         return 0
 
+    # Inputs, most-processed first: an explicit pre-built artifact wins, then
+    # the model's delta, then the canonical delta path.
+    cv_patch = args.patch or (p['cv_patch'] if os.path.exists(p['cv_patch']) else None)
     cv_json = args.content or (p['cv_content'] if os.path.exists(p['cv_content']) else None)
+    cl_json = args.letter or (p['cl_content'] if os.path.exists(p['cl_content']) else None)
     cl_html = args.cover_letter or (p['cl_source'] if os.path.exists(p['cl_source']) else None)
-    if not cv_json and not cl_html:
-        raise SystemExit('error: nothing to render - pass --content and/or --cover-letter')
+
+    if not (cv_patch or cv_json or cl_json or cl_html):
+        raise SystemExit('error: nothing to render - no patch, content or letter '
+                         'JSON found at the canonical paths, and none passed')
 
     os.makedirs(OUTPUT, exist_ok=True)
     produced, checks = [], []
+
+    # Assemble before rendering: a malformed delta should fail here, before any
+    # Chromium or LibreOffice process is started.
+    if cv_patch and not args.content:
+        print(f'CV patch: {cv_patch}')
+        cv_json = merge_cv_patch(cv_patch, p['cv_content'], args.base)
+    if cl_json and not args.cover_letter:
+        print(f'Letter content: {cl_json}')
+        cl_html = assemble_letter(cl_json, args.lang, p['cl_source'])
 
     # Sequential on purpose: LibreOffice locks its user profile.
     if cv_json:
