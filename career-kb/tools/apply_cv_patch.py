@@ -58,7 +58,12 @@ SELECTORS
 Usage:
     apply_cv_patch.py --patch <patch.json> --out <merged.json> [--base <base.json>]
 """
-import argparse, copy, json, os, sys
+
+import argparse
+import copy
+import json
+import os
+import sys
 
 KB = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # career-kb/
 CONTENT = os.path.join(KB, 'content')
@@ -68,11 +73,11 @@ MATCH_FIELDS = ('title', 'company', 'degree')
 
 # patch key -> (section type, which occurrence of that type)
 SECTION_MAP = {
-    'summary':    ('summary', 0),
-    'skills':     ('skills', 0),
+    'summary': ('summary', 0),
+    'skills': ('skills', 0),
     'experience': ('experience', 0),
-    'projects':   ('experience', 1),
-    'education':  ('education', 0),
+    'projects': ('experience', 1),
+    'education': ('education', 0),
 }
 
 
@@ -80,8 +85,10 @@ def find_section(doc, key):
     stype, nth = SECTION_MAP[key]
     matches = [s for s in doc.get('sections', []) if s.get('type') == stype]
     if len(matches) <= nth:
-        raise SystemExit(f'error: base JSON has no section for patch key '
-                         f'"{key}" (type={stype}, occurrence {nth + 1})')
+        raise SystemExit(
+            f'error: base JSON has no section for patch key '
+            f'"{key}" (type={stype}, occurrence {nth + 1})'
+        )
     return matches[nth]
 
 
@@ -118,25 +125,45 @@ def resolve(selector, items, key):
         raise SystemExit(f'error: {key}: boolean is not a valid selector')
     if isinstance(selector, int):
         if not 0 <= selector < len(items):
-            raise SystemExit(f'error: {key}: index {selector} is out of range '
-                             f'(base has {len(items)} entr(ies))')
+            raise SystemExit(
+                f'error: {key}: index {selector} is out of range (base has {len(items)} entr(ies))'
+            )
         return selector
     needle = str(selector).strip().lower()
     hits = []
     for tier in (0, 1):
-        hits = [i for i, it in enumerate(items)
-                if any(needle in h.lower() for h in _haystacks(it)[tier])]
+        hits = [
+            i
+            for i, it in enumerate(items)
+            if any(needle in h.lower() for h in _haystacks(it)[tier])
+        ]
         if len(hits) == 1:
             return hits[0]
         if hits:
-            break   # ambiguous at this tier; a broader tier cannot disambiguate
+            break  # ambiguous at this tier; a broader tier cannot disambiguate
     if not hits:
-        raise SystemExit(f'error: {key}: selector {selector!r} matched nothing '
-                         f'in the base JSON')
+        raise SystemExit(f'error: {key}: selector {selector!r} matched nothing in the base JSON')
     labels = ', '.join(repr(_label(items[i])) for i in hits)
-    raise SystemExit(f'error: {key}: selector {selector!r} is ambiguous - '
-                     f'matched {len(hits)} entries ({labels}). Use an index '
-                     f'or a longer, more specific string.')
+    raise SystemExit(
+        f'error: {key}: selector {selector!r} is ambiguous - '
+        f'matched {len(hits)} entries ({labels}). Use an index '
+        f'or a longer, more specific string.'
+    )
+
+
+def resolve_select(spec, entries, key):
+    """Apply a `select` list: validate it, then return the reordered subset.
+
+    Shared by the skill lines and the item sections - both express "keep these,
+    in this order" the same way, and both must reject a repeated selector.
+    """
+    sel = spec['select']
+    if isinstance(sel, str) or not isinstance(sel, list) or not sel:
+        raise SystemExit(f'error: {key}.select must be a non-empty list')
+    order = [resolve(s, entries, f'{key}.select') for s in sel]
+    if len(set(order)) != len(order):
+        raise SystemExit(f'error: {key}.select selects the same entry twice')
+    return [entries[i] for i in order], len(entries) - len(order)
 
 
 def patch_skills(section, spec, notes):
@@ -154,40 +181,34 @@ def patch_skills(section, spec, notes):
 
     # Full replacement - still correct when the line text genuinely changes.
     if isinstance(spec, list):
-        if not spec or any(not isinstance(l, str) for l in spec):
+        if not spec or any(not isinstance(line, str) for line in spec):
             raise SystemExit('error: "skills" must be a non-empty list of strings')
         section['lines'] = spec
         return
 
     if not isinstance(spec, dict):
-        raise SystemExit('error: "skills" must be a list of strings, or an object '
-                         'with "select" and/or "rewrite"')
+        raise SystemExit(
+            'error: "skills" must be a list of strings, or an object with "select" and/or "rewrite"'
+        )
     unknown = [k for k in spec if k not in ('select', 'rewrite')]
     if unknown:
-        raise SystemExit(f'error: skills: unknown key(s) {unknown}. '
-                         f'Allowed: ["select", "rewrite"]')
+        raise SystemExit(f'error: skills: unknown key(s) {unknown}. Allowed: ["select", "rewrite"]')
 
     lines = list(base_lines)
     for selector, text in (spec.get('rewrite') or {}).items():
         if not isinstance(text, str) or not text.strip():
-            raise SystemExit(f'error: skills.rewrite[{selector!r}] must be a '
-                             f'non-empty string')
+            raise SystemExit(f'error: skills.rewrite[{selector!r}] must be a non-empty string')
         lines[resolve(selector, lines, 'skills.rewrite')] = text
 
     if 'select' in spec:
-        sel = spec['select']
-        if isinstance(sel, str) or not isinstance(sel, list) or not sel:
-            raise SystemExit('error: skills.select must be a non-empty list')
-        order = [resolve(s, lines, 'skills.select') for s in sel]
-        if len(set(order)) != len(order):
-            raise SystemExit('error: skills.select selects the same line twice')
-        dropped = len(lines) - len(order)
-        lines = [lines[i] for i in order]
+        lines, dropped = resolve_select(spec, lines, 'skills')
         # Reordering is the normal case; dropping a whole skill category is not,
         # and it silently removes ATS keywords from the CV.
         if dropped:
-            notes.append(f'skills: {dropped} skill line(s) dropped by "select" - '
-                         f'check no required keyword was removed')
+            notes.append(
+                f'skills: {dropped} skill line(s) dropped by "select" - '
+                f'check no required keyword was removed'
+            )
 
     section['lines'] = lines
 
@@ -204,30 +225,29 @@ def patch_items(section, spec, key, notes):
             raise SystemExit(f'error: {key}.rewrite[{selector!r}] must be an object')
         unknown = [f for f in fields if f not in ITEM_FIELDS]
         if unknown:
-            raise SystemExit(f'error: {key}.rewrite[{selector!r}]: unknown '
-                             f'field(s) {unknown}. Allowed: {list(ITEM_FIELDS)}')
+            raise SystemExit(
+                f'error: {key}.rewrite[{selector!r}]: unknown '
+                f'field(s) {unknown}. Allowed: {list(ITEM_FIELDS)}'
+            )
         if 'bullets' in fields:
             b = fields['bullets']
             if isinstance(b, str) or not isinstance(b, list) or not b:
-                raise SystemExit(f'error: {key}.rewrite[{selector!r}]: "bullets" '
-                                 f'must be a non-empty list of strings')
+                raise SystemExit(
+                    f'error: {key}.rewrite[{selector!r}]: "bullets" '
+                    f'must be a non-empty list of strings'
+                )
         items[idx].update(fields)
 
     if 'select' in spec:
-        sel = spec['select']
-        if isinstance(sel, str) or not isinstance(sel, list) or not sel:
-            raise SystemExit(f'error: {key}.select must be a non-empty list')
-        order = [resolve(s, items, f'{key}.select') for s in sel]
-        if len(set(order)) != len(order):
-            raise SystemExit(f'error: {key}.select selects the same item twice')
-        dropped = len(items) - len(order)
-        items = [items[i] for i in order]
+        items, dropped = resolve_select(spec, items, key)
         # Dropping a job leaves a hole in the employment history, which the CV
         # standards forbid. Projects are meant to be a curated subset, so only
         # the work-experience section gets flagged.
         if dropped and key == 'experience':
-            notes.append(f'{key}: {dropped} work-experience entr(ies) dropped by '
-                         f'"select" - check this does not create a CV gap')
+            notes.append(
+                f'{key}: {dropped} work-experience entr(ies) dropped by '
+                f'"select" - check this does not create a CV gap'
+            )
 
     section['items'] = items
 
@@ -238,8 +258,9 @@ def apply_patch(base, patch):
 
     unknown = [k for k in patch if k not in SECTION_MAP and k != 'base']
     if unknown:
-        raise SystemExit(f'error: unknown patch key(s) {unknown}. '
-                         f'Allowed: {sorted(SECTION_MAP)} (+ "base")')
+        raise SystemExit(
+            f'error: unknown patch key(s) {unknown}. Allowed: {sorted(SECTION_MAP)} (+ "base")'
+        )
 
     if 'summary' in patch:
         text = patch['summary']
@@ -255,8 +276,7 @@ def apply_patch(base, patch):
             continue
         spec = patch[key]
         if not isinstance(spec, dict):
-            raise SystemExit(f'error: "{key}" must be an object with "select" '
-                             f'and/or "rewrite"')
+            raise SystemExit(f'error: "{key}" must be an object with "select" and/or "rewrite"')
         patch_items(find_section(doc, key), spec, key, notes)
 
     return doc, notes
@@ -274,8 +294,7 @@ def main():
 
     base_path = args.base or patch.get('base')
     if not base_path:
-        raise SystemExit('error: no base given - pass --base or set "base" in '
-                         'the patch JSON')
+        raise SystemExit('error: no base given - pass --base or set "base" in the patch JSON')
     if not os.path.isabs(base_path):
         base_path = os.path.join(CONTENT, os.path.basename(base_path))
     if not os.path.exists(base_path):
