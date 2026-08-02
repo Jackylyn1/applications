@@ -1,0 +1,6 @@
+# Runtime dependencies for the career-kb document pipeline.
+python-docx>=1.1
+
+# job-watch (job-watch/watch.py)
+python-jobspy>=1.1.82   # LinkedIn / Indeed / Glassdoor / Google scraping
+apprise>=1.9            # notification fan-out to 137 services
