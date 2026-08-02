@@ -7,7 +7,7 @@
 PY      ?= python3
 VENV    ?= .venv
 BIN      = $(VENV)/bin
-SOURCES  = career-kb/tools job-watch tests
+SOURCES  = career-kb/tools tests
 
 .DEFAULT_GOAL := check
 .PHONY: check lint format typecheck security complexity deadcode test audit fix venv clean
@@ -46,8 +46,8 @@ test: venv           ## pytest + coverage.py
 	$(BIN)/coverage run -m pytest
 	$(BIN)/coverage report
 
-audit: venv          ## pip-audit — advisory only, see README
-	-$(BIN)/pip-audit -r requirements.txt
+audit: venv          ## pip-audit
+	$(BIN)/pip-audit -r requirements.txt
 
 fix: venv            ## apply every safe autofix
 	$(BIN)/ruff check --fix .

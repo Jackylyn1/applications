@@ -38,8 +38,6 @@ ignore = [
     "S404",    # "subprocess is imported" is not a finding on its own
     "S603",    # every call site uses a fixed argv list, never a shell
     "S607",    # soffice/chromium/pdfinfo are resolved from PATH on purpose
-    "S310",    # both urlopen call sites guard the scheme themselves - see
-               # watch.fetch() and the hardcoded https:// templates in find_boards
 ]
 
 [tool.ruff.lint.per-file-ignores]
@@ -48,28 +46,28 @@ ignore = [
 "tests/*" = ["S101", "SLF001", "E402"]
 
 [tool.ruff.lint.isort]
-known-first-party = ["ats_hygiene", "apply_cv_patch", "build_cv", "build_letter", "watch"]
+known-first-party = ["ats_hygiene", "apply_cv_patch", "build_cv", "build_letter"]
 
 [tool.ruff.format]
-# Preserve, not normalize: career-kb uses single quotes and job-watch uses
-# double quotes. Rewriting either would produce a diff that hides real changes
-# for no readability gain.
+# Preserve, not normalize: the codebase is consistently single-quoted, and
+# letting the formatter rewrite quotes would produce a diff that hides real
+# changes for no readability gain.
 quote-style = "preserve"
 
 [tool.mypy]
 python_version = "3.11"
-ignore_missing_imports = true      # python-docx, jobspy and apprise ship no stubs
+ignore_missing_imports = true      # python-docx ships no type stubs
 warn_unused_ignores = true
 warn_redundant_casts = true
 warn_unreachable = true
-files = ["career-kb/tools", "job-watch", "tests"]
+files = ["career-kb/tools", "tests"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q --strict-markers"
 
 [tool.coverage.run]
-source = ["career-kb/tools", "job-watch"]
+source = ["career-kb/tools"]
 omit = ["*/.venv/*"]
 
 [tool.coverage.report]
@@ -79,10 +77,10 @@ exclude_lines = ["pragma: no cover", "if __name__ == .__main__.:", "raise NotImp
 show_missing = true
 
 [tool.bandit]
-exclude_dirs = [".venv", "career-kb/.venv", "job-watch/.venv", "tests"]
+exclude_dirs = [".venv", "career-kb/.venv", "tests"]
 
 [tool.vulture]
 # Per-component virtualenvs live inside the tree and are not ours to audit.
 exclude = ["*/.venv/*"]
 min_confidence = 80
-paths = ["career-kb/tools", "job-watch", "tests"]
+paths = ["career-kb/tools", "tests"]
