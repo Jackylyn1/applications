@@ -1,0 +1,18 @@
+services:
+  applications:
+    build:
+      context: .
+      args:
+        UID: "1000"
+        GID: "1000"
+    image: applications:latest
+    container_name: applications
+    working_dir: /app
+    volumes:
+      # Live bind mount: host edits are visible in the container immediately.
+      - .:/app
+    environment:
+      HOME: /tmp
+    stdin_open: true
+    tty: true
+    command: bash

@@ -59,7 +59,8 @@ KB = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # career-kb/
 TOOLS = os.path.join(KB, 'tools')
 OUTPUT = os.path.join(KB, 'output')
 CONTENT = os.path.join(KB, 'content')
-VENV_PY = os.path.join(KB, '.venv', 'bin', 'python')
+# In the container the venv lives outside the bind mount, so it is passed in.
+VENV_PY = os.environ.get('CAREER_KB_PYTHON') or os.path.join(KB, '.venv', 'bin', 'python')
 
 TEMPLATES = {
     'de': os.path.join(KB, 'templates', 'CV_Template_Rezi_DE_Dec2025.docx'),

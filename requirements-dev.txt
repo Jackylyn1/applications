@@ -1,0 +1,10 @@
+# Validation workflow from CODING_RULES.md — one entry per required tool.
+ruff            # Ruff + Ruff Formatter
+mypy
+bandit
+radon
+xenon
+vulture
+pytest
+coverage
+pip-audit
