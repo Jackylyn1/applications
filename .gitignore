@@ -7,11 +7,6 @@ career-kb/.venv/
 # LibreOffice lock files
 .~lock.*#
 
-# job-watch runtime data (scraped postings + dedupe state — regenerable, bulky)
-job-watch/inbox/
-job-watch/state.db
-job-watch/watch.log
-
 # Machine-local Claude Code settings and the harness's temp copies of them
 **/.claude/settings.local.json.tmp.*
 

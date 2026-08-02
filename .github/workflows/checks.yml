@@ -36,13 +36,10 @@ jobs:
       - run: ruff check .
       - run: ruff format --check .
       - run: mypy
-      - run: bandit -q -ll -c pyproject.toml -r career-kb/tools job-watch tests
-      - run: xenon -b C -m B -a A career-kb/tools job-watch tests
+      - run: bandit -q -ll -c pyproject.toml -r career-kb/tools tests
+      - run: xenon -b C -m B -a A career-kb/tools tests
       - run: vulture
       - run: coverage run -m pytest
       - run: coverage report
 
-      # Advisory: the only open finding is pinned by an upstream dependency and
-      # cannot be resolved from this repo. See README, "Known open finding".
       - run: pip-audit -r requirements.txt
-        continue-on-error: true
