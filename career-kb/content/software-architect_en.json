@@ -10,7 +10,7 @@
     {
       "heading": "PROFESSIONAL SUMMARY",
       "type": "summary",
-      "text": "Software engineer with a focus on software architecture. I have been building software for over 15 years, first through volunteer open-source and community projects and professionally since 2019, using PHP/Laravel and TypeScript. My focus is Domain-Driven Design, modular monoliths (package-oriented architecture), event-driven systems, and clean, test-driven code. On a greenfield POS platform I designed and own specific components end-to-end: a real-time pivot-event synchronization mechanism (Mercure/SSE) and an external REST API with a multi-tenant permission system. I value Clean Code, design patterns, and quality discipline (PHPStan level 9, BDD). I like to understand a system end-to-end, measure the results, and keep improving it. Currently deepening cloud architecture, Kubernetes, and message brokers (Kafka/RabbitMQ)."
+      "text": "Software engineer with a focus on Domain-Driven Design, modular monoliths and event-driven systems. I have been building software for over 15 years, first through volunteer open-source and community projects and professionally since 2019, using PHP/Laravel and TypeScript. My focus is Domain-Driven Design, modular monoliths (package-oriented architecture), event-driven systems, and clean, test-driven code. On a greenfield POS platform I designed and own specific components end-to-end: a real-time pivot-event synchronization mechanism (Mercure/SSE) and an external REST API with a multi-tenant permission system. I value Clean Code, design patterns, and quality discipline (PHPStan level 9, BDD). I like to understand a system end-to-end, measure the results, and keep improving it. Currently deepening cloud architecture, Kubernetes, and message brokers (Kafka/RabbitMQ)."
     },
     {
       "heading": "SKILLS",
@@ -37,7 +37,7 @@
           "bullets": [
             "Core contributor (top 3 of a ~7-person team) on a greenfield restaurant point-of-sale (POS) platform: a distributed, layered system built on a Domain-Driven, package-oriented Laravel monolith (14 domains, 8 internal Composer packages).",
             "Designed and own the real-time pivot-event synchronization mechanism (a custom laravel-pivot-events package plus a dedicated PivotEvents domain, pushed via Mercure/SSE) within an event-driven architecture backed by Redis queues (Laravel Horizon) and Laravel Octane.",
-            "Designed the platform's external REST API end-to-end (API Platform) with multi-tenant, permission-scoped access control: row-level query extensions, tenant-isolation write guards, JWT-based API credentials and permission management, and OpenAPI documentation.",
+            "Designed the platform's external REST API end-to-end (API Platform) with multi-tenant, permission-scoped access control: row-level query extensions, tenant-isolation write guards, Sanctum-based API credentials and permission management, and OpenAPI documentation.",
             "Automated tests across the stack (PHPUnit, BDD with Behat/Gherkin and Pest, Selenium) within a GitLab CI pipeline enforcing PHPStan level 9 (Larastan) and ECS code style."
           ]
         },

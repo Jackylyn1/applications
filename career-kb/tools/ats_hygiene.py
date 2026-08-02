@@ -13,13 +13,14 @@ Used by:
   - tools/render_application.py -> norm_file() on the cover-letter HTML
   - CLI: ats_hygiene.py <file>...   (normalize files in place)
 """
+
 import sys
 
 # Literal characters plus the HTML entities that render as them, so the rule
 # holds for HTML sources as well as plain DOCX text.
 REPLACEMENTS = {
-    '—': '-',   # em dash
-    '–': '-',   # en dash
+    '—': '-',  # em dash
+    '–': '-',  # noqa: RUF001 - en dash; this table is the definition of the rule
     '&mdash;': '-',
     '&ndash;': '-',
     '&#8212;': '-',

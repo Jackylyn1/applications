@@ -7,11 +7,6 @@ career-kb/.venv/
 # LibreOffice lock files
 .~lock.*#
 
-# job-watch runtime data (scraped postings + dedupe state — regenerable, bulky)
-job-watch/inbox/
-job-watch/state.db
-job-watch/watch.log
-
 # Machine-local Claude Code settings and the harness's temp copies of them
 **/.claude/settings.local.json.tmp.*
 
@@ -22,5 +17,37 @@ job-watch/watch.log
 # OS cruft
 .DS_Store
 
-# Derived profile digests (rebuild: .claude/scripts/rebuild-digests.sh)
-career-kb/.digest/
+# Generated application documents (Jacqueline, 2026-07-31). Reproducible from
+# career-kb/content/*.json plus a template in ~1.7s, so they are output, not
+# knowledge.
+career-kb/output/
+
+# NO COMPANY NAMES IN THE REPOSITORY (Jacqueline, 2026-08-02).
+# Every per-application artifact is named after the company it targets — the
+# naming convention itself lives in career-kb/tools/render_application.py. Who
+# she applied to is nobody else's business, so these stay on disk and out of
+# git. The role-generic base CVs in career-kb/content/ (php-developer_de.json
+# and friends) are tracked: they carry no target company.
+career-kb/content/offer_*.json
+career-kb/content/patch_*.json
+career-kb/offer_*.md
+career-kb/examples/coverletter_*
+
+# Private source documents (Arbeitszeugnisse, certificates). They name former
+# employers and were never meant for publication.
+career-kb/documents/
+
+# The scanned signature (Jacqueline, 2026-08-02). A signature image is reusable
+# by anyone who has the file: it does not make a document legally binding, but it
+# is trivially pasted under one. It therefore never goes into a public
+# repository. build_letter.py fails with instructions when it is absent, so a
+# fresh clone gets a clear error instead of an unsigned letter.
+career-kb/assets/
+
+# career-kb/.digest/ is deliberately NOT ignored (Jacqueline, 2026-07-31).
+# The digests are generated, but they are what the agents actually read instead
+# of profile.json, so tracking them makes a stale digest visible in `git diff`
+# rather than silently shipping outdated facts, and a fresh clone works without
+# a build step. Rebuild with .claude/scripts/rebuild-digests.sh after every
+# profile.json change.
+.coverage

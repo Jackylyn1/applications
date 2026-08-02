@@ -1,0 +1,2 @@
+# Runtime dependencies for the career-kb document pipeline.
+python-docx>=1.1

@@ -10,7 +10,7 @@
     {
       "heading": "PROFESSIONAL SUMMARY",
       "type": "summary",
-      "text": "Software engineer with a focus on software architecture and applied AI. I have been building software for over 15 years, first through volunteer open-source and community projects and professionally since 2019, using PHP/Laravel and TypeScript, from greenfield architecture through CI/CD to test automation. Over the last two years I have integrated LLMs into real development workflows: designing AI agents, engineering prompts, and optimizing token usage and cost, using the OpenAI and Anthropic APIs and MCP. I like to understand a system end-to-end, measure the results, and keep improving it. Currently deepening Python for AI work and learning RAG and vector databases."
+      "text": "Software engineer with a focus on AI integration, API and backend development. I have been building software for over 15 years, first through volunteer open-source and community projects and professionally since 2019, using PHP/Laravel and TypeScript, from greenfield architecture through CI/CD to test automation. Over the last two years I have integrated LLMs into real development workflows: designing AI agents, engineering prompts, and optimizing token usage and cost, using the OpenAI and Anthropic APIs and MCP. I like to understand a system end-to-end, measure the results, and keep improving it. Currently deepening Python for AI work and learning RAG and vector databases."
     },
     {
       "heading": "SKILLS",
@@ -37,7 +37,7 @@
           "bullets": [
             "Core contributor (top-3 of a ~7-person team) on an existing greenfield restaurant point-of-sale platform: a distributed system (central Laravel/Filament cloud back-office, on-premise location servers, Capacitor/TypeScript terminals) built on a Domain-Driven, package-oriented Laravel monolith.",
             "Built an internal AI-assisted code-audit tooling suite (Claude Code slash-commands and subagents with deterministic verification) for soft-delete, CRUD-logging, and field-permission audits; integrated AI tools into daily development.",
-            "Designed and owns the platform's external REST API end-to-end (API Platform on Laravel) with multi-tenant, permission-scoped access control: row-level query extensions, tenant-isolation write guards, JWT-based API credentials, and OpenAPI documentation.",
+            "Designed and owns the platform's external REST API end-to-end (API Platform on Laravel) with multi-tenant, permission-scoped access control: row-level query extensions, tenant-isolation write guards, Sanctum-based API credentials, and OpenAPI documentation.",
             "Designed and implemented the real-time pivot-event synchronization mechanism (a custom laravel-pivot-events package plus a dedicated PivotEvents domain, pushed via Mercure/SSE) within an event-driven architecture backed by Redis queues (Laravel Horizon) and Laravel Octane.",
             "Authored automated tests across the stack (PHPUnit, BDD with Behat/Gherkin and Pest, Selenium, Bruno) within a GitLab CI pipeline enforcing PHPStan level 9 (Larastan) and ECS."
           ]

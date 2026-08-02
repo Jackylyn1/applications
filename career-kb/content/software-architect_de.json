@@ -10,7 +10,7 @@
     {
       "heading": "PROFIL",
       "type": "summary",
-      "text": "Softwareentwicklerin mit Schwerpunkt Softwarearchitektur. Ich entwickle seit über 15 Jahren Software, zunächst ehrenamtlich in Open-Source- und Community-Projekten und seit 2019 auch beruflich, mit PHP/Laravel und TypeScript. Mein Fokus liegt auf Domain-Driven Design, modularen Monolithen (package-orientierte Architektur), event-getriebenen Systemen und sauberem, testgetriebenem Code. In einem greenfield POS-System habe ich eigenverantwortlich zentrale Komponenten entworfen: eine Echtzeit-Synchronisation über Pivot-Events (Mercure/SSE) sowie eine externe REST-API mit mandantenfähigem Berechtigungssystem. Ich lege Wert auf Clean Code, Entwurfsmuster und Qualitätsdisziplin (PHPStan Level 9, BDD). Ich verstehe Systeme gern von Anfang bis Ende, messe Ergebnisse und verbessere sie iterativ. Aktuell arbeite ich mich in Cloud-Architektur, Kubernetes und Message-Broker (Kafka/RabbitMQ) ein."
+      "text": "Softwareentwicklerin mit Schwerpunkt Domain-Driven Design, modularen Monolithen und event-getriebenen Systemen. Ich entwickle seit über 15 Jahren Software, zunächst ehrenamtlich in Open-Source- und Community-Projekten und seit 2019 auch beruflich, mit PHP/Laravel und TypeScript. Mein Fokus liegt auf Domain-Driven Design, modularen Monolithen (package-orientierte Architektur), event-getriebenen Systemen und sauberem, testgetriebenem Code. In einem greenfield POS-System habe ich eigenverantwortlich zentrale Komponenten entworfen: eine Echtzeit-Synchronisation über Pivot-Events (Mercure/SSE) sowie eine externe REST-API mit mandantenfähigem Berechtigungssystem. Ich lege Wert auf Clean Code, Entwurfsmuster und Qualitätsdisziplin (PHPStan Level 9, BDD). Ich verstehe Systeme gern von Anfang bis Ende, messe Ergebnisse und verbessere sie iterativ. Aktuell arbeite ich mich in Cloud-Architektur, Kubernetes und Message-Broker (Kafka/RabbitMQ) ein."
     },
     {
       "heading": "KENNTNISSE",
@@ -35,9 +35,9 @@
           "company": "Gastro IT GmbH",
           "right": "03.2025 - heute  |  Wuppertal (Remote)",
           "bullets": [
-            "Core-Entwicklerin (Top 3 in einem rund siebenköpfigen Team) an einem greenfield Kassensystem (POS) für die Gastronomie: ein verteiltes, mehrschichtiges System auf Basis eines Domain-Driven, package-orientierten Laravel-Monolithen (14 Domänen, 8 interne Composer-Pakete).",
+            "Entwicklerin an einem greenfield Kassensystem (POS) für die Gastronomie: ein verteiltes, mehrschichtiges System auf Basis eines Domain-Driven, package-orientierten Laravel-Monolithen (14 Domänen, 8 interne Composer-Pakete).",
             "Entwurf und Verantwortung für die Echtzeit-Synchronisation über Pivot-Events (eigenes laravel-pivot-events-Paket plus dedizierte PivotEvents-Domäne, ausgeliefert über Mercure/SSE) innerhalb einer event-getriebenen Architektur mit Redis-Queues (Laravel Horizon) und Laravel Octane.",
-            "Entwurf der externen REST-API end-to-end (API Platform) mit mandantenfähiger, berechtigungsgesteuerter Zugriffskontrolle: Row-Level-Query-Extensions, Tenant-Isolation-Guards, JWT-basierte API-Credentials und Berechtigungsverwaltung sowie OpenAPI-Dokumentation.",
+            "Entwurf der externen REST-API end-to-end (API Platform) mit mandantenfähiger, berechtigungsgesteuerter Zugriffskontrolle: Row-Level-Query-Extensions, Tenant-Isolation-Guards, Sanctum-basierte API-Credentials und Berechtigungsverwaltung sowie OpenAPI-Dokumentation.",
             "Testautomatisierung über den gesamten Stack (PHPUnit, BDD mit Behat/Gherkin und Pest, Selenium) in einer GitLab-CI-Pipeline mit erzwungenem PHPStan Level 9 (Larastan) und ECS-Code-Style."
           ]
         },

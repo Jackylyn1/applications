@@ -3,6 +3,10 @@
 A running log of what we built, what broke, what the numbers actually were, and
 why. Updated after every task.
 
+> Employers are pseudonymised as **Company A–J** (and `company-a`–`company-j` in
+> filenames). The mapping is stable across the whole log, so a run can still be
+> followed end to end — but who she applied to is not this repository's business.
+
 Three audiences, in this order:
 1. **Us** — so a fix is never rediscovered twice.
 2. **Applications** — concrete, measurable engineering evidence for CVs and
@@ -35,7 +39,7 @@ whole thing.
 | 1 | Orchestrator said "inject file *content*", agent specs said "*read* `profile.json`" — contradictory | fixed by hand |
 | 2 | Dash hygiene enforced only on the CV path; the cover letter shipped **12 en dashes** into the PDF | extracted `tools/ats_hygiene.py`, imported by both paths |
 | 3 | `README.md` duplicated the render commands and had **drifted** — it documented a CV rendered from HTML, contradicting the hard rule that CVs come from the stored DOCX template | README reduced to an index; commands documented once |
-| 4 | Two filename conventions in one run (`offer_Company A_de.json` vs `Urban_CV_Company A_de.pdf`) | naming defined once, in `tools/render_application.py`; agents call `--print-paths` |
+| 4 | Two filename conventions in one run (`offer_company-a_de.json` vs `Urban_CV_Company-A_de.pdf`) | naming defined once, in `tools/render_application.py`; agents call `--print-paths` |
 | 5 | Cover letter invented an `Anlagen:` line nothing had specified | banned in `cover-letter-standards.md` |
 
 The pattern in 2/3/4: **duplication drifts.** Every one of those defects was two
@@ -242,7 +246,7 @@ bottleneck.** Everything that mattered was around it.
 
 After run 2 finished, `career-kb/output/` and `career-kb/content/` were emptied
 of the run's outputs at 19:29, and a file nothing in this session wrote —
-`career-kb/offer_Company A_de.md`, self-described as a *reconstructed*
+`career-kb/offer_company-a_de.md`, self-described as a *reconstructed*
 job offer rebuilt from the phase-1 parse — appeared at 19:20. A **concurrent
 Claude Code session** was operating in the same repo.
 
@@ -703,7 +707,7 @@ the Laravel correction from 2026-07-26.
   generators actually see it (they read `.digest/`, not `profile.json` — a stale
   digest silently ignores a KB fix).
 - Letter and CV content edited in place, `render_application.py --company
-  Company C --lang de`, 12/12 checks passed (letter 501 words → 1 page, CV 2
+  company-c --lang de`, 12/12 checks passed (letter 501 words → 1 page, CV 2
   pages).
 
 ### Numbers
@@ -883,3 +887,807 @@ pipeline defects on 2026-07-25.
   base for 'reproducibility'. Then I read them: ports, secrets, container URLs.
   Nothing about the project. Ask what a file is about before you ask where it
   should live."*
+
+## 2026-07-31 — profiling `/generate-application`: the compute was 0.2 % of the wall clock
+
+Asked why the pipeline takes so long. Profiled it against three recorded runs in
+`~/.claude/projects/-home-jacqueline-Desktop-applications/` (orchestrator
+transcripts plus the per-agent files under `subagents/`), then fixed six causes.
+
+**The first measurement ended the search for a slow script.** The whole
+deterministic output phase — CV template fill, page-fit escalation, Chromium
+render, 12 verification checks — runs in **1.67 s**. A single `soffice` HTML
+conversion is 0.89 s, a Chromium print 0.55 s. Every remaining minute is model
+turns. So there was nothing to optimise in Python, and the entire question was
+turn count and context size.
+
+### Measured baseline — one clean run (Company B, both documents, session `6d3e6ade`)
+
+| phase | turns | output tok | cache-read tok | span |
+|---|---|---|---|---|
+| orchestrator (pipeline portion) | 20 | 39,664 | 901,621 | 15.7 min |
+| `preparation` | 16 | 11,772 | 456,903 | 4.8 min |
+| `generate-cv` | 22 | 20,350 | 815,583 | 4.1 min |
+| `generate-cover-letter` | 33 | 16,890 | 978,265 | 4.9 min |
+| `output-generator` | 8 | 1,606 | 52,786 | 0.6 min |
+| **total** | **99** | **90,282** | **3,205,158** | **~12–13 min machine** |
+
+Cache-write was 428,157. Wall clock was 15.7 min including ~3.5 min of my own
+answering time on two `AskUserQuestion` prompts — the two largest gaps in the
+trace (286 s and 210 s) are agents running, not waiting on me. Same pricing
+caveat as the 2026-07-27 entry: turns, tokens and timings are measured, the
+**≈ $6.54/run** rests on the estimated `claude-opus-5` rates in `pricing.json`.
+
+Two other runs bracket the variance: `ca686015` took **43.4 min**, and in
+`00ecc276` a single cover-letter agent spent **27.1 min over 42 turns with 14
+Edit calls** on one page of text, while its output phase spent **40.7 min over
+41 turns**. So the pipeline was 12 → 43 min, and the spread had one dominant
+cause (defect 2 below).
+
+### Why context, not output, is the bill
+
+A file read at turn 2 is re-sent on every later turn. `profile.json` costs
+**~29,300 tokens** per read (79,344 chars over 1,311 lines, and `Read` prefixes
+every line with its number). That one file therefore accounted for:
+
+```
+generate-cover-letter   29,300 × 31 later turns  =  908,300
+generate-cv             29,300 × 20              =  586,000
+preparation             29,300 × 14              =  410,200
+                                        ≈ 1.90M of 3.21M  →  59 %
+```
+
+**Six defects, all in prompts, none in code:**
+
+1. **Every subagent read the fact base itself, and three read it twice.** The
+   orchestrator's prompts were 6,848–13,363 chars (~2–3k tokens): it was passing
+   *paths*, while its own command file said to inject *contents*, while the agent
+   files said "do not read context or rule files yourself." None of the three
+   matched reality. In `ca686015`, `preparation`, `generate-cv` and
+   `generate-cover-letter` each opened `profile.json` **twice**.
+2. **The cover-letter page-fit loop was still in the agent.** `fit_cover_letter`
+   in `render_application.py` has guaranteed one page since it was written, and
+   its docstring says the agent loop was removed — but
+   `generate-cover-letter.md` still ordered the agent to verify with
+   `--page-check`. So it kept looping: 33 turns in the clean run, 42 turns and
+   27.1 min in `00ecc276`. The docstring described an intent, not the system.
+3. **A whole agent wrapped a 1.67 s command** — and ran on the wrong model.
+   `output-generator.md` declared `model: haiku`; both run metas record
+   `"model": "opus"`, because the orchestrator's `model: opus` won. It also ran
+   the `ls -lh`, `grep` and file reads its own file forbade.
+4. **Every subagent explored, against the hard `CLAUDE.md` rule** — `find -iname
+   '*Company B*'`, `ls -la` across three directories, `git show HEAD:…`,
+   `git log`, and reads of `render_application.py` (+5.5k tokens) and
+   `ats_hygiene.py` inside the *cover-letter* agent. ~11 turns per run. The cause
+   was structural, not disobedience: agents were given a filename pattern and no
+   path, so they hunted. `generate-cv` even probed `.digest/` and found nothing
+   usable.
+5. **`sound-like-human-standards.md` was mandatory but unlisted.**
+   `communication-rules.md:5` requires it for every generated text; the
+   orchestrator's context list never named it. Agents read it anyway, by
+   guessing — which is defect 4 with a good motive.
+6. **`profile_digest.py` existed to solve all of this and nothing used it.**
+   Written earlier with a docstring measuring the exact problem, producing
+   phase-scoped minified digests (58,084–61,363 chars, ~19.4–20.5k tokens,
+   36–39 % under a `profile.json` read). Zero references anywhere. Worse, the
+   digests on disk were built **2026-07-28 16:20** against a `profile.json` last
+   modified **2026-07-30 22:23** — two days stale, and `.digest/` is gitignored,
+   so a fresh clone has none at all.
+
+### Fixes shipped
+
+Path-injection replaced content-injection, pointed at the phase-scoped digest;
+step 3 now rebuilds the digests before any agent runs; the orchestrator renders
+directly and `output-generator.md` is deleted (its "Keywords" section was a
+duplicate of `application-standards.md:37`, so no rule was lost); the
+`--page-check` order became an explicit prohibition; `sound-like-human-standards.md`
+is now named; and `preparation` receives the `ls -1 career-kb/content/` inventory
+so it picks a base JSON that exists instead of constructing a filename.
+
+**The enforcement change is the one worth remembering.** I removed the `Bash`
+tool from all three agents (`preparation` keeps `Read, WebFetch, WebSearch`; the
+generators keep `Read, Write, Edit`). The old files *already* said "do not read
+context files yourself" and "do not run additional checks," and the transcripts
+show both instructions ignored. A capability an agent must not use is better
+removed than forbidden.
+
+### Estimated effect — NOT YET MEASURED
+
+Projected from the per-defect measurements above; the real numbers come from the
+next application run and belong in this table when they exist:
+
+| | measured before | **estimated** after | measured after |
+|---|---|---|---|
+| turns | 99 | ~60 | *pending* |
+| cache-read tok | 3,205,158 | ~1.3M | *pending* |
+| output tok | 90,282 | ~70k | *pending* |
+| cost (est. rates) | ≈ $6.54 | ≈ $2.60 | *pending* |
+| wall clock | 12–13 min (43 min worst) | ~6 min, no 40-min tail | *pending* |
+
+Treat every "after" figure as a hypothesis. The 59 % share of cache-read traced
+to one file is measured; that removing it converts linearly into wall clock is
+not.
+
+### Transferable lessons
+
+- **Measure the deterministic part first, to rule it out.** One 1.67 s timing
+  redirected the entire investigation away from Python and toward prompts.
+- **A docstring that says a problem is solved is a claim, not evidence.**
+  `render_application.py` documented removing the fit loop; the agent file still
+  ordered it. Both files were internally consistent and the system was not.
+- **Dead tooling is worse than missing tooling.** `profile_digest.py` was
+  correct, measured, and unreferenced — so the cost it was built to remove was
+  paid in full every run, and its stale output was a live correctness risk.
+- **Three files disagreed about one decision and the code obeyed none.** Inject
+  contents / do not read files / read them anyway. Contradictions do not
+  resolve, they get resolved by whichever agent runs.
+- **Content-injection is the expensive direction.** Pasting the fact base into
+  three prompts means ~100k *output* tokens — the slowest and dearest class — to
+  move data a subagent reads for a fraction of that. Paths win by ~20×.
+
+### Raw material for LinkedIn / posts
+
+- *"My slow AI pipeline spent 1.67 seconds in code and 13 minutes in model
+  turns. I had been planning to optimise the Python. Measure the part you can
+  measure exactly first — if only to eliminate it."*
+- *"One 79 KB JSON file was 59 % of my pipeline's token bill. Not because it was
+  read too often — because it was read at turn 2 and re-sent on all 31 turns
+  after it. In agent systems, what you load early you pay for repeatedly."*
+- *"I found a tool in my own repo that solved my exact bottleneck, with the
+  measurements in its docstring, referenced by nothing. Its cached output was
+  two days stale. Unused correct code is not neutral; it is a bill you pay plus
+  a wrong answer waiting."*
+- *"Three files in my pipeline disagreed about one decision: the orchestrator
+  said inject the data, the agents said never read the data, and the agents read
+  it twice. Every file was internally consistent. The system was incoherent."*
+- *"My agents kept ignoring 'do not run extra checks', so I took away their
+  shell. Instructions are a request; tool grants are the actual policy."*
+- *"A docstring in my renderer said the expensive edit loop had been moved into
+  code. It had. The agent prompt telling the model to do it manually was still
+  there — 27 minutes and 14 edits on one page of text."*
+
+## 2026-07-28 → 07-31 — the fact base got stricter: gender, money, and what is *not* RAG
+
+Catch-up on four days that produced no entry. Mostly knowledge-base work, and
+the corrections are the valuable part.
+
+### Two hard rules that change every future document
+
+- **Grammatical gender (2026-07-30, `communication-rules.md`).** She is a woman;
+  every text about her uses the **feminine** form in every language that marks
+  it — "Softwareentwicklerin", "Entwicklerin", "Werkstudentin", "Mentorin". Never
+  the generic masculine, and never a neutralising dodge ("Person mit Erfahrung in
+  …"). `Entwickler:in` forms belong to *postings addressing a group*: quoting an
+  advertised title verbatim is correct, writing about herself in it is not.
+- **Money, dates, relocation (2026-07-30, `application-standards.md`).** Never
+  volunteer a salary expectation or a start date; if a posting asks, **ask her
+  for the figure** rather than deriving one. `"ab sofort verfügbar"` counts as a
+  start-date statement and goes out with the rest. Relocation is **no, ever** —
+  and it is never framed as a limitation, per *Never frame by negation*.
+  `preparation` now stops on offers requiring on-site work outside NRW, with
+  exceptions only for a bounded period (onboarding) or remote-possible postings;
+  more than 2 on-site days a month is a hard stop.
+
+### What she does and does not have (2026-07-31, Company D posting)
+
+- **MCP: upgraded.** She has *built* an MCP client/integration into her own agent
+  workflows, so "MCP-Client integriert" is licensed — but she named no project,
+  so no project name may be attached. State the capability, not a location.
+- **TypeScript: downgraded to honest.** She writes some Capacitor/TypeScript
+  terminal code at Gastro IT, occasionally, not as a focus. That plus the React
+  18/TypeScript take-home is the whole evidence base. It never supports a
+  "4 years of TypeScript" claim.
+- **RAG, embeddings, vector databases: none.** They stay in
+  `role_skill_map.must_learn` and may appear once, in prose, as "baue ich gerade
+  auf".
+- **Knowledge graphs: none.** Her answer was "yEd, mermaid" — *diagramming*
+  tools. They license Neo4j, Cypher, RDF/SPARQL and "Knowledge Graph" not at all.
+  The term leaves the documents with no disclaimer.
+- Java stays absent. English stays "fließend" — no C1 claim, no certificate.
+- `PhpSpreadsheet` was removed from the skills list and from the Sanctum project
+  in both `php-developer` base JSONs.
+- GitHub Copilot may be named (private and occasional Gastro IT use), but never
+  headlines the AI positioning — Claude Code is the primary practice. Cursor is
+  still not hers.
+
+**The most useful correction is self-referential.** She asked whether this
+pipeline counts as RAG. It does not: no retriever, no embeddings, no vector
+index, no chunking, no similarity search — nothing is *retrieved*. What it
+genuinely is: **context engineering** plus a **multi-step agent workflow with
+orchestration** — an orchestrator command, specialised subagents, a
+single-source-of-truth knowledge base, and a deterministic verification step in
+`render_application.py`. That is the honest label, and it is the concrete
+artefact behind "Designed agent workflows" and "Context management" in the AI
+Engineering Experiments project.
+
+One consequence to carry into `profile.json`: that note describes the pipeline as
+injecting facts "wholesale into subagents", which the 2026-07-31 rework above
+replaced with path-injected, phase-scoped digests. Still not RAG — even less so —
+but the description is now stale, and the *new* architecture is the better
+evidence: pre-scoped context digests with measured token accounting.
+
+### Verified Gastro IT facts, and the corrections behind them
+
+`profile.json` gained 152 changed lines, mostly verification against the actual
+repo rather than recollection:
+
+- API credentials are **Sanctum**, not JWT — with the reason recorded: tokens must
+  be long-lived, revocable and DB-backed; JWTs are hard to revoke, Passport
+  OAuth2 was overkill. A design decision with a rationale is CV material; a
+  technology name is not.
+- **~50 models** exposed as `#[ApiResource]`, and the resources that may be named
+  as examples of that scale are now listed (Menükarten, Produkte, Standorte,
+  Terminals, Zahlungsmethoden, Drucker) — because [[examples-give-numbers-scale]]:
+  "~50 resources" needs one real name beside it.
+- **Five** legally critical models (BusinessTransaction, BusinessTransactionEvent,
+  ChangeLog, PrintJob, Language) are read-only over the API as a KassenSichV
+  guard, so a POST cannot bypass event-sourcing and TSE signing.
+- The feature is **built and in review, not merged**. Never "in production", and
+  there is **no tenant count** because it is not productive yet.
+- Tests: **58 test classes** — 48 inheriting a CRUD base defining 18 cases per
+  resource, 4 inheriting a role-permission base with 2 each. The number of
+  *executed* cases was never measured, so the class count and cases-per-resource
+  may be stated and a derived total may not.
+- Corrections: **Pest and Selenium are not her work** in that role. **She did set
+  up the self-hosted Langfuse herself**, so "aufgesetzt" is licensed — but not
+  "introduced LLM observability at the company". OAuth in the skills list is
+  genuinely **OAuth2**, from the Facebook API integration at wpt-online.
+- The **ticketing system** is not the Laravel application: a genuinely legacy
+  system of glued-together parts grown over **20+ years** (XSLT, Vue.js, raw
+  HTML, Bootstrap, CSS, MySQL). So wpt-online does carry professional legacy
+  evidence, the 80 % load-time result should carry that context, and only the
+  ~3-year-old Laravel codebase must never be called legacy.
+
+### Two housekeeping lessons
+
+- **`sound-like-human-standards.md` was created** (+37 lines) to hold the
+  `Human_Writing_Ruleset.pdf` rules — buzzword and stock-phrase blacklists,
+  hedging ban, rhythm and sentence-opening variation, editing checklist. It
+  governs *whether text reads as human*; `communication-rules.md` governs *what
+  the voice says*. Splitting them was right, and the rework above shows the cost
+  of the split: a mandatory file that no pipeline stage was told to load.
+- **~40 MB of generated `.docx`/`.pdf` left git** (commit `e4ccb92`, 697
+  deletions): per-company outputs and all sixteen `base-cvs` artifacts. They are
+  reproducible from `content/*.json` plus a template in 1.67 s. A knowledge base
+  stores facts and generators, never their output.
+
+### Raw material for LinkedIn / posts
+
+- *"'~50 API resources' means nothing until one of them is 'Menükarten'. A count
+  without an example is a number the reader cannot picture — so give the scale
+  and one real thing at that scale."*
+- *"I asked whether my own agent pipeline was RAG. No retriever, no embeddings,
+  no vector index, nothing retrieved. It is context engineering and workflow
+  orchestration. Using the fashionable word would have cost me the first
+  technical follow-up question in an interview."*
+- *"Sanctum over JWT because the tokens had to be long-lived, revocable and
+  DB-backed, and revoking a JWT is the hard part. The decision is the
+  engineering; the library name is just where it landed."*
+- *"Five models in that API are read-only, so no POST can bypass event-sourcing
+  and TSE signing. In German fiscal software the interesting design work is
+  usually what you make impossible."*
+- *"I deleted 40 MB of generated PDFs from my knowledge base. They rebuild in
+  1.67 seconds from the JSON that was already there. If you can regenerate it,
+  it is output, not knowledge."*
+- *"My CV said 58 test classes at 18 cases per resource, and not the product of
+  those two numbers — because nobody ever ran the count. The multiplication
+  would have been true-looking and unverified, which is the same as false."*
+
+## 2026-07-31 — Run: Company D (posted under a white-label brand) — Software Developer, RAG / Knowledge Graph / Agentic Systems, de
+
+### Numbers
+- Offer requirements: 7 qualifications, 8 responsibilities. Genuine DIRECT match on 5 of 7
+  qualifications; **3 hard gaps**: RAG/embeddings/vector DBs, graph technologies, Java.
+- The formal bar "4+ years in Java, Python or TypeScript" is **not met in any single one of the
+  three named languages**. What is genuinely ≥4 years: professional development since 2019-08
+  (≈6 years 7 months) and PHP/Laravel (≈4 years 9 months production, written as "ca. 5 Jahre").
+- Documents: CV 2 pages / 932 words, cover letter 1 page / 532 words (body 494). 12/12 renderer
+  checks passed, first try, scale 1.0, 0 bullets dropped.
+- Evidence kept: 6 Gastro IT bullets, 5 wpt-online bullets, 4 projects. Dropped for relevance,
+  not honesty: starter-kit/SEO/Barrierefreiheit/DSGVO, the ~10 target terms, Facebook/OAuth2 as a
+  bullet, standalone DB design, the book, the LinkedIn brand, the OSS fork as a standalone entry.
+- 4 clarifying questions asked before generating; 2 of the 4 answers had to be **corrected**
+  rather than used.
+
+### Why
+- **Two of my own answers were the wrong answer, and saying so was the value.** "Does importing
+  LinkedIn/PDF/GitHub data into my KB count as RAG?" — no: no retriever, no embeddings, no index,
+  nothing retrieved. "Graph technologies? yEd, mermaid" — no: those draw diagrams, a knowledge
+  graph is a queryable structure with traversal. Both would have been *plausible* on paper and
+  both die in the first technical follow-up. The posting accepted "a strong motivation to work
+  with" these, so the honest version cost almost nothing and the dishonest version risked
+  everything.
+- **The gap belonged in the middle of the summary, not at the end.** The CV summary first ended on
+  "RAG und Vektordatenbanken baue ich gerade auf." Final position is the most-remembered slot in a
+  paragraph; spending it on the one thing I cannot do yet inverts the whole document. Moved it
+  inward, ended on payment-critical data and TSE/KassenSichV instead. Same sentences, same
+  honesty, different last impression.
+- **A confirmed capability outranks a cautious one — once it is confirmed.** The KB said "works
+  with MCP". I have actually built an MCP client/integration, and MCP clients are a literal line
+  item in the posting. Recording that in `profile.json` upgraded a hedge into a match. The
+  opposite of overstating is not understating; it is asking.
+- **The non-obvious argument beat the obvious one.** Company D does payments, BNPL and debt
+  reduction. Nothing in the posting asked for fiscal or payment experience — but Mahnungen,
+  bank-transfer import/export, TSE/KassenSichV and "five models are read-only so no POST bypasses
+  event-sourcing" say more to a FinTech about whether my agents will survive contact with their
+  domain than another paragraph about prompts would.
+- **Mixed-language posting: mirror the employer, not the reposter.** German company copy (du,
+  first person), English recruiter boilerplate (third person about Company D, "Knowledgraph"
+  misspelled twice). German won, because the German text is the only part Company D demonstrably
+  wrote and the posting demands German at C1+ — a German document evidences that in the medium
+  itself. No ATS cost, since the English technical terms go in either way.
+
+### Post angles
+- *"The job wanted RAG. I asked my own assistant whether my knowledge-base pipeline counted, and
+  it said no — no retriever, no embeddings, nothing retrieved. It was right. I applied anyway,
+  with the gap named once and the adjacent skills named properly. Reaching for the fashionable
+  word is how you lose the first interview question."*
+- *"yEd and Mermaid draw graphs. A knowledge graph is queried. Not the same noun."*
+- *"The posting asked for 4 years of Java, Python or TypeScript. I have none of those at 4 years —
+  I have six years of shipping software and five of Laravel in production. I wrote that, plainly,
+  instead of adding three part-time numbers together until they cleared the bar."*
+- *"I moved one sentence in my CV and changed nothing else. It was the sentence about what I
+  cannot do yet, and it had been sitting in the last line. Last line is what people remember."*
+- *"Their posting never asked about payments. My best argument was Mahnungen and TSE signing.
+  Read what the company does, not only what the job ad lists."*
+
+### Addendum, same run — the de-escalated verb came back, and one true detail stayed out
+- **Reversed a downgrade, with evidence.** On 2026-07-30 I had softened the Gastro IT bullet to
+  "Erfahrungen ins Team eingebracht". Asked again for this posting, the actual story turned out to be:
+  I used AI-assisted development myself, explained it and my way of working to sceptical teammates,
+  and they came around. That is initiation with an outcome, so `angestoßen` is now the accurate verb
+  and the item earned its **own** bullet instead of a trailing subclause. The rule against upgrading
+  verbs is a rule against *synonyms without evidence* — not a ratchet that only turns one way.
+- **One true detail is still the wrong detail.** Part of that AI use ran through my private account on
+  company work. Real, and it stays out of every document: to a FinTech reading a CV, "private AI
+  account on company code" is a data-governance flag, not initiative. Same substance, no liability.
+  Recorded as a hard never-write rule in the fact base.
+- **English written as C1** by my decision, replacing "fließend". CV 943 words / 2 pages, letter
+  551 words / 1 page, 12/12 renderer checks green on the re-render.
+- Post angle: *"An assistant that only ever talks you down is as useless as one that talks you up.
+  Mine softened a claim last week, asked me for the evidence this week, and put the stronger word
+  back when I had it. Then it told me which true fact to leave out."*
+
+## 2026-07-31 - Company E, Full-Stack Engineer (Front-End Leaning), remote, EN
+
+### Numbers
+- CV 1057 words / 2 pages (scale 1.0, 0 bullets dropped, 29 lines on page 2).
+- Cover letter 617 words / 1 page (zoom 1.0). 12/12 renderer checks green.
+- Base: `ai-software-developer_en.json`. Digests rebuilt first, all three were stale.
+- Digest read cost: preparation 20,750 tok, cv/cover-letter 19,657 tok each - 38-42% under
+  reading pretty-printed `profile.json`.
+- Pipeline: preparation 43k subagent tokens / 107s, cover letter 54k / 81s, CV 71k / 286s.
+
+### Why
+- **The posting removed my weakest argument and handed me my strongest.** "We do not require any
+  formal experience, certifications, or degrees... showcase solving impressively hard problems
+  with artifacts such as past projects, designs, or GitHub contributions." That makes the
+  unfinished IT-Security studies irrelevant by their own terms, and it makes github.com/Jackylyn1
+  load-bearing rather than decorative. The React 18 + TypeScript WordPress plugin - a take-home,
+  labelled as one - is worth more here than any sentence claiming React experience, because they
+  asked for artifacts by name.
+- **"AI first" is the differentiator, and it is the one thing most full-stack applicants cannot
+  fake.** They say they use AI across the whole company. I do not just use it: self-hosted
+  Langfuse tracing turns, generations, tool calls and token usage; a Claude Code audit suite with
+  deterministic verification; an MCP client; a multi-agent pipeline with a structured KB as
+  injected context. Measuring my AI runs instead of guessing is the claim, and it is evidenced.
+- **Rejected the architect framing on purpose.** `Software Architect` and `Solution Architect` are
+  in my role map and would have been the flattering choice. The company writes "impact not job
+  titles - no task is above or beneath you". An architect frame reads as someone who wants to
+  design rather than ship. Picked the frame that matches how they work, not the one that ranks
+  highest.
+- **React honestly: TypeScript is production, React is not.** Capacitor/TypeScript terminals ship;
+  React exists as one public artifact. Framed as a TypeScript-first engineer who works in
+  component/reactive UI models daily (Vue, Alpine, Livewire/Filament, Tailwind) and has shipped
+  React - not as "years of React". The posting is front-end *leaning*, so the fix is pointing at
+  the repo, not inflating the adjective.
+- **"Cloud infrastructure tools" without a hyperscaler.** No AWS/GCP/Azure, no Kubernetes. Listed
+  what is real: Docker Compose multi-container stacks, GitLab CI/CD, Redis queues, Linux, DDEV.
+  Infrastructure competence is not a vendor logo.
+- **Removed "(not completed)" from the education entry.** *Never frame by negation* says scope
+  comes from what is listed. The entry now states the studies and the years and claims no degree -
+  which is the same information without the apology attached.
+
+### Post angles
+- *"A job ad that says 'no degrees required, show us artifacts' is not lowering the bar. It is
+  moving it somewhere you cannot bluff. My GitHub had to carry the application."*
+- *"I turned down the more senior-sounding frame for my own CV. The company wrote 'impact not job
+  titles'. Applying as an architect to a place that does not believe in titles is a reading-
+  comprehension failure, not ambition."*
+- *"TypeScript is in my production code. React is in one public repo from a take-home. I wrote
+  exactly that. The alternative is a first interview question I lose."*
+- *"They asked for cloud infrastructure. I have Docker Compose, GitLab CI and Linux, and no
+  hyperscaler. I listed the three real ones and left the logos out - a gap you name costs less
+  than a claim you cannot defend."*
+- *"I deleted two words from my CV: '(not completed)'. Same facts, same years, same honesty. The
+  parenthesis was doing nothing except apologising."*
+
+## 2026-07-31 — the generators stopped writing documents and started writing deltas
+
+Both generation phases were paying frontier-model output prices to retype boilerplate.
+Output costs 5× input on every model, and it is also *all* of the wall-clock, because
+input is one prefill while output is generated serially. So this was the worst trade in
+the pipeline, twice over.
+
+### What was measured
+
+- **Cover letter:** the agent wrote the whole HTML document — doctype, A4 print CSS,
+  header, address table, date, signature. **5,588 bytes** (company-i) / **5,712** (company-d), of
+  which ~2,000 was byte-identical on every single run. Content JSON instead:
+  **3,872 / 4,015 bytes** — a **30 %** cut, ~1,730 → ~1,215 output tokens.
+- **CV:** the agent rewrote the entire content JSON — **9,800 bytes**, ~2,970 output
+  tokens — to change the summary, the skill-line order and some bullets. A patch of the
+  changed fields only: **522 bytes** in the test, ~2,000 for a realistic one. **−80 %**,
+  ~610 tokens.
+- **Together: ~4,700 → ~1,825 output tokens per both-documents run (−61 %).** The two
+  generators run in parallel, so the *critical-path* saving is the CV path alone:
+  **~2,360 fewer serial output tokens**.
+- My own estimate beforehand was wrong in its split: I predicted the letter would drop
+  1.9k → 900 tokens. It drops 1,730 → 1,215. The boilerplate was ~2 KB, not ~3 KB, and
+  501 words of prose is irreducible. The aggregate −60 % held; the per-file guess did not.
+  Estimating the *shape* of a saving is not the same as measuring it.
+
+### Why it is also a correctness win, not only a cost one
+
+Every unchanged field the model retypes is a field it can quietly get wrong — a date, a
+company name, a bullet it half-remembers. **A patch cannot corrupt a date it never
+mentions.** The renderer merges onto the base, so anything the patch does not name is
+provably identical to the source.
+
+The date now comes from `datetime.date.today()` in `build_letter.py` with hardcoded month
+names (not the system locale), so a letter can no longer be dated wrong by a model.
+
+### The reference file that deleted itself
+
+`generate-cover-letter.md` pointed at `output/coverletter_company-i_de.html` as its structure
+reference. `output/` holds disposable build artifacts, so routine cleanup deleted it, and
+the phase was pointing at a missing file — while also being told "if a path is missing,
+stop". **A pipeline input stored in an output directory is a time bomb.** Both references
+now live where nothing sweeps them: `templates/coverletter_template_{de,en}.html` for the
+skeleton, `examples/coverletter_company-i_de.json` for tone. The example is stored in the exact
+format the phase must emit, so one file is both the tone reference *and* the schema — and
+it carries no CSS.
+
+### Verification
+
+Round-trip: the company-d letter was decomposed into a content JSON, reassembled through the
+template, and re-rendered. `pdftotext` output is **identical** to the original PDF. Renderer
+still 12/12 green on both documents; old-style artifacts (finished HTML + merged content
+JSON) render unchanged, so in-flight applications did not break.
+
+Failure paths fail loudly rather than guessing: an ambiguous item selector names all three
+matches and refuses; a selector matching nothing refuses; misspelled patch keys and item
+fields list the allowed set; selecting the same item twice refuses. Dropping a
+work-experience entry prints a NOTE — projects are meant to be a curated subset, employment
+history is not.
+
+### One finding I did not expect
+
+The "phase-scoped" digests are barely scoped. `profile_cv.json` and
+`profile_cover-letter.json` are **byte-identical** (same md5); `profile_preparation.json`
+differs only by adding `role_skill_map`. All three ship `github_repositories`
+(17,217 chars, ~5.7k tokens) and `references` (3,685 chars) into every phase, including the
+cover letter, which needs neither. The documented "~39 % cheaper" is versus `profile.json`,
+not per phase.
+
+### Raw material for LinkedIn / posts
+
+- *"My CV generator was spending 2,970 output tokens to change maybe 400 of them. It
+  retyped my name, my phone number and every date, every run, at frontier-model output
+  prices — which are 5× input prices and 100 % of the latency, because output is serial.
+  Now it emits a patch: 610 tokens."*
+- *"A patch cannot corrupt a date it never mentions. I moved from 'rewrite the document' to
+  'name what changes' and got a cost win and a correctness win from the same edit — the
+  cheapest field is the one the model never touches."*
+- *"I was paying Opus to retype an A4 stylesheet. Every cover letter it wrote began with
+  the same 2 KB of print CSS. That was never a judgement call, so it moved into a
+  template."*
+- *"My cover-letter agent's structure reference lived in output/. Cleanup deleted it, and
+  the agent was pointed at a file that no longer existed. A pipeline input stored in an
+  output directory is a time bomb — inputs go in templates/ and examples/, where nothing
+  sweeps them."*
+- *"I predicted the saving would be 60 % and it was 61 % — but I had the split wrong: I
+  credited the letter with twice the boilerplate it actually had. Prose is irreducible;
+  markup is not. Estimating the shape of a saving is not measuring it."*
+- *"Two of my three 'per-phase' context digests were byte-identical. I had documented a
+  39 % saving that was measured against something else entirely. Config comments rot
+  faster than code, because nothing runs them."*
+
+## 2026-08-01 - Company F, Backend Developer (Essen, remote), DE
+
+**Zahlen aus dieser Bewerbung**
+- ca. 5 Jahre PHP/Laravel in Produktion.
+- Ticketing-System: Ladezeit um 80 % reduziert, in einem ueber 20 Jahre gewachsenen Multi-Technologie-System.
+- Externe REST-API mit rund 50 Ressourcen, Multi-Tenancy, permission-scoped Zugriff (gebaut, im Review, nicht produktiv).
+- Testautomatisierung bei wpt-online: ca. 50 % der Website-Tests automatisiert.
+- Quant-Harness: rund 130 Mio. Backtests ueber 205 Symbole und 17 Signaltypen in ca. 5 Stunden.
+- 96 Kandidat:innen hatten bereits auf "Bewerben" geklickt.
+
+**Warum**
+Das Angebot verlangt eine von fuenf Backend-Sprachen, PHP erfuellt es voll. Cloud, Kubernetes,
+GraphQL, Node.js und MongoDB sind ehrliche Luecken und wurden nirgends behauptet; im Angebot
+stehen Cloud und Container ohnehin nur als "von Vorteil". Differenzierung gegenueber 96
+Mitbewerbern lief ueber MVP-Tempo plus Tragfaehigkeit: Greenfield, Performance-Nachweis,
+AI-gestuetzte Entwicklung.
+
+**Post-Winkel**
+- "80 % Ladezeit weg in einem 20 Jahre alten System" - was Legacy-Performance wirklich kostet.
+- Ehrlichkeit im Anschreiben: warum ich GraphQL und AWS einfach weglasse statt sie zu streifen.
+- MVPs bauen, die den ersten Kunden ueberleben.
+
+**Pipeline-Learning**
+`apply_cv_patch.py` fuehrt `rewrite` vor `select` aus. Benennt ein Rewrite den Titel um, muss
+der Select-Selector den **neuen** Titel treffen, nicht den der Basis.
+
+## 2026-08-01 — four architecture changes, and the one that did not pay off
+
+Implemented the four changes from yesterday's review. Three did what I predicted. The
+first one — the one I had ranked **highest** — mostly did not.
+
+### #1 Scope the digests: predicted ~9k tokens, delivered ~1.8k
+
+I claimed the phase digests had ~35k tokens of fat because two of the three were
+byte-identical and all three shipped `github_repositories` (5.6k tok) and `references`
+(1.2k) into phases that "obviously" did not need them. Auditing every key against what
+each phase provably reads, almost none of that was true:
+
+- **`projects` and `github_repositories.flagship_own` are disjoint sets.** The repos hold
+  Signal Pipeline, execution framework and the WordPress/React plugin; `projects` holds none of them.
+  Dropping repos from `preparation` would hide exactly the evidence that matches a
+  frontend or quant posting. This is the same mistake the file's own docstring already
+  records someone making once.
+- **`references` IS cited by `cv-standards.md`** — it stays for the writing phase. It is
+  genuinely inert for `preparation`, which the DROP comment has claimed since v1 while the
+  code never did it. Comment-code drift: a comment describing behaviour nothing executes.
+- **`work_experience.bullets` (3.4k tok) looks droppable and is not.** It is the evidence
+  `preparation` matches against.
+
+What was actually safe: `references` for preparation, five bookkeeping sub-keys of
+`github_repositories`, and the `linkedin_*` fields (they belong to `/optimize-linkedin`,
+which reads `profile.json` directly). **~1.8k tokens, not ~9k.** Preparation went
+20.2k → 18.4k *while profile.json itself grew by 1.3k chars*.
+
+**The lesson:** a fact base that is mostly evidence does not compress by scoping, because
+every phase cites evidence. I had estimated from *file sizes*, which measure bytes, not
+need. The honest ratio in this file was already documented — "~90% minification, ~10%
+scoping" — and I proposed a plan that assumed the opposite without re-reading it.
+
+### What actually paid: one generation phase instead of two
+
+|                          | before | after  |
+|--------------------------|--------|--------|
+| digest loads per run     | 3      | 2      |
+| digest tokens per run    | ~58.6k | ~37.7k |
+
+**−36%, and ~19k of the ~21k came from the merge, not the scoping.** `generate-cv` and
+`generate-cover-letter` shared ~95% of their context — same digest, same standards, same
+match summary — and split it only to produce two small deltas. Merging them into
+`generate-documents` was the change; scoping was rounding error next to it.
+
+This only became cheap *because* of yesterday's patch work. Two agents writing two full
+documents in parallel was defensible; two agents writing ~600 and ~1,215 tokens of delta
+was paying a 19k-token context load to parallelise 10 seconds of typing.
+
+### #3 Model tiering, #4 one pre-run call
+
+`preparation` stays on Opus — it holds every judgement that can be wrong in a way that
+matters: honest gaps, the relocation gate, role framing, base selection.
+`generate-documents` and the orchestrator moved to Sonnet: a constrained transform with
+all facts pre-supplied, and path plumbing. Sonnet 5 intro pricing runs to **2026-08-31**,
+so the A/B window is this month.
+
+`prepare-run.sh` collapses digest-rebuild + inventory into one call, removing a round-trip
+from every run. It also fixed a bug I was not looking for: the old inventory command was
+`ls -1 career-kb/content/`, which lists `offer_*` and `patch_*` — previous applications'
+build artifacts. `preparation` could have picked *another company's tailored CV* as the
+base for a new one. The script lists role bases only.
+
+### Guardrails added
+
+The digest verifier now checks sub-keys, not just top-level keys, and asserts that
+`github_repositories.honesty_rules` and `not_own_do_not_cite` survive into **every** phase
+— the rules that stop a repo being claimed as hers when it is not. Digest values are
+verified to be a **verbatim subset** of `profile.json`: pruning may remove, never reword.
+Obsolete phase digests are deleted on rebuild, so a prompt that was not updated cannot
+inject a stale file that still looks current.
+
+### Raw material for LinkedIn / posts
+
+- *"I ranked 'trim the context' as my highest-value optimisation and it returned a fifth of
+  what I predicted. The data was mostly evidence, and every phase cites evidence. I had
+  estimated from file sizes — which measure bytes, not need."*
+- *"Two of my agents shared 95% of their context to produce 600 tokens each. Parallelism
+  cost me a 19,000-token context load to save ten seconds of typing. Merging them was
+  worth more than every byte of trimming I did."*
+- *"My config had a comment explaining why a file was excluded from a context digest. The
+  code had never excluded it. Comments rot faster than code, because nothing runs them."*
+- *"My pipeline listed every JSON in a folder as a candidate CV base — including the
+  tailored CVs from previous applications. One directory listing away from writing a
+  Company D application on top of an Company E one."*
+- *"The audit found a repo set my matching phase 'obviously' didn't need. It held the
+  three projects that would match a frontend role. The file's own comments recorded
+  someone making that exact mistake before me. Read the changelog before you trust the
+  hunch."*
+
+### Correction to yesterday's patch numbers — measured on a real run
+
+The company-f application is the first real run through the delta path, and it corrects
+the figure I logged yesterday. I measured the CV saving with a **synthetic** patch that
+rewrote one bullet set: 522 B vs 9,800 B, i.e. −80%. A real tailoring run does far more
+work than that:
+
+| | bytes |
+|---|---|
+| `experience.rewrite` (3 jobs) | 3,094 |
+| `projects.rewrite` (3) + `select` | 1,712 |
+| `skills` (whole list restated) | 1,248 |
+| `summary` | 1,033 |
+| **real patch** | **7,175** |
+| merged document | 9,225 |
+
+**Real saving: 2,050 B (~22%), not 80%.** Per-run output drops ~1,135 tokens, not the
+~2,875 I logged — CV ~620, letter ~515. Still ~25% off the most expensive token class,
+and the correctness argument is untouched (an unmentioned field cannot be corrupted), but
+the number I published was inflated by a test case I chose because it was easy to write,
+not because it was typical.
+
+**The lesson is the same one as #1 above, twice in two days:** I measured a proxy
+(a synthetic patch, a file size) instead of the thing itself, and both times the proxy
+flattered the change. The real run was sitting in `content/` the whole time.
+
+Remaining headroom now visible: `skills` (1,248 B) restates the whole line list even when
+only the order changes. A reorder-by-reference form would recover most of that.
+
+### One thing I got wrong in the other direction
+
+I added `career-kb/.digest/` to `.gitignore`, reasoning that a tracked build artifact can
+be committed stale. `.gitignore` line 31 already carried a dated decision **not** to ignore
+it, with the opposite and better argument: tracking the digests makes a stale one visible
+in `git diff` instead of silently shipping outdated facts, and a fresh clone works with no
+build step. Reverted. The reasoning was written down, in the file I was editing, and I
+appended without reading up.
+
+### Skills by reference — the last easy 375 tokens
+
+`skills` was the one section still restated in full on every run: nine lines, 1,248 bytes
+in the company-f patch, to express what is almost always just **a permutation**. Tailoring
+moves the required stack to the top; the line text rarely changes.
+
+`"skills": {"select": ["KI", "Backend", ...]}` says the same thing by reference:
+**1,248 B → 122 B, ~375 output tokens saved.** That takes the real CV patch from 7,175 B
+to ~6,050 B, so the saving against a full rewritten document goes from 22% to ~34%, and
+the per-run output saving from ~1,135 to ~1,510 tokens.
+
+**The design detail that mattered:** substring matching is far more collision-prone on
+skill lines than on job titles, because a line is `Category: a, b, c, d`. The first
+implementation refused `"AI"` as ambiguous — it appears inside "T**ai**lwind". Correct
+behaviour (refuse, never guess), useless ergonomics. Matching is now tiered: the category
+before the colon first, the whole line only as a fallback. `"KI"` resolves cleanly, and
+`"Sanctum"` still finds the Backend line. Ambiguity within a tier is still refused —
+tiering removes false collisions, it does not start guessing.
+
+`select` is subset **and** order, so omitting a line drops it and its ATS keywords. The
+renderer prints a NOTE whenever a `select` drops skill lines, for the same reason it does
+for work-experience entries: the failure is silent in the PDF and expensive in the
+applicant tracking system.
+
+## company-g — PHP Vibe-Coder (Laravel), 2026-08-01
+
+**Numbers.** Preparation 41,171 tokens / 5 tool uses / 46 s. Generation 58,455 tokens /
+11 tool uses / 55 s, plus a 61,028-token repair pass (12 tool uses, 105 s) because the
+first patch selected project titles that do not exist. Render 12/12 checks: CV 2 pages
+(585 words, scale 1.0, 0 bullets dropped), letter 1 page (470 words, zoom 1.0). One
+work-experience entry dropped by `select` — the Narutorpg volunteer project, so no CV gap.
+
+**Why the repair pass cost more than the fix.** `projects.select` failed on
+`"AI Engineering Experiments"`, a title the generator wanted to exist rather than one it
+had read. The selector API makes the base document the authority, and the renderer
+refuses rather than guesses — correct. But the generator had the base path injected and
+still invented three of three selectors. The cheap fix is not a better prompt: it is
+printing the selectable titles next to the base path, the same way `prepare-run.sh`
+already prints the base-JSON inventory instead of letting the agent go looking. A
+`--print-selectors <base>` flag would have turned a 61k-token round trip into zero.
+
+**Post angle.** "Vibe-Coding" postings are really asking one question: can you go fast
+without shipping garbage? The answer that lands is not a speedup number, it is the
+verification layer — PHPStan level 9, BDD, audit subagents, Langfuse traces of every
+turn and tool call. Speed claims are unfalsifiable; a trace is not.
+
+## Company H — GenAI Engineering Coach (all genders), 2026-08-02
+
+**Numbers.** Preparation 41,130 tokens / 5 tool uses / 54 s. Generation 59,936 tokens /
+11 tool uses / 71 s. No repair pass. Render 12/12 checks on the first run: CV 2 pages
+(733 words, scale 1.0, 0 bullets dropped), letter 1 page (507 words, zoom 1.0, 6
+paragraphs / 456 source words). Base `it-consultant_de.json`, register `du`.
+
+**Why it ran clean this time.** Same two-phase shape as company-g, but the generation
+phase invented no selectors. The difference was the preparation summary naming the
+evidence items explicitly (Langfuse, MCP client, code-audit suite, pivot events) instead
+of describing them by category. A selector the generator has seen spelled out is one it
+copies; a category is one it fills in. That argues for `--print-selectors` even harder:
+the cheap version of "seen spelled out" is printing them, not hoping the upstream phase
+happened to.
+
+**The hardest constraint was subtractive.** Cursor, Angular, Java/Spring, conference
+talks, enterprise AI-Act work — five plausible-sounding things this posting invites and
+none of them hers. A GenAI coaching role reads as an open invitation to embellish because
+the whole field is 18 months old and nobody's résumé is deep in it. The honest version is
+stronger anyway: the posting's own line is "nicht nur auf Folien", so the differentiator
+is the measurement layer, not the tool list.
+
+**Post angle.** Everyone claims AI makes their team faster. Almost nobody can show the
+trace. Self-hosted Langfuse over Docker Compose, every turn, generation, tool call and
+token counted — that is the difference between an AI opinion and an AI decision. Guardrails
+follow the same logic: an AI code audit is worth nothing until a deterministic check
+confirms what the model claimed.
+
+## Signature in the cover letter, 2026-08-02
+
+**What was built.** The handwritten signature was cut out of a scanned PDF page (photo of
+paper, 200 dpi render) and now sits in every letter automatically:
+`career-kb/assets/signature.png`, inlined as a base64 data URI by `build_letter.py` into
+both templates, above the typed name. Company H's letter was rebuilt with it and re-dated
+to 3 August 2026.
+
+**The cut was a colour problem, not a cropping problem.** The signature crosses a printed
+rule and the printed label under it, so no rectangle isolates it. Luminance alone keeps
+all three. What separates them is hue: the paper photographs warm (R roughly 20 above B),
+the printed toner stays warm even when dark, the ballpoint ink is the only thing where
+blue meets or beats red. Gate on `B - R > -3`, then take darkness against the paper level
+as the alpha, and the rule and the label disappear on their own. Two lines of arithmetic
+where a mask drawn by hand would have taken far longer and aged worse.
+
+**Data URI, not a relative path.** The letter is rendered from a scratch copy
+(`output/.fit.html`) that the page-fitting loop writes and deletes, and the fit loop can
+rewrite it several times. Any `src="../assets/…"` is one moved file away from a silently
+missing image in a PDF nobody re-opens. Inlining costs about 30 KB and cannot break.
+
+**The background is the page, not transparency.** The scan was composited onto pure white
+because that is the letter's page colour — same file works in Chromium and in the
+LibreOffice fallback, and nothing can render a grey halo around the ink.
+
+**Nachtrag: warum die erste saubere Version noch nach Ausschnitt aussah.** Binarisieren
+plus Morphologie macht die Linien topologisch richtig, aber gleich breit — und eine
+gleich breite Handschrift liest sich sofort als Grafik, nicht als Stift. Die Rettung war,
+beide Bilder zu behalten: die bereinigte Binärmaske entscheidet nur noch *wo* Tinte ist,
+die Graustufen aus dem Scan entscheiden *wie viel*. Multipliziert man beide, kommen
+Druckschwankung, Strichverjüngung an den Enden und die dünnen Stellen in den Kurven
+zurück, ohne dass die Verschmutzung wieder auftaucht. Die Auflösung blieb dabei voll
+(926 px breit, rund 590 dpi bei 12 mm Höhe, 42 KB) — Herunterrechnen auf Anzeigegröße war
+falsche Sparsamkeit, gedruckt sieht man den Unterschied.
+
+**Die restlichen Unterbrechungen kamen alle von derselben Stelle.** Nach der
+Dichte-Modulation sahen mehrere Striche noch aufgerissen aus, und zwar nicht zufällig:
+die Unterschrift wurde auf eine gedruckte Linie geschrieben, und mein Farbton-Filter
+entfernt diese Linie samt der Tinte, die genau darauf liegt. Jede Kreuzung ist damit eine
+Lücke von rund fünfzehn Pixeln. Sichtbar wurde das erst beim Zählen der
+Zusammenhangskomponenten: sieben statt der fünf, die die echten Absetzpunkte hergeben.
+Repariert wird jetzt gezielt — Strichenden ober- und unterhalb der Linie werden paarweise
+verbunden, mit der lokalen Strichbreite, und nur wenn auf beiden Seiten wirklich Tinte
+weitergeht. Der Absatz zwischen "b" und "a" ist echt (46 px, im Foto klar sichtbar) und
+bleibt offen; ein Bild "sauberer" zu machen als das Original ist keine Reinigung mehr.
+
+**Merkregel dafür.** Bei so einer Freistellung ist die Komponentenzahl die einzige
+Messung, die zählt. Ansehen genügt nicht — bei der Anzeigegröße von 12 mm sind fünfzehn
+Pixel unsichtbar, gedruckt und vergrößert nicht.
+
+**Die Kanten waren nicht zu retten — sie mussten weg.** Jede Filterrunde auf der Maske
+(glätten, öffnen, schließen) arbeitet weiter an einem Umriss, der aus Papierfasern und
+Handykamera besteht. Der Ausweg war, den Umriss ganz aufzugeben: die Maske auf eine ein
+Pixel breite Mittellinie ausdünnen (Zhang-Suen), diese Linie glätten und mit einer runden
+Feder neu zeichnen. Damit sind die Kanten gezeichnet statt fotografiert und mathematisch
+glatt, während Form und Strichführung erhalten bleiben.
+
+**Zwei Dinge, die dabei zuerst falsch aussahen.** Erstens Perlenschnur: die Federbreite
+pixelweise aus der Distanztransformation zu nehmen, reproduziert die Papierkörnung als
+Kette von Verdickungen — ein Kugelschreiber hat eine Breite, also gehört der Messwert
+stark geglättet und nach oben gedeckelt. Zweitens zu fett: die Maske ist durch Schließen,
+Brückenschlag und den Unschärfehof des Fotos deutlich breiter als der echte Strich, hier
+Faktor knapp zwei. Ohne diese Korrektur laufen enge Schleifen wie im "b" zu.
+
+**Und der Fallstrick beim Nachzeichnen.** Das Ausdünnen erfindet an jeder Ausbuchtung eine
+Verzweigung, die Kurve zerfällt in Fragmente, und jedes Fragmentende bekommt beim Zeichnen
+eine Verjüngung — das liest sich wieder als unterbrochener Strich. Nötig war beides:
+Fragmente wieder zusammennähen, wo genau zwei an einem Punkt sanft ineinander laufen, und
+verjüngen nur noch dort, wo die Mittellinie wirklich endet. Zur Kontrolle zählt das Skript
+am Ende die Mittellinienpixel, die kein Pfad aufgenommen hat; die Zahl muss null sein.

@@ -10,7 +10,7 @@
     {
       "heading": "PROFIL",
       "type": "summary",
-      "text": "Softwareentwicklerin mit Schwerpunkt Softwarearchitektur und angewandter KI. Ich entwickle seit über 15 Jahren Software, zunächst ehrenamtlich in Open-Source- und Community-Projekten und seit 2019 auch beruflich, mit PHP/Laravel und TypeScript, von der Greenfield-Architektur über CI/CD bis zur Testautomatisierung. In den letzten zwei Jahren habe ich LLMs in reale Entwicklungs-Workflows integriert: KI-Agenten entworfen, Prompts optimiert sowie Token-Verbrauch und Kosten reduziert, unter anderem mit der OpenAI- und Anthropic-API und MCP. Ich verstehe Systeme gern von Anfang bis Ende, messe Ergebnisse und verbessere sie iterativ. Aktuell vertiefe ich Python für KI-Arbeit und arbeite mich in RAG und Vektordatenbanken ein."
+      "text": "Softwareentwicklerin mit Schwerpunkt KI-Integration, API- und Backend-Entwicklung. Ich entwickle seit über 15 Jahren Software, zunächst ehrenamtlich in Open-Source- und Community-Projekten und seit 2019 auch beruflich, mit PHP/Laravel und TypeScript, von der Greenfield-Architektur über CI/CD bis zur Testautomatisierung. In den letzten zwei Jahren habe ich LLMs in reale Entwicklungs-Workflows integriert: KI-Agenten entworfen, Prompts optimiert sowie Token-Verbrauch und Kosten reduziert, unter anderem mit der OpenAI- und Anthropic-API und MCP. Ich verstehe Systeme gern von Anfang bis Ende, messe Ergebnisse und verbessere sie iterativ. Aktuell vertiefe ich Python für KI-Arbeit und arbeite mich in RAG und Vektordatenbanken ein."
     },
     {
       "heading": "KENNTNISSE",
@@ -35,9 +35,9 @@
           "company": "Gastro IT GmbH",
           "right": "03.2025 - heute  |  Wuppertal (Remote)",
           "bullets": [
-            "Kernentwicklerin (Top-3 im rund siebenköpfigen Team) an einer bestehenden Greenfield-POS-Plattform für die Gastronomie: verteiltes System aus zentralem Laravel/Filament-Cloud-Backoffice, On-Premise-Standortservern und Capacitor/TypeScript-Terminals auf Basis eines Domain-Driven, paketorientierten Laravel-Monolithen.",
+            "Entwicklerin an einer bestehenden Greenfield-POS-Plattform für die Gastronomie: verteiltes System aus zentralem Laravel/Filament-Cloud-Backoffice, On-Premise-Standortservern und Capacitor/TypeScript-Terminals auf Basis eines Domain-Driven, paketorientierten Laravel-Monolithen.",
             "Aufbau einer internen KI-gestützten Code-Audit-Toolsuite (Claude-Code-Slash-Commands und Subagenten mit deterministischer Verifikation) für Soft-Delete-, CRUD-Logging- und Feld-Berechtigungs-Audits; Integration von KI-Tools in den täglichen Entwicklungs-Workflow.",
-            "Eigenverantwortlicher Entwurf und Umsetzung der externen REST-API (API Platform auf Laravel) end-to-end, inkl. mandantenfähiger, berechtigungsbasierter Zugriffskontrolle: Row-Level-Query-Extensions, Tenant-Isolation, JWT-basierte API-Credentials und OpenAPI-Dokumentation.",
+            "Eigenverantwortlicher Entwurf und Umsetzung der externen REST-API (API Platform auf Laravel) end-to-end, inkl. mandantenfähiger, berechtigungsbasierter Zugriffskontrolle: Row-Level-Query-Extensions, Tenant-Isolation, Sanctum-basierte API-Credentials und OpenAPI-Dokumentation.",
             "Entwurf und Implementierung des Echtzeit-Pivot-Event-Sync-Mechanismus (eigenes laravel-pivot-events-Paket plus dedizierte PivotEvents-Domain, ausgeliefert über Mercure/SSE) in einer event-getriebenen Architektur mit Redis-Queues (Laravel Horizon) und Laravel Octane.",
             "Testautomatisierung über den gesamten Stack (PHPUnit, BDD mit Behat/Gherkin und Pest, Selenium, Bruno) in einer GitLab-CI-Pipeline mit PHPStan Level 9 (Larastan) und ECS."
           ]
