@@ -44,6 +44,7 @@ Usage:
 """
 
 import argparse
+import base64
 import datetime
 import html
 import json
@@ -60,6 +61,8 @@ TEMPLATES = {
     'de': os.path.join(KB, 'templates', 'coverletter_template_de.html'),
     'en': os.path.join(KB, 'templates', 'coverletter_template_en.html'),
 }
+
+SIGNATURE = os.path.join(KB, 'assets', 'signature.png')
 
 # Hardcoded so the rendered date never depends on the machine's locale.
 MONTHS = {
@@ -120,6 +123,32 @@ def _clean(value):
     return html.escape(norm_text(str(value)), quote=False)
 
 
+def signature_data_uri(path=None):
+    """Inline the scanned signature so the HTML stays a single portable file.
+
+    The letter is rendered from a scratch copy in output/, so a relative <img>
+    src would break as soon as the HTML moves; a data URI cannot.
+
+    The file is deliberately untracked: a reusable image of a handwritten
+    signature does not belong in a public repository. So a fresh clone will not
+    have it, and the fix is to add it - not to silently ship a letter without a
+    signature, which a recruiter would read as carelessness.
+
+    The path is resolved on call, not bound as a default, so a test can point
+    SIGNATURE somewhere else.
+    """
+    path = path or SIGNATURE
+    if not os.path.exists(path):
+        raise SystemExit(
+            f'error: signature image not found: {path}\n'
+            f'       Scan or photograph your signature, crop it tight, save it\n'
+            f'       as a PNG on white background at that path, and re-run.\n'
+            f'       It stays out of git on purpose - see .gitignore.'
+        )
+    with open(path, 'rb') as f:
+        return 'data:image/png;base64,' + base64.b64encode(f.read()).decode('ascii')
+
+
 def build(content, lang, today=None):
     missing = [k for k in REQUIRED if not content.get(k)]
     if missing:
@@ -145,6 +174,7 @@ def build(content, lang, today=None):
         salutation=_clean(content['salutation']),
         body=body,
         closing=_clean(content.get('closing') or DEFAULT_CLOSING[lang]),
+        signature=signature_data_uri(),
     )
 
 
