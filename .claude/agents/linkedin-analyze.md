@@ -1,6 +1,6 @@
 ---
 name: linkedin-analyze
-description: Audits Jacqueline Urban's LinkedIn profile and produces an optimization brief (keyword strategy, multi-role positioning, gaps, honesty fixes, positions/projects, and skills plan). Spawned by `/optimize-linkedin`; context is injected by the orchestrator.
+description: Audits [applicant]'s LinkedIn profile and produces an optimization brief (keyword strategy, multi-role positioning, gaps, honesty fixes, positions/projects, and skills plan). Spawned by `/optimize-linkedin`; context is injected by the orchestrator.
 model: opus
 tools: Read, Bash
 ---

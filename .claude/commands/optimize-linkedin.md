@@ -1,5 +1,5 @@
 ---
-description: Analyze and optimize Jacqueline Urban's LinkedIn **profile** (not posts) for recruiter discoverability, trust, and multi-role fit. Produces copy-paste-ready, keyword-optimized `.txt` files by orchestrating the `linkedin-analyze` and `linkedin-optimize` subagents.
+description: Analyze and optimize [applicant]'s LinkedIn **profile** (not posts) for recruiter discoverability, trust, and multi-role fit. Produces copy-paste-ready, keyword-optimized `.txt` files by orchestrating the `linkedin-analyze` and `linkedin-optimize` subagents.
 model: opus
 ---
 # /optimize-linkedin — LinkedIn profile optimization (orchestrator)

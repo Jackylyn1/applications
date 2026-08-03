@@ -39,7 +39,7 @@ whole thing.
 | 1 | Orchestrator said "inject file *content*", agent specs said "*read* `profile.json`" — contradictory | fixed by hand |
 | 2 | Dash hygiene enforced only on the CV path; the cover letter shipped **12 en dashes** into the PDF | extracted `tools/ats_hygiene.py`, imported by both paths |
 | 3 | `README.md` duplicated the render commands and had **drifted** — it documented a CV rendered from HTML, contradicting the hard rule that CVs come from the stored DOCX template | README reduced to an index; commands documented once |
-| 4 | Two filename conventions in one run (`offer_company-a_de.json` vs `Urban_CV_Company-A_de.pdf`) | naming defined once, in `tools/render_application.py`; agents call `--print-paths` |
+| 4 | Two filename conventions in one run (`offer_company-a_de.json` vs `[applicant]_CV_Company-A_de.pdf`) | naming defined once, in `tools/render_application.py`; agents call `--print-paths` |
 | 5 | Cover letter invented an `Anlagen:` line nothing had specified | banned in `cover-letter-standards.md` |
 
 The pattern in 2/3/4: **duplication drifts.** Every one of those defects was two
@@ -665,7 +665,7 @@ the only lever.
 
 ## 2026-07-27 — Company C revision: three corrections, and where they actually belonged
 
-Jacqueline reviewed the Company C letter and rejected three things: a
+[applicant] reviewed the Company C letter and rejected three things: a
 self-characterising work-style line ("und ich höre selten bei der ersten Lösung
 auf, die funktioniert"), Symfony framed as multi-year experience when it is
 private/volunteer only and far below full-time intensity, and the closing
@@ -678,7 +678,7 @@ paragraph naming individual side projects as work samples.
   **Authentic phrasing patterns**. The generator quoted the style guide
   faithfully. Deleting the sentence from the output would have regenerated it on
   the next run.
-  **Corrected an hour later:** the pattern itself is fine — Jacqueline allows
+  **Corrected an hour later:** the pattern itself is fine — [applicant] allows
   *"…if time allows it."* What failed was the German rendering, which dropped
   the time qualifier ("ich höre selten bei der ersten Lösung auf, die
   funktioniert") and thereby reads as overengineering instead of craft. My first

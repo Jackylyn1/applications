@@ -53,6 +53,8 @@ import string
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from profile_digest import applicant_name
+
 from ats_hygiene import norm_text
 
 KB = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # career-kb/
@@ -174,6 +176,7 @@ def build(content, lang, today=None):
         salutation=_clean(content['salutation']),
         body=body,
         closing=_clean(content.get('closing') or DEFAULT_CLOSING[lang]),
+        name=_clean(applicant_name()),
         signature=signature_data_uri(),
     )
 

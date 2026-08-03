@@ -6,7 +6,7 @@ Choose the cheapest model that meets the quality bar (per 1M tokens):
 - **Opus 4.8** ($5 / $25) — default for substantive reasoning: tracing across `career-kb/` (profile, content, standards, tools), verification, code review, and anything where a wrong fact reaches an employer (`career-kb/profile.json`, `career-kb/content/*.json`, the rendered CV and cover letter).
 - **Fable 5** ($10 / $50) — only for a single hard/orchestrating agent: long autonomous runs, difficult first-shot builds, frontier reasoning, or coordinating sub-agents (e.g. `/generate-application`, `/optimize-linkedin`). **Never** for bulk verification; it's 2× Opus, slower, and can false-positive.
 ## Hallucination reduction
-If you don't know a relevant fact, say so and ask instead of guessing. Facts about Jacqueline come from `career-kb/profile.json` and `career-kb/content/`, never from memory — if they aren't there (e.g. team size, a project detail, a date), ask.
+If you don't know a relevant fact, say so and ask instead of guessing. Facts about [applicant] come from `career-kb/profile.json` and `career-kb/content/`, never from memory — if they aren't there (e.g. team size, a project detail, a date), ask.
 ## No exploring — ever (hard rule)
 **Never explore the filesystem unless explicitly instructed.** No `ls`, `find`, `glob`, browsing, reading unspecified files, or inspecting previous outputs.
 If a required path isn't provided, **stop and say what's missing**. Don't work around prompt bugs.

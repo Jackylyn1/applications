@@ -3,7 +3,7 @@
 An agent-driven pipeline that turns a job posting into a tailored, ATS-ready CV
 and cover letter, verified before it is handed over.
 
-It is Jacqueline Urban's real job-search workspace, kept public as an engineering
+It is [applicant]'s real job-search workspace, kept public as an engineering
 showcase. The interesting part is not that an LLM writes a cover letter. It is
 **where the boundary between the model and the code was drawn**, and what
 measuring that boundary was worth.

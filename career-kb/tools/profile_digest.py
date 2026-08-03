@@ -131,6 +131,15 @@ def load_profile():
         return json.load(f)
 
 
+def applicant_name():
+    """The applicant's full name - the only place any tool may read it from.
+
+    Templates and output filenames used to hardcode it; personal data lives in
+    profile.json alone, so everything else asks for it here.
+    """
+    return load_profile()['personal']['full_name']
+
+
 def build(phase, profile=None):
     data = profile if profile is not None else load_profile()
     kept = {k: v for k, v in data.items() if k not in DROP.get(phase, [])}

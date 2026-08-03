@@ -17,10 +17,11 @@ NAMING CONVENTION (defined once, here)
     CV content JSON      content/offer_<slug>_<lang>.json      <- merged here
     letter content JSON  output/coverletter_<slug>_<lang>.json <- model writes
     cover-letter source  output/coverletter_<slug>_<lang>.html <- assembled here
-    CV output            output/Urban_CV_<slug>_<lang>.docx  (+ .pdf)
-    cover-letter output  output/Urban_CoverLetter_<slug>_<lang>.pdf
-    The `Urban_CV_` / `Urban_CoverLetter_` prefixes stay capitalized because a
-    recruiter sees those filenames; the slug is always lowercase.
+    CV output            output/<Surname>_CV_<slug>_<lang>.docx  (+ .pdf)
+    cover-letter output  output/<Surname>_CoverLetter_<slug>_<lang>.pdf
+    The surname comes from profile.json and its `_CV_` / `_CoverLetter_`
+    prefixes stay capitalized because a recruiter sees those filenames; the
+    slug is always lowercase.
 
 THE MODEL WRITES DELTAS, THIS SCRIPT WRITES DOCUMENTS
     Both generation phases emit only what is a judgement call, and this script
@@ -58,6 +59,8 @@ import subprocess
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from profile_digest import applicant_name
+
 from apply_cv_patch import apply_patch
 from ats_hygiene import count_violations, norm_file
 from build_letter import build as build_letter
@@ -96,15 +99,16 @@ def normalize_slug(company):
 
 def paths_for(company, lang):
     slug = normalize_slug(company)
+    surname = applicant_name().split()[-1]
     return {
         'slug': slug,
         'cv_patch': os.path.join(CONTENT, f'patch_{slug}_{lang}.json'),
         'cv_content': os.path.join(CONTENT, f'offer_{slug}_{lang}.json'),
         'cl_content': os.path.join(OUTPUT, f'coverletter_{slug}_{lang}.json'),
         'cl_source': os.path.join(OUTPUT, f'coverletter_{slug}_{lang}.html'),
-        'cv_docx': os.path.join(OUTPUT, f'Urban_CV_{slug}_{lang}.docx'),
-        'cv_pdf': os.path.join(OUTPUT, f'Urban_CV_{slug}_{lang}.pdf'),
-        'cl_pdf': os.path.join(OUTPUT, f'Urban_CoverLetter_{slug}_{lang}.pdf'),
+        'cv_docx': os.path.join(OUTPUT, f'{surname}_CV_{slug}_{lang}.docx'),
+        'cv_pdf': os.path.join(OUTPUT, f'{surname}_CV_{slug}_{lang}.pdf'),
+        'cl_pdf': os.path.join(OUTPUT, f'{surname}_CoverLetter_{slug}_{lang}.pdf'),
     }
 
 

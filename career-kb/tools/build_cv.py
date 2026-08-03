@@ -12,9 +12,9 @@ Usage:
 
 CONTENT JSON SCHEMA
 {
-  "name": "Jacqueline Urban",
+  "name": "[applicant]",
   "contact": ["Gelsenkirchen, Germany", "info@perfectseowebsite.de",
-              "+49 152 13839296", "github.com/Jackylyn1", "in/jacqueline-u-92753821b"],
+              "+49 152 13839296", "github.com/Jackylyn1", "in/[applicant]"],
   "sections": [
     {"heading": "PROFESSIONAL SUMMARY", "type": "summary",
      "text": "..."},

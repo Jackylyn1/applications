@@ -1,6 +1,6 @@
 ## Sound_Like_Human_Standards
 
-Source: `Human_Writing_Ruleset.pdf` (Jacqueline, 2026-07-30). Governs **voice** in every channel, so it sits next to `communication-rules.md` rather than in any channel file. Where a rule here already exists there, that file stays the authority — this one is the source of record and adds the concrete blacklists.
+Source: `Human_Writing_Ruleset.pdf` ([applicant], 2026-07-30). Governs **voice** in every channel, so it sits next to `communication-rules.md` rather than in any channel file. Where a rule here already exists there, that file stays the authority — this one is the source of record and adds the concrete blacklists.
 
 ### Core principle
 Write like an experienced human with a clear purpose. Authenticity, specificity and a consistent personal voice beat polish. A single AI tell is survivable; an accumulation of predictable AI patterns is what discredits the text.

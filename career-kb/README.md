@@ -1,4 +1,4 @@
-# career-kb — Jacqueline Urban's application knowledge base
+# career-kb — [applicant]'s application knowledge base
 
 A fast, exact, portable store of everything needed to generate tailored CVs and
 cover letters (English & German) and to produce finished PDF applications from a
@@ -62,4 +62,4 @@ store in Chroma/Qdrant/pgvector. Not needed today.
 
 ## Updating
 Edit `profile.json`. Never add a skill or experience that isn't genuinely
-Jacqueline's. Principle: **she never lies.**
+[applicant]'s. Principle: **she never lies.**

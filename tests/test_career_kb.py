@@ -126,7 +126,7 @@ def test_build_letter_asks_for_the_signature_when_it_is_missing(tmp_path, monkey
 # --------------------------------------------------------------- CV patch ----
 
 BASE = {
-    'name': 'Jacqueline Urban',
+    'name': '[applicant]',
     'sections': [
         {'heading': 'PROFIL', 'type': 'summary', 'text': 'old summary'},
         {
@@ -249,7 +249,7 @@ def test_ambiguous_selector_fails_rather_than_guessing():
 TEMPLATE = TOOLS.parent / 'templates' / 'CV_Template_Rezi_Dec2025.docx'
 
 SMOKE = {
-    'name': 'Jacqueline Urban',
+    'name': '[applicant]',
     'contact': [
         'Gelsenkirchen',
         'info@perfectseowebsite.de',

@@ -1,6 +1,6 @@
 ---
 name: generate-documents
-description: Generates Jacqueline Urban's tailored CV **patch JSON** and cover-letter **content JSON** from the preparation summary. Spawned by `/generate-application`; context is injected by the orchestrator. Merging, HTML assembly and PDF rendering are done by the renderer, not here.
+description: Generates [applicant]'s tailored CV **patch JSON** and cover-letter **content JSON** from the preparation summary. Spawned by `/generate-application`; context is injected by the orchestrator. Merging, HTML assembly and PDF rendering are done by the renderer, not here.
 model: sonnet
 tools: Read, Write, Edit
 ---
@@ -48,7 +48,7 @@ Write **only the fields that change**. Every key is optional; omit anything you 
 `select` is subset **and** order, so **list every line you want to keep** — anything you leave out is dropped from the CV, taking its ATS keywords with it. The renderer prints a NOTE when a `select` drops lines, so check that note.
 
 ## Cover letter
-- Tailor the letter to the job. Structure: ~40% company/problem, ~40% solution/value, ~20% about Jacqueline.
+- Tailor the letter to the job. Structure: ~40% company/problem, ~40% solution/value, ~20% about [applicant].
 - Reference the company and role in the introduction.
 - Write roughly one page: the tone reference is 6 paragraphs / ~500 words, which fits. Be confident, concise, solution-oriented, and match the posting's language and register (`du`/`Sie`).
 - **Do not verify page length, and do not render anything.** `render_application.py` owns page fitting: it scales the letter to one page and fails loudly if the text is too long. Checking it yourself turns into write → render → shorten → render, which measured 14 edits and 27 minutes in one run for a single page of text. Judge length against the tone reference, write once, and stop. If the render later fails on length, the orchestrator will send it back to you with the failure.
