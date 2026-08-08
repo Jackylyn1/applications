@@ -1,19 +1,42 @@
 ## CV Standards
-- **LAYOUT RULE (hard): Always use the stored template as the CV layout. NEVER generate or design an own/custom layout.** Fill the template with role-optimized content; keep its structure, fonts and styling. Every generated CV — base templates and job-offer CVs — must be built from a stored template.
-  - **English CVs → `templates/CV_Template_Rezi_Dec2025.docx`.**
-  - **German CVs → `templates/CV_Template_Rezi_DE_Dec2025.docx`** (structurally identical; German section headings, German placeholder text, `MM.YYYY` dates). Regenerate it from the English template with `tools/make_de_template.py` if the English one changes.
-  - Both templates are ATS-hardened: name + contact left-aligned (name = first extracted line), no em/en dashes.
-- ATS-friendly and clean (universal branding/voice → `general-standards.md` + `communication-rules.md`; application-wide rules → `application-standards.md`).
-- Optimize **content**, not layout. The layout is fixed to the stored template (see rule above).
+
+CV-specific rules only. Universal branding → `general-standards.md`; voice → `communication-rules.md`; application-wide rules → `application-standards.md`.
+
+### Layout (hard)
+- Always build the CV from the stored template. Never generate or design a custom layout. This covers base templates and job-offer CVs alike.
+- English CVs → `templates/CV_Template_Rezi_Dec2025.docx`.
+- German CVs → `templates/CV_Template_Rezi_DE_Dec2025.docx` (structurally identical; German headings, German placeholders, `MM.YYYY` dates). Regenerate it with `tools/make_de_template.py` when the English template changes.
+- Both templates are ATS-hardened: name and contact left-aligned (name = first extracted line), no em/en dashes.
+- Optimize content, never layout.
+
+### Content per application
 - Use the existing CV as the master document.
-- Customize summary, skills, projects and keywords for **every** application.
-- **Rewrite/reframe the experience bullet points per role when it helps.** The standard CV bullets are a default, not fixed text. When a job offer emphasizes something different from the standard CV (e.g. requirements engineering, database design, project leadership, or the online-marketing/SEO side), rephrase, reorder, drop, or surface bullets — including drawing on documented duties in `profile.json` → `references` (the wpt-online Arbeitszeugnis) — so the most relevant experience leads. Not required every time; leave bullets as-is when the defaults already fit the role.
-- **Summary framing (hard — "Variant A", always): open the summary with the full building span, not the first professional role.** [applicant] has built software for 15+ years — first voluntarily in open-source/community projects (Narutorpg.de since 2009, Tierheim web work from ~2005), professionally since 2019. Phrase it like: "I have been building software for over 15 years, first through volunteer open-source and community projects and professionally since 2019, …". Never write "since 2019 I build/maintain web applications" (undersells and misleads).
-  - This rule owns the **first sentence only**. The rest of the summary is written like the LinkedIn About section — same register, same structure (`communication-rules.md`, *The person description stays prose*), and the span sentence itself is first person and active like any other prose sentence (*Say it the way she would say it out loud*).
-- **Experience and project bullets are the LinkedIn bullets** ([applicant], 2026-07-30): one bullet per unit of work, `Topic: outcome`, defined once in `communication-rules.md`, *Bullet points*; *what* goes into a bullet → `application-standards.md`, *Project Description Standard*. Nothing CV-specific to add — the CV and the LinkedIn entries carry the same bullets, selected and reordered per role (see the rewrite rule above).
-- **Projects (hard): every project entry has a timespan** (like experience). AI Engineering Experiments = 2024–heute; Execution Research & Backtesting Platform = 2025–2026; Laravel Pivot Events = 2025–heute. Put it in the item's `right` as `Timespan  |  <tech>` (tech optional).
-- **Skills section (hard): bulleted, with a BOLD category label**, same bullet marker and spacing as every other section. `KI & LLM-Engineering:` etc. is bold; the item list stays normal. No custom spacers between skill lines. (Bold has no negative ATS impact.) Handled by `build_cv.py` `fill_skill()`.
-- **Dates (hard): German CVs use numeric `MM.YYYY` (e.g. `03.2025 - heute`, `08.2019 - 06.2021`); ongoing = `heute`.** English CVs use `Mon YYYY` (e.g. `Mar 2025 - Present`). Year-only ranges (`2013 - 2017`) are fine where no month applies. Separator is a plain hyphen ` - ` (never `—`/`–`).
-- **Section order (hard): follow the template — Profile/Summary, then Skills, then Experience, then Projects, then Education.** Skills sits directly under the profile. `build_cv.py` enforces this canonical order regardless of the order sections appear in the content JSON.
-- **Experience layout (hard): each experience entry LEADS with its timespan on the title line** — `Timespan | Job Title` (EN: `Mar 2025 - Present | …`, DE: `03.2025 - heute | …`) — with `Company · Location` left-aligned on the line below. No right-aligned date tab (the old tab sat off-page and hid the date). Projects have no timespan prefix. Handled automatically by `build_cv.py`; the template placeholders were aligned to this via `tools/apply_timespan_layout.py`.
-- **Page-length rule (hard): a second page is only allowed if it carries at least 10 lines of text.** If page 2 has fewer than 10 lines, compact onto ONE page — least-destructive first: (1) tighten paragraph spacing (no content lost, font size unchanged); (2) only if still not enough, drop the least-important bullets (trailing bullets of the older/lower-listed roles first; every role keeps ≥1 bullet, and log what was dropped). Since a bullet now carries a whole unit of work, dropping one drops a whole project — so shorten the wording inside the longest bullets before dropping any. CAP the compaction: never tighten below 0.82 spacing and never drop more than 3 bullets. If one page still isn't reachable, keep the intact clean 2-pager (a full 2 pages beats a gutted 1 page) and flag that page 2 is below target — trim manually if a single page is truly required. Automated by `tools/build_fit.py` (renders, checks page 2, escalates within the caps).
+- Customize summary, skills, projects and keywords for every application.
+- Rewrite, reorder, drop or surface experience bullets per role when it helps. The standard bullets are a default, not fixed text. When a posting emphasizes something else — requirements engineering, database design, project leadership, online marketing/SEO — lead with the relevant experience, drawing on `profile.json` → `references` (the wpt-online Arbeitszeugnis). Leave the bullets as they are when the defaults already fit.
+
+### Summary framing (hard — "Variant A", always)
+- Open the summary with the full building span, not the first professional role. [applicant] has built software for 15+ years: first voluntarily in open-source and community projects (Narutorpg.de since 2009, Tierheim web work from ~2005), professionally since 2019.
+- Right: "I have been building software for over 15 years, first through volunteer open-source and community projects and professionally since 2019, …"
+- Wrong: "since 2019 I build/maintain web applications" — it undersells and misleads.
+- This rule owns the first sentence only. The rest of the summary follows `communication-rules.md`, *The person description stays prose*, and the span sentence itself is first person and active.
+
+### Bullets
+- Experience and project bullets are the LinkedIn bullets: one bullet per unit of work, `Topic: outcome`, defined in `communication-rules.md`, *Bullet points*. What goes into a bullet → `application-standards.md`, *Project Description Standard*.
+- CV and LinkedIn entries carry the same bullets, selected and reordered per role.
+
+### Structure (hard)
+- **Projects:** every project entry has a timespan, like experience. AI Engineering Experiments = 2024–heute; Execution Research & Backtesting Platform = 2025–2026; Laravel Pivot Events = 2025–heute. Put it in the item's `right` as `Timespan  |  <tech>` (tech optional).
+- **Skills:** bulleted, with a bold category label (`KI & LLM-Engineering:`), same bullet marker and spacing as every other section. The item list stays normal. No custom spacers between skill lines. Bold has no negative ATS impact. Handled by `build_cv.py` `fill_skill()`.
+- **Dates:** German CVs use `MM.YYYY` (`03.2025 - heute`, `08.2019 - 06.2021`), ongoing = `heute`. English CVs use `Mon YYYY` (`Mar 2025 - Present`). Year-only ranges (`2013 - 2017`) are fine where no month applies. The separator is a plain hyphen ` - `, never `—` or `–`.
+- **Section order:** Profile/Summary, Skills, Experience, Projects, Education. Skills sits directly under the profile. `build_cv.py` enforces this order regardless of the content JSON.
+- **Experience layout:** each entry leads with its timespan on the title line — `Timespan | Job Title` (EN `Mar 2025 - Present | …`, DE `03.2025 - heute | …`) — with `Company · Location` left-aligned below. No right-aligned date tab. Projects carry no timespan prefix. Handled by `build_cv.py`.
+
+### Page length (hard)
+- A second page is allowed only if it carries at least 10 lines of text.
+- Below that, compact onto one page, least-destructive first:
+  1. Tighten paragraph spacing (no content lost, font size unchanged).
+  2. Only if that is not enough, drop the least important bullets — trailing bullets of the older or lower-listed roles first. Every role keeps at least one bullet, and log what was dropped.
+- Shorten the wording inside the longest bullets before dropping any: a bullet carries a whole unit of work, so dropping one drops a whole project.
+- Caps: never tighten below 0.82 spacing and never drop more than 3 bullets.
+- If one page is still out of reach, keep the intact 2-pager and flag that page 2 is below target. A full 2 pages beats a gutted 1 page.
+- Automated by `tools/build_fit.py`.

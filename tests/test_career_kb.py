@@ -203,6 +203,21 @@ def test_rewrite_targets_the_base_order_then_select_reorders():
     assert items[1]['title'] == 'Web Dev'
 
 
+def test_select_still_finds_a_category_that_rewrite_renamed():
+    # The model writes both keys against the base it was shown, so a rewrite
+    # that renames a skill category must not make its own select unresolvable.
+    doc, _ = apply_patch(
+        BASE,
+        {
+            'skills': {
+                'rewrite': {'KI': 'AI & LLM: LLMs'},
+                'select': ['KI', 'Backend', 'Frontend'],
+            }
+        },
+    )
+    assert section(doc, 'SKILLS')['lines'][0] == 'AI & LLM: LLMs'
+
+
 def test_projects_addresses_the_second_experience_section():
     doc, _ = apply_patch(BASE, {'projects': {'rewrite': {'Signal Pipeline': {'bullets': ['x']}}}})
     assert section(doc, 'PROJEKTE')['items'][0]['bullets'] == ['x']

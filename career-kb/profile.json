@@ -183,7 +183,12 @@
       "SEM",
       "Google Ads",
       "Facebook / Social Media Marketing",
-      "Web content writing"
+      "Web content writing",
+      "Keyword research",
+      "Target-group identification (Zielgruppenermittlung)",
+      "Campaign presentation to clients",
+      "Social media copywriting (especially Facebook)",
+      "Local SEO / Google Business Profile (GoogleMyBusiness entries)"
     ],
     "data_python": [
       "Python",
@@ -223,7 +228,7 @@
     ],
     "domain_expertise": [
       "German POS fiscal compliance (TSE / KassenSichV, DSFinV-K / TAR exports)",
-    "Payment-critical data flows in client web applications: import/export of bank transfers and payment data, dunning-letter generation (wpt-online, 2021-2024)",
+      "Payment-critical data flows in client web applications: import/export of bank transfers and payment data, dunning-letter generation (wpt-online, 2021-2024)",
       "OPI (Open Payment Interface) payment-terminal integration",
       "Multi-tenancy / tenant isolation",
       "Modular monolith / package-oriented monorepo architecture",
@@ -313,7 +318,9 @@
     "Structured problem solving",
     "Pragmatic decision making",
     "Mentoring mindset",
-    "Curiosity and ownership"
+    "Curiosity and ownership",
+    "Team orientation (Arbeitszeugnis: 'vorbildliche Teamorientierung')",
+    "Precision and efficiency (Arbeitszeugnis: 'mit äußerster Präzision und Effizienz')"
   ],
   "core_differentiator": "Designs systems rather than merely implementing features. Emphasizes measurable optimization, architecture decisions, AI integration, performance engineering, and continuous improvement.",
   "professional_profile": {
@@ -412,7 +419,7 @@
         "Core contributor in a 4-developer team (including the lead developer) on a greenfield restaurant point-of-sale platform: a distributed, multi-component system (central Laravel/Filament cloud back-office, on-premise location servers, Capacitor/TypeScript mobile terminals) built on a Domain-Driven, package-oriented Laravel monolith (14 domains, 8 internal Composer packages).",
         "Designed and shipped the platform's external REST API end-to-end (API Platform on Laravel) with multi-tenant, permission-scoped access control: a permission-scoped collection query extension on the read path, write guards on the write path (original-state access, write-target authorization, create-only relations), and generated OpenAPI documentation. API credentials are Laravel SANCTUM personal access tokens (Jacqueline 2026-07-30: NOT JWT — Sanctum was chosen because the tokens must be long-lived, revocable and DB-backed; JWTs are hard to revoke and Passport OAuth2 was overkill), issued and revoked through a Filament UI per user; permission checks REUSE the existing Laravel Policy system (GET->viewAny/view, POST->create, PATCH->update, DELETE->delete), and tokens inherit the user's full permission set (no per-token scopes). VERIFIED 2026-07-30 in the repo (branch 42-add-external-api-incl-api-credentials-permission-management, MR !671, and gastropos/work-summary.md): ~50 models exposed as #[ApiResource] — resources that may be NAMED as examples of the scale: Menükarten/MenuCard, Produkte/Product, Standorte/Location, Terminals/Terminal, Zahlungsmethoden/PaymentMethod, Drucker/Printer, plus the read-only ones below (verified in the branch, so a bullet may say 'rund 50 Ressourcen (Menükarten, Terminals)'); five legally critical models (BusinessTransaction, BusinessTransactionEvent, ChangeLog, PrintJob, Language) are READ-ONLY over the API as a KassenSichV guard, so a direct POST cannot bypass event-sourcing and TSE signing. The feature is BUILT and in review, NOT merged to main — never write 'in production' for it. Tenant count: NONE to state — the API is not productive yet (Jacqueline 2026-07-30), so no tenant figure exists and the question is closed. Never imply production use of this API.",
         "Authored automated tests — PHPUnit feature/unit suites plus BDD (Behat/Gherkin) and Bruno API collections — within a GitLab CI pipeline enforcing PHPStan level 9 (Larastan) and ECS code style. (Corrected 2026-07-29: Pest and Selenium are NOT her work in this role.) VERIFIED 2026-07-30 in the repo: the external-API suite (code/cloud/tests/Feature/Api, PHPUnit suite FeatureApi) has 58 test classes — 48 inherit the CRUD base class that defines 18 test cases per resource, 4 inherit the role-permission base with 2 each. The number of EXECUTED cases was never measured, so state the class count and the cases-per-resource figure, never a derived total (Jacqueline 2026-07-30 could not recall a coverage figure).",
-        "Designed and implemented the real-time pivot-event synchronization mechanism (a custom laravel-pivot-events package plus a dedicated PivotEvents domain, pushed via Mercure/SSE) within an event-driven architecture backed by Redis queues (Laravel Horizon) and Laravel Octane; on a platform integrating German fiscal compliance (TSE/KassenSichV, DSFinV-K/TAR) and OPI payment terminals.",
+        "Extended the platform's EXISTING real-time synchronization (Mercure/SSE) with pivot-event support, writing a custom laravel-pivot-events package plus a dedicated PivotEvents domain, within an event-driven architecture backed by Redis queues (Laravel Horizon) and Laravel Octane; on a platform integrating German fiscal compliance (TSE/KassenSichV, DSFinV-K/TAR) and OPI payment terminals. HARD RULE (Jacqueline 2026-08-04, correcting an earlier overclaim): she did NOT build the real-time sync mechanism from scratch — it was already there and she added functionality to it. NEVER write 'designed', 'built', 'implemented the real-time synchronization mechanism', 'built the platform's real-time service layer' or any wording implying authorship of the sync itself, in any CV, cover letter, LinkedIn text or post. The pivot-event package and PivotEvents domain ARE her own work and may be claimed as such; the surrounding Mercure/SSE sync may only be described as extended.",
         "SET UP the self-hosted Langfuse herself (Jacqueline 2026-07-30, answering the open question below with YES — the verb may now be 'aufgesetzt' / 'set up'; still do NOT write 'introduced LLM observability at the company'): the Langfuse instance (Docker Compose) records turns, generations, tool calls and token usage of the AI-assisted development runs, so model and workflow decisions rest on measurements instead of impressions. Used BOTH privately and at Gastro IT — so it may be stated as professional work, which is rare in a profile and worth leading with. (Corrected 2026-07-29: write that she USES it; do NOT write that she introduced LLM observability at Gastro IT. Open question: if she did set up the self-hosting there, 'introduced' may return — ask, never assume.)",
         "Worked on the containerized development and CI environment with Docker Compose (PostgreSQL, Redis) — corrected 2026-07-29: she did not build it, and there is no TSE emulator in her part; initiated the adoption of AI-assisted development on the team and built an internal AI-assisted code-audit tooling suite (Claude Code slash-commands/subagents with deterministic verification) for soft-delete, CRUD-logging and field-permission audits — which sped up the team's development workflows (Jacqueline 2026-07-28: outcome is 'performance optimization of the workflows'; NO numeric figure available, do not invent one)."
       ],
@@ -458,7 +465,9 @@
         "Requirements engineering: user stories together with clients and the development team, designing requirement-appropriate software solutions, analysing client business processes (Jacqueline 2026-07-30: the earlier claim 'prototypes from researched market gaps' is WRONG — she did NOT do that; removed, must not reappear)",
         "Database design, planning and optimization",
         "Integrated the Facebook API via OAUTH2 for the agency's social-media marketing tools (Jacqueline 2026-07-30, answering where OAuth in the skills list comes from — it is OAuth2 and it is genuine; keep it in the list and label it OAuth2)",
-        "Project coordination: formulated programming tasks and handed them to the team, reviewed and signed off programming work, quality assurance — the team was 3 people (Jacqueline 2026-07-30; a coordinated team size may be stated, but 3 is small enough that omitting it is the safer default)",
+        "Project coordination AND project leadership — the Arbeitszeugnis is broader than 'coordination' and documents 'Projektmanagement, einschließlich der Koordination und Leitung von Projekten' ('project management, including the coordination and LEADERSHIP of projects', references[0].documented_responsibilities), so Projektleitung may be stated when a posting asks for it; it remains project leadership, NOT disciplinary line management (Jacqueline 2026-08-04). Concretely: formulated programming tasks and handed them to the team, reviewed and signed off programming work, quality assurance — the team was 3 people (Jacqueline 2026-07-30; a coordinated team size may be stated, but 3 is small enough that omitting it is the safer default)",
+        "Hiring: conducted MORE THAN 10 job interviews for developer and intern/apprentice (Praktikant:innen / Azubis) positions, some alone and some together with a manager or HR depending on the case, and was CO-DECIDING on the hiring decision — her vote counted equally, the decision was not hers alone (Jacqueline 2026-08-04). This is her only PROFESSIONAL, non-volunteer recruiting evidence and the closest thing in her record to disciplinary-leadership experience — name it whenever a posting asks for Führungserfahrung, Teamaufbau or recruiting, alongside (not instead of) the volunteer team coordination at Narutorpg.de. Do NOT inflate it into line management, team leadership or final hiring authority. DOCUMENTED THIRD-PARTY EVIDENCE: the wpt-online Arbeitszeugnis lists 'Recruiting und Auswahl von Mitarbeitern' among her responsibilities (see references[0].documented_responsibilities, 'Recruiting and selection of employees'), so this is citable, not just self-reported (Jacqueline 2026-08-04).",
+        "Invoicing and payment monitoring: created and checked invoices and monitored incoming payments — documented in the Arbeitszeugnis as 'Erstellung und Prüfung von Rechnungen sowie Überwachung von Zahlungen' (references[0].documented_responsibilities). This is COMMERCIAL-side work, done only occasionally alongside her main task of programming and conception (Jacqueline 2026-08-04) — never present it as a finance role or a continuous responsibility. Its value is domain understanding of invoicing and dunning processes, which pairs with the payment-critical Laravel application above whenever a posting touches invoicing, accounting or fiscal data",
         "Productive use of AI tools for code analysis, architectural design, code generation, and automation in daily development workflows",
         "Client communication and coordination"
       ],
@@ -491,8 +500,12 @@
       "employment_type": "Full-time",
       "start": "2021-07",
       "end": "2024-09",
-      "note": "Held concurrently with the developer role at the same company. FRAMING (Jacqueline, 2026-07-28): this entry exists to show DOMAIN KNOWLEDGE and cross-functional insight — she worked her way into the commercial side once and had visibility into every area of the business, which is what makes her able to talk to stakeholders and translate business needs into software. She did NOT do much of the hands-on marketing work herself, so do not present campaign execution as a personal achievement or list marketing deliverables as accomplishments.",
-      "bullets": []
+      "note": "Held concurrently with the developer role at the same company. FRAMING (Jacqueline, 2026-07-28): this entry exists to show DOMAIN KNOWLEDGE and cross-functional insight — she worked her way into the commercial side once and had visibility into every area of the business, which is what makes her able to talk to stakeholders and translate business needs into software. She did NOT do much of the hands-on marketing work herself, so do not present campaign execution as a personal achievement or list marketing deliverables as accomplishments. SCOPE LIMIT (Jacqueline 2026-08-04, decisive for every bullet below): she DID do these things, but only a HANDFUL OF TIMES — on the order of 2 to 5 campaigns, in the spirit of 'do a few so you understand how it works', never as a continuous workload. Her MAIN TASK throughout was PROGRAMMING AND CONCEPTION. Treat the commercial items as learning-by-doing exposure that produced domain knowledge, never as a second career track, never as years of marketing experience, and never as a volume or performance claim. This entry does not qualify her for a marketing role.",
+      "bullets": [
+        "Marketing strategy and product positioning: documented in the Arbeitszeugnis as 'Entwicklung von Marketingstrategien und Verantwortung für die Produktpositionierung' — the only documented OWNERSHIP ('Verantwortung') on the commercial side (references[0].documented_responsibilities). Usable for the business/technology-bridge narrative, subject to the SCOPE LIMIT in this entry's note (Jacqueline 2026-08-04)",
+        "Ran social-media and Google Ads campaigns end to end a FEW TIMES (roughly 2 to 5 campaigns, not more — Jacqueline 2026-08-04): conception, presentation, setup and support, including copywriting, image research, target-group identification, keyword research and client coordination. Zeugnis wording: 'Konzeption, Präsentation, Einrichtung und Betreuung von Social-Media- und Google-Ads-Kampagnen'. The transferable part is that she PRESENTED to and coordinated with CLIENTS, which pure development bullets cannot evidence — not the campaign output itself",
+        "Copywriting for social-media channels, especially Facebook ('Texterstellung für Social-Media-Kanäle (insbesondere Facebook)'), and maintenance of Google My Business entries ('Pflege von GoogleMyBusiness-Einträgen') — both documented, both small in volume per the SCOPE LIMIT"
+      ]
     },
     {
       "title": "Development / Coordination",
@@ -585,7 +598,7 @@
         "work_experience: wpt-online (2021-06 to 2024-09)",
         "education: IT Specialist for Application Development (2019-08 to 2021-06)"
       ],
-      "overall_rating": "Top grade (equivalent to 'sehr gut' / very good). Wording: tasks always performed 'mit großem Engagement und Erfolg'; 'unverzichtbare Mitarbeiterin' (indispensable employee).",
+      "overall_rating": "Top grade (equivalent to 'sehr gut' / very good). Wording: tasks always performed 'mit großem Engagement und Erfolg'; 'unverzichtbare Mitarbeiterin' (indispensable employee). VERBATIM DE (breadth): 'Im Rahmen ihrer Ausbildung und ihrer anschließenden Tätigkeit hat Frau Urban eine Vielzahl von Aufgaben übernommen und stets mit großem Engagement und Erfolg ausgeführt.' — 'a large number of tasks … always performed with great commitment and success.' This is third-party backing for the cross-functional breadth narrative, which the profile otherwise asserts on its own.",
       "documented_responsibilities": [
         "Project management, including coordination and leadership of projects in online marketing, web design and programming",
         "Conception of requirements-appropriate software solutions",
@@ -596,7 +609,7 @@
         "Determining customer needs and deriving the necessary measures",
         "Setup, optimization, planning and creation of database systems",
         "Quality assurance and analysis of business processes and conditions at the customer / in the respective application department",
-        "Developing product ideas based on researched market gaps and turning them into market-ready prototypes in collaboration with production",
+        "Developing product ideas based on researched market gaps and turning them into market-ready prototypes in collaboration with production — DO NOT USE. This sentence stands in the Arbeitszeugnis, but Jacqueline states she did NOT do this (correction 2026-07-30, repeated 2026-08-04). It is kept here only so the discrepancy with the document is visible; it must never appear in a CV, cover letter, LinkedIn text or any generated document, and no generator may reintroduce it from this list.",
         "Developing marketing strategies and responsibility for product positioning",
         "Conception, presentation, setup and management of social media and Google Ads campaigns (incl. copywriting, image research, target-group identification, keyword research, client coordination)",
         "Copywriting for social media channels (especially Facebook)",
@@ -612,9 +625,13 @@
         "Comprehensive, in-depth knowledge in application development",
         "Excellent project-management skills and campaign management",
         "Strong communication skills and exemplary team orientation",
-        "Works with utmost precision and efficiency, never losing sight of company goals"
+        "Works with utmost precision and efficiency, never losing sight of company goals",
+        "VERBATIM DE: 'Ihre analytischen Fähigkeiten und ihr lösungsorientiertes Denken sind auf höchstem Niveau und haben in jeder Situation überzeugt.' — 'Her analytical skills and solution-oriented thinking are at the highest level and have been convincing in every situation.' Quotable one-liner for the analytical-thinking claim in a German cover letter.",
+        "VERBATIM DE: 'Sie hat sich stets in kürzester Zeit in neue Aufgabenbereiche eingearbeitet und diese mit höchster Selbstständigkeit und großem Erfolg bearbeitet.' — 'She always familiarised herself with new areas in the shortest time and handled them with the utmost autonomy and great success.' The documented version of 'continuous learning' and of an independent, self-reliant working style — better evidence than any self-description.",
+        "VERBATIM DE (closing): 'Wir danken Frau Urban für ihre überragende und stets engagierte Arbeit' — 'We thank Ms Urban for her outstanding and consistently committed work.' Grade-code evidence of a top rating; cite as is, never paraphrase upward.",
+        "VERBATIM DE: 'vorbildliche Teamorientierung' (exemplary team orientation) and 'ausgeprägte Kommunikationsfähigkeit' (strong communication skills) and 'mit äußerster Präzision und Effizienz' (with utmost precision and efficiency)."
       ],
-      "usage_note": "This is verified third-party evidence — safe to cite for the wpt-online period. It broadens that role beyond 'AI-assisted web development' to include requirements engineering, database design, project leadership, custom software, and online-marketing/SEO. Use relevant parts when tailoring; German quotes are available verbatim in the stored PDF for German applications."
+      "usage_note": "This is verified third-party evidence — safe to cite for the wpt-online period. It broadens that role beyond 'AI-assisted web development' to include requirements engineering, database design, project leadership, custom software, and online-marketing/SEO. Use relevant parts when tailoring; German quotes are available verbatim in the stored PDF for German applications. IMPORTANT LIMITS (added 2026-08-04): (1) The Zeugnis names NO technology and NO figures — no Laravel, PHP, Selenium, SEO score, ticketing system, 80% load-time cut or '50% of tests automated'. It broadens the RESPONSIBILITIES of the role and must never be cited as third-party verification of a technical claim or a number. The one technically adjacent claim it does back is the recruiting work, via 'Anwerbung und Auswahl von Mitarbeitern'. (2) The document credits campaign conception, setup and copywriting to her personally and calls her skills in supporting online-marketing campaigns 'exzellent', which is BROADER than her own framing; her conservative framing in work_experience[2].note and its SCOPE LIMIT wins — do not widen the marketing story using this document. (3) documented_responsibilities contains one sentence she rejects (market gaps / market-ready prototypes); it is marked DO NOT USE and must not be reintroduced."
     }
   ],
   "projects": [
@@ -721,6 +738,7 @@
         "Compared model strengths and weaknesses",
         "Integrated AI into software workflows",
         "Built an MCP client/integration into her own agent workflows (Jacqueline 2026-07-31)",
+        "Connected EXTERNAL SYSTEMS AND DOCUMENT SOURCES to her agent workflows — among them GitHub and PDF files — so agents work against real repositories and documents instead of pasted text. Scale is modest and it is INTEGRATION, not embeddings: sources are wired in as tools/inputs, with NO embedding model, NO vector store and NO similarity search anywhere (confirmed by Jacqueline 2026-08-04). Usable answer when a posting asks for REST/API integration of external services or document processing. It is NOT evidence for embeddings, vector databases or RAG — those stay in must_learn. In application texts, do not raise the embeddings topic at all: 'never done it' would understate this integration work, and it is not a standout strength either, so the CV's 'Currently learning' line is the only place it belongs (Jacqueline 2026-08-04)",
         "Concrete artefact behind the agent-workflow and context-management learnings: her own multi-agent application pipeline — an orchestrator command plus four specialised subagents, a single-source-of-truth structured knowledge base injected as context, and a deterministic verification/rendering step. Present it as CONTEXT ENGINEERING, context preparation and workflow orchestration. It is NOT RAG and not retrieval — no retriever, no embeddings, no vector index, no chunking (Jacqueline 2026-07-31)"
       ],
       "key_learnings": [

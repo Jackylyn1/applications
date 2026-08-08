@@ -38,7 +38,7 @@
           "bullets": [
             "Entwicklerin an einer bestehenden Greenfield-POS-Plattform für die Gastronomie: Domain-Driven, paket-orientierter Laravel-13-Monolith (Filament, Livewire) mit PostgreSQL und Redis; verantwortlich für einzelne Komponenten, nicht für die Gesamtarchitektur.",
             "Entwurf und End-to-End-Verantwortung für die externe REST-API (API Platform auf Laravel) mit mandantenfähiger, berechtigungsbasierter Zugriffssteuerung: Row-Level-Query-Extensions, Tenant-Isolation-Guards, Sanctum-basierte API-Credentials und Berechtigungsverwaltung sowie OpenAPI-Dokumentation.",
-            "Entwurf und Umsetzung des Echtzeit-Pivot-Event-Sync-Mechanismus (eigenes laravel-pivot-events-Paket plus dedizierte PivotEvents-Domain, Push über Mercure/SSE) in einer event-getriebenen Architektur mit Redis-Queues (Laravel Horizon) und Laravel Octane.",
+            "Bestehende Echtzeit-Synchronisation (Mercure/SSE) um Pivot-Events erweitert: eigenes laravel-pivot-events-Paket plus dedizierte PivotEvents-Domain, in einer event-getriebenen Architektur mit Redis-Queues (Laravel Horizon) und Laravel Octane.",
             "Testautomatisierung über den gesamten Stack: PHPUnit sowie Full-Stack-BDD (Behat/Gherkin, Pest, Selenium) und Bruno-API-Collections in einer GitLab-CI-Pipeline mit PHPStan Level 9 (Larastan) und ECS.",
             "Containerisierung von Entwicklung und CI mit Docker Compose (PostgreSQL, Redis, TSE-Emulator); Integration deutscher Kassen-Compliance (TSE/KassenSichV, DSFinV-K) und OPI-Zahlungsterminals; ergänzend Einsatz von KI-Tools im täglichen Entwicklungsalltag."
           ]

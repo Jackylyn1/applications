@@ -38,7 +38,7 @@
           "bullets": [
             "Core contributor (top 3 of a ~7-person team) on an existing greenfield restaurant point-of-sale (POS) platform: a Domain-Driven, package-oriented Laravel 13 monolith (Filament, Livewire) with PostgreSQL and Redis; owning specific components rather than the overall architecture.",
             "Designed and owned end-to-end the platform's external REST API (API Platform on Laravel) with multi-tenant, permission-scoped access control: row-level query extensions, tenant-isolation write guards, Sanctum-based API credentials and permission management, and OpenAPI documentation.",
-            "Designed and implemented the real-time pivot-event synchronization mechanism (a custom laravel-pivot-events package plus a dedicated PivotEvents domain, pushed via Mercure/SSE) within an event-driven architecture backed by Redis queues (Laravel Horizon) and Laravel Octane.",
+            "Extended the platform's existing real-time synchronization (Mercure/SSE) with pivot-event support: a custom laravel-pivot-events package plus a dedicated PivotEvents domain, within an event-driven architecture backed by Redis queues (Laravel Horizon) and Laravel Octane.",
             "Automated tests across the stack: PHPUnit plus full-stack BDD (Behat/Gherkin, Pest, Selenium) and Bruno API collections in a GitLab CI pipeline enforcing PHPStan level 9 (Larastan) and ECS.",
             "Containerized development and CI with Docker Compose (PostgreSQL, Redis, TSE emulator); integrated German fiscal compliance (TSE/KassenSichV, DSFinV-K) and OPI payment terminals; additionally used AI tools in daily development."
           ]

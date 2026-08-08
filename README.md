@@ -88,7 +88,7 @@ document that should carry the application one.
 | `tests/` | 35 unit tests over the pure logic — text hygiene, patch merging, template filling, date formatting. |
 | `CODING_RULES.md` | The rules every change to this repo follows. |
 | `CLAUDE.md` | Operating instructions for the agent working in this repo. |
-| `learnings.md` | The running log of what each measurement actually showed. |
+| `LEARNINGS.md` | The running log of what each measurement actually showed. |
 
 ### Which data is committed, and which is not
 
@@ -114,7 +114,7 @@ the letter tone references in `examples/`, and the private source documents in
 `career-kb/documents/` (Arbeitszeugnisse and certificates, which name former
 employers). `.gitignore` enforces this by the naming convention itself, so a new
 application is untracked the moment it is generated rather than by anyone
-remembering. In `learnings.md` the runs are pseudonymised as **Company A–J**,
+remembering. In `LEARNINGS.md` the runs are pseudonymised as **Company A–M**,
 consistently, so each run can still be followed end to end.
 
 Also not committed: the generated PDFs in `career-kb/output/` (reproducible in
@@ -225,7 +225,7 @@ claude plugin install langfuse-observability@langfuse-observability \
 installed plugin is a no-op, so change values later with `/plugin configure
 langfuse-observability@langfuse-observability`. Hooks take effect in the **next**
 session. Requires `uv` on PATH (or Python 3.10+ with `langfuse>=4.0,<5`). Setup
-pitfalls that cost time once are in [`learnings.md`](learnings.md).
+pitfalls that cost time once are in [`LEARNINGS.md`](LEARNINGS.md).
 
 </details>
 
@@ -263,7 +263,7 @@ upgrade path, if it were ever needed, is written down in
 
 Every row below is something that was measured, not assumed. The long form,
 with the numbers and the wrong turns that produced them, is in
-[`learnings.md`](learnings.md).
+[`LEARNINGS.md`](LEARNINGS.md).
 
 | Problem | Before | Learning | Description |
 |---|---|---|---|

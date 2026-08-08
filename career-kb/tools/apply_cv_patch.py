@@ -52,8 +52,9 @@ SELECTORS
            or of the line itself for `skills`. Must match exactly one entry;
            ambiguous or unmatched fails loudly rather than silently dropping a
            job off the CV.
-    "rewrite" keys resolve against the BASE list (what the model was shown),
-    and are applied before "select" reorders anything.
+    Both "rewrite" and "select" keys resolve against the BASE list (what the
+    model was shown), so a "rewrite" that renames an entry does not invalidate
+    the "select" that names it.
 
 Usage:
     apply_cv_patch.py --patch <patch.json> --out <merged.json> [--base <base.json>]
@@ -151,16 +152,22 @@ def resolve(selector, items, key):
     )
 
 
-def resolve_select(spec, entries, key):
+def resolve_select(spec, entries, key, originals=None):
     """Apply a `select` list: validate it, then return the reordered subset.
 
     Shared by the skill lines and the item sections - both express "keep these,
     in this order" the same way, and both must reject a repeated selector.
+
+    Selectors resolve against `originals` - the base list the model was shown -
+    while the subset is taken from `entries`, which already carries the
+    rewrites. A `rewrite` that renames a skill category would otherwise make the
+    model's own `select` name unfindable a moment later.
     """
     sel = spec['select']
     if isinstance(sel, str) or not isinstance(sel, list) or not sel:
         raise SystemExit(f'error: {key}.select must be a non-empty list')
-    order = [resolve(s, entries, f'{key}.select') for s in sel]
+    pool = entries if originals is None else originals
+    order = [resolve(s, pool, f'{key}.select') for s in sel]
     if len(set(order)) != len(order):
         raise SystemExit(f'error: {key}.select selects the same entry twice')
     return [entries[i] for i in order], len(entries) - len(order)
@@ -201,7 +208,7 @@ def patch_skills(section, spec, notes):
         lines[resolve(selector, lines, 'skills.rewrite')] = text
 
     if 'select' in spec:
-        lines, dropped = resolve_select(spec, lines, 'skills')
+        lines, dropped = resolve_select(spec, lines, 'skills', originals=base_lines)
         # Reordering is the normal case; dropping a whole skill category is not,
         # and it silently removes ATS keywords from the CV.
         if dropped:
@@ -217,6 +224,7 @@ def patch_items(section, spec, key, notes):
     items = section.get('items')
     if not isinstance(items, list):
         raise SystemExit(f'error: {key}: base section has no "items" list')
+    originals = copy.deepcopy(items)
     items = copy.deepcopy(items)
 
     for selector, fields in (spec.get('rewrite') or {}).items():
@@ -239,7 +247,7 @@ def patch_items(section, spec, key, notes):
         items[idx].update(fields)
 
     if 'select' in spec:
-        items, dropped = resolve_select(spec, items, key)
+        items, dropped = resolve_select(spec, items, key, originals=originals)
         # Dropping a job leaves a hole in the employment history, which the CV
         # standards forbid. Projects are meant to be a curated subset, so only
         # the work-experience section gets flagged.
