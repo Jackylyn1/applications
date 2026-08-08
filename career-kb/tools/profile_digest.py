@@ -29,7 +29,7 @@ Less than it looks. An audit of every top-level key against what each phase
 provably reads found only ~2.3k tokens of genuinely inert data, because the fact
 base is mostly *evidence* and both phases cite evidence:
   - `projects` and `github_repositories.flagship_own` are DISJOINT sets. The
-    repos hold Signal Pipeline, execution framework and the WordPress/React plugin, which
+    repos hold the two execution-system repos and the WordPress/React plugin, which
     appear nowhere else - dropping them would hide exactly the projects that
     match a frontend or quant posting.
   - `references` IS cited by cv-standards.md, so it stays for the writing phase.

@@ -73,9 +73,9 @@
           "company": "Eigenprojekt",
           "right": "2025 - 2026  |  Python, FastAPI, Docker",
           "bullets": [
-            "Entwurf und Aufbau eines verteilten, event-getriebenen Execution-Systems in Python mit mehreren Docker-Containern (Monitor, FastAPI-Dashboard, MT 5-5-Anbindung über RPyC unter Wine/VNC).",
+            "Entwurf und Aufbau eines verteilten, event-getriebenen Execution-Systems in Python mit mehreren Docker-Containern (Monitor, FastAPI-Dashboard, MT-5-Anbindung über RPyC unter Wine/VNC).",
             "Zuverlässigkeitsdesign: duale Push-/Poll-Signalzustellung mit Deduplizierung über einen Cache-Schlüssel aus (chat_id, msg_id, text_hash) sowie mehrstufige Risiko-Gates.",
-            "Zusätzliches algorithmisches Backtesting-System auf dem event-getriebenen execution framework-Framework mit Walk-Forward-Validierung und Monte-Carlo-Portfolio-Simulation; Performance-Engineering über Vektorisierung und JIT-Kompilierung (NumPy, Numba). Umfangreiche Testabdeckung mit pytest."
+            "Zusätzliches algorithmisches Backtesting-System auf dem event-getriebenen Execution-Framework mit Walk-Forward-Validierung und Monte-Carlo-Portfolio-Simulation; Performance-Engineering über Vektorisierung und JIT-Kompilierung (NumPy, Numba). Umfangreiche Testabdeckung mit pytest."
           ]
         },
         {

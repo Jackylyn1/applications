@@ -88,11 +88,11 @@
           ]
         },
         {
-          "title": "Execution Research & Backtesting Platform",
+          "title": "Quantitative Research & Backtesting Platform",
           "company": "Self-directed project",
           "right": "2025 - 2026",
           "bullets": [
-            "Designed and built an algorithmic execution and backtesting system in Python on the event-driven execution framework framework, including walk-forward validation and Monte Carlo simulation.",
+            "Designed and built an algorithmic execution and backtesting system in Python on the event-driven execution framework, including walk-forward validation and Monte Carlo simulation.",
             "Performance engineering: evaluated very large parameter spaces via vectorization and JIT compilation (NumPy, Numba) instead of brute-force loops.",
             "Built a distributed signal-execution system (FastAPI dashboard, multiple Docker containers, MT 5 integration) with risk management and extensive test coverage (pytest)."
           ]

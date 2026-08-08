@@ -68,12 +68,12 @@
       "type": "experience",
       "items": [
         {
-          "title": "Execution Research & Backtesting Platform",
+          "title": "Quantitative Research & Backtesting Platform",
           "company": "Eigenprojekt",
           "right": "2025 - 2026",
           "bullets": [
-            "Entwurf eines algorithmischen Execution- und Backtesting-Systems in Python auf Basis des event-getriebenen execution framework-Frameworks, inkl. Walk-Forward-Validierung und Monte-Carlo-Portfolio-Simulation.",
-            "Aufbau eines verteilten Signal-Execution-Systems (FastAPI-Dashboard, mehrere Docker-Container, MT 5-5-Anbindung) mit mehrstufigem Risikomanagement und umfangreicher Testabdeckung (pytest).",
+            "Entwurf eines algorithmischen Execution- und Backtesting-Systems in Python auf Basis des event-getriebenen Execution-Frameworks, inkl. Walk-Forward-Validierung und Monte-Carlo-Portfolio-Simulation.",
+            "Aufbau eines verteilten Signal-Execution-Systems (FastAPI-Dashboard, mehrere Docker-Container, MT-5-Anbindung) mit mehrstufigem Risikomanagement und umfangreicher Testabdeckung (pytest).",
             "Performance-Engineering: Auswertung sehr großer Parameterräume durch Vektorisierung und JIT-Kompilierung (NumPy, Numba) statt Brute-Force-Schleifen."
           ]
         },

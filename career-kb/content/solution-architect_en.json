@@ -75,7 +75,7 @@
           "bullets": [
             "Designed and built a distributed, event-driven execution system in Python across multiple Docker containers (monitor, FastAPI dashboard, MT 5 integration over RPyC under Wine/VNC).",
             "Reliability design: dual push/poll signal delivery with deduplication keyed on (chat_id, msg_id, text_hash), plus layered risk gates.",
-            "Additional algorithmic backtesting system on the event-driven execution framework framework with walk-forward validation and Monte Carlo portfolio simulation; performance engineering via vectorization and JIT compilation (NumPy, Numba). Extensive test coverage with pytest."
+            "Additional algorithmic backtesting system on the event-driven execution framework with walk-forward validation and Monte Carlo portfolio simulation; performance engineering via vectorization and JIT compilation (NumPy, Numba). Extensive test coverage with pytest."
           ]
         },
         {

@@ -207,7 +207,7 @@
     "also_used_in_personal_or_exploratory_projects": {
       "note": "Genuinely present in her repos but from smaller, exploratory, or take-home projects — verify depth before headlining on a CV; safe to mention as exposure.",
       "items": [
-        "execution framework (event-driven execution framework)",
+        "Event-driven execution framework (third-party)",
         "MT 5 integration (mt5linux/RPyC)",
         "React Native / Expo",
         "Redux Toolkit",
@@ -655,7 +655,7 @@
     },
     {
       "name": "Quantitative Research & Backtesting Harness",
-      "goal": "Design a quantitative execution research environment capable of evaluating enormous parameter spaces quickly enough to iterate on strategies.",
+      "goal": "Design a quantitative research environment capable of evaluating enormous parameter spaces quickly enough to iterate on strategies.",
       "technologies": [
         "Python",
         "NumPy",
@@ -679,7 +679,7 @@
         "Working with large datasets",
         "Optimization mindset"
       ],
-      "naming_note": "Do not use the word 'Execution' as a label (Jacqueline, 2026-07-28) — see communication-rules.md, 'Fixed terminology'.",
+      "naming_note": "Never label this project by its domain; describe it technically (backtesting, quantitative research, parameter-space evaluation).",
       "honesty_note": "Largely AI-generated code (confirmed by Jacqueline 2026-07-28). Her own contribution and the only thing to present: the performance-optimization strategy (measuring, then replacing hot paths with Numba/JIT and vectorization) and the AI-engineering practice itself — this is where she built her AI skills. Never present the Python codebase as evidence of hand-written Python craftsmanship."
     },
     {
@@ -844,17 +844,9 @@
     "honesty_rules": "Only 'flagship_own' and 'secondary_own' are genuinely her own substantive work. 'assessment_takehomes' are job trial tasks (label as such). 'open_source_contribution' is a fork with one small commit. 'learning_selfstudy' are course-along/scaffold repos. 'not_own_do_not_cite' are clones/forks she barely or never authored, and empty scaffolds — never present these as her projects. All quantitative performance/test figures are the repos' own README claims and are not independently verified.",
     "flagship_own": [
       {
-        "name": "Automated Telegram-Signal Execution System (Signal Pipeline)",
-        "repos": [
-          "SignalTelegramParser",
-          "SignalApp"
-        ],
-        "urls": [
-          "https://github.com/Jackylyn1/SignalTelegramParser",
-          "https://github.com/Jackylyn1/SignalApp"
-        ],
+        "name": "Automated Telegram-Signal Execution System",
         "dates": "2026-03 to 2026-04 (~2 months, very high cadence: 192 + 168 commits)",
-        "description": "Self-built distributed system that receives German-language execution signals from ~32 Telegram channels, parses them, and auto-executes trades on MT 5 with a multi-gate risk-management pipeline and a FastAPI web dashboard. SignalApp is the earlier iteration; SignalTelegramParser ('Signal Pipeline') is the more mature, English-documented evolution — present as ONE evolving project, not two.",
+        "description": "Self-built distributed system that receives German-language signals from ~32 Telegram channels, parses them, and auto-executes orders on MT 5 with a multi-gate risk-management pipeline and a FastAPI web dashboard. Two repositories exist: the earlier iteration and its more mature, English-documented evolution — present as ONE evolving project, not two.",
         "technologies": [
           "Python 3.12",
           "Telethon",
@@ -867,7 +859,7 @@
           "Jinja2",
           "TA-Lib",
           "NumPy",
-          "Docker Compose (multi-container: monitor/dashboard/MT5-in-Wine+VNC)",
+          "Docker Compose (multi-container: monitor/dashboard/MT 5-in-Wine+VNC)",
           "pytest",
           "ruff",
           "mypy",
@@ -877,32 +869,26 @@
           "Domain-driven layout (broker/channels/signals/telegram)",
           "Reliability engineering: dual push+poll signal delivery with dedup cache keyed on (chat_id, msg_id, text_hash)",
           "Layered risk gates (auto SL/TP, SL tightening, spread gate, equity-based risk cap with documented float tolerance)",
-          "Integrating a legacy GUI execution platform (MT5) over RPyC, containerized under Wine+VNC",
+          "Integrating a legacy GUI platform (MT 5) over RPyC, containerized under Wine+VNC",
           "Async Python",
           "Security awareness (bandit, .env, dry-run mode)"
         ],
         "tests": "Extensive; README claims 227 tests (parsers, risk guards, DB, API, trade service).",
         "relevance": "high — strongest portfolio piece: real distributed architecture, reliability/risk design, large test suite, strong docs.",
-        "caveat": "Handles real money/credentials; keep private. Overlaps with SignalApp — cite as one project.",
-        "naming_note": "Present without the word 'Execution' as a label (Jacqueline, 2026-07-28). Use MT 5, never 'MT 5'.",
+        "caveat": "Handles real money/credentials; keep private. Overlaps with the earlier iteration — cite as one project.",
+        "naming_note": "Never label this project by its domain; describe it technically (signal ingestion, parsing, order execution, risk gates). Use MT 5 for the platform.",
         "honesty_note": "Largely AI-generated code (confirmed by Jacqueline 2026-07-28). Present the ARCHITECTURE and RELIABILITY DESIGN decisions plus the AI-engineering practice — not hand-written Python skill."
       },
       {
-        "name": "Algorithmic Execution & Backtesting System (execution framework)",
-        "repos": [
-          "ExecutionSystem"
-        ],
-        "urls": [
-          "https://github.com/Jackylyn1/ExecutionSystem"
-        ],
+        "name": "Algorithmic Execution & Backtesting System",
         "dates": "2026-03 to 2026-04 (43 commits, ~2.5 weeks)",
-        "description": "Quant execution system on the execution framework framework running 10 walk-forward-validated mean-reversion/momentum strategies live on MT5, plus a large research/backtesting harness (scans 205 symbols x 17 signal types; ~130M backtests, a RECORDED MEASUREMENT confirmed by Jacqueline 2026-07-30, not a README claim) with composite-score ranking and Monte Carlo portfolio simulation.",
+        "description": "Quantitative execution system on the event-driven execution framework framework running 10 walk-forward-validated mean-reversion/momentum strategies live on MT 5, plus a large research/backtesting harness (scans 205 symbols x 17 signal types; ~130M backtests, a RECORDED MEASUREMENT confirmed by Jacqueline 2026-07-30, not a README claim) with composite-score ranking and Monte Carlo portfolio simulation.",
         "technologies": [
           "Python 3.12",
-          "execution framework",
+          "event-driven execution framework",
           "Numba (JIT)",
           "NumPy",
-          "custom MT5 adapter over RPyC",
+          "custom MT 5 adapter over RPyC",
           "Docker Compose",
           "pytest",
           "ruff"
@@ -915,8 +901,8 @@
         ],
         "tests": "Present (~10 test modules; README claims 57 unit tests).",
         "relevance": "high — shows quantitative/algorithmic depth distinct from CRUD/integration work.",
-        "caveat": "This maps to the existing 'Execution Research & Backtesting Platform' project entry. The sibling repo 'ExecutionSystemApp-highspeed-backtest-' is an earlier snapshot of the SAME project — do NOT count twice.",
-        "naming_note": "Same as Signal Pipeline: no 'Execution' label; MT 5, never 'MT 5'.",
+        "caveat": "This maps to the existing 'Quantitative Research & Backtesting Platform' project entry. A sibling repository holds an earlier snapshot of the SAME project — do NOT count twice.",
+        "naming_note": "Same as the signal-execution project: never label it by its domain; describe it technically (order execution, backtesting, quantitative research). Use MT 5 for the platform.",
         "honesty_note": "Largely AI-generated code (confirmed by Jacqueline 2026-07-28). The presentable substance is the performance-optimization work (Numba/JIT, vectorization) over ~130M backtests across 205 symbols x 17 signal types, and the quantitative research methodology. RUNTIME FIGURES: none recorded — never state a before/after runtime.",
         "performance_result": "Final runtime for the full run over ~130M backtests: about 5 hours (Jacqueline 2026-07-28). Before the Numba/vectorization work the same search space would have taken several days — that part is HER ESTIMATE, not a recorded measurement, so phrase it as a counterfactual ('would have taken') and never as a measured before-value. The exact original figures are no longer available."
       },
@@ -1188,7 +1174,7 @@
       },
       {
         "name": "Documents",
-        "reason": "Not a code repo — a private store of documents (POS spec, execution-app planning notes, certificates, an unpublished book manuscript, personal files). Keep private; the certificates were extracted into continuing_education. Do not publish or cite as portfolio."
+        "reason": "Not a code repo — a private store of documents (POS spec, planning notes, certificates, an unpublished book manuscript, personal files). Keep private; the certificates were extracted into continuing_education. Do not publish or cite as portfolio."
       }
     ]
   },

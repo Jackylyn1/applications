@@ -147,7 +147,7 @@ BASE = {
             'type': 'experience',
             'items': [
                 {'title': 'Signal Pipeline', 'bullets': ['p']},
-                {'title': 'execution framework', 'bullets': ['q']},
+                {'title': 'Backtesting Harness', 'bullets': ['q']},
             ],
         },
     ],

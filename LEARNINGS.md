@@ -1432,7 +1432,7 @@ byte-identical and all three shipped `github_repositories` (5.6k tok) and `refer
 each phase provably reads, almost none of that was true:
 
 - **`projects` and `github_repositories.flagship_own` are disjoint sets.** The repos hold
-  Signal Pipeline, execution framework and the WordPress/React plugin; `projects` holds none of them.
+  the two execution-system repos and the WordPress/React plugin; `projects` holds none of them.
   Dropping repos from `preparation` would hide exactly the evidence that matches a
   frontend or quant posting. This is the same mistake the file's own docstring already
   records someone making once.
@@ -1691,3 +1691,161 @@ eine Verjüngung — das liest sich wieder als unterbrochener Strich. Nötig war
 Fragmente wieder zusammennähen, wo genau zwei an einem Punkt sanft ineinander laufen, und
 verjüngen nur noch dort, wo die Mittellinie wirklich endet. Zur Kontrolle zählt das Skript
 am Ende die Mittellinienpixel, die kein Pfad aufgenommen hat; die Zahl muss null sein.
+
+## Company I — Back-end Engineer Integration and AI (PHP/Python), remote, EN, 2026-08-04
+
+**Was lief.** Pipeline in einem Durchlauf plus zwei Korrekturen. Rollen-Framing
+`AI Software Developer` auf der Basis `ai-software-developer_en.json`, Sprache Englisch,
+weil die Anzeige englisch ist. Ergebnis: CV 2 Seiten bei scale=1.0 mit 0 gestrichenen
+Bullets und 24 Zeilen auf Seite 2, Anschreiben 1 Seite bei zoom=1.0, 409 Wörter im
+Quell-JSON und 449 im gerenderten PDF. Alle 10 Prüfungen grün, 2 übersprungen
+(`CAREER_KB_PERSONAL_EMAIL` nicht gesetzt).
+
+**Defekt 1: Patch-Reihenfolge im Renderer.** Der erste Render brach ab mit
+`skills.select: selector 'Currently learning' matched nothing in the base JSON`. Ursache
+war nicht ein Tippfehler, sondern die Ausführungsreihenfolge: das `rewrite` hatte das
+Kategorie-Präfix von "Currently learning" auf "Currently strengthening" geändert, und als
+danach `select` lief, gab es die Kategorie nicht mehr. **Merkregel:** in einem CV-Patch
+darf ein `rewrite` niemals das Feld anfassen, über das ein `select` im selben Patch
+selektiert. Präfix behalten, Substanz ändern.
+
+**Defekt 2: Lücken nicht ungefragt benennen.** Der Generator hat die RAG-/Embeddings-Lücke
+im Anschreiben explizit ausgeschrieben, als Ehrlichkeits-Move. Jacquelines Korrektur: sie
+hat externe Systeme (GitHub, PDFs) durchaus schon eingebunden, nur nicht in großem Stil —
+"noch nie gemacht" wäre also eine Untertreibung, ein Stärke-Argument ist es aber auch
+nicht. Das Thema gehört damit gar nicht ins Anschreiben. **Transferable:** die
+Never-lie-Regel verlangt, nichts Falsches zu behaupten — sie verlangt nicht, jede Lücke
+aktiv anzusprechen. Weglassen ist erlaubt, Verneinen und Behaupten nicht. Die
+`Currently learning`-Zeile im CV bleibt der richtige Ort dafür.
+
+**Offener Faktenmangel.** Dass externe Systeme (GitHub, PDF-Dateien) schon eingebunden
+wurden, steht nicht in `profile.json` und war deshalb in dieser Bewerbung nicht nutzbar.
+Solange das nicht mit konkreten Details drinsteht, bleibt es bei jeder AI-Stelle
+ungenutztes Material.
+
+**Rohmaterial für Posts.** Zwei Angeln, beide klein und konkret: (1) "Ein Patch, der sich
+selbst das Ziel wegnimmt" — warum deklarative Patch-Formate eine definierte
+Operationsreihenfolge brauchen, mit dem Selector-Fehler als Miniatur. (2) "Ehrlich heißt
+nicht geständig" — Lücken im Bewerbungstext: nicht lügen ist Pflicht, sich selbst anklagen
+nicht, und wo die Grenze liegt.
+
+**Nachtrag zu profile.json, 2026-08-04.** Zwei Fakten sind aus diesem Lauf in
+`career-kb/profile.json` gewandert. Erstens: die Anbindung externer Systeme und
+Dokumentquellen (GitHub, PDF-Dateien) an ihre Agent-Workflows, ausdrücklich als
+Integration und nicht als Embeddings — kein Embedding-Modell, kein Vektorstore, keine
+Similarity-Suche. Damit ist es als Antwort auf "REST-/API-Integration externer Dienste"
+und Dokumentverarbeitung nutzbar, aber es bleibt kein Beleg für Embeddings, Vektor-DBs
+oder RAG; die bleiben in `must_learn`. Zweitens: das Recruiting bei wpt-online steht als
+"Recruiting und Auswahl von Mitarbeitern" im Arbeitszeugnis, ist also
+Drittbelegt und zitierbar statt nur selbstberichtet — die Bullet verweist jetzt auf
+`references[0].documented_responsibilities`.
+
+**Lektion daraus.** "Wir haben X gemacht" ist keine Faktenbasis, solange unklar ist, was X
+technisch heißt. "Externe Systeme eingebunden" konnte echte Vektor-Embeddings oder
+Tool-Integration bedeuten — zwei völlig verschiedene Ansprüche gegenüber einem
+Arbeitgeber. Einmal nachfragen kostete eine Frage und verhinderte eine falsche Behauptung
+in jeder künftigen AI-Bewerbung.
+
+## Arbeitszeugnis wpt-online gegen profile.json abgeglichen, 2026-08-04
+
+**Anlass.** Nach der Bewerbung bei Company I die Frage: steht im Arbeitszeugnis etwas, das
+`profile.json` noch nicht hat? Antwort: ja, sechs Tätigkeiten und der komplette wörtliche
+deutsche Wortlaut der Leistungsbeurteilung. `profile.json` +28/-10 Zeilen; Marketing-Skills
+8 → 13, Soft Skills 10 → 12, `documented_qualities` 8 → 12, Entwickler-Bullets 12 → 13,
+und die Marketing-Rolle hatte **0** Bullets und hat jetzt 3.
+
+**Der wichtigste Fund war eine Widerspruchsfalle.** Im Zeugnis steht "Entwicklung von
+Produktideen basierend auf recherchierten Marktlücken … marktreifen Prototypen". Jacqueline
+hatte das am 2026-07-30 als falsch korrigiert — aber nur in der Bullet der
+Berufserfahrung. In `references[0].documented_responsibilities` stand der Satz weiter
+unkommentiert, und ein Generator, der die References liest, hätte ihn jederzeit
+legitim wieder eingebaut. **Merkregel:** eine Korrektur muss an *jeder* Stelle landen, an
+der die Behauptung steht, nicht nur an der, wo sie aufgefallen ist. Der Satz bleibt jetzt
+drin, aber mit DO NOT USE markiert — Löschen hätte die Abweichung zum Dokument unsichtbar
+gemacht, und die will man kennen, wenn ein Arbeitgeber beides vergleicht.
+
+**Das Zeugnis nennt keine einzige Technologie.** Kein Laravel, kein Selenium, kein
+SEO-Score, keine 80 %. Der `usage_note` behauptete vorher pauschal, das Dokument
+"erweitert" die Rolle — richtig für Tätigkeiten, aber es belegt keine einzige technische
+Zahl. Jetzt explizit begrenzt. Einzige technisch angrenzende Aussage mit Zeugnisdeckung:
+"Anwerbung und Auswahl von Mitarbeitern".
+
+**Und ein Fall, in dem das Dokument mehr erlaubt als die Wahrheit.** Das Zeugnis schreibt
+ihr Kampagnenkonzeption, -aufsetzung und Texterstellung persönlich zu und nennt ihre
+Fähigkeiten dabei "exzellent". Jacquelines Korrektur: gemacht hat sie das alles, aber
+2 bis 5 Kampagnen, im Sinne von "mach ein paar, damit du es verstehst" — Haupttätigkeit
+war Programmierung und Konzeption. Das steht jetzt als SCOPE LIMIT in der Rolle, und die
+konservative Fassung gewinnt gegen das Dokument. **Transferable:** ein Arbeitszeugnis ist
+freundlich formuliert; es ist eine Obergrenze dessen, was man behaupten *könnte*, nicht das
+Maß dessen, was man behaupten *sollte*.
+
+**Rohmaterial für Posts.** (1) "Mein Arbeitszeugnis lobt mich für etwas, das ich nicht
+getan habe" — was man mit so einem Satz macht, wenn man ehrlich bleiben will. (2) "Ein
+Arbeitszeugnis belegt Aufgaben, keine Zahlen" — warum die 80 % aus dem Ticketsystem
+Selbstauskunft bleiben und wie man das trotzdem glaubwürdig schreibt.
+
+## 2026-08-04 — Senior Backend Engineer (Company J, EN)
+
+**Numbers used:** ca. 5 Jahre PHP/Laravel in Produktion; ~50 API-Ressourcen; 80 % kürzere Ladezeit im Ticketsystem; ~130M-Backtest-Lauf auf ~5 Stunden; 20 Jahre gewachsenes Multi-Technologie-System; PHPStan Level 9.
+
+**Why:** Die Stelle besteht aus drei Bausteinen — Realtime-Service-Layer, REST-API unter Latenzdruck, Multi-Agent-AI-Pipeline. Genau die habe ich schon gebaut, nur in PHP statt Node. Deshalb trägt die Bewerbung ganz auf dem "Node.js **and/or** PHP/Laravel"-Zweig: Pivot-Events über Mercure/SSE, permission-scoped API auf API Platform, Redis-Queues mit Horizon, Langfuse als echte Observability für Agent-Läufe. Node.js-Seniorität wird nicht behauptet — TypeScript in Produktion, Node aus eigenen Projekten, so steht es auch im Anschreiben.
+
+**Offene Lücken (ehrlich benannt):** keine 5 Jahre Node.js, kein Audio-Streaming/Speech-to-Text, kein AWS/Azure/Kubernetes, keine dokumentierte Latenz- oder Uptime-SLO-Verantwortung.
+
+**Post-Winkel:**
+- "Ein paar hundert Millisekunden entscheiden über das Ergebnis" — warum Realtime-Sync kein Feature ist, sondern das Produkt.
+- 80 % Ladezeit weg in einem 20 Jahre gewachsenen System: was Performance-Arbeit wirklich kostet.
+- Multi-Agent-Pipelines ohne Observability sind Raten. Wie Langfuse aus Vermutung Messung macht.
+- Node vs. PHP als Realtime-Backend: was übertragbar ist und was nicht — und warum man den Unterschied benennen sollte.
+
+**Korrektur (2026-08-04):** Das Anschreiben behauptete, ich hätte den Echtzeit-Sync-Mechanismus gebaut. Falsch — der Mercure/SSE-Sync existierte bereits, ich habe ihn um Pivot-Events erweitert (eigenes `laravel-pivot-events`-Paket, `PivotEvents`-Domain). Muster: Überzeichnung kommt selten als erfundene Tatsache, sondern als **stärkeres Verb für eine echte**. Regel steht jetzt in `general-standards.md` ("Extending an existing system is never building it") und als harte Sperre in `profile.json`.
+
+## 2026-08-04 — Backend Developer PHP (Company K, DE)
+
+**Numbers used:** ca. 5 Jahre PHP/Laravel in Produktion; ~50 API-Ressourcen (Menükarten, Terminals); ~50 % der Website-Tests bei wpt-online automatisiert (Selenium); PHPStan Level 9; Team aus 4 Entwicklern inkl. Lead.
+
+**Why:** Die Anzeige fragt nichts Exotisches — PHP, Container, agile Teams, Feature von Planung bis Rollout, Deutsch C1. Das ist eine Deckungsbewerbung, kein Brückenschlag. Also trägt sie auf dem Lifecycle-Argument: externe REST-API selbst geplant, gebaut, mit OpenAPI dokumentiert und end-to-end getestet, statt auf Technologie-Namedropping. Register: **du**, weil die Anzeige die Duz-Kultur ausdrücklich nennt. Remote-first mit HQ Essen (~30 km) ist geografisch unkritisch, deshalb keine Standortfrage im Anschreiben.
+
+**Der heikle Punkt: Gesundheitswesen.** Company K ist Abrechnung im Gesundheitswesen, dafür gibt es im Profil nichts. Die Versuchung wäre, TSE/KassenSichV und DSFinV-K als "regulierte Branche, also praktisch dasselbe" zu verkaufen. Gemacht wurde stattdessen: regulierte, geldkritische Domäne als **Arbeitsweise** benannt (Daten müssen rechtlich korrekt sein), Gesundheitswesen-Erfahrung nirgends behauptet. Muster wie bei der Company-J-Korrektur: die Überzeichnung sitzt nicht in erfundenen Fakten, sondern im **stillschweigenden Domänen-Transfer**.
+
+**Offene Lücken (ehrlich benannt):** keine Gesundheitswesen-/Abrechnungserfahrung; keine App-Entwicklung als Kernrolle (nur Capacitor-Terminals); kein Kubernetes/Cloud (wird auch nicht gefragt, bleibt draußen); keine dokumentierte Teilnahme an Usability-Tests, obwohl die Anzeige sie nennt.
+
+**Post-Winkel:**
+- "Reguliert ist nicht reguliert" — warum Kassensicherungsverordnung dich nicht zum Gesundheits-IT-Experten macht, und was doch überträgt.
+- Feature von Planung bis Rollout: was der 360°-Anspruch in einer Anzeige praktisch bedeutet, wenn eine Person ihn erfüllen soll.
+- Container im Bewerbungsdeutsch: wie man Docker-Alltag beschreibt, ohne DevOps-Seniorität zu behaupten.
+- 50 % automatisierte Tests eingeführt — die unbeliebte Wahrheit, dass die zweite Hälfte teurer ist als die erste.
+
+## 2026-08-04 — AI Transformation Architect EMEA (Company L, EN, remote)
+
+**Numbers used:** ca. 5 Jahre PHP/Laravel in Produktion; ~50 API-Ressourcen; 80 % kürzere Ladezeit im Ticketsystem (20 Jahre gewachsenes XSLT/Vue/MySQL-System); SEO-Score 60 -> 90 (Seobility) und 20 % schnellere Ladezeiten; ~50 % der Website-Tests automatisiert (Selenium); ~130M Backtests auf ~5 Stunden; ~15 Personen im Narutorpg-Team koordiniert; 10+ Bewerbungsgespraeche mit Mitentscheidungsrecht.
+
+**Why:** Die Stelle ist Pre-Sales, nicht Entwicklung: erste technische Stimme im Kundengespraech, Discovery, Live-Demos, Uebersetzung von Kundenproblemen in AI-Loesungen. Es gibt keinen Solutions-Engineering-Titel im Profil, also traegt die Bewerbung auf den **Bestandteilen** der Rolle, die belegbar sind: Requirements Engineering mit Kunden bei wpt-online, Kundenpraesentationen, Projektleitung, Bewerbungsgespraeche — plus die Faehigkeit, LLM-Systeme glaubwuerdig zu demonstrieren, weil sie gebaut und **gemessen** wurden (MCP-Client, Agent-Workflows, self-hosted Langfuse, Token/Kosten-Trade-offs). Basis war `it-consultant_en.json`, nicht `ai-software-developer` — das Thema ist AI, der Job ist Beratung.
+
+**Der heikle Punkt: Pre-Sales ohne Pre-Sales-Historie.** Die Versuchung waere, Kundenpraesentationen und Requirements Engineering als "praktisch Solutions Engineering" auszugeben. Gemacht wurde stattdessen: die Discovery- und Praesentationsarbeit als das benennen, was sie ist, und den fehlenden Demo-/Sales-Motion nicht wegargumentieren. Gleiches Muster wie bei Company K (stillschweigender Domaenen-Transfer) — hier waere es ein stillschweigender **Rollen**-Transfer gewesen.
+
+**Offene Luecken (ehrlich benannt):** kein formaler Pre-Sales-/Solutions-Engineering-Titel, keine quotengetragene Sales-Erfahrung, kein Enterprise-SaaS-Demo-Track-Record; kein Fortune-500-/Grosskunden-Kontakt (Agentur- und SMB-Kunden plus ein Greenfield-POS-Produkt); kein AWS/Azure/GCP, kein Kubernetes; kein RAG/Embeddings/Vector-DB (bleibt komplett draussen, nur "Currently learning" im CV); kein MLOps/Fine-Tuning; kein Cybersecurity-Produkt-Hintergrund, obwohl die Anzeige die Branche nennt.
+
+**Pipeline-Bug (behoben in diesem Lauf):** `generate-documents` hat in `skills` gleichzeitig `rewrite` (Kategorien umbenannt) und `select` (mit den **alten** Kategorienamen) geschrieben. `apply_cv_patch.py` wendet `rewrite` zuerst an, danach findet `select` die alten Namen nicht mehr — zwei Fehlversuche. Regel: wenn `rewrite` eine Skill-Kategorie umbenennt, muss `select` **Indizes** benutzen, nie Namen. Kandidat fuer die Patch-Format-Doku in `apply_cv_patch.py` und fuer den `generate-documents`-Prompt.
+
+**Post-Winkel:**
+- "Ich habe den Titel nicht, ich habe die Arbeit" — wie man sich auf Pre-Sales bewirbt, ohne Pre-Sales gemacht zu haben.
+- Warum eine LLM-Demo nur dann ueberzeugt, wenn du die Kosten pro Lauf nennen kannst.
+- Langfuse selbst hosten: von "der Agent macht irgendwas" zu "der Agent macht 14 Tool-Calls und 40k Tokens".
+- AI-Adoption im eigenen Team einfuehren ist dasselbe Gespraech wie beim Kunden — nur ohne Vertrag.
+
+## 2026-08-07 — PHP Backend Engineer (Company M, EN)
+
+**Numbers used:** ca. 5 Jahre Laravel in Produktion (wpt-online 2021-06..2024-09, Gastro IT seit 2025-03); ~50 API-Ressourcen in der externen REST-API (API Platform, generierte OpenAPI-Doku); 14 Domains / 8 interne Composer-Pakete; 58 Testklassen, davon 48 auf einer CRUD-Basisklasse mit 18 Faellen pro Ressource; PHPStan Level 9; 80 % kuerzere Ladezeit im Ticketsystem; ~50 % der Website-Tests automatisiert (Selenium); 170 von 747 Commits bei Narutorpg.de (GPL-2.0).
+
+**Why:** Die Anzeige ist eine klassische IC-Laravel-Stelle — aber mit einem Wunsch, den kaum ein PHP-Bewerber belegen kann: "dive deeper into AI protocols like MCP". Genau da liegt der belegbare Vorsprung (MCP-Client in eigene Agent-Workflows integriert, Langfuse selbst gehostet, AI-gestuetzte Code-Audits mit deterministischer Verifikation), also fuehrt der Brief damit und nicht mit Laravel-Jahren. Basis: `php-developer_en.json`. Architektur bleibt auf Komponentenebene (externe REST-API + Permission-System, Pivot-Events-Beitrag) — kein Architekten-Anspruch, die Stelle vergibt den Titel auch nicht.
+
+**Ehrlichkeits-Entscheidungen:** Symfony nur als privat/ehrenamtlich (Narutorpg-Modernisierung), nie auf Laravel-Niveau. Mercure/SSE-Sync "erweitert", nicht "gebaut". Pest steht nur in einer Technologieliste und ist nicht ihre Arbeit — Testclaims tragen PHPUnit und Behat. Laravel Inertia, Laravel Sail, Linear/Notion: nicht im Profil, also nicht behauptet (Docker Compose/DDEV bzw. GitLab Issues sind das ehrliche Aequivalent). GraphQL nur als "currently strengthening". "Millions of users" nicht gespiegelt — es gibt keine Traffic-Zahl im Profil, Skalensignal kommt ueber Multi-Tenancy, ~50 Ressourcen und Redis-Queues. Kubernetes/AWS/Azure komplett weggelassen statt wegerklaert.
+
+**Pipeline-Bug (Wiederholungstaeter):** derselbe `skills`-Fehler wie am 2026-08-04 — `rewrite` benennt "Currently learning" in "Currently strengthening" um, `select` referenziert danach noch den alten Namen, Render bricht ab. Beim letzten Mal als Kandidat notiert, seitdem nicht umgesetzt. Fix gehoert jetzt wirklich in den `generate-documents`-Prompt bzw. in die Patch-Format-Doku von `apply_cv_patch.py`: **wenn `rewrite` eine Kategorie umbenennt, muss `select` Indizes benutzen** — oder `apply_cv_patch.py` loest `select` gegen die Basisnamen auf, bevor `rewrite` greift.
+
+**Post-Winkel:**
+- MCP als Bewerbungsvorteil: warum "ich habe einen MCP-Client gebaut" 2026 mehr Tueren oeffnet als ein weiteres Laravel-Jahr.
+- 48 Testklassen auf einer Basisklasse — wann Test-Vererbung Deckung schafft und wann sie sie nur vortaeuscht.
+- Der Unterschied zwischen "gebaut" und "erweitert" im Lebenslauf, und warum ich ihn im Interview nie erklaeren muss.
+- Ein Bug, den man zweimal notiert und einmal behebt: warum Learnings ohne Fix nur Buchhaltung sind.
