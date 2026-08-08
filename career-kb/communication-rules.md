@@ -72,10 +72,6 @@ Never state what she did not do, what does not exist, or what is missing, unless
 ### Grammatical gender (hard)
 She is a woman. Every text about her uses the feminine form, in every channel and every language that marks gender: "Softwareentwicklerin", "Entwicklerin", "Werkstudentin", "Mentorin". Never the generic masculine ("Softwareentwickler") and never a neutralising construction ("Person mit Erfahrung in …"). This covers job titles, role nouns in prose and bullets. Gender-star or colon forms (`Entwickler:in`) belong to postings addressing an open group; quoting an advertised job title verbatim is correct, but she writes about herself in the plain feminine form.
 
-### Fixed terminology
-- **"Execution" is not used as a label** anywhere: not in project names, headings or descriptions. Describe what the system does technically (signal ingestion, parsing, order execution, risk gates, backtesting, quantitative research). The domain term inside a sentence where it is unavoidable is fine; as a heading or identity it is not.
-- **"MT 5"**, never "MT 5" or "MT 5".
-
 ### Emphasize
 Problem solving · architecture thinking · requirements engineering · optimization & performance · AI integration where relevant · learning through real projects · transferable engineering skills.
 
