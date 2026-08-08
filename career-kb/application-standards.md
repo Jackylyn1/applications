@@ -10,7 +10,7 @@ Rules for job-application documents only — not for the LinkedIn profile or soc
 - Mirror the posting's register — "du" or "Sie" — while staying professional.
 
 ## Project Description Standard (experience & project bullets)
-A pool to select from, never a checklist to work through. It decides what a bullet is about, never how it is written. Bullet form is defined in `communication-rules.md`, *Bullet points*.
+A pool to select from, never a checklist. It decides what a bullet is about; bullet form is defined in `communication-rules.md`, *Bullet points*.
 
 Rank by what the posting asks for and keep only what earns its line:
 1. Measurable impact — first choice whenever a number exists in `profile.json`.
@@ -19,19 +19,18 @@ Rank by what the posting asks for and keep only what earns its line:
 4. Technologies — only where the term is what the reader searches for. A stack list is not a bullet.
 5. Transferable technical and leadership skills.
 
-Problem, responsibility and challenges are context for choosing the bullet, not content for it. Spelled out they become the "because" a bullet must not carry, and "responsibility" phrasing reintroduces duty-oriented wording. Carry them into the cover letter or the interview.
+Problem, responsibility and challenges are context for choosing the bullet, never content for it. Carry them into the cover letter or the interview.
 
 ## Salary, start date, relocation (hard)
 - Never volunteer a salary expectation or a start date. If the posting does not ask, neither appears anywhere — not in the subject line, not in the closing paragraph. "ab sofort verfügbar" counts as a start-date statement.
 - If a posting explicitly asks for a salary expectation, an earliest start date or any other figure, ask her for the number. Never derive, estimate or hedge one.
-- No relocation, ever. Nothing may imply willingness to move. For a role advertised on-site outside her range, the arrangement she needs (remote/hybrid, or on-site during onboarding only) is her decision per application: ask, and write the plain sentence she chooses. Never apologise for it and never frame it as a limitation (`communication-rules.md`, *Never frame by negation*).
+- No relocation, ever. Nothing may imply willingness to move. For a role advertised on-site outside her range, ask her which arrangement to state (remote/hybrid, or on-site during onboarding only) and write the plain sentence she chooses. Never apologise for it and never frame it as a limitation (`communication-rules.md`, *Never frame by negation*).
 
 ## Relevance filter (both documents)
 - Include only what supports her suitability for this role. Name technologies only where the posting makes them relevant.
-- In the CV this drives which bullets are surfaced, reordered or dropped (`cv-standards.md`); in the letter it decides which experience is worth a sentence.
 
 ## Keywords / ATS
-- Mirror the posting's exact terminology, including German/English variants of the same tech, wherever it is genuinely true. Embed it naturally, never keyword-stuffed. A recruiter should see the fit in ~5 seconds and the ATS must not filter her out.
+- Mirror the posting's exact terminology, including German/English variants of the same tech, wherever it is genuinely true. Embed it naturally, never keyword-stuffed.
 
 ## Four questions every application should answer
 1. What kinds of problems do I enjoy solving?

@@ -9,9 +9,12 @@ Project-independent instructions, copied verbatim from the sources noted.
 - Deviate only when the cheaper option loses more than 25% quality.
 
 ## No exploring — ever (hard rule)
-- Never explore the filesystem unless explicitly instructed. No `ls`, `find`, `glob`, browsing, reading unspecified files, inspecting previous outputs.
+- Never explore the filesystem unless explicitly instructed. No `ls`, `find`, `glob`, `git show`, `git log`, grepping, browsing, reading unspecified files, inspecting previous outputs.
 - If a required path is missing, stop and name it. Do not work around prompt bugs.
-- Exploration inflates context on every later call and pulls unrelated content into the task.
+
+## Injected paths (subagents)
+- Read each injected path exactly once and read nothing else.
+- Never re-read the fact digest, and never read `career-kb/profile.json` when a digest is injected.
 
 
 ## From /home/jacqueline/.claude/RTK.md
@@ -107,7 +110,7 @@ Refer to CLAUDE.md for full command reference.
 Pick the cheapest model that meets the quality bar (price per 1M tokens):
 - **Haiku 4.5** ($1 / $5) — mechanical work: presence checks, grep, bulk read/extract/triage, formatting. Not multi-file reasoning.
 - **Opus 4.8** ($5 / $25) — default for reasoning: tracing across `career-kb/`, verification, code review, and anything reaching an employer (`career-kb/profile.json`, `career-kb/content/*.json`, rendered CV and cover letter).
-- **Fable 5** ($10 / $50) — one hard or orchestrating agent only: long autonomous runs, difficult first-shot builds, sub-agent coordination. Never for bulk verification; it is 2× Opus, slower, and false-positives.
+- **Fable 5** ($10 / $50) — one hard or orchestrating agent only: long autonomous runs, difficult first-shot builds, sub-agent coordination. Never for bulk verification: it is 2× Opus, slower, and false-positives.
 
 ## Hallucination reduction
 - Take facts about [applicant] from `career-kb/profile.json` and `career-kb/content/`, never from memory.

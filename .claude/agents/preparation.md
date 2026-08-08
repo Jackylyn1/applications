@@ -12,9 +12,7 @@ The orchestrator injects every path you need:
 - The inventory of base content JSONs in `career-kb/content/`
 - The job offer as text, URL or PDF. Fetch or read a URL/PDF yourself.
 
-Read each injected path exactly once and read nothing else. Re-reading the digest is the most expensive mistake available to you: ~19k tokens, re-sent on every later turn.
-
-Never explore. No `ls`, `find`, `glob`, `git show`, `git log` or grepping. Every path is in your prompt. If one is missing, name it and stop.
+If a path is missing, name it and stop.
 
 ## Workflow
 1. Parse the offer: company, role, seniority, industry, required and preferred skills, responsibilities, language, register (`du`/`Sie`), ATS keywords.

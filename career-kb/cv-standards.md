@@ -6,7 +6,7 @@ CV-specific rules only. Universal branding → `general-standards.md`; voice →
 - Always build the CV from the stored template. Never generate or design a custom layout. This covers base templates and job-offer CVs alike.
 - English CVs → `templates/CV_Template_Rezi_Dec2025.docx`.
 - German CVs → `templates/CV_Template_Rezi_DE_Dec2025.docx` (structurally identical; German headings, German placeholders, `MM.YYYY` dates). Regenerate it with `tools/make_de_template.py` when the English template changes.
-- Both templates are ATS-hardened: name and contact left-aligned (name = first extracted line), no em/en dashes.
+- Keep name and contact left-aligned (name = first extracted line) and use no em/en dashes.
 - Optimize content, never layout.
 
 ### Content per application
@@ -26,17 +26,17 @@ CV-specific rules only. Universal branding → `general-standards.md`; voice →
 
 ### Structure (hard)
 - **Projects:** every project entry has a timespan, like experience. AI Engineering Experiments = 2024–heute; Execution Research & Backtesting Platform = 2025–2026; Laravel Pivot Events = 2025–heute. Put it in the item's `right` as `Timespan  |  <tech>` (tech optional).
-- **Skills:** bulleted, with a bold category label (`KI & LLM-Engineering:`), same bullet marker and spacing as every other section. The item list stays normal. No custom spacers between skill lines. Bold has no negative ATS impact. Handled by `build_cv.py` `fill_skill()`.
+- **Skills:** bulleted, with a bold category label (`KI & LLM-Engineering:`), same bullet marker and spacing as every other section. The item list stays normal. No custom spacers between skill lines.
 - **Dates:** German CVs use `MM.YYYY` (`03.2025 - heute`, `08.2019 - 06.2021`), ongoing = `heute`. English CVs use `Mon YYYY` (`Mar 2025 - Present`). Year-only ranges (`2013 - 2017`) are fine where no month applies. The separator is a plain hyphen ` - `, never `—` or `–`.
-- **Section order:** Profile/Summary, Skills, Experience, Projects, Education. Skills sits directly under the profile. `build_cv.py` enforces this order regardless of the content JSON.
-- **Experience layout:** each entry leads with its timespan on the title line — `Timespan | Job Title` (EN `Mar 2025 - Present | …`, DE `03.2025 - heute | …`) — with `Company · Location` left-aligned below. No right-aligned date tab. Projects carry no timespan prefix. Handled by `build_cv.py`.
+- **Section order:** Profile/Summary, Skills, Experience, Projects, Education. Skills sits directly under the profile.
+- **Experience layout:** each entry leads with its timespan on the title line — `Timespan | Job Title` (EN `Mar 2025 - Present | …`, DE `03.2025 - heute | …`) — with `Company · Location` left-aligned below. No right-aligned date tab. Projects carry no timespan prefix.
 
 ### Page length (hard)
 - A second page is allowed only if it carries at least 10 lines of text.
 - Below that, compact onto one page, least-destructive first:
   1. Tighten paragraph spacing (no content lost, font size unchanged).
   2. Only if that is not enough, drop the least important bullets — trailing bullets of the older or lower-listed roles first. Every role keeps at least one bullet, and log what was dropped.
-- Shorten the wording inside the longest bullets before dropping any: a bullet carries a whole unit of work, so dropping one drops a whole project.
+- Shorten the wording inside the longest bullets before dropping any. A bullet carries a whole unit of work, so dropping one drops a whole project.
 - Caps: never tighten below 0.82 spacing and never drop more than 3 bullets.
-- If one page is still out of reach, keep the intact 2-pager and flag that page 2 is below target. A full 2 pages beats a gutted 1 page.
+- If one page is still out of reach, keep the intact 2-pager and flag that page 2 is below target.
 - Automated by `tools/build_fit.py`.
