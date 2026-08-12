@@ -26,7 +26,10 @@ CV-specific rules only. Universal branding → `general-standards.md`; voice →
 
 ### Structure (hard)
 - **Projects:** every project entry has a timespan, like experience. AI Engineering Experiments = 2024–heute; Quantitative Research & Backtesting Platform = 2025–2026; Laravel Pivot Events = 2025–heute. Put it in the item's `right` as `Timespan  |  <tech>` (tech optional).
-- **Skills:** bulleted, with a bold category label (`KI & LLM-Engineering:`), same bullet marker and spacing as every other section. The item list stays normal. No custom spacers between skill lines.
+- **Skills:** bulleted, same bullet marker and spacing as every other section. No custom spacers between skill lines.
+  - The first bullet is always `LLM & KI-Workflow:` (EN `LLM & AI Workflow:`) — the AI focus leads the section.
+  - **Only the label before the colon is bold**; everything after it stays normal, including any level rating. `tools/build_cv.py` splits at the *first* colon, so a skill line without a colon renders entirely bold — every line needs one.
+- **Links:** the GitHub URL belongs in the header contact line and nowhere else. Never repeat it as the `company` of a project entry; leave that field empty when a project has no employer.
 - **Dates:** German CVs use `MM.YYYY` (`03.2025 - heute`, `08.2019 - 06.2021`), ongoing = `heute`. English CVs use `Mon YYYY` (`Mar 2025 - Present`). Year-only ranges (`2013 - 2017`) are fine where no month applies. The separator is a plain hyphen ` - `, never `—` or `–`.
 - **Section order:** Profile/Summary, Skills, Experience, Projects, Education. Skills sits directly under the profile.
 - **Experience layout:** each entry leads with its timespan on the title line — `Timespan | Job Title` (EN `Mar 2025 - Present | …`, DE `03.2025 - heute | …`) — with `Company · Location` left-aligned below. No right-aligned date tab. Projects carry no timespan prefix.
